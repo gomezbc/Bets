@@ -165,7 +165,7 @@ public class MainGUI extends JFrame {
 	}
 	
 	private void redibujar() {
-		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
+		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("Seleccionar opción:"));
 //		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
 //		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
