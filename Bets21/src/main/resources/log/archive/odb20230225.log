@@ -1,0 +1,800 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 13:14:52 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 25300@debian-b
+
+[2023-02-25 13:14:52 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 13:14:52 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 13:14:52 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 13:14:52 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 13:14:52 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 13:14:52 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 13:14:52 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 13:14:52 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 13:14:52 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 13:27:59 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 26412@debian-b
+
+[2023-02-25 13:27:59 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 13:27:59 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 13:27:59 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 13:27:59 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 13:27:59 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 13:27:59 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 13:27:59 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 13:27:59 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 13:27:59 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 14:25:13 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 33210@debian-b
+
+[2023-02-25 14:25:13 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 14:25:13 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 14:25:13 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 14:25:13 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 14:25:13 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 14:25:13 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 14:25:13 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 14:25:13 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 14:25:13 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 14:25:43 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 14:25:43 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 14:31:06 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 33653@debian-b
+
+[2023-02-25 14:31:06 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 14:31:06 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 14:31:06 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 14:31:06 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 14:31:06 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 14:31:06 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 14:31:06 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 14:31:06 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 14:31:06 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 14:31:27 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 14:31:27 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:12:45 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 35713@debian-b
+
+[2023-02-25 15:12:45 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:12:45 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:12:45 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:12:45 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:12:45 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:12:45 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:12:45 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:12:45 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:12:45 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:47:40 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39001@debian-b
+
+[2023-02-25 15:47:40 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:47:40 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:47:40 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:47:40 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:47:40 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:47:40 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:47:40 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:47:40 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:47:40 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:49:06 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39174@debian-b
+
+[2023-02-25 15:49:06 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:49:06 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:49:06 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:49:06 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:49:06 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:49:06 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:49:06 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:49:06 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:49:06 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:49:37 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39334@debian-b
+
+[2023-02-25 15:49:37 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:49:37 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:49:37 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:49:37 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:49:37 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:49:37 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:49:37 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:49:37 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:49:38 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:49:52 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:49:52 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:51:02 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39493@debian-b
+
+[2023-02-25 15:51:02 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:51:02 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:51:02 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:51:02 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:51:02 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:51:02 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:51:02 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:51:02 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:51:02 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:51:09 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:51:09 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:52:26 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39653@debian-b
+
+[2023-02-25 15:52:26 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:52:26 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:52:26 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:52:26 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:52:26 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:52:26 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:52:26 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:52:26 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:52:26 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:52:45 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 39817@debian-b
+
+[2023-02-25 15:52:45 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:52:45 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:52:45 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:52:45 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:52:45 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:52:45 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:52:45 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:52:45 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:52:45 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:52:59 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:52:59 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:55:27 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 40164@debian-b
+
+[2023-02-25 15:55:27 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:55:27 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:55:27 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:55:27 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:55:27 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:55:27 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:55:27 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:55:27 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:55:27 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:55:37 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:55:37 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:56:30 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 40326@debian-b
+
+[2023-02-25 15:56:30 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:56:30 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:56:30 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:56:30 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:56:30 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:56:30 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:56:30 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:56:30 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:56:30 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:56:41 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:56:41 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:59:03 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 40566@debian-b
+
+[2023-02-25 15:59:03 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:59:03 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:59:03 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:59:03 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:59:03 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:59:03 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:59:03 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:59:03 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:59:03 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 15:59:13 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 15:59:13 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 15:59:55 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 40743@debian-b
+
+[2023-02-25 15:59:55 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 15:59:55 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 15:59:55 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 15:59:55 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 15:59:55 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 15:59:55 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 15:59:55 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 15:59:55 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 15:59:55 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 16:00:02 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 16:00:02 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:03:41 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 41075@debian-b
+
+[2023-02-25 16:03:42 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 16:03:42 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:03:42 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 16:03:42 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 16:03:42 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 16:03:42 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:03:42 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:03:42 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 16:03:42 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 16:03:48 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 16:03:48 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:06:02 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 41354@debian-b
+
+[2023-02-25 16:06:02 #2 type.registry] 
+New type domain.Question
+
+[2023-02-25 16:06:02 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:06:02 #4 type.registry] 
+New type domain.Forecast
+
+[2023-02-25 16:06:02 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-02-25 16:06:02 #6 type.registry] 
+New type domain.Event
+
+[2023-02-25 16:06:02 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:06:02 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:06:02 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-25 16:06:02 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-02-25 16:06:08 #11 type.registry] 
+New type domain.User
+
+[2023-02-25 16:06:08 #12 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:10:56 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' has been recovered (tr. 1-8)
+
+[2023-02-25 16:10:56 #2 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 41780@debian-b
+
+[2023-02-25 16:10:56 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:10:56 #4 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:10:56 #5 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:10:56 #6 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:21:16 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 42493@debian-b
+
+[2023-02-25 16:21:16 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:21:16 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:21:16 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:21:16 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:22:33 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 42643@debian-b
+
+[2023-02-25 16:22:33 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:22:33 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:22:33 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:22:33 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:23:23 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 42730@debian-b
+
+[2023-02-25 16:23:23 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:23:23 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:23:23 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:23:23 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:25:25 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 42936@debian-b
+
+[2023-02-25 16:25:25 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:25:25 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:25:25 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:25:25 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:25:51 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 42989@debian-b
+
+[2023-02-25 16:25:52 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:25:52 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:25:52 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:25:52 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:27:10 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 43188@debian-b
+
+[2023-02-25 16:27:10 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:27:10 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:27:10 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:27:10 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:27:43 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 43248@debian-b
+
+[2023-02-25 16:27:44 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:27:44 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:27:44 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:27:44 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:28:05 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 43302@debian-b
+
+[2023-02-25 16:28:05 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:28:05 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:28:05 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:28:05 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:37:39 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 44071@debian-b
+
+[2023-02-25 16:37:39 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:37:39 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:37:39 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:37:39 #5 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-25 16:38:38 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 44164@debian-b
+
+[2023-02-25 16:38:38 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-25 16:38:38 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-02-25 16:38:38 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-25 16:38:38 #5 type] 
+Type domain.User is not enhanced.
+

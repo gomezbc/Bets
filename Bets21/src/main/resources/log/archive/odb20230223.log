@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-02-23 18:01:27 #1 store] 
+Database '/home/borja/git/Bets21/src/main/resources/bets.temp' is opened by 12534@debian-b
+
+[2023-02-23 18:01:27 #2 type.registry] 
+New type domain.Question
+
+[2023-02-23 18:01:27 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-02-23 18:01:27 #4 type.registry] 
+New type domain.Event
+
+[2023-02-23 18:01:27 #5 type] 
+Type domain.Event is not enhanced.
+
+[2023-02-23 18:01:27 #6 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-02-23 18:01:27 #7 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
