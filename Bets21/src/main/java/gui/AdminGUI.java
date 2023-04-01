@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,17 +24,15 @@ public class AdminGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserGUI frame = new UserGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public AdminGUI() {
+		try
+		{
+			jbInit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -44,7 +41,7 @@ public class AdminGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdminGUI() {
+	public void jbInit() throws Exception {
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,17 +31,15 @@ public class CreateEvent extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreateEvent frame = new CreateEvent();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public CreateEvent() {
+		try
+		{
+			jbInit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	
@@ -51,7 +47,7 @@ public class CreateEvent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreateEvent() {
+	public void jbInit() throws Exception{
 		setTitle("Crear Evento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 372);
