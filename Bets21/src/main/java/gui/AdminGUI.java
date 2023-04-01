@@ -131,6 +131,16 @@ public class AdminGUI extends JFrame {
 		});
 		contentPane.add(btnNewButton_1);
 		
+		JButton btnCerrarEvento = new JButton("Cerrar Evento");
+		btnCerrarEvento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame a = new CloseEventGUI();
+				a.setVisible(true);
+			}
+		});
+		btnCerrarEvento.setBounds(228, 40, 194, 52);
+		contentPane.add(btnCerrarEvento);
+		
 	}
 	
 	
