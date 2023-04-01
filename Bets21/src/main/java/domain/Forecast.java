@@ -10,10 +10,10 @@ public class Forecast {
 	@GeneratedValue
 	private Integer  forecastNumber;
 	private String description;
-	private double gain;
+	private float gain;
 	private Question question;
 	
-	public Forecast (String description, double gain, Question question) {
+	public Forecast (String description, float gain, Question question) {
 		this.description = description; 
 		this.gain = gain; 
 		this.question = question;
@@ -28,11 +28,11 @@ public class Forecast {
 		this.description = description;
 	}
 
-	public double getGain() {
+	public float getGain() {
 		return gain;
 	}
 
-	public void setGain(double gain) {
+	public void setGain(float gain) {
 		this.gain = gain;
 	}
 
@@ -50,6 +50,11 @@ public class Forecast {
 	
 	public void setForecastNumber(Integer forecastNumber) {
 		this.forecastNumber = forecastNumber;
+	}
+	
+	@Override
+	public String toString() {
+		return forecastNumber+";"+description+";"+gain;
 	}
 	
 	

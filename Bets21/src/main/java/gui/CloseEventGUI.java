@@ -28,6 +28,8 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Forecast;
 import domain.Question;
+import exceptions.EventHasntFinished;
+import exceptions.ForecastDoesntExist;
 import exceptions.QuestionDoesntExist;
 
 public class CloseEventGUI extends JFrame {
@@ -37,6 +39,8 @@ public class CloseEventGUI extends JFrame {
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
+	private JLabel lblNoFinalizado = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.lblNoFinalizado.text"));
+
 
 	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
@@ -73,7 +77,7 @@ public class CloseEventGUI extends JFrame {
 	private String[] columnNamesForecast = new String[] {
 			"Pronostico#","Pronostico","Ganancia"
 	};
-	private final JButton btnAsignarResultado = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.btnAsignarResultado.text")); //$NON-NLS-1$ //$NON-NLS-2$
+	private final JButton btnAsignarResultado = new JButton("AsignarResultado");
 	
 	/**
 	 * Launch the application.
@@ -91,7 +95,7 @@ public class CloseEventGUI extends JFrame {
 
 	private void jbInit() throws Exception
 	{
-
+		lblNoFinalizado.setVisible(false);
 		this.getContentPane().setLayout(null);
 		this.setSize(new Dimension(700, 500));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
@@ -167,6 +171,7 @@ public class CloseEventGUI extends JFrame {
 					
 
 					try {
+						lblNoFinalizado.setVisible(false);
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 						
@@ -217,14 +222,22 @@ public class CloseEventGUI extends JFrame {
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				lblNoFinalizado.setVisible(false);
 				int i=tableEvents.getSelectedRow();
 				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
 				Vector<Question> queries = ev.getQuestions();
 				
-				tableModelForecast.setDataVector(null, columnNamesForecast); //Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 				tableModelQueries.setDataVector(null, columnNamesQueries);
+				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
+				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				
+				tableModelForecast.setDataVector(null, columnNamesForecast); //Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
+				tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
+				tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
+				tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
 
+				tableModelQueries.setColumnCount(3); // another column added to allocate q objects
+				
 				if (queries.isEmpty())
 					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries")+": "+ev.getDescription());
 				else 
@@ -232,13 +245,14 @@ public class CloseEventGUI extends JFrame {
 
 				for (domain.Question q:queries){
 					Vector<Object> row = new Vector<Object>();
-
 					row.add(q.getQuestionNumber());
 					row.add(q.getQuestion());
+					row.add(q);
 					tableModelQueries.addRow(row);	
 				}
 				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+				tableQueries.getColumnModel().removeColumn(tableQueries.getColumnModel().getColumn(2)); // not shown in JTable
 			}
 		});
 
@@ -269,9 +283,6 @@ public class CloseEventGUI extends JFrame {
 		tableModelForecast = new DefaultTableModel(null, columnNamesForecast);
 		tableForecast.setModel(tableModelForecast);
 		scrollPaneForecast.setViewportView(tableForecast);
-		btnAsignarResultado.setBounds(420, 421, 160, 27);
-		
-		getContentPane().add(btnAsignarResultado);
 		
 		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
 		tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
@@ -280,6 +291,7 @@ public class CloseEventGUI extends JFrame {
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lblNoFinalizado.setVisible(false);
 				int i=tableQueries.getSelectedRow();
 				BLFacade facade=MainGUI.getBusinessLogic();
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
@@ -300,6 +312,7 @@ public class CloseEventGUI extends JFrame {
 						row.add(f.getForecastNumber());
 						row.add(f.getDescription());
 						row.add(f.getGain());
+						row.add(f.getQuestion());
 						tableModelForecast.addRow(row);	
 					}
 					tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
@@ -311,6 +324,31 @@ public class CloseEventGUI extends JFrame {
 				
 			}
 		});
+		
+		btnAsignarResultado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BLFacade facade=MainGUI.getBusinessLogic();
+				int i=tableQueries.getSelectedRow();
+				int questionNumber = (int) tableModelQueries.getValueAt(i,0);
+				
+				i=tableForecast.getSelectedRow();
+				int forecastNumber = (int) tableModelForecast.getValueAt(i,0);
+				try {
+					facade.assignResult(questionNumber, forecastNumber);
+				}catch(EventHasntFinished e1){
+					lblNoFinalizado.setVisible(true);
+				} catch (QuestionDoesntExist e1) {
+					e1.printStackTrace();
+				} catch (ForecastDoesntExist e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAsignarResultado.setBounds(420, 421, 160, 27);
+		getContentPane().add(btnAsignarResultado);
+		
+		lblNoFinalizado.setBounds(420, 396, 180, 17);
+		getContentPane().add(lblNoFinalizado);
 		
 	}
 	private void jButton2_actionPerformed(ActionEvent e) {

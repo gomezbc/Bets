@@ -1,5 +1,4 @@
 package businessLogic;
-//hola
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -15,7 +14,9 @@ import domain.Event;
 import domain.Forecast;
 import exceptions.EventAlreadyExist;
 import exceptions.EventFinished;
+import exceptions.EventHasntFinished;
 import exceptions.ForecastAlreadyExist;
+import exceptions.ForecastDoesntExist;
 import exceptions.QuestionAlreadyExist;
 import exceptions.QuestionDoesntExist;
 import exceptions.UserAlreadyExist;
@@ -185,7 +186,7 @@ public class BLFacadeImplementation  implements BLFacade {
     
     
     @WebMethod
-    public Forecast createForecast(String description, double gain, Question question) throws ForecastAlreadyExist {
+    public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
  	   dbManager.open(false);
  	  Forecast forecast = null;
  	   try {
@@ -210,6 +211,21 @@ public class BLFacadeImplementation  implements BLFacade {
   	   }
  	   dbManager.close();
  	   return u;
+    }
+    
+    @WebMethod
+    public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
+    {
+    	dbManager.open(false);
+    	try {
+    		Event ev = dbManager.getQuestion(questionNumber).getEvent();
+    		if(new Date().compareTo(ev.getEventDate())<0) {
+    			throw new EventHasntFinished(ev.getEventNumber()+" "+ev.getDescription()+" "+ev.getEventDate());
+    		}
+    		dbManager.assignResult(questionNumber, forecastNumber);
+    	}catch(Exception e) {
+    		throw e;
+    	}
     }
 
 }

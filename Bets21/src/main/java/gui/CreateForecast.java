@@ -265,7 +265,7 @@ public class CreateForecast extends JFrame {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
 					
-					facade.createForecast(textPronostico.getText(), Double.parseDouble(textGanancia.getText()), (Question) jComboBoxQuestions.getSelectedItem());
+					facade.createForecast(textPronostico.getText(), Float.parseFloat(textGanancia.getText()), (Question) jComboBoxQuestions.getSelectedItem());
 					lblForecastAlreadyExists.setVisible(false);
 					lblPronosticoCreado.setVisible(true); 
 					

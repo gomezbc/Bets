@@ -8,17 +8,8 @@ import java.util.Date;
 
 
 //import domain.Booking;
-import domain.Question;
-import domain.User;
-import domain.Event;
-import domain.Forecast;
-import exceptions.EventAlreadyExist;
-import exceptions.EventFinished;
-import exceptions.ForecastAlreadyExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import domain.*;
+import exceptions.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -69,11 +60,11 @@ public interface BLFacade  {
 	
 	@WebMethod public Event createEvent(String description,Date eventDate) throws EventAlreadyExist;
 	
-	@WebMethod public Forecast createForecast(String description, double gain, Question question) throws ForecastAlreadyExist;
+	@WebMethod public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist;
 	
 	@WebMethod public User getUser(String Dni) throws UserDoesntExist;
 	
-	@WebMethod public Question getQuestion (Integer questionNumber) throws QuestionDoesntExist;
+	@WebMethod public Question getQuestion(Integer questionNumber) throws QuestionDoesntExist;
 
-	
+	@WebMethod public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
 }

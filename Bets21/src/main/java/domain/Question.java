@@ -57,7 +57,7 @@ public class Question implements Serializable {
 		return false;
 	}
 	
-	public Forecast addForecast(String description, double gain, Question question) {
+	public Forecast addForecast(String description, float gain, Question question) {
 		Forecast f = new Forecast(description, gain, question);
 		forecasts.add(f);
 		return f;

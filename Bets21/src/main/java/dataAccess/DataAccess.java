@@ -120,10 +120,10 @@ public class DataAccess  {
 				
 			}
 			
-			q1.addForecast("Athletic", 1.5 ,q1);
-			q1.addForecast("Atlético", 1.4 ,q1);
-			q2.addForecast("Athletic", 1.8 ,q2);
-			q2.addForecast("Atlético", 1.2 ,q2);
+			q1.addForecast("Athletic", 1.5f ,q1);
+			q1.addForecast("Atlético", 1.4f ,q1);
+			q2.addForecast("Athletic", 1.8f ,q2);
+			q2.addForecast("Atlético", 1.2f ,q2);
 			
 			db.persist(q1);
 			db.persist(q2);
@@ -214,9 +214,8 @@ public class DataAccess  {
 		   return event;
 	   }else {
 		   throw new EventAlreadyExist (" already exists!");
-	   }
-		   
-	   }
+	   }	   
+   }
 
    
    
@@ -232,12 +231,12 @@ public class DataAccess  {
 			   throw new UserAlreadyExist(user.toString() + " already exists!");
 		   }
 		   return user;
-	   }
+	}
 	
 	
 	
 	
-	public Forecast createForecast(String description, double gain, Question question) throws ForecastAlreadyExist {
+	public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
 	 	  Question ques = db.find(Question.class, question.getQuestionNumber());
 	 	  if (ques.DoesForecastExists(description)) throw new ForecastAlreadyExist("Esta predicción ya existe");
 	 	    db.getTransaction().begin();
@@ -255,6 +254,16 @@ public class DataAccess  {
 		User u = db.find(User.class, Dni);
 		if(u==null) throw new UserDoesntExist("No existe un usuario con este DNI "+Dni);
 		return u;
+	}
+	
+	public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist {
+		Question q = db.find(Question.class, questionNumber);
+		Forecast f = db.find(Forecast.class, forecastNumber);
+		if(q==null) throw new QuestionDoesntExist("No existe una pregunta con este identificador " + questionNumber);
+		if(f==null) throw new ForecastDoesntExist("No existe un pronostico con este identificador " + forecastNumber);
+		db.getTransaction().begin();
+		q.setResult(f);
+		db.getTransaction().commit();
 	}
 	
 	
