@@ -154,7 +154,19 @@ public class FindQuestionsGUI extends JFrame {
 
 					try {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
+						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
+						
+						tableModelQueries.setDataVector(null, columnNamesQueries);
+						tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
+						tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
+						
+						tableModelForecast.setDataVector(null, columnNamesForecast); 
+						tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
+						tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
+						tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
+						
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
+
 
 						BLFacade facade=MainGUI.getBusinessLogic();
 
@@ -191,10 +203,12 @@ public class FindQuestionsGUI extends JFrame {
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				int i=tableEvents.getSelectedRow();
 				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
 				Vector<Question> queries = ev.getQuestions();
-
+				
+				tableModelForecast.setDataVector(null, columnNamesForecast); //Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
