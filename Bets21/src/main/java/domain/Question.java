@@ -21,7 +21,7 @@ public class Question implements Serializable {
 	private Integer questionNumber;
 	private String question; 
 	private float betMinimum;
-	private String result;  
+	private Forecast result;  
 	@XmlIDREF
 	private Event event;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
@@ -132,7 +132,7 @@ public class Question implements Serializable {
 	 * 
 	 * @return the the query result
 	 */
-	public String getResult() {
+	public Forecast getResult() {
 		return result;
 	}
 
@@ -144,7 +144,7 @@ public class Question implements Serializable {
 	 * @param result of the query to be setted
 	 */
 	
-	public void setResult(String result) {
+	public void setResult(Forecast result) {
 		this.result = result;
 	}
 
