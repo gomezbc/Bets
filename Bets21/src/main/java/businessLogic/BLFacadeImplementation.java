@@ -226,6 +226,15 @@ public class BLFacadeImplementation  implements BLFacade {
     	}catch(Exception e) {
     		throw e;
     	}
+  	   dbManager.close();
+    }
+    
+    @WebMethod
+    public Vector<User> getAllUsers(){
+    	dbManager.open(false);
+    	Vector<User> users = dbManager.getAllUsers();
+  	    dbManager.close();
+  	    return users;
     }
 
 }

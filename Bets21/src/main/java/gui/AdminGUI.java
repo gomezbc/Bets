@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -44,6 +46,7 @@ public class AdminGUI extends JFrame {
 	public void jbInit() throws Exception {
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(new Dimension(700, 500));
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -137,6 +140,16 @@ public class AdminGUI extends JFrame {
 		});
 		btnCerrarEvento.setBounds(228, 40, 194, 52);
 		contentPane.add(btnCerrarEvento);
+		
+		JButton btnListUsers = new JButton("Lista de Usuarios");
+		btnListUsers.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame a = new ListUsersGUI();
+				a.setVisible(true);
+			}
+		});
+		btnListUsers.setBounds(228, 160, 194, 52);
+		contentPane.add(btnListUsers);
 		
 	}
 	
