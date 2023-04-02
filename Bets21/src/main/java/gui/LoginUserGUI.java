@@ -90,7 +90,7 @@ public class LoginUserGUI extends JFrame {
 					else {
 							userError.setVisible(false);
 						if(user.isAdmin()) {
-							JFrame a = new AdminGUI();
+							JFrame a = new AdmGUI();
 							a.setVisible(true);
 						}else {
 							JFrame a = new UserGUI();

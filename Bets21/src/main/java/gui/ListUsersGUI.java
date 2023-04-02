@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 
-public class ListUsersGUI extends JFrame {
+public class ListUsersGUI extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -37,7 +38,6 @@ public class ListUsersGUI extends JFrame {
 	 * Launch the application.
 	 */
 	public  ListUsersGUI(){
-		setTitle("Lista de Usuarios");
 		try
 		{
 			jbInit();
@@ -52,6 +52,7 @@ public class ListUsersGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() {
+		setTitle("Lista de Usuarios");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.setSize(new Dimension(700, 500));
@@ -64,6 +65,7 @@ public class ListUsersGUI extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 0, 673, 400);
 		contentPane.add(tabbedPane);
+		this.add(tabbedPane);
 		
 		scrollPaneUser.setViewportView(tableUsers);
 		scrollPaneAdmin.setViewportView(tableAdmins);
@@ -79,6 +81,7 @@ public class ListUsersGUI extends JFrame {
 		JButton btnClose = new JButton("Cerrar");
 		btnClose.setBounds(292, 416, 105, 27);
 		contentPane.add(btnClose);
+		this.add(btnClose);
 		
 		BLFacade facade=MainGUI.getBusinessLogic();
 		Vector<User> users = new Vector<User>();
