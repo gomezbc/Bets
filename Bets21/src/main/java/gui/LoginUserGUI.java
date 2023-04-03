@@ -19,10 +19,21 @@ import javax.swing.SwingConstants;
 public class LoginUserGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static User userRegistered;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel userError;
+	
+	
+
+	public static User getUserRegistered() {
+		return userRegistered;
+	}
+
+	public static void setUserRegistered(User userRegistered) {
+		LoginUserGUI.userRegistered = userRegistered;
+	}
 
 	/**
 	 * Launch the application.
@@ -101,6 +112,7 @@ public class LoginUserGUI extends JFrame {
 					userError.setVisible(true);
 					userError.setText(e2.getMessage());
 				}
+				setUserRegistered(user);
 			}
 		});
 		

@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,21 +21,23 @@ public class UserGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public UserGUI() {
-		try
-		{
-			jbInit();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserGUI frame = new UserGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public void jbInit() throws Exception {
+	public UserGUI() {
 		setTitle("Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -49,7 +53,7 @@ public class UserGUI extends JFrame {
 				btnClose_actionPerformed(e);
 			}
 		});
-		btnClose.setBounds(165, 191, 105, 27);
+		btnClose.setBounds(166, 203, 105, 27);
 		contentPane.add(btnClose);
 		
 		JButton jButtonQueryQueries = new JButton();
@@ -69,7 +73,25 @@ public class UserGUI extends JFrame {
 		jLabelSelectOption.setFont(new Font("Dialog", Font.BOLD, 13));
 		jLabelSelectOption.setBounds(-30, 25, 495, 30);
 		contentPane.add(jLabelSelectOption);
+		
+		
+		JButton btnNewButton = new JButton();
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame a = new createBetGUI();
+				a.setVisible(true);
+			}
+			
+		});
+		
+		btnNewButton.setText("Crear Apuesta");
+		btnNewButton.setBounds(113, 127, 213, 53);
+		contentPane.add(btnNewButton);
 	}
+	
+	
+
+	
 	private void btnClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}

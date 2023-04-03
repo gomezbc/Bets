@@ -67,4 +67,7 @@ public interface BLFacade  {
 	@WebMethod public Question getQuestion(Integer questionNumber) throws QuestionDoesntExist;
 
 	@WebMethod public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
+	
+	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist;
+
 }

@@ -17,6 +17,7 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
+import domain.Bet;
 import domain.Event;
 import domain.Forecast;
 import domain.Question;
@@ -370,6 +371,17 @@ public class DataAccess  {
 	public void close(){
 		db.close();
 		System.out.println("DataBase closed");
+	}
+	
+	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist {
+		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
+		if ( forcast.DoesBetExists(betMoney)) throw new BetAlreadyExist("Esta apuesta ya existe");
+ 	    	db.getTransaction().begin();
+ 	    	Bet b = forcast.addBet(user, betMoney, forecast);
+ 	    	db.persist(forcast); 
+						
+		db.getTransaction().commit();
+		return b;
 	}
 	
 }

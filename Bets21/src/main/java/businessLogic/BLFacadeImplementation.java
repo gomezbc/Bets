@@ -10,8 +10,10 @@ import configuration.ConfigXML;
 import dataAccess.DataAccess;
 import domain.Question;
 import domain.User;
+import domain.Bet;
 import domain.Event;
 import domain.Forecast;
+import exceptions.BetAlreadyExist;
 import exceptions.EventAlreadyExist;
 import exceptions.EventFinished;
 import exceptions.EventHasntFinished;
@@ -226,6 +228,19 @@ public class BLFacadeImplementation  implements BLFacade {
     	}catch(Exception e) {
     		throw e;
     	}
+    }
+    
+    @WebMethod
+    public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist{
+    	dbManager.open(false);
+    	Bet bet = null;
+    	try {
+    		bet = dbManager.createBet(user, betMoney, forecast);
+    	} catch (BetAlreadyExist e) {
+    		throw new BetAlreadyExist(e.getMessage());
+    	}
+    	dbManager.close();
+    	return bet;
     }
 
 }
