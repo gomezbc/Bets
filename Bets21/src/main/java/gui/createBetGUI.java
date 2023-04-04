@@ -87,7 +87,7 @@ public class createBetGUI extends JFrame {
 	private final JLabel lblNewLabel_1 = new JLabel("Dinero Apuesta : ");
 	private final JTextField textFieldDinero = new JTextField();
 	
-
+	private JLabel lblNewLabel_Error1 = new JLabel("El dinero de la apuesta no supera el dinero mínimo");
 
 
 	
@@ -262,9 +262,15 @@ public class createBetGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
-					Forecast a2 = (Forecast) JComboBoxForecast.getSelectedItem();
-					System.out.println(a2);
-					facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
+					
+					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
+					double a = q1.getBetMinimum();
+					if(Double.parseDouble(textFieldDinero.getText()) < a){
+						lblNewLabel_Error1.setVisible(true);
+					} else {
+						facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
+						lblNewLabel_Error1.setVisible(false);
+					}
 					
 				} catch (BetAlreadyExist ea){
 					ea.printStackTrace();
@@ -323,6 +329,14 @@ public class createBetGUI extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		contentPane.add(textFieldDinero);
+		
+		
+		lblNewLabel_Error1.setVisible(false);
+		lblNewLabel_Error1.setForeground(Color.RED);
+		lblNewLabel_Error1.setBackground(Color.BLACK);
+		lblNewLabel_Error1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_Error1.setBounds(411, 280, 305, 61);
+		contentPane.add(lblNewLabel_Error1);
 		
 
 
