@@ -88,23 +88,24 @@ public class createBetGUI extends JFrame {
 	private final JTextField textFieldDinero = new JTextField();
 	
 	private JLabel lblNewLabel_Error1 = new JLabel("El dinero de la apuesta no supera el dinero mínimo");
+	
+	private JLabel lblNewLabel_2 = new JLabel("Apuesta creada");
+	private JLabel lblNewLabel_3 = new JLabel("Ya has apostado a este pronóstico");
 
 
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreateForecast frame = new CreateForecast();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public createBetGUI() {
+		try
+		{
+			jbInit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -114,7 +115,7 @@ public class createBetGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public createBetGUI() {
+	public void jbInit() {
 		User userRegistered = LoginUserGUI.getUserRegistered();
 
 		textFieldDinero.setBounds(224, 289, 133, 44);
@@ -256,26 +257,35 @@ public class createBetGUI extends JFrame {
 		contentPane.add(btnClose);
 		
 		
-		JButton btnSaveForecast = new JButton("Guardar Apueta");
+		JButton btnSaveForecast = new JButton("Guardar Apuesta");
 		btnSaveForecast.setBounds(193, 374, 164, 50);
 		btnSaveForecast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
-					
 					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
 					double a = q1.getBetMinimum();
 					if(Double.parseDouble(textFieldDinero.getText()) < a){
 						lblNewLabel_Error1.setVisible(true);
+						lblNewLabel_2.setVisible(false);
+						lblNewLabel_3.setVisible(false);
+						
+						
 					} else {
 						facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
 						lblNewLabel_Error1.setVisible(false);
+						lblNewLabel_2.setVisible(true);
+						lblNewLabel_3.setVisible(false);
+						
 					}
 					
 				} catch (BetAlreadyExist ea){
-					ea.printStackTrace();
+					lblNewLabel_Error1.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+					lblNewLabel_3.setVisible(true);
+					//ea.printStackTrace();
 				}
-				// CrearApuesta		
+					
 		   }
 		});
 		contentPane.add(btnSaveForecast);
@@ -335,8 +345,20 @@ public class createBetGUI extends JFrame {
 		lblNewLabel_Error1.setForeground(Color.RED);
 		lblNewLabel_Error1.setBackground(Color.BLACK);
 		lblNewLabel_Error1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_Error1.setBounds(411, 280, 305, 61);
+		lblNewLabel_Error1.setBounds(411, 280, 305, 36);
 		contentPane.add(lblNewLabel_Error1);
+		
+		
+		lblNewLabel_2.setVisible(false);
+		lblNewLabel_2.setForeground(Color.BLUE);
+		lblNewLabel_2.setBounds(461, 316, 178, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		
+		lblNewLabel_3.setVisible(false);
+		lblNewLabel_3.setForeground(new Color(199, 21, 133));
+		lblNewLabel_3.setBounds(431, 341, 245, 14);
+		contentPane.add(lblNewLabel_3);
 		
 
 

@@ -106,6 +106,8 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 
     
+    
+    
 	/**
 	 * This method invokes the data access to retrieve the dates a month for which there are events
 	 * 
@@ -120,6 +122,8 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 	
 	
+	
+	
 	public void close() {
 		DataAccess dB4oManager=new DataAccess(false);
 
@@ -127,6 +131,9 @@ public class BLFacadeImplementation  implements BLFacade {
 
 	}
 
+	
+	
+	
 	/**
 	 * This method invokes the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
@@ -137,6 +144,8 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.initializeDB();
 		dbManager.close();
 	}
+    
+    
     
     
     @WebMethod
@@ -153,6 +162,8 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
+    
+    
     @WebMethod 
 	public Question getQuestion (Integer questionNumber) throws QuestionDoesntExist{
 		dbManager.open(false);
@@ -166,7 +177,8 @@ public class BLFacadeImplementation  implements BLFacade {
 		return ( ev ) ;
 		
 	}
-	
+
+    
     
     
     
@@ -187,6 +199,7 @@ public class BLFacadeImplementation  implements BLFacade {
     
     
     
+    
     @WebMethod
     public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
  	   dbManager.open(false);
@@ -199,6 +212,8 @@ public class BLFacadeImplementation  implements BLFacade {
  	   dbManager.close();
  	   return forecast;
     }
+    
+    
     
     
     
@@ -215,6 +230,9 @@ public class BLFacadeImplementation  implements BLFacade {
  	   return u;
     }
     
+    
+    
+    
     @WebMethod
     public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
     {
@@ -229,6 +247,9 @@ public class BLFacadeImplementation  implements BLFacade {
     		throw e;
     	}
     }
+    
+   
+    
     
     @WebMethod
     public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist{

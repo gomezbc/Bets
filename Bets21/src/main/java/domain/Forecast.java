@@ -47,12 +47,14 @@ public class Forecast {
 	}
 	
 	
-	public boolean DoesBetExists(double a) {
+	public boolean DoesBetExists(String user, Forecast forecast) {
 		if(this.getBets() == null) {
 			return false; }
 		for (Bet b:this.getBets()){
-			if(b.getBetMoney() == a)
+			if(b.getUser().equals(user) & b.getForecast().getForecastNumber()== forecast.getForecastNumber()) {
 				return true;
+			}
+				
 		}
 		return false;
 	}

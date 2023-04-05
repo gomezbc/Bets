@@ -375,7 +375,9 @@ public class DataAccess  {
 	
 	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist {
 		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
-		if ( forcast.DoesBetExists(betMoney)) throw new BetAlreadyExist("Esta apuesta ya existe");
+		if ( forcast.DoesBetExists(user, forecast)) {
+			throw new BetAlreadyExist("Esta apuesta ya existe");
+		}
  	    	db.getTransaction().begin();
  	    	Bet b = forcast.addBet(user, betMoney, forecast);
  	    	db.persist(forcast); 
