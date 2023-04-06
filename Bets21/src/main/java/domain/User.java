@@ -1,7 +1,12 @@
 package domain;
 
+import java.util.Vector;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -14,6 +19,9 @@ public class User {
 	private String username;
 	private boolean isAdmin;
 	
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+	 private Vector<Bet> bets = new Vector<Bet>();
+	
 	public User(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) {
 		this.setDni(dni);
 		this.setUsername(username);
@@ -21,6 +29,32 @@ public class User {
 		this.setName(name);
 		this.setApellido(apellido);
 		this.setAdmin(isAdmin);
+	}
+	
+	public Bet addBet(double betMoney, Forecast forecast) {
+		Bet b = new Bet(this, betMoney, forecast);
+		if(bets==null) bets = new Vector<Bet>();
+		bets.add(b);
+		return b;
+	}
+	
+	public boolean DoesBetExists(Forecast forecast) {
+		if(this.getBets() == null) {
+			return false; }
+		for (Bet b:this.getBets()){
+			if(b.getForecast().getForecastNumber()== forecast.getForecastNumber()) {
+				return true;
+			}		
+		}
+		return false;
+	}
+	
+	public Vector<Bet> getBets() {
+		return bets;
+	}
+	
+	public void setBets(Vector<Bet> bets) {
+		this.bets = bets;
 	}
 
 	public boolean checkCredentials(String tryPasswd) {

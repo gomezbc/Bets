@@ -7,19 +7,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 //import domain.Booking;
-import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
-import exceptions.EventAlreadyExist;
-import exceptions.EventFinished;
-import exceptions.EventHasntFinished;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import domain.*;
+import exceptions.*;
 
 /**
  * Interface that specifies the business logic.
@@ -76,6 +65,8 @@ public interface BLFacade  {
 	@WebMethod public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
 
 	@WebMethod public Vector<User> getAllUsers();
+	
+	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;
 	
 	@WebMethod public boolean removeUser(String dni);
 }

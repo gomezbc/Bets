@@ -19,11 +19,20 @@ import exceptions.UserDoesntExist;
 public class LoginUserGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private static User userRegistered;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel userError;
 
+	public static User getUserRegistered() {
+		return userRegistered;
+	}
+
+	public static void setUserRegistered(User userRegistered) {
+		LoginUserGUI.userRegistered = userRegistered;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -88,6 +97,7 @@ public class LoginUserGUI extends JFrame {
 					user = facade.getUser(textField.getText());
 					if(!user.checkCredentials(new String(passwordField.getPassword()))) userError.setText("La contraseña es incorrecta");
 					else {
+							setUserRegistered(user);
 							userError.setVisible(false);
 						if(user.isAdmin()) {
 							JFrame a = new AdminGUI();

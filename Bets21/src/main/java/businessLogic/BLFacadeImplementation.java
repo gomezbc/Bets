@@ -8,19 +8,8 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
-import exceptions.EventAlreadyExist;
-import exceptions.EventFinished;
-import exceptions.EventHasntFinished;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import domain.*;
+import exceptions.*;
 
 /**
  * It implements the business logic as a web service.
@@ -243,6 +232,21 @@ public class BLFacadeImplementation  implements BLFacade {
     	boolean ret = dbManager.removeUser(dni);
   	    dbManager.close();
   	    return ret;
+    }
+    
+    @WebMethod
+	public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
+		dbManager.open(false);
+		Bet bet = null;
+		try {
+			bet = dbManager.createBet(user, betMoney, forecast);
+		} catch (BetAlreadyExist e) {
+			throw e;
+		}catch (UserDoesntExist e1) {
+			throw e1;
+		}
+		dbManager.close();
+		return bet;
     }
 
 }

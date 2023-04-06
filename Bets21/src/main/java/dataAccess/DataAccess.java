@@ -17,17 +17,8 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
-import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
-import exceptions.EventAlreadyExist;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import domain.*;
+import exceptions.*;
 
 /**
  * It implements the data access to the objectDb database
@@ -298,6 +289,21 @@ public class DataAccess  {
 			db.getTransaction().commit();
 			return true;
 		}
+	}
+	
+	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
+		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecast.toString());
+		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
+		User u = db.find(User.class, user);
+		if(u==null) throw new UserDoesntExist("No hay un usuario con este DNI en la bas de datos, dni="+user);
+		if ( u.DoesBetExists(forecast)) {
+			throw new BetAlreadyExist("Esta apuesta ya existe");
+		}
+			db.getTransaction().begin();
+ 	    	Bet b = u.addBet(betMoney, forecast);
+ 	    	db.persist(forcast); 
+ 			db.getTransaction().commit();
+ 			return b;
 	}
 	
  

@@ -127,7 +127,6 @@ public class AdminGUI extends JFrame {
 	        tabPane.setFocusable(false); // quitar el focus de la pestaña
 	        tabPane.setForeground(lightHighlight);
 	        tabPane.setOpaque(false); // establecer la opacidad de la pestaña a verdadero
-	        tabPane.setToolTipText(""); // quitar el tooltip
 	    }
 	}
 }

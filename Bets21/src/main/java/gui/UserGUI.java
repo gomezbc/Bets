@@ -44,7 +44,6 @@ public class UserGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setBackground(new Color(17, 110, 80));
-		setTitle("Admin");
 		setResizable(false);
 		setMaximumSize(new Dimension(886, 612));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,6 +69,11 @@ public class UserGUI extends JFrame {
 		ImageIcon icon = new ImageIcon(AdminGUI.class.getResource("/event-list.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		tabbedPane.addTab(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"), new ImageIcon(scaledIcon), findQuestion, null);
+		
+		JPanel createBet = new CreateBetGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/chips-bet.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Apostar", new ImageIcon(scaledIcon), createBet);
 		
 		
 		btnLogOut = new JButton();
@@ -102,7 +106,6 @@ protected class CustomTabbedPaneUI extends BasicTabbedPaneUI {
 	        tabPane.setFocusable(false); // quitar el focus de la pestaña
 	        tabPane.setForeground(lightHighlight);
 	        tabPane.setOpaque(false); // establecer la opacidad de la pestaña a verdadero
-	        tabPane.setToolTipText(""); // quitar el tooltip
 	    }
 	}
 }

@@ -1,8 +1,13 @@
 package domain;
 
+import java.util.Vector;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlIDREF;
 
 @Entity
 public class Forecast {
@@ -10,10 +15,12 @@ public class Forecast {
 	@GeneratedValue
 	private Integer  forecastNumber;
 	private String description;
-	private float gain;
+	private double gain;
+	@XmlIDREF
 	private Question question;
 	
-	public Forecast (String description, float gain, Question question) {
+	
+	public Forecast (String description, double gain, Question question) {
 		this.description = description; 
 		this.gain = gain; 
 		this.question = question;
@@ -28,11 +35,11 @@ public class Forecast {
 		this.description = description;
 	}
 
-	public float getGain() {
+	public double getGain() {
 		return gain;
 	}
 
-	public void setGain(float gain) {
+	public void setGain(double gain) {
 		this.gain = gain;
 	}
 
@@ -54,7 +61,7 @@ public class Forecast {
 	
 	@Override
 	public String toString() {
-		return forecastNumber+";"+description+";"+gain;
+		return forecastNumber+";"+description+";"+Double.toString(gain);
 	}
 	
 	
