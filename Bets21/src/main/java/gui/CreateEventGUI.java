@@ -1,28 +1,26 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import com.toedter.calendar.JCalendar;
-
-import businessLogic.BLFacade;
-import exceptions.EventAlreadyExist;
-
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class CreateEvent extends JFrame {
+import com.toedter.calendar.JCalendar;
+
+import businessLogic.BLFacade;
+import exceptions.EventAlreadyExist;
+import javax.swing.border.LineBorder;
+
+public class CreateEventGUI extends JPanel {
 
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JTextField textField_EscribirEquipos;
 	
 	private JLabel lblNewLabel = new JLabel("Evento Creado");
@@ -31,7 +29,7 @@ public class CreateEvent extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public CreateEvent() {
+	public CreateEventGUI() {
 		try
 		{
 			jbInit();
@@ -48,32 +46,28 @@ public class CreateEvent extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
-		setTitle("Crear Evento");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 559, 372);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		this.setBounds(100, 100, 559, 372);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		this.setLayout(null);
 		
 		JCalendar jCalendar = new JCalendar();
 		jCalendar.setBounds(30, 20, 225, 150);
-		contentPane.add(jCalendar);
+		this.add(jCalendar);
 		
 		JLabel lblNewLabelEquipos = new JLabel("Evento:");
 		lblNewLabelEquipos.setBounds(125, 211, 119, 14);
 		lblNewLabelEquipos.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		contentPane.add(lblNewLabelEquipos);
+		this.add(lblNewLabelEquipos);
 		
 		textField_EscribirEquipos = new JTextField();
 		textField_EscribirEquipos.setBounds(211, 204, 234, 30);
-		contentPane.add(textField_EscribirEquipos);
+		this.add(textField_EscribirEquipos);
 		textField_EscribirEquipos.setColumns(10);
 		
 		
 		JButton btnButton_Save = new JButton("Guardar");
-		btnButton_Save.setBounds(77, 246, 148, 37);
+		btnButton_Save.setBounds(194, 284, 148, 37);
 		btnButton_Save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
@@ -109,35 +103,19 @@ public class CreateEvent extends JFrame {
 			}
 			
 		});
-		contentPane.add(btnButton_Save);
-		
-		
-		JButton btnButton_Close = new JButton("Cerrar");
-		btnButton_Close.setBounds(328, 246, 148, 37);
-		btnButton_Close.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jButtonClose_actionPerformed(e);
-			}
-			
-			
-		});
-		contentPane.add(btnButton_Close);
+		this.add(btnButton_Save);
 		lblNewLabel.setBounds(350, 142, 119, 14);
 		
 		
 		lblNewLabel.setEnabled(true);
 		lblNewLabel.setVisible(false);
 		lblNewLabel.setForeground(new Color(148, 0, 211));
-		contentPane.add(lblNewLabel);
+		this.add(lblNewLabel);
 		lblNewLabel_1.setBounds(319, 94, 189, 37);
 		
 	
 		lblNewLabel_1.setForeground(new Color(165, 42, 42));
 		lblNewLabel_1.setVisible(false);
-		contentPane.add(lblNewLabel_1);
-	}
-	
-	private void jButtonClose_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
+		this.add(lblNewLabel_1);
 	}
 }

@@ -1,30 +1,34 @@
 package gui;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 import domain.Event;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.util.Vector;
-import java.awt.event.ActionEvent;
 
 public class AdminGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JButton btnLogOut;
+
 
 	/**
-	 * Launch the application.
+	 * Create the frame.
 	 */
 	public AdminGUI() {
 		try
@@ -36,125 +40,94 @@ public class AdminGUI extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
 	
-	
-	
-	/**
-	 * Create the frame.
-	 */
-	public void jbInit() throws Exception {
-		setTitle("Administrador");
+	private void jbInit() {
+		setBackground(new Color(17, 110, 80));
+		setTitle("Admin");
+		setResizable(false);
+		setMaximumSize(new Dimension(886, 612));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(new Dimension(700, 500));
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 886, 612);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		contentPane.setBackground(new Color(17, 110, 80));
+		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+		contentPane.setLayout(null);
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setForeground(new Color(222, 221, 218));
+		tabbedPane.setBackground(new Color(56, 56, 56));
+		tabbedPane.setBorder(null);
+		tabbedPane.setBounds(12, 35, 850, 553);
+		tabbedPane.setUI(new CustomTabbedPaneUI());
+		
+		contentPane.add(tabbedPane);
+		
+		JPanel createEvent = new CreateEventGUI();
+		ImageIcon icon = new ImageIcon(AdminGUI.class.getResource("/event-creat.png"));
+		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Crear Evento", new ImageIcon(scaledIcon), createEvent);
+		
+		JPanel closeEvent = new CloseEventGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/close-event.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Cerrar Evento", new ImageIcon(scaledIcon), closeEvent, null);
+		
+		JPanel createQuestion = new CreateQuestionGUI(new Vector<Event>());
+		icon = new ImageIcon(AdminGUI.class.getResource("/event-creat.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"), new ImageIcon(scaledIcon), createQuestion, null);
+		
+		JPanel findQuestion = new FindQuestionsGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/event-list.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"), new ImageIcon(scaledIcon), findQuestion, null);
+		
+		JPanel createForecas = new CreateForecastGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/close-event.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Crear Pronostico", new ImageIcon(scaledIcon), createForecas, null);
+		
+		JPanel listUsers = new ListUsersGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/users-list.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Listar Usuarios", new ImageIcon(scaledIcon), listUsers, null);
 		
 		
-		JButton jButtonQueryQueries = new JButton();
-		jButtonQueryQueries.addActionListener(new ActionListener() {
+		btnLogOut = new JButton();
+		btnLogOut.setBorderPainted(false);
+		btnLogOut.setOpaque(false);
+		btnLogOut.setBorder(null);
+		btnLogOut.setBackground(new Color(17, 110, 80));
+		btnLogOut.setToolTipText("Log Out");
+		icon = new ImageIcon(AdminGUI.class.getResource("/exit.png"));
+		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		btnLogOut.setIcon(new ImageIcon(scaledIcon));
+		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame a = new FindQuestionsGUI();
-				a.setVisible(true);
+				jButtonClose_actionPerformed(e);
 			}
 		});
-		jButtonQueryQueries.setText("Consultar Preguntas");
-		jButtonQueryQueries.setBounds(228, 100, 194, 52);
-		contentPane.add(jButtonQueryQueries);
-		
-		
-		
-		
-		
-		JButton jButtonCreateQuery = new JButton();
-		jButtonCreateQuery.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new CreateQuestionGUI(new Vector<Event>());
-				a.setVisible(true);
-			}
-		});
-		jButtonCreateQuery.setText("Crear Pregunta");
-		jButtonCreateQuery.setBounds(12, 100, 194, 52);
-		contentPane.add(jButtonCreateQuery);
-		
-		
-		
-		JLabel jLabelSelectOption = new JLabel("Selecciona una opcion");
-		jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
-		jLabelSelectOption.setForeground(Color.BLACK);
-		jLabelSelectOption.setFont(new Font("Dialog", Font.BOLD, 13));
-		jLabelSelectOption.setBounds(-35, 7, 495, 30);
-		contentPane.add(jLabelSelectOption);
-		
-		
-		
-		JButton btnClose = new JButton("Cerrar");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnClose_actionPerformed(e);
-			}
-		});
-		
-		
-		btnClose.setBounds(173, 230, 105, 27);
-		contentPane.add(btnClose);
-		
-		
-		
-		
-		
-		JButton btnNewButton = new JButton("Crear Evento");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new CreateEvent();
-				a.setVisible(true);
-			}
-			
-		});
-		btnNewButton.setBounds(12, 40, 194, 52);
-		contentPane.add(btnNewButton);
-		
-		
-		
-		JButton btnNewButton_1 = new JButton("Crear Pronostico");
-		btnNewButton_1.setBounds(12, 160, 194, 52);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new CreateForecast();
-				a.setVisible(true);
-			}
-		});
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnCerrarEvento = new JButton("Cerrar Evento");
-		btnCerrarEvento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new CloseEventGUI();
-				a.setVisible(true);
-			}
-		});
-		btnCerrarEvento.setBounds(228, 40, 194, 52);
-		contentPane.add(btnCerrarEvento);
-		
-		JButton btnListUsers = new JButton("Lista de Usuarios");
-		btnListUsers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame a = new ListUsersGUI();
-				a.setVisible(true);
-			}
-		});
-		btnListUsers.setBounds(228, 160, 194, 52);
-		contentPane.add(btnListUsers);
-		
+		btnLogOut.setBounds(820, 0, 35, 35);
+		contentPane.add(btnLogOut);
 	}
 	
-	
-	private void btnClose_actionPerformed(ActionEvent e) {
+	private void jButtonClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
+	}
+	
+	protected class CustomTabbedPaneUI extends BasicTabbedPaneUI {
+	    
+	    @Override
+	    protected void installDefaults() {
+	        super.installDefaults();
+	        tabPane.setBackground(new Color(17, 110, 80)); // establecer el color de fondo de la pestaña
+	        tabPane.setFocusable(false); // quitar el focus de la pestaña
+	        tabPane.setForeground(lightHighlight);
+	        tabPane.setOpaque(false); // establecer la opacidad de la pestaña a verdadero
+	        tabPane.setToolTipText(""); // quitar el tooltip
+	    }
 	}
 }

@@ -1,38 +1,42 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
 import java.util.Vector;
 
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import businessLogic.BLFacade;
-import domain.*;
-
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import domain.User;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Color;
 
-public class ListUsersGUI extends JInternalFrame {
+public class ListUsersGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JTable tableUsers = new JTable();
 	private JTable tableAdmins = new JTable();
 	private JScrollPane scrollPaneUser = new JScrollPane();
 	private JScrollPane scrollPaneAdmin = new JScrollPane();
 	private DefaultTableModel tableModelUser;
 	private DefaultTableModel tableModelAdmin;
+	private JTable selectedTable;
+	private DefaultTableModel selectedModel;
 
 	private String[] columnNames = new String[] {
 			"Dni","Nombre","Apellidos","Usuario","Saldo"
 	};
+	private JButton btnEliminarUsuario;
+	private JLabel lblResBtn = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -52,19 +56,14 @@ public class ListUsersGUI extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() {
-		setTitle("Lista de Usuarios");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		this.setSize(new Dimension(700, 500));
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		lblResBtn.setVisible(false);
+		setBounds(100, 100, 863, 609);
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		this.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 0, 673, 400);
-		contentPane.add(tabbedPane);
+		tabbedPane.setBounds(12, 0, 826, 480);
 		this.add(tabbedPane);
 		
 		scrollPaneUser.setViewportView(tableUsers);
@@ -78,11 +77,55 @@ public class ListUsersGUI extends JInternalFrame {
 		tableModelAdmin = new DefaultTableModel(null, columnNames);
 		tableAdmins.setModel(tableModelAdmin);
 		
-		JButton btnClose = new JButton("Cerrar");
-		btnClose.setBounds(292, 416, 105, 27);
-		contentPane.add(btnClose);
-		this.add(btnClose);
+		updateTable();
 		
+		btnEliminarUsuario = new JButton("Eliminar Usuario");
+		btnEliminarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblResBtn.setText("");
+				int index = tabbedPane.getSelectedIndex();
+				switch(index) {
+					case(0): {
+						selectedTable = tableUsers;
+						selectedModel = tableModelUser;
+						break;
+					}
+					case(1): {
+						 selectedTable = tableAdmins;
+				         selectedModel = tableModelAdmin;
+				         break;
+					}
+				}
+				int i = selectedTable.getSelectedRow();
+				String dni = (String) selectedModel.getValueAt(i, 0);
+				BLFacade facade = MainGUI.getBusinessLogic();
+				boolean ret = facade.removeUser(dni);
+				lblResBtn.setVisible(true);
+				if(ret) {
+					lblResBtn.setForeground(new Color(51, 51, 51));
+					lblResBtn.setText("Usuario eliminado");
+				}else {
+					lblResBtn.setForeground(new Color(246, 97, 81));
+					lblResBtn.setText("No se ha podido eliminar");
+				}
+				updateTable();
+			}
+		});
+		ImageIcon icon = new ImageIcon(AdminGUI.class.getResource("/users-remove.png"));
+		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnEliminarUsuario.setIcon(new ImageIcon(scaledIcon));
+		btnEliminarUsuario.setBounds(333, 487, 180, 27);
+		add(btnEliminarUsuario);
+		
+		lblResBtn.setForeground(new Color(246, 97, 81));
+		lblResBtn.setBounds(531, 492, 186, 17);
+		add(lblResBtn);
+	}
+	
+	private void updateTable() {
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		tableModelUser.setRowCount(0);
+		tableModelAdmin.setRowCount(0);
 		BLFacade facade=MainGUI.getBusinessLogic();
 		Vector<User> users = new Vector<User>();
 		users = facade.getAllUsers();
@@ -97,18 +140,5 @@ public class ListUsersGUI extends JInternalFrame {
 			if(u.isAdmin()) tableModelAdmin.addRow(row);
 			else tableModelUser.addRow(row);
 		}
-		
-		btnClose.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				btnClose_actionPerformed(e);
-			}
-		});
-		
-	}
-	
-	private void btnClose_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
 	}
 }

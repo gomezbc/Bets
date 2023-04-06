@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,11 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
@@ -32,7 +34,7 @@ import exceptions.EventHasntFinished;
 import exceptions.ForecastDoesntExist;
 import exceptions.QuestionDoesntExist;
 
-public class CloseEventGUI extends JFrame {
+public class CloseEventGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -40,9 +42,6 @@ public class CloseEventGUI extends JFrame {
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
 	private JLabel lblNoFinalizado = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.lblNoFinalizado.text"));
-
-
-	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -77,7 +76,7 @@ public class CloseEventGUI extends JFrame {
 	private String[] columnNamesForecast = new String[] {
 			"Pronostico#","Pronostico","Ganancia"
 	};
-	private final JButton btnAsignarResultado = new JButton("AsignarResultado");
+	private final JButton btnAsignarResultado = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.btnAsignarResultado.text")); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	/**
 	 * Launch the application.
@@ -96,29 +95,18 @@ public class CloseEventGUI extends JFrame {
 	private void jbInit() throws Exception
 	{
 		lblNoFinalizado.setVisible(false);
-		this.getContentPane().setLayout(null);
+		this.setLayout(null);
 		this.setSize(new Dimension(700, 500));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(40, 248, 598, 14);
 		jLabelEvents.setBounds(295, 19, 259, 16);
 
-		this.getContentPane().add(jLabelEventDate, null);
-		this.getContentPane().add(jLabelQueries);
-		this.getContentPane().add(jLabelEvents);
-
-		jButtonClose.setBounds(new Rectangle(60, 419, 130, 30));
-
-		jButtonClose.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				jButton2_actionPerformed(e);
-			}
-		});
-
-		this.getContentPane().add(jButtonClose, null);
+		this.add(jLabelEventDate, null);
+		this.add(jLabelQueries);
+		this.add(jLabelEvents);
 
 
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
@@ -214,7 +202,7 @@ public class CloseEventGUI extends JFrame {
 			} 
 		});
 
-		this.getContentPane().add(jCalendar1, null);
+		this.add(jCalendar1, null);
 		
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
 		scrollPaneQueries.setBounds(new Rectangle(40, 274, 322, 116));
@@ -271,12 +259,12 @@ public class CloseEventGUI extends JFrame {
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 
-		this.getContentPane().add(scrollPaneEvents, null);
-		this.getContentPane().add(scrollPaneQueries, null);
+		this.add(scrollPaneEvents, null);
+		this.add(scrollPaneQueries, null);
 
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
 		scrollPaneForecast.setBounds(366, 274, 286, 116);
-		getContentPane().add(scrollPaneForecast);
+		this.add(scrollPaneForecast);
 		
 
 		scrollPaneForecast.setViewportView(tableForecast);
@@ -345,13 +333,10 @@ public class CloseEventGUI extends JFrame {
 			}
 		});
 		btnAsignarResultado.setBounds(420, 421, 160, 27);
-		getContentPane().add(btnAsignarResultado);
+		this.add(btnAsignarResultado);
 		
 		lblNoFinalizado.setBounds(420, 396, 180, 17);
-		getContentPane().add(lblNoFinalizado);
+		this.add(lblNoFinalizado);
 		
-	}
-	private void jButton2_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
 	}
 }

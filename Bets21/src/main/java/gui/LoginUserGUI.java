@@ -1,20 +1,20 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
-
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 public class LoginUserGUI extends JFrame {
 
@@ -90,7 +90,7 @@ public class LoginUserGUI extends JFrame {
 					else {
 							userError.setVisible(false);
 						if(user.isAdmin()) {
-							JFrame a = new AdmGUI();
+							JFrame a = new AdminGUI();
 							a.setVisible(true);
 						}else {
 							JFrame a = new UserGUI();

@@ -8,10 +8,10 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Question;
-import domain.User;
 import domain.Event;
 import domain.Forecast;
+import domain.Question;
+import domain.User;
 import exceptions.EventAlreadyExist;
 import exceptions.EventFinished;
 import exceptions.EventHasntFinished;
@@ -235,6 +235,14 @@ public class BLFacadeImplementation  implements BLFacade {
     	Vector<User> users = dbManager.getAllUsers();
   	    dbManager.close();
   	    return users;
+    }
+    
+    @WebMethod
+    public boolean removeUser(String dni) {
+    	dbManager.open(false);
+    	boolean ret = dbManager.removeUser(dni);
+  	    dbManager.close();
+  	    return ret;
     }
 
 }

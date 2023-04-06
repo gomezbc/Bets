@@ -2,20 +2,16 @@ package dataAccess;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import configuration.ConfigXML;
-
-import javax.swing.JTextArea;
-
-
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * It runs the database server as a separate process.

@@ -1,19 +1,7 @@
 package gui;
 
 import java.awt.Color;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JCalendar;
-
-import businessLogic.BLFacade;
-import configuration.UtilDate;
-import domain.Question;
-import exceptions.ForecastAlreadyExist;
-
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -27,22 +15,27 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
-public class CreateForecast extends JFrame {
+import com.toedter.calendar.JCalendar;
 
-	/**
-	 * 
-	 */
+import businessLogic.BLFacade;
+import configuration.UtilDate;
+import domain.Question;
+import exceptions.ForecastAlreadyExist;
+
+public class CreateForecastGUI extends JPanel {
+
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
@@ -84,7 +77,7 @@ public class CreateForecast extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public CreateForecast() {
+	public CreateForecastGUI() {
 		try
 		{
 			jbInit();
@@ -99,13 +92,8 @@ public class CreateForecast extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 802, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		setBounds(100, 100, 802, 500);		
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
@@ -187,9 +175,9 @@ public class CreateForecast extends JFrame {
 				}
 			} 
 		});
-		contentPane.setLayout(null);
+		this.setLayout(null);
 
-		this.getContentPane().add(jCalendar1);
+		this.add(jCalendar1);
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
@@ -222,7 +210,7 @@ public class CreateForecast extends JFrame {
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
-		this.getContentPane().add(scrollPaneEvents, null);
+		this.add(scrollPaneEvents, null);
 		
 		
 		
@@ -235,25 +223,25 @@ public class CreateForecast extends JFrame {
 				btnClose_actionPerformed(e);
 			}
 		});
-		contentPane.add(btnClose);
+		this.add(btnClose);
 		lblNewLabel.setBounds(394, 204, 102, 22);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		contentPane.add(lblNewLabel);
+		this.add(lblNewLabel);
 		
 		textPronostico = new JTextField();
 		textPronostico.setBounds(517, 197, 164, 38);
-		contentPane.add(textPronostico);
+		this.add(textPronostico);
 		textPronostico.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Ganancia:");
 		lblNewLabel_1.setBounds(394, 282, 102, 22);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		contentPane.add(lblNewLabel_1);
+		this.add(lblNewLabel_1);
 		
 		textGanancia = new JTextField();
 		textGanancia.setBounds(517, 275, 164, 38);
-		contentPane.add(textGanancia);
+		this.add(textGanancia);
 		textGanancia.setColumns(10);
 		
 		
@@ -277,27 +265,27 @@ public class CreateForecast extends JFrame {
 						
 		   }
 		});
-		contentPane.add(btnSaveForecast);
+		this.add(btnSaveForecast);
 		
 		lblForecastAlreadyExists.setVisible(false);
 		lblForecastAlreadyExists.setBounds(461, 324, 184, 43);
 		lblForecastAlreadyExists.setBackground(Color.RED);
 		lblForecastAlreadyExists.setForeground(new Color(255, 0, 0));
-		contentPane.add(lblForecastAlreadyExists);
+		this.add(lblForecastAlreadyExists);
 		
 		jComboBoxQuestions.setModel(modelQuestions);
 		jComboBoxQuestions.setBounds(30, 233, 305, 26);
-		contentPane.add(jComboBoxQuestions);
+		this.add(jComboBoxQuestions);
 		
 		JLabel lblQuestions = new JLabel("Preguntas");
 		lblQuestions.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblQuestions.setBounds(30, 207, 102, 17);
-		contentPane.add(lblQuestions);
+		this.add(lblQuestions);
 		
 		lblPronosticoCreado.setVisible(false); 
 		lblPronosticoCreado.setForeground(new Color(0, 0, 255));
 		lblPronosticoCreado.setBounds(113, 299, 130, 29);
-		contentPane.add(lblPronosticoCreado);
+		this.add(lblPronosticoCreado);
 
 	}
 	

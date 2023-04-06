@@ -21,7 +21,13 @@ import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
-import exceptions.*;
+import exceptions.EventAlreadyExist;
+import exceptions.ForecastAlreadyExist;
+import exceptions.ForecastDoesntExist;
+import exceptions.QuestionAlreadyExist;
+import exceptions.QuestionDoesntExist;
+import exceptions.UserAlreadyExist;
+import exceptions.UserDoesntExist;
 
 /**
  * It implements the data access to the objectDb database
@@ -281,7 +287,18 @@ public class DataAccess  {
 		db.getTransaction().commit();
 	}
 	
-	
+	public boolean removeUser(String dni) {
+		System.out.println(">> DataAccess: removeUser => " + dni);
+		User u = db.find(User.class, dni);
+		if(u==null) {
+			return false;
+		}else {
+			db.getTransaction().begin();
+			db.remove(u);
+			db.getTransaction().commit();
+			return true;
+		}
+	}
 	
  
 	/**
