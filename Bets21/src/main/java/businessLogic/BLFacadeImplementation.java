@@ -8,21 +8,8 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
-import domain.Question;
-import domain.User;
-import domain.Bet;
-import domain.Event;
-import domain.Forecast;
-import exceptions.BetAlreadyExist;
-import exceptions.EventAlreadyExist;
-import exceptions.EventFinished;
-import exceptions.EventHasntFinished;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import domain.*;
+import exceptions.*;
 
 /**
  * It implements the business logic as a web service.
@@ -106,8 +93,6 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 
     
-    
-    
 	/**
 	 * This method invokes the data access to retrieve the dates a month for which there are events
 	 * 
@@ -122,8 +107,6 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 	
 	
-	
-	
 	public void close() {
 		DataAccess dB4oManager=new DataAccess(false);
 
@@ -131,9 +114,6 @@ public class BLFacadeImplementation  implements BLFacade {
 
 	}
 
-	
-	
-	
 	/**
 	 * This method invokes the data access to initialize the database with some events and questions.
 	 * It is invoked only when the option "initialize" is declared in the tag dataBaseOpenMode of resources/config.xml file
@@ -144,8 +124,6 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.initializeDB();
 		dbManager.close();
 	}
-    
-    
     
     
     @WebMethod
@@ -162,8 +140,6 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
-    
-    
     @WebMethod 
 	public Question getQuestion (Integer questionNumber) throws QuestionDoesntExist{
 		dbManager.open(false);
@@ -177,8 +153,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		return ( ev ) ;
 		
 	}
-
-    
+	
     
     
     
@@ -199,7 +174,6 @@ public class BLFacadeImplementation  implements BLFacade {
     
     
     
-    
     @WebMethod
     public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
  	   dbManager.open(false);
@@ -212,8 +186,6 @@ public class BLFacadeImplementation  implements BLFacade {
  	   dbManager.close();
  	   return forecast;
     }
-    
-    
     
     
     
@@ -230,9 +202,6 @@ public class BLFacadeImplementation  implements BLFacade {
  	   return u;
     }
     
-    
-    
-    
     @WebMethod
     public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
     {
@@ -246,22 +215,38 @@ public class BLFacadeImplementation  implements BLFacade {
     	}catch(Exception e) {
     		throw e;
     	}
+  	   dbManager.close();
     }
     
-   
-    
+    @WebMethod
+    public Vector<User> getAllUsers(){
+    	dbManager.open(false);
+    	Vector<User> users = dbManager.getAllUsers();
+  	    dbManager.close();
+  	    return users;
+    }
     
     @WebMethod
-    public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist{
+    public boolean removeUser(String dni) {
     	dbManager.open(false);
-    	Bet bet = null;
-    	try {
-    		bet = dbManager.createBet(user, betMoney, forecast);
-    	} catch (BetAlreadyExist e) {
-    		throw new BetAlreadyExist(e.getMessage());
-    	}
-    	dbManager.close();
-    	return bet;
+    	boolean ret = dbManager.removeUser(dni);
+  	    dbManager.close();
+  	    return ret;
+    }
+    
+    @WebMethod
+	public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
+		dbManager.open(false);
+		Bet bet = null;
+		try {
+			bet = dbManager.createBet(user, betMoney, forecast);
+		} catch (BetAlreadyExist e) {
+			throw e;
+		}catch (UserDoesntExist e1) {
+			throw e1;
+		}
+		dbManager.close();
+		return bet;
     }
 
 }

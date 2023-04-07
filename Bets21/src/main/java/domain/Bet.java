@@ -13,14 +13,14 @@ public class Bet {
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private Integer betNumber;
-	private String user;
+	private User user;
 	private double betMoney;
 	
 	@XmlIDREF
 	private Forecast forecast;
 	
 	
-	public Bet ( String user, double betMoney, Forecast forecast) {
+	public Bet (User user, double betMoney, Forecast forecast) {
 		this.user = user;
 		this.betMoney = betMoney;
 		this.forecast = forecast;
@@ -37,12 +37,12 @@ public class Bet {
 	}
 
 
-	public String getUser() {
+	public User getUser() {
 		return user;
 	}
 
 
-	public void setUser(String user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

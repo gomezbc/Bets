@@ -1,20 +1,20 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
-
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 public class LoginUserGUI extends JFrame {
 
@@ -24,8 +24,6 @@ public class LoginUserGUI extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel userError;
-	
-	
 
 	public static User getUserRegistered() {
 		return userRegistered;
@@ -34,7 +32,7 @@ public class LoginUserGUI extends JFrame {
 	public static void setUserRegistered(User userRegistered) {
 		LoginUserGUI.userRegistered = userRegistered;
 	}
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -99,6 +97,7 @@ public class LoginUserGUI extends JFrame {
 					user = facade.getUser(textField.getText());
 					if(!user.checkCredentials(new String(passwordField.getPassword()))) userError.setText("La contraseña es incorrecta");
 					else {
+							setUserRegistered(user);
 							userError.setVisible(false);
 						if(user.isAdmin()) {
 							JFrame a = new AdminGUI();
@@ -112,7 +111,6 @@ public class LoginUserGUI extends JFrame {
 					userError.setVisible(true);
 					userError.setText(e2.getMessage());
 				}
-				setUserRegistered(user);
 			}
 		});
 		

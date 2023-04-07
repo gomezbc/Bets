@@ -1,6 +1,6 @@
 package dataAccess;
 
-//hello
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,11 +17,7 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
-import domain.Bet;
-import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
+import domain.*;
 import exceptions.*;
 
 /**
@@ -222,6 +218,7 @@ public class DataAccess  {
    
 	
 	public User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist {
+		System.out.println(">> DataAccess: createUser => username="+username+" dni="+dni+" name="+name+" apellido="+apellido+" isAdmin="+isAdmin);
 		   User user = db.find(User.class, dni);
 		   if (user==null ) {
 			   db.getTransaction().begin();
@@ -238,6 +235,7 @@ public class DataAccess  {
 	
 	
 	public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
+		  System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+question.getQuestionNumber()+";"+question.getQuestion());
 	 	  Question ques = db.find(Question.class, question.getQuestionNumber());
 	 	  if (ques.DoesForecastExists(description)) throw new ForecastAlreadyExist("Esta predicción ya existe");
 	 	    db.getTransaction().begin();
@@ -252,12 +250,25 @@ public class DataAccess  {
 	
 	
 	public User getUser(String Dni) throws UserDoesntExist{
+		System.out.println(">> DataAccess: getUser => Dni="+Dni);
 		User u = db.find(User.class, Dni);
 		if(u==null) throw new UserDoesntExist("No existe un usuario con este DNI "+Dni);
 		return u;
 	}
 	
+	public Vector<User> getAllUsers(){
+		System.out.println(">> DataAccess: getAllUsers");
+		Vector<User> res = new Vector<User>();	
+		TypedQuery<User> query = db.createQuery("SELECT u FROM User u",User.class);
+		List<User> users = query.getResultList();
+		for(User u: users) {
+			res.add(u);
+		}
+		return res;
+	}
+	
 	public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist {
+		System.out.println(">> DataAccess: getEvents");
 		Question q = db.find(Question.class, questionNumber);
 		Forecast f = db.find(Forecast.class, forecastNumber);
 		if(q==null) throw new QuestionDoesntExist("No existe una pregunta con este identificador " + questionNumber);
@@ -267,7 +278,33 @@ public class DataAccess  {
 		db.getTransaction().commit();
 	}
 	
+	public boolean removeUser(String dni) {
+		System.out.println(">> DataAccess: removeUser => " + dni);
+		User u = db.find(User.class, dni);
+		if(u==null) {
+			return false;
+		}else {
+			db.getTransaction().begin();
+			db.remove(u);
+			db.getTransaction().commit();
+			return true;
+		}
+	}
 	
+	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
+		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecast.toString());
+		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
+		User u = db.find(User.class, user);
+		if(u==null) throw new UserDoesntExist("No hay un usuario con este DNI en la bas de datos, dni="+user);
+		if ( u.DoesBetExists(forecast)) {
+			throw new BetAlreadyExist("Esta apuesta ya existe");
+		}
+			db.getTransaction().begin();
+ 	    	Bet b = u.addBet(betMoney, forecast);
+ 	    	db.persist(forcast); 
+ 			db.getTransaction().commit();
+ 			return b;
+	}
 	
  
 	/**
@@ -371,19 +408,6 @@ public class DataAccess  {
 	public void close(){
 		db.close();
 		System.out.println("DataBase closed");
-	}
-	
-	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist {
-		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
-		if ( forcast.DoesBetExists(user, forecast)) {
-			throw new BetAlreadyExist("Esta apuesta ya existe");
-		}
- 	    	db.getTransaction().begin();
- 	    	Bet b = forcast.addBet(user, betMoney, forecast);
- 	    	db.persist(forcast); 
-						
-		db.getTransaction().commit();
-		return b;
 	}
 	
 }

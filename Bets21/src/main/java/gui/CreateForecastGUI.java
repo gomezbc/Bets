@@ -1,22 +1,7 @@
 package gui;
+
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JCalendar;
-
-import businessLogic.BLFacade;
-import configuration.UtilDate;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
-import exceptions.BetAlreadyExist;
-import exceptions.ForecastAlreadyExist;
-
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,21 +15,27 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JCalendar;
 
-public class createBetGUI extends JFrame {
+import businessLogic.BLFacade;
+import configuration.UtilDate;
+import domain.Question;
+import exceptions.ForecastAlreadyExist;
 
-	
+public class CreateForecastGUI extends JPanel {
+
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
@@ -55,21 +46,13 @@ public class createBetGUI extends JFrame {
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
 
 	
+	
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JTable tableEvents= new JTable();
 	private JComboBox<Question> jComboBoxQuestions =  new JComboBox<Question>();
 	private DefaultComboBoxModel<Question> modelQuestions = new DefaultComboBoxModel<Question>();
-	
-	
-	private JComboBox<Forecast> JComboBoxForecast = new JComboBox<Forecast>();
-	private DefaultComboBoxModel<Forecast> modelForecast = new DefaultComboBoxModel<Forecast>();
-	
 	private DefaultTableModel tableModelEvents;
 	private DefaultTableModel tableModelQueries;
-	private DefaultTableModel tableModelForecast;
-
-	
-	private LoginUserGUI usuario;
 	
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 	
@@ -83,21 +66,18 @@ public class createBetGUI extends JFrame {
 			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
-	private final JLabel lblNewLabel = new JLabel("PRONOSTICO: ");
-	private final JLabel lblNewLabel_1 = new JLabel("Dinero Apuesta : ");
-	private final JTextField textFieldDinero = new JTextField();
+	private final JLabel lblNewLabel = new JLabel("Pronostico :");
+	private JTextField textPronostico;
+	private JTextField textGanancia;
 	
-	private JLabel lblNewLabel_Error1 = new JLabel("El dinero de la apuesta no supera el dinero mínimo");
 	
-	private JLabel lblNewLabel_2 = new JLabel("Apuesta creada");
-	private JLabel lblNewLabel_3 = new JLabel("Ya has apostado a este pronóstico");
+	private JLabel lblForecastAlreadyExists = new JLabel("Este pronostico ya existe!");
+	private JLabel lblPronosticoCreado = new JLabel("Pronóstico creado");
 
-
-	
 	/**
 	 * Launch the application.
 	 */
-	public createBetGUI() {
+	public CreateForecastGUI() {
 		try
 		{
 			jbInit();
@@ -107,27 +87,13 @@ public class createBetGUI extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
-	
 
 	/**
 	 * Create the frame.
 	 */
-	public void jbInit() {
-		User userRegistered = LoginUserGUI.getUserRegistered();
-
-		textFieldDinero.setBounds(224, 289, 133, 44);
-		textFieldDinero.setColumns(10);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 802, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		
+	public void jbInit() throws Exception{
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		setBounds(100, 100, 802, 500);		
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
@@ -209,9 +175,9 @@ public class createBetGUI extends JFrame {
 				}
 			} 
 		});
-		contentPane.setLayout(null);
+		this.setLayout(null);
 
-		this.getContentPane().add(jCalendar1);
+		this.add(jCalendar1);
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
@@ -244,7 +210,10 @@ public class createBetGUI extends JFrame {
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
-		this.getContentPane().add(scrollPaneEvents, null);
+		this.add(scrollPaneEvents, null);
+		
+		
+		
 		
 		
 		JButton btnClose = new JButton("Cerrar");
@@ -254,113 +223,69 @@ public class createBetGUI extends JFrame {
 				btnClose_actionPerformed(e);
 			}
 		});
-		contentPane.add(btnClose);
+		this.add(btnClose);
+		lblNewLabel.setBounds(394, 204, 102, 22);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		this.add(lblNewLabel);
+		
+		textPronostico = new JTextField();
+		textPronostico.setBounds(517, 197, 164, 38);
+		this.add(textPronostico);
+		textPronostico.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Ganancia:");
+		lblNewLabel_1.setBounds(394, 282, 102, 22);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		this.add(lblNewLabel_1);
+		
+		textGanancia = new JTextField();
+		textGanancia.setBounds(517, 275, 164, 38);
+		this.add(textGanancia);
+		textGanancia.setColumns(10);
 		
 		
-		JButton btnSaveForecast = new JButton("Guardar Apuesta");
+		
+		JButton btnSaveForecast = new JButton("Guardar Pronostico");
 		btnSaveForecast.setBounds(193, 374, 164, 50);
 		btnSaveForecast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
-					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
-					double a = q1.getBetMinimum();
-					if(Double.parseDouble(textFieldDinero.getText()) < a){
-						lblNewLabel_Error1.setVisible(true);
-						lblNewLabel_2.setVisible(false);
-						lblNewLabel_3.setVisible(false);
-						
-						
-					} else {
-						facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
-						lblNewLabel_Error1.setVisible(false);
-						lblNewLabel_2.setVisible(true);
-						lblNewLabel_3.setVisible(false);
-						
-					}
 					
-				} catch (BetAlreadyExist ea){
-					lblNewLabel_Error1.setVisible(false);
-					lblNewLabel_2.setVisible(false);
-					lblNewLabel_3.setVisible(true);
-					//ea.printStackTrace();
+					facade.createForecast(textPronostico.getText(), Float.parseFloat(textGanancia.getText()), (Question) jComboBoxQuestions.getSelectedItem());
+					lblForecastAlreadyExists.setVisible(false);
+					lblPronosticoCreado.setVisible(true); 
+					
+				} catch (ForecastAlreadyExist e1) {
+					lblForecastAlreadyExists.setVisible(true);
+					lblPronosticoCreado.setVisible(false); 
+					//e1.printStackTrace();
 				}
-					
+						
 		   }
 		});
-		contentPane.add(btnSaveForecast);
+		this.add(btnSaveForecast);
 		
-		
-		
-		jComboBoxQuestions.setModel(modelQuestions);
-		jComboBoxQuestions.setBounds(30, 233, 305, 26);
-		jComboBoxQuestions.addMouseListener(new MouseAdapter () {
-			public void mouseClicked (MouseEvent e) {
-				modelForecast.removeAllElements();
-			    Question question = (Question) jComboBoxQuestions.getSelectedItem();
-			    Vector<Forecast> queries2 = question.getForecasts();
-			    
-			    
-			 // tableModelForecast.setDataVector(null, columnNamesForecast);
-			    
-			    if(! queries2.isEmpty())
-			    	jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")+" "+ question.getForecasts());
-			    	
-			    
-			    for (domain.Forecast f:queries2) {
-			    	modelForecast.addElement(f);
-			    }
-			}
-			
-		} );
-		
-		//tableModelForecast.setDataVector(null, columnNamesForecast);
+		lblForecastAlreadyExists.setVisible(false);
+		lblForecastAlreadyExists.setBounds(461, 324, 184, 43);
+		lblForecastAlreadyExists.setBackground(Color.RED);
+		lblForecastAlreadyExists.setForeground(new Color(255, 0, 0));
+		this.add(lblForecastAlreadyExists);
 		
 		jComboBoxQuestions.setModel(modelQuestions);
 		jComboBoxQuestions.setBounds(30, 233, 305, 26);
-		contentPane.add(jComboBoxQuestions);
-		
-		
-		JComboBoxForecast.setModel(modelForecast);
-		JComboBoxForecast.setBounds(411, 235, 298, 22);
-		contentPane.add(JComboBoxForecast);
+		this.add(jComboBoxQuestions);
 		
 		JLabel lblQuestions = new JLabel("Preguntas");
 		lblQuestions.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblQuestions.setBounds(30, 207, 102, 17);
-		contentPane.add(lblQuestions);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNewLabel.setBounds(411, 210, 184, 14);
+		this.add(lblQuestions);
 		
-		contentPane.add(lblNewLabel);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(86, 302, 157, 14);
-		
-		contentPane.add(lblNewLabel_1);
-		
-		contentPane.add(textFieldDinero);
-		
-		
-		lblNewLabel_Error1.setVisible(false);
-		lblNewLabel_Error1.setForeground(Color.RED);
-		lblNewLabel_Error1.setBackground(Color.BLACK);
-		lblNewLabel_Error1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_Error1.setBounds(411, 280, 305, 36);
-		contentPane.add(lblNewLabel_Error1);
-		
-		
-		lblNewLabel_2.setVisible(false);
-		lblNewLabel_2.setForeground(Color.BLUE);
-		lblNewLabel_2.setBounds(461, 316, 178, 14);
-		contentPane.add(lblNewLabel_2);
-		
-		
-		lblNewLabel_3.setVisible(false);
-		lblNewLabel_3.setForeground(new Color(199, 21, 133));
-		lblNewLabel_3.setBounds(431, 341, 245, 14);
-		contentPane.add(lblNewLabel_3);
-		
-
+		lblPronosticoCreado.setVisible(false); 
+		lblPronosticoCreado.setForeground(new Color(0, 0, 255));
+		lblPronosticoCreado.setBounds(113, 299, 130, 29);
+		this.add(lblPronosticoCreado);
 
 	}
 	

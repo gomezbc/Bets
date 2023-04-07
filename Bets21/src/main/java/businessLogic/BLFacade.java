@@ -1,18 +1,14 @@
 package businessLogic;
 
-import java.util.Vector;
 import java.util.Date;
+import java.util.Vector;
 
-
-
-
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 
 //import domain.Booking;
 import domain.*;
 import exceptions.*;
-
-import javax.jws.WebMethod;
-import javax.jws.WebService;
 
 /**
  * Interface that specifies the business logic.
@@ -67,7 +63,10 @@ public interface BLFacade  {
 	@WebMethod public Question getQuestion(Integer questionNumber) throws QuestionDoesntExist;
 
 	@WebMethod public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
-	
-	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist;
 
+	@WebMethod public Vector<User> getAllUsers();
+	
+	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;
+	
+	@WebMethod public boolean removeUser(String dni);
 }

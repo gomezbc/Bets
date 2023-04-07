@@ -1,32 +1,55 @@
 package gui;
 
+import java.awt.Image;
+import java.util.Vector;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
 import businessLogic.BLFacade;
-import configuration.UtilDate;
+import domain.User;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
 
+import businessLogic.BLFacade;
+import configuration.UtilDate;
 import domain.Forecast;
 import domain.Question;
 import exceptions.QuestionDoesntExist;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
-import java.text.DateFormat;
-import java.util.*;
 
-import javax.swing.table.DefaultTableModel;
-
-
-public class FindQuestionsGUI extends JFrame {
+public class FindQuestionsGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
-
-	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 
 	// Code for JCalendar
 	private JCalendar jCalendar1 = new JCalendar();
@@ -77,30 +100,18 @@ public class FindQuestionsGUI extends JFrame {
 	
 	private void jbInit() throws Exception
 	{
-
-		this.getContentPane().setLayout(null);
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		this.setLayout(null);
 		this.setSize(new Dimension(700, 500));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
+//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelQueries.setBounds(40, 248, 598, 14);
 		jLabelEvents.setBounds(295, 19, 259, 16);
 
-		this.getContentPane().add(jLabelEventDate, null);
-		this.getContentPane().add(jLabelQueries);
-		this.getContentPane().add(jLabelEvents);
-
-		jButtonClose.setBounds(new Rectangle(274, 419, 130, 30));
-
-		jButtonClose.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				jButton2_actionPerformed(e);
-			}
-		});
-
-		this.getContentPane().add(jButtonClose, null);
+		this.add(jLabelEventDate, null);
+		this.add(jLabelQueries);
+		this.add(jLabelEvents);
 
 
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
@@ -195,7 +206,7 @@ public class FindQuestionsGUI extends JFrame {
 			} 
 		});
 
-		this.getContentPane().add(jCalendar1, null);
+		this.add(jCalendar1, null);
 		
 		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
 		scrollPaneQueries.setBounds(new Rectangle(40, 274, 322, 116));
@@ -243,13 +254,13 @@ public class FindQuestionsGUI extends JFrame {
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 
-		this.getContentPane().add(scrollPaneEvents, null);
-		this.getContentPane().add(scrollPaneQueries, null);
+		this.add(scrollPaneEvents, null);
+		this.add(scrollPaneQueries, null);
 		
 		
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
 		scrollPaneForecast.setBounds(366, 274, 286, 116);
-		getContentPane().add(scrollPaneForecast);
+		add(scrollPaneForecast);
 		
 
 		scrollPaneForecast.setViewportView(tableForecast);
@@ -296,9 +307,5 @@ public class FindQuestionsGUI extends JFrame {
 			}
 		});
 
-	}
-
-	private void jButton2_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
 	}
 }

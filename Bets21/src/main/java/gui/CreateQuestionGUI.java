@@ -1,16 +1,30 @@
 package gui;
 
-import java.text.DateFormat;
-import java.util.*;
-
-import javax.swing.*;
-
-import com.toedter.calendar.JCalendar;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Vector;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+
+import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
@@ -18,7 +32,7 @@ import domain.Event;
 import exceptions.EventFinished;
 import exceptions.QuestionAlreadyExist;
 
-public class CreateQuestionGUI extends JFrame {
+public class CreateQuestionGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JComboBox<Event> jComboBoxEvents = new JComboBox<Event>();
@@ -38,7 +52,6 @@ public class CreateQuestionGUI extends JFrame {
 	private JScrollPane scrollPaneEvents = new JScrollPane();
 
 	private JButton jButtonCreate = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
-	private JButton jButtonClose = new JButton(ResourceBundle.getBundle("Etiquetas").getString("Close"));
 	private JLabel jLabelMsg = new JLabel();
 	private JLabel jLabelError = new JLabel();
 	
@@ -53,10 +66,10 @@ public class CreateQuestionGUI extends JFrame {
 	}
 
 	private void jbInit(Vector<domain.Event> v) throws Exception {
-
-		this.getContentPane().setLayout(null);
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		this.setLayout(null);
 		this.setSize(new Dimension(604, 370));
-		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
+//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
 
 		jComboBoxEvents.setModel(modelEvents);
 		jComboBoxEvents.setBounds(new Rectangle(275, 47, 250, 20));
@@ -78,12 +91,7 @@ public class CreateQuestionGUI extends JFrame {
 			}
 		});
 		
-		jButtonClose.setBounds(new Rectangle(275, 275, 130, 30));
-		jButtonClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jButtonClose_actionPerformed(e);
-			}
-		});
+
 
 		
 		jLabelMsg.setBounds(new Rectangle(275, 182, 305, 20));
@@ -93,20 +101,19 @@ public class CreateQuestionGUI extends JFrame {
 		jLabelError.setBounds(new Rectangle(175, 240, 305, 20));
 		jLabelError.setForeground(Color.red);
 
-		this.getContentPane().add(jLabelMsg, null);
-		this.getContentPane().add(jLabelError, null);
+		this.add(jLabelMsg, null);
+		this.add(jLabelError, null);
 
-		this.getContentPane().add(jButtonClose, null);
-		this.getContentPane().add(jButtonCreate, null);
-		this.getContentPane().add(jTextFieldQuery, null);
-		this.getContentPane().add(jLabelQuery, null);
-		this.getContentPane().add(jTextFieldPrice, null);
+		this.add(jButtonCreate, null);
+		this.add(jTextFieldQuery, null);
+		this.add(jLabelQuery, null);
+		this.add(jTextFieldPrice, null);
 
-		this.getContentPane().add(jLabelMinBet, null);
-		this.getContentPane().add(jLabelListOfEvents, null);
-		this.getContentPane().add(jComboBoxEvents, null);
+		this.add(jLabelMinBet, null);
+		this.add(jLabelListOfEvents, null);
+		this.add(jComboBoxEvents, null);
 
-		this.getContentPane().add(jCalendar, null);
+		this.add(jCalendar, null);
 		
 		
 		BLFacade facade = MainGUI.getBusinessLogic();
@@ -117,7 +124,7 @@ public class CreateQuestionGUI extends JFrame {
 
 		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
 		jLabelEventDate.setBounds(40, 16, 140, 25);
-		getContentPane().add(jLabelEventDate);
+		this.add(jLabelEventDate);
 
 		
 		// Code for JCalendar
@@ -279,9 +286,5 @@ public static void paintDaysWithEvents(JCalendar jCalendar,Vector<Date> datesWit
 			e1.printStackTrace();
 
 		}
-	}
-
-	private void jButtonClose_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
 	}
 }
