@@ -273,6 +273,22 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
+    
+    @WebMethod
+    public User restarAlSaldo (float saldo, String user2) {
+    	dbManager.open(false);
+    	User user = null;
+    	try {
+    		user = dbManager.restarAlSaldo(saldo, user2);
+    	} catch ( Exception e) {
+    		throw e;
+    	}
+    	dbManager.close();
+    	return user;
+    }
+    
+     
+    
     @WebMethod
     public Float saldoActual (String user2) {
     	dbManager.open(false);
@@ -285,6 +301,8 @@ public class BLFacadeImplementation  implements BLFacade {
     	dbManager.close();
     	return a;
     }
+    
+    
 
 }
 

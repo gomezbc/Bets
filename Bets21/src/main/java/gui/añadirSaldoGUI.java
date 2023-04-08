@@ -36,6 +36,7 @@ public class añadirSaldoGUI extends JPanel {
 			
 		try
 		{
+			
 			jbInit();
 		}
 		catch(Exception e)
@@ -49,6 +50,9 @@ public class añadirSaldoGUI extends JPanel {
 	public void jbInit() {
 		
 		User userRegistered = LoginUserGUI.getUserRegistered();
+		BLFacade facade = MainGUI.getBusinessLogic();
+		
+		lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
 		
 		setLayout(null);
 
@@ -66,7 +70,6 @@ public class añadirSaldoGUI extends JPanel {
 		lblNewLabel_1.setBounds(70, 94, 139, 37);
 		add(lblNewLabel_1);
 		
-		BLFacade facade = MainGUI.getBusinessLogic();	
 		lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
 		
 		btnNewButton.setBounds(150, 252, 112, 37);
@@ -99,7 +102,7 @@ public class añadirSaldoGUI extends JPanel {
 		
 		add(btnNewButton);
 		lblNewLabel_2.setBounds(253, 102, 72, 24);
-		
+		//lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
 		add(lblNewLabel_2);
 		
 	

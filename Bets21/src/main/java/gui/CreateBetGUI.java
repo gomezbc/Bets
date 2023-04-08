@@ -86,6 +86,7 @@ public class CreateBetGUI extends JPanel {
 	
 	private JLabel lblErrorApuesta = new JLabel("Apuesta creada");
 	private JLabel lblErrorExiste = new JLabel("Ya has apostado a este pronóstico");
+	private final JLabel lblNewLabel = new JLabel("No tienes suficiente saldo.");
 
 
 	
@@ -245,6 +246,7 @@ public class CreateBetGUI extends JPanel {
 		btnSaveForecast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
+
 				try {
 					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
 					double a = q1.getBetMinimum();
@@ -252,18 +254,29 @@ public class CreateBetGUI extends JPanel {
 						lblErrorDinero.setVisible(true);
 						lblErrorApuesta.setVisible(false);
 						lblErrorExiste.setVisible(false);
+						lblNewLabel.setVisible(false);
+					
+					} else if( (facade.saldoActual(userRegistered.getDni())) < Float.parseFloat(textFieldDinero.getText())) {
 						
+						lblErrorDinero.setVisible(false);
+						lblErrorApuesta.setVisible(false);
+						lblErrorExiste.setVisible(false);
+						lblNewLabel.setVisible(true);
 						
 					} else {
 						facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
+						facade.restarAlSaldo(Float.parseFloat(textFieldDinero.getText()), userRegistered.getDni());
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(true);
 						lblErrorExiste.setVisible(false);
+						lblNewLabel.setVisible(false);
 					}
 				} catch (BetAlreadyExist ea){
 					lblErrorDinero.setVisible(false);
 					lblErrorApuesta.setVisible(false);
 					lblErrorExiste.setVisible(true);
+					lblNewLabel.setVisible(false);
+					
 				} catch (NumberFormatException e1) {
 					e1.printStackTrace();
 				} catch (UserDoesntExist e1) {
@@ -343,6 +356,12 @@ public class CreateBetGUI extends JPanel {
 		lblErrorExiste.setForeground(new Color(199, 21, 133));
 		lblErrorExiste.setBounds(289, 419, 214, 17);
 		this.add(lblErrorExiste);
+		
+		lblNewLabel.setVisible(false);
+		lblNewLabel.setForeground(new Color(255, 0, 0));
+		lblNewLabel.setBounds(199, 446, 193, 20);
+		
+		add(lblNewLabel);
 		
 
 

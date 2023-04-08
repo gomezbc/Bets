@@ -343,6 +343,18 @@ public class DataAccess  {
 	}
 	
 	
+	public User restarAlSaldo (float saldo, String user) {
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		float saldo_actual = user2.getSaldo();
+		float saldo_modificado = saldo_actual - saldo;
+		user2.setSaldo(saldo_modificado);
+		db.getTransaction().commit();
+		
+		
+		return user2;
+	}
+	
 	
 	
 	/**
