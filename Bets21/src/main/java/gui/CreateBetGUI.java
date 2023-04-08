@@ -82,7 +82,7 @@ public class CreateBetGUI extends JPanel {
 	private final JLabel lblNewLabel_1 = new JLabel("Dinero Apuesta : ");
 	private final JTextField textFieldDinero = new JTextField();
 	
-	private JLabel lblErrorDinero = new JLabel("El dinero de la apuesta no supera el dinero mínimo, vuelve a introducir.");
+	private JLabel lblErrorDinero = new JLabel("El dinero de la apuesta no supera el dinero mínimo ");
 	
 	private JLabel lblErrorApuesta = new JLabel("Apuesta creada");
 	private JLabel lblErrorExiste = new JLabel("Ya has apostado a este pronóstico");

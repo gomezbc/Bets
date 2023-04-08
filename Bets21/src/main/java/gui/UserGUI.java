@@ -76,6 +76,13 @@ public class UserGUI extends JFrame {
 		tabbedPane.addTab("Apostar", new ImageIcon(scaledIcon), createBet);
 		
 		
+		JPanel añadirSaldoGUI = new añadirSaldoGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/event-list.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Añadir Saldo", new ImageIcon(scaledIcon), añadirSaldoGUI);
+		
+		
+		
 		btnLogOut = new JButton();
 		btnLogOut.setBorderPainted(false);
 		btnLogOut.setOpaque(false);
@@ -84,6 +91,7 @@ public class UserGUI extends JFrame {
 		btnLogOut.setToolTipText("Log Out");
 		icon = new ImageIcon(AdminGUI.class.getResource("/exit.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,11 +101,13 @@ public class UserGUI extends JFrame {
 		btnLogOut.setBounds(820, 0, 35, 35);
 		contentPane.add(btnLogOut);
 	}
+	
+	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
 	}
 	
-protected class CustomTabbedPaneUI extends BasicTabbedPaneUI {
+	protected class CustomTabbedPaneUI extends BasicTabbedPaneUI {
 	    
 	    @Override
 	    protected void installDefaults() {

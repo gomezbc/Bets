@@ -247,7 +247,8 @@ public class DataAccess  {
 			return f;
 	    }
 	
-	
+
+
 	
 	public User getUser(String Dni) throws UserDoesntExist{
 		System.out.println(">> DataAccess: getUser => Dni="+Dni);
@@ -255,6 +256,9 @@ public class DataAccess  {
 		if(u==null) throw new UserDoesntExist("No existe un usuario con este DNI "+Dni);
 		return u;
 	}
+	
+	
+	
 	
 	public Vector<User> getAllUsers(){
 		System.out.println(">> DataAccess: getAllUsers");
@@ -267,6 +271,9 @@ public class DataAccess  {
 		return res;
 	}
 	
+	
+	
+	
 	public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist {
 		System.out.println(">> DataAccess: getEvents");
 		Question q = db.find(Question.class, questionNumber);
@@ -277,6 +284,8 @@ public class DataAccess  {
 		q.setResult(f);
 		db.getTransaction().commit();
 	}
+	
+	
 	
 	public boolean removeUser(String dni) {
 		System.out.println(">> DataAccess: removeUser => " + dni);
@@ -290,6 +299,8 @@ public class DataAccess  {
 			return true;
 		}
 	}
+	
+	
 	
 	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
 		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecast.toString());
@@ -307,6 +318,33 @@ public class DataAccess  {
 	}
 	
  
+	
+	
+	public User modifySaldo (float saldo, String user) {
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		float saldo_actual = user2.getSaldo();
+		float saldo_modificado = saldo_actual + saldo;
+		user2.setSaldo(saldo_modificado);
+		db.getTransaction().commit();
+		
+		
+		return user2;
+	}
+	
+	
+	public Float saldoActual (String user) {
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		float saldo_actual = user2.getSaldo();
+		db.getTransaction().commit();
+		
+		return saldo_actual;
+	}
+	
+	
+	
+	
 	/**
 	 * This method retrieves from the database the events of a given date 
 	 * 
@@ -325,6 +363,8 @@ public class DataAccess  {
 		  }
 	 	return res;
 	}
+	
+	
 	
 	
 	public Vector<String> getEvents2(Date date) {

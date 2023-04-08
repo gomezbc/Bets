@@ -68,5 +68,9 @@ public interface BLFacade  {
 	
 	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;
 	
+    @WebMethod public User modifySaldo (float saldo, String user2);
+	
 	@WebMethod public boolean removeUser(String dni);
+	
+	@WebMethod public Float saldoActual (String user2);
 }

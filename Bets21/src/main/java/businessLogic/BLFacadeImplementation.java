@@ -202,6 +202,8 @@ public class BLFacadeImplementation  implements BLFacade {
  	   return u;
     }
     
+    
+    
     @WebMethod
     public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
     {
@@ -218,6 +220,8 @@ public class BLFacadeImplementation  implements BLFacade {
   	   dbManager.close();
     }
     
+    
+    
     @WebMethod
     public Vector<User> getAllUsers(){
     	dbManager.open(false);
@@ -226,6 +230,8 @@ public class BLFacadeImplementation  implements BLFacade {
   	    return users;
     }
     
+    
+    
     @WebMethod
     public boolean removeUser(String dni) {
     	dbManager.open(false);
@@ -233,6 +239,8 @@ public class BLFacadeImplementation  implements BLFacade {
   	    dbManager.close();
   	    return ret;
     }
+    
+    
     
     @WebMethod
 	public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
@@ -247,6 +255,35 @@ public class BLFacadeImplementation  implements BLFacade {
 		}
 		dbManager.close();
 		return bet;
+    }
+    
+    
+    
+    @WebMethod
+    public User modifySaldo (float saldo, String user2) {
+    	dbManager.open(false);
+    	User user = null;
+    	try {
+    		user = dbManager.modifySaldo(saldo, user2);
+    	} catch ( Exception e) {
+    		throw e;
+    	}
+    	dbManager.close();
+    	return user;
+    }
+    
+    
+    @WebMethod
+    public Float saldoActual (String user2) {
+    	dbManager.open(false);
+    	Float a = (float) 0;
+    	try {
+    		a = dbManager.saldoActual(user2);
+    	} catch ( Exception e) {
+    		throw e;
+    	}
+    	dbManager.close();
+    	return a;
     }
 
 }
