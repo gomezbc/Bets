@@ -302,12 +302,12 @@ public class DataAccess  {
 	
 	
 	
-	public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
+	public Bet createBet (String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
 		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecast.toString());
 		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
 		User u = db.find(User.class, user);
 		if(u==null) throw new UserDoesntExist("No hay un usuario con este DNI en la bas de datos, dni="+user);
-		if ( u.DoesBetExists(forecast)) {
+		if ( u.DoesBetExists(forecast.getForecastNumber()) != null) {
 			throw new BetAlreadyExist("Esta apuesta ya existe");
 		}
 			db.getTransaction().begin();
@@ -321,6 +321,7 @@ public class DataAccess  {
 	
 	
 	public User modifySaldo (float saldo, String user) {
+		System.out.println(">> DataAccess: modifySaldo => user="+user+" saldo a añadir="+saldo);
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
 		float saldo_actual = user2.getSaldo();
@@ -333,26 +334,11 @@ public class DataAccess  {
 	}
 	
 	
-	public Float saldoActual (String user) {
-		User user2 = db.find(User.class, user);
-		db.getTransaction().begin();
-		float saldo_actual = user2.getSaldo();
-		db.getTransaction().commit();
-		
-		return saldo_actual;
-	}
-	
-	
-	public User restarAlSaldo (float saldo, String user) {
-		User user2 = db.find(User.class, user);
-		db.getTransaction().begin();
-		float saldo_actual = user2.getSaldo();
-		float saldo_modificado = saldo_actual - saldo;
-		user2.setSaldo(saldo_modificado);
-		db.getTransaction().commit();
-		
-		
-		return user2;
+	public Forecast getForecast(Integer forecastNumber) throws ForecastDoesntExist{
+		System.out.println(">> DataAccess: getForecast => forecastNumber="+forecastNumber);
+		Forecast f = db.find(Forecast.class, forecastNumber);
+		if(f==null) throw new ForecastDoesntExist("No existe un pronostico con este identificador " + forecastNumber);
+		return f;
 	}
 	
 	

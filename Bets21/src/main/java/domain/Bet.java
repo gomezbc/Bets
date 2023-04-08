@@ -14,13 +14,13 @@ public class Bet {
 	@GeneratedValue
 	private Integer betNumber;
 	private User user;
-	private double betMoney;
+	private float betMoney;
 	
 	@XmlIDREF
 	private Forecast forecast;
 	
 	
-	public Bet (User user, double betMoney, Forecast forecast) {
+	public Bet (User user, float betMoney, Forecast forecast) {
 		this.user = user;
 		this.betMoney = betMoney;
 		this.forecast = forecast;
@@ -52,7 +52,7 @@ public class Bet {
 	}
 
 
-	public void setBetMoney(double betMoney) {
+	public void setBetMoney(float betMoney) {
 		this.betMoney = betMoney;
 	}
 

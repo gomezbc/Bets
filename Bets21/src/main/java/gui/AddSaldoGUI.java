@@ -12,27 +12,26 @@ import businessLogic.BLFacade;
 import domain.User;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import java.awt.Color;
 
-public class añadirSaldoGUI extends JPanel {
+public class AddSaldoGUI extends JPanel {
 
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	
 	private JLabel lblNewLabel = new JLabel("Dinero a añadir : ");
-	private JLabel lblNewLabel_1 = new JLabel("Saldo actual:");
+	private JLabel lblInfoSaldo = new JLabel("Saldo actual:");
 	private JButton btnNewButton = new JButton("Aceptar");
-	private final JLabel lblNewLabel_2 = new JLabel(" ");
-	private JLabel lblNewLabel_3 = new JLabel("Dinero añadido");
-	private final JLabel lblNewLabel_4 = new JLabel("Tiene que ser positivo");
+	private final JLabel lblSaldo = new JLabel(" ");
+	private JLabel lblDineroAñadido = new JLabel("Dinero añadido");
+	private final JLabel lblError = new JLabel("Tiene que ser positivo");
 	
 	
 	/**
 	 * Create the panel.
 	 */
-	public añadirSaldoGUI() {
+	public AddSaldoGUI() {
 			
 		try
 		{
@@ -52,7 +51,7 @@ public class añadirSaldoGUI extends JPanel {
 		User userRegistered = LoginUserGUI.getUserRegistered();
 		BLFacade facade = MainGUI.getBusinessLogic();
 		
-		lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
+		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 		
 		setLayout(null);
 
@@ -66,32 +65,32 @@ public class añadirSaldoGUI extends JPanel {
 		textField.setColumns(10);
 		
 
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(70, 94, 139, 37);
-		add(lblNewLabel_1);
+		lblInfoSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblInfoSaldo.setBounds(70, 94, 139, 37);
+		add(lblInfoSaldo);
 		
-		lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
+		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 		
 		btnNewButton.setBounds(150, 252, 112, 37);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BLFacade facade = MainGUI.getBusinessLogic();
+				User userRegistered = LoginUserGUI.getUserRegistered();
 				if (Float.parseFloat(textField.getText()) > 0){
-					lblNewLabel_4.setVisible(false);
+					lblError.setVisible(false);
 					try {
-						
 						facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-						lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
-						lblNewLabel_3.setVisible(true);
+						userRegistered = facade.getUser(userRegistered.getDni());//Actualizamos los datos del usuario
+						lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
+						lblDineroAñadido.setVisible(true);
 						textField.setText("");
 						
 					} catch (Exception e2) {
-						lblNewLabel_3.setVisible(false);
+						lblDineroAñadido.setVisible(false);
 						e2.printStackTrace();
 			    	
 					}
 				} else {
-					lblNewLabel_4.setVisible(true);
+					lblError.setVisible(true);
 					
 				}
 				
@@ -101,24 +100,24 @@ public class añadirSaldoGUI extends JPanel {
 			} });
 		
 		add(btnNewButton);
-		lblNewLabel_2.setBounds(253, 102, 72, 24);
+		lblSaldo.setBounds(253, 102, 72, 24);
 		//lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
-		add(lblNewLabel_2);
+		add(lblSaldo);
 		
 	
 		
-		lblNewLabel_3.setVisible(false);
-		lblNewLabel_3.setForeground(new Color(199, 21, 133));
-		lblNewLabel_3.setBackground(Color.BLACK);
-		lblNewLabel_3.setBounds(70, 201, 129, 27);
-		add(lblNewLabel_3);
+		lblDineroAñadido.setVisible(false);
+		lblDineroAñadido.setForeground(new Color(199, 21, 133));
+		lblDineroAñadido.setBackground(Color.BLACK);
+		lblDineroAñadido.setBounds(70, 201, 129, 27);
+		add(lblDineroAñadido);
 		
 		
-		lblNewLabel_4.setVisible(false);
-		lblNewLabel_4.setForeground(new Color(255, 0, 0));
-		lblNewLabel_4.setBounds(211, 181, 169, 60);
+		lblError.setVisible(false);
+		lblError.setForeground(new Color(255, 0, 0));
+		lblError.setBounds(211, 181, 169, 60);
 		
-		add(lblNewLabel_4);
+		add(lblError);
 		
 	}
 }

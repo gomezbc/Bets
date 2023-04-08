@@ -76,10 +76,15 @@ public class UserGUI extends JFrame {
 		tabbedPane.addTab("Apostar", new ImageIcon(scaledIcon), createBet);
 		
 		
-		JPanel añadirSaldoGUI = new añadirSaldoGUI();
-		icon = new ImageIcon(AdminGUI.class.getResource("/event-list.png"));
+		JPanel AddSaldoGUI = new AddSaldoGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/chip-exchange.png"));
 		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab("Añadir Saldo", new ImageIcon(scaledIcon), añadirSaldoGUI);
+		tabbedPane.addTab("Añadir Saldo", new ImageIcon(scaledIcon), AddSaldoGUI);
+		
+		JPanel listUserBets = new ListUserBetsGUI();
+		icon = new ImageIcon(AdminGUI.class.getResource("/bets-saldo.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		tabbedPane.addTab("Apuestas", new ImageIcon(scaledIcon), listUserBets);
 		
 		
 		

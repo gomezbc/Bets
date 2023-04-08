@@ -31,22 +31,22 @@ public class User {
 		this.setAdmin(isAdmin);
 	}
 	
-	public Bet addBet(double betMoney, Forecast forecast) {
+	public Bet addBet(float betMoney, Forecast forecast) {
 		Bet b = new Bet(this, betMoney, forecast);
 		if(bets==null) bets = new Vector<Bet>();
 		bets.add(b);
 		return b;
 	}
 	
-	public boolean DoesBetExists(Forecast forecast) {
+	public Bet DoesBetExists(Integer forecastNumber) {
 		if(this.getBets() == null) {
-			return false; }
+			return null; }
 		for (Bet b:this.getBets()){
-			if(b.getForecast().getForecastNumber()== forecast.getForecastNumber()) {
-				return true;
+			if(b.getForecast().getForecastNumber()== forecastNumber) {
+				return b;
 			}		
 		}
-		return false;
+		return null;
 	}
 	
 	public Vector<Bet> getBets() {

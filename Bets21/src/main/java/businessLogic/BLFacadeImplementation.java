@@ -243,7 +243,7 @@ public class BLFacadeImplementation  implements BLFacade {
     
     
     @WebMethod
-	public Bet createBet(String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
+	public Bet createBet(String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
 		dbManager.open(false);
 		Bet bet = null;
 		try {
@@ -272,36 +272,35 @@ public class BLFacadeImplementation  implements BLFacade {
     	return user;
     }
     
-    
-    
-    @WebMethod
-    public User restarAlSaldo (float saldo, String user2) {
-    	dbManager.open(false);
-    	User user = null;
-    	try {
-    		user = dbManager.restarAlSaldo(saldo, user2);
-    	} catch ( Exception e) {
-    		throw e;
-    	}
-    	dbManager.close();
-    	return user;
-    }
-    
      
-    
-    @WebMethod
-    public Float saldoActual (String user2) {
+    @WebMethod 
+    public Forecast getForecast (Integer forecastNumber) throws ForecastDoesntExist{
+    	Forecast ret = null;
     	dbManager.open(false);
-    	Float a = (float) 0;
     	try {
-    		a = dbManager.saldoActual(user2);
-    	} catch ( Exception e) {
+    		    ret = dbManager.getForecast(forecastNumber);
+    	}catch(ForecastDoesntExist e) {
     		throw e;
     	}
     	dbManager.close();
-    	return a;
+    	return ret;
     }
     
+    @WebMethod
+    public void updateCloseEvent(Integer numResultado) {
+    	dbManager.open(false);
+    	Vector<User> users = new Vector<User>();
+    	for(User u: users) {
+    		Bet b = u.DoesBetExists(numResultado);
+    		if(b!=null) {
+    			if(b.getForecast().getForecastNumber()==numResultado) {
+    				this.modifySaldo( (float) (u.getSaldo() + (b.getForecast().getGain() * b.getBetMoney())), u.getDni());
+    			}else {
+    				this.modifySaldo( (float) ( u.getSaldo() - b.getBetMoney()), u.getDni()) ;
+    			}
+    		}
+    	}
+    }
     
 
 }

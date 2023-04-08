@@ -330,6 +330,7 @@ public class CloseEventGUI extends JPanel {
 				} catch (ForecastDoesntExist e1) {
 					e1.printStackTrace();
 				}
+				facade.updateCloseEvent(forecastNumber);
 			}
 		});
 		btnAsignarResultado.setBounds(420, 421, 160, 27);

@@ -66,13 +66,13 @@ public interface BLFacade  {
 
 	@WebMethod public Vector<User> getAllUsers();
 	
-	@WebMethod public Bet createBet (String user, double betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;
+	@WebMethod public Bet createBet (String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;
 	
     @WebMethod public User modifySaldo (float saldo, String user2);
-    
-    @WebMethod public User restarAlSaldo (float saldo, String user2);
-	
+    	
 	@WebMethod public boolean removeUser(String dni);
 	
-	@WebMethod public Float saldoActual (String user2);
+	@WebMethod public Forecast getForecast (Integer forecastNumber) throws ForecastDoesntExist;
+	
+	@WebMethod public void updateCloseEvent(Integer numResultado);
 }

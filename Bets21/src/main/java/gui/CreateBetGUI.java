@@ -256,7 +256,7 @@ public class CreateBetGUI extends JPanel {
 						lblErrorExiste.setVisible(false);
 						lblNewLabel.setVisible(false);
 					
-					} else if( (facade.saldoActual(userRegistered.getDni())) < Float.parseFloat(textFieldDinero.getText())) {
+					} else if( userRegistered.getSaldo() < Float.parseFloat(textFieldDinero.getText())) {
 						
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(false);
@@ -264,8 +264,8 @@ public class CreateBetGUI extends JPanel {
 						lblNewLabel.setVisible(true);
 						
 					} else {
-						facade.createBet(userRegistered.getDni(), Double.parseDouble(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
-						facade.restarAlSaldo(Float.parseFloat(textFieldDinero.getText()), userRegistered.getDni());
+						facade.createBet(userRegistered.getDni(), Float.parseFloat(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
+						facade.modifySaldo(- Float.parseFloat(textFieldDinero.getText()), userRegistered.getDni());
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(true);
 						lblErrorExiste.setVisible(false);
