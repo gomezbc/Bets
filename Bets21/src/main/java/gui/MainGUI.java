@@ -48,6 +48,7 @@ public class MainGUI extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton jButtonCreateUser;
 	private JButton jButtonLogin;
+	private JButton jButtonEvents;
 	
 	/**
 	 * This is the default constructor
@@ -99,6 +100,9 @@ public class MainGUI extends JFrame {
 			jContentPane.add(getJButtonCreateUser());
 			jContentPane.add(getPanel());
 			jContentPane.add(getJButtonLogin());
+			jContentPane.add(getJButtonEvents());
+			jButtonEvents.setBounds(139, 42, 200, 45);
+			jContentPane.add(jButtonEvents);
 		}
 		return jContentPane;
 	}
@@ -186,7 +190,7 @@ public class MainGUI extends JFrame {
 					a.setVisible(true);
 				}
 			});
-			jButtonCreateUser.setBounds(137, 113, 220, 45);
+			jButtonCreateUser.setBounds(272, 107, 190, 45);
 		}
 		return jButtonCreateUser;
 	}
@@ -206,8 +210,25 @@ public class MainGUI extends JFrame {
 					a.setVisible(true);
 				}
 			});
-			jButtonLogin.setBounds(137, 50, 220, 45);
+			jButtonLogin.setBounds(27, 107, 190, 45);
 		}
 		return jButtonLogin;
+	}
+	
+	private JButton getJButtonEvents() {
+		if (jButtonEvents == null) {
+			jButtonEvents = new JButton("Mirar Eventos"); //$NON-NLS-1$ //$NON-NLS-2$
+			ImageIcon icon = new ImageIcon(MainGUI.class.getResource("/event-list-black.png"));
+			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+			jButtonEvents.setIcon(new ImageIcon(scaledIcon));
+			jButtonEvents.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JFrame a = new NoUserGUI();
+					a.setVisible(true);
+				}
+			});
+			jButtonEvents.setBounds(272, 107, 190, 45);
+		}
+		return jButtonEvents;
 	}
 } // @jve:decl-index=0:visual-constraint="0,0"
