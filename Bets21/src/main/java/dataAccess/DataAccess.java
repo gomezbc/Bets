@@ -285,8 +285,6 @@ public class DataAccess  {
 		db.getTransaction().commit();
 	}
 	
-	
-	
 	public boolean removeUser(String dni) {
 		System.out.println(">> DataAccess: removeUser => " + dni);
 		User u = db.find(User.class, dni);
@@ -324,12 +322,8 @@ public class DataAccess  {
 		System.out.println(">> DataAccess: modifySaldo => user="+user+" saldo a añadir="+saldo);
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
-		float saldo_actual = user2.getSaldo();
-		float saldo_modificado = saldo_actual + saldo;
-		user2.setSaldo(saldo_modificado);
+		user2.setSaldo(user2.getSaldo() + saldo);
 		db.getTransaction().commit();
-		
-		
 		return user2;
 	}
 	

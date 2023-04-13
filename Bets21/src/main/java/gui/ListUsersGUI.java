@@ -122,7 +122,7 @@ public class ListUsersGUI extends JPanel {
 		add(lblResBtn);
 	}
 	
-	private void updateTable() {
+	public void updateTable() {
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		tableModelUser.setRowCount(0);
 		tableModelAdmin.setRowCount(0);

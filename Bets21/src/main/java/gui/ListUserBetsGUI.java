@@ -20,7 +20,7 @@ public class ListUserBetsGUI extends JPanel {
 	private DefaultTableModel tableModelBets;
 	
 	private String[] columnNames = new String[] {
-			"#Apuesta","Evento","Pregunta","Pronostico","Ganancia","Dinero Apostado"
+			"#Apuesta","Evento","Pregunta","Pronostico","Ganancia","Dinero Apostado","Balance"
 	};
 
 	/**
@@ -38,12 +38,12 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
-		setBounds(100, 100, 863, 609);
+		setBounds(100, 100, 863, 629);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 12, 820, 480);
+		scrollPane.setBounds(12, 12, 820, 500);
 		add(scrollPane);
 		
 		tableBets = new JTable();
@@ -58,7 +58,7 @@ public class ListUserBetsGUI extends JPanel {
 
 	}
 	
-	private void updateTable() {
+	public void updateTable() {
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		tableModelBets.setRowCount(0);
 		User u = LoginUserGUI.getUserRegistered();
@@ -72,6 +72,14 @@ public class ListUserBetsGUI extends JPanel {
 			row.add(b.getForecast().getDescription());
 			row.add(b.getForecast().getGain());
 			row.add(b.getBetMoney());
+			if(b.getForecast().getQuestion().getResult()==null) row.add(b.getBetMoney());
+			else {
+				if(b.getForecast().getQuestion().getResult() == b.getForecast()) {
+					row.add("+ "+b.getBetMoney() * b.getForecast().getGain());
+				}else {
+					row.add("- "+b.getBetMoney());
+				}
+			}
 			tableModelBets.addRow(row);
 		}
 	}

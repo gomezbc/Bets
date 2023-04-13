@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import businessLogic.BLFacade;
 import domain.User;
@@ -49,8 +50,7 @@ public class AddSaldoGUI extends JPanel {
 	public void jbInit() {
 		
 		User userRegistered = LoginUserGUI.getUserRegistered();
-		BLFacade facade = MainGUI.getBusinessLogic();
-		
+		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 		
 		setLayout(null);
@@ -75,11 +75,12 @@ public class AddSaldoGUI extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User userRegistered = LoginUserGUI.getUserRegistered();
+				BLFacade facade = MainGUI.getBusinessLogic();
 				if (Float.parseFloat(textField.getText()) > 0){
 					lblError.setVisible(false);
 					try {
 						facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-						userRegistered = facade.getUser(userRegistered.getDni());//Actualizamos los datos del usuario
+						userRegistered = LoginUserGUI.getUserRegistered();//Actualizamos los datos del usuario
 						lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 						lblDineroAñadido.setVisible(true);
 						textField.setText("");
@@ -93,15 +94,11 @@ public class AddSaldoGUI extends JPanel {
 					lblError.setVisible(true);
 					
 				}
-				
-				
-				
-				
+				updateFrame();
 			} });
 		
 		add(btnNewButton);
 		lblSaldo.setBounds(253, 102, 72, 24);
-		//lblNewLabel_2.setText( Float.toString(facade.saldoActual(userRegistered.getDni())));
 		add(lblSaldo);
 		
 	
@@ -119,5 +116,10 @@ public class AddSaldoGUI extends JPanel {
 		
 		add(lblError);
 		
+	}
+	
+	public void updateFrame() {
+		User userRegistered = LoginUserGUI.getUserRegistered();
+		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 	}
 }

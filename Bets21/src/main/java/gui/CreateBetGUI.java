@@ -87,6 +87,8 @@ public class CreateBetGUI extends JPanel {
 	private JLabel lblErrorApuesta = new JLabel("Apuesta creada");
 	private JLabel lblErrorExiste = new JLabel("Ya has apostado a este pronóstico");
 	private final JLabel lblNewLabel = new JLabel("No tienes suficiente saldo.");
+	private User userRegistered = LoginUserGUI.getUserRegistered();
+
 
 
 	
@@ -113,8 +115,6 @@ public class CreateBetGUI extends JPanel {
 	 */
 	public void jbInit() {
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
-
-		User userRegistered = LoginUserGUI.getUserRegistered();
 
 		textFieldDinero.setBounds(298, 358, 114, 21);
 		textFieldDinero.setColumns(10);
@@ -213,7 +213,6 @@ public class CreateBetGUI extends JPanel {
 				modelQuestions.removeAllElements();
 				int i=tableEvents.getSelectedRow();
 				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
-				//evento = ev; 
 				Vector<Question> queries=ev.getQuestions();
 
 				tableModelQueries.setDataVector(null, columnNamesQueries);
@@ -246,22 +245,20 @@ public class CreateBetGUI extends JPanel {
 		btnSaveForecast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
-
+				userRegistered = LoginUserGUI.getUserRegistered();
 				try {
 					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
-					double a = q1.getBetMinimum();
-					if(Double.parseDouble(textFieldDinero.getText()) < a){
-						lblErrorDinero.setVisible(true);
-						lblErrorApuesta.setVisible(false);
-						lblErrorExiste.setVisible(false);
-						lblNewLabel.setVisible(false);
-					
-					} else if( userRegistered.getSaldo() < Float.parseFloat(textFieldDinero.getText())) {
-						
+					float a = q1.getBetMinimum();
+					if( userRegistered.getSaldo() < Float.parseFloat(textFieldDinero.getText())){
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(false);
 						lblErrorExiste.setVisible(false);
 						lblNewLabel.setVisible(true);
+					} else if( Float.parseFloat(textFieldDinero.getText()) < a){
+							lblErrorDinero.setVisible(true);
+							lblErrorApuesta.setVisible(false);
+							lblErrorExiste.setVisible(false);
+							lblNewLabel.setVisible(false);
 						
 					} else {
 						facade.createBet(userRegistered.getDni(), Float.parseFloat(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
@@ -282,23 +279,18 @@ public class CreateBetGUI extends JPanel {
 				} catch (UserDoesntExist e1) {
 					e1.printStackTrace();
 				}
-					
+				userRegistered = LoginUserGUI.getUserRegistered();
 		   }
 		});
 		this.add(btnSaveForecast);
 		
-		
-		
 		jComboBoxQuestions.setModel(modelQuestions);
 		jComboBoxQuestions.setBounds(34, 310, 31, 26);
-		jComboBoxQuestions.addMouseListener(new MouseAdapter () {
-			public void mouseClicked (MouseEvent e) {
+		jComboBoxQuestions.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
 				modelForecast.removeAllElements();
 			    Question question = (Question) jComboBoxQuestions.getSelectedItem();
 			    Vector<Forecast> queries2 = question.getForecasts();
-			    
-			    
-			 // tableModelForecast.setDataVector(null, columnNamesForecast);
 			    
 			    if(! queries2.isEmpty())
 			    	jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")+" "+ question.getForecasts());
@@ -310,9 +302,7 @@ public class CreateBetGUI extends JPanel {
 			}
 			
 		} );
-		
-		//tableModelForecast.setDataVector(null, columnNamesForecast);
-		
+				
 		jComboBoxQuestions.setModel(modelQuestions);
 		jComboBoxQuestions.setBounds(30, 310, 305, 26);
 		this.add(jComboBoxQuestions);
@@ -342,7 +332,7 @@ public class CreateBetGUI extends JPanel {
 		lblErrorDinero.setForeground(Color.RED);
 		lblErrorDinero.setBackground(Color.BLACK);
 		lblErrorDinero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblErrorDinero.setBounds(199, 397, 293, 17);
+		lblErrorDinero.setBounds(152, 397, 322, 17);
 		this.add(lblErrorDinero);
 		
 		

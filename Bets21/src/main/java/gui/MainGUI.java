@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -21,6 +22,7 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 import businessLogic.BLFacade;
+import javax.swing.ImageIcon;
 
 
 public class MainGUI extends JFrame {
@@ -169,14 +171,15 @@ public class MainGUI extends JFrame {
 	
 	private void redibujar() {
 		jLabelSelectOption.setText(ResourceBundle.getBundle("Etiquetas").getString("Seleccionar opción:"));
-//		jButtonQueryQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
-//		jButtonCreateQuery.setText(ResourceBundle.getBundle("Etiquetas").getString("CreateQuery"));
 		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("MainTitle"));
 	}
 	
 	private JButton getJButtonCreateUser() {
 		if (jButtonCreateUser == null) {
 			jButtonCreateUser = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnCreateUser.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			ImageIcon icon = new ImageIcon(MainGUI.class.getResource("/user-create.png"));
+			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+			jButtonCreateUser.setIcon(new ImageIcon(scaledIcon));
 			jButtonCreateUser.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFrame a = new CreateUserGUI();
@@ -194,6 +197,9 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonLogin() {
 		if (jButtonLogin == null) {
 			jButtonLogin = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.jButtonLogin.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			ImageIcon icon = new ImageIcon(MainGUI.class.getResource("/user-login.png"));
+			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+			jButtonLogin.setIcon(new ImageIcon(scaledIcon));
 			jButtonLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFrame a = new LoginUserGUI();

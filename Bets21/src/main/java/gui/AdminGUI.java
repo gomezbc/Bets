@@ -45,9 +45,9 @@ public class AdminGUI extends JFrame {
 		setBackground(new Color(17, 110, 80));
 		setTitle("Admin");
 		setResizable(false);
-		setMaximumSize(new Dimension(886, 612));
+		setMaximumSize(new Dimension(886, 632));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 886, 612);
+		setBounds(100, 100, 886, 632);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(17, 110, 80));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -60,7 +60,7 @@ public class AdminGUI extends JFrame {
 		tabbedPane.setForeground(new Color(222, 221, 218));
 		tabbedPane.setBackground(new Color(56, 56, 56));
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(12, 35, 850, 553);
+		tabbedPane.setBounds(12, 35, 850, 573);
 		tabbedPane.setUI(new CustomTabbedPaneUI());
 		
 		contentPane.add(tabbedPane);

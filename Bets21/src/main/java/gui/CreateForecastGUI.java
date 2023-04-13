@@ -211,19 +211,6 @@ public class CreateForecastGUI extends JPanel {
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
 		this.add(scrollPaneEvents, null);
-		
-		
-		
-		
-		
-		JButton btnClose = new JButton("Cerrar");
-		btnClose.setBounds(461, 374, 184, 50);
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnClose_actionPerformed(e);
-			}
-		});
-		this.add(btnClose);
 		lblNewLabel.setBounds(394, 204, 102, 22);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
@@ -268,7 +255,7 @@ public class CreateForecastGUI extends JPanel {
 		this.add(btnSaveForecast);
 		
 		lblForecastAlreadyExists.setVisible(false);
-		lblForecastAlreadyExists.setBounds(461, 324, 184, 43);
+		lblForecastAlreadyExists.setBounds(193, 340, 184, 43);
 		lblForecastAlreadyExists.setBackground(Color.RED);
 		lblForecastAlreadyExists.setForeground(new Color(255, 0, 0));
 		this.add(lblForecastAlreadyExists);
@@ -287,9 +274,5 @@ public class CreateForecastGUI extends JPanel {
 		lblPronosticoCreado.setBounds(113, 299, 130, 29);
 		this.add(lblPronosticoCreado);
 
-	}
-	
-	private void btnClose_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
 	}
 }

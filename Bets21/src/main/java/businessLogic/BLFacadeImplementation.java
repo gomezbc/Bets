@@ -290,6 +290,8 @@ public class BLFacadeImplementation  implements BLFacade {
     public void updateCloseEvent(Integer numResultado) {
     	dbManager.open(false);
     	Vector<User> users = new Vector<User>();
+    	users = dbManager.getAllUsers();
+    	dbManager.close();
     	for(User u: users) {
     		Bet b = u.DoesBetExists(numResultado);
     		if(b!=null) {
@@ -300,6 +302,7 @@ public class BLFacadeImplementation  implements BLFacade {
     			}
     		}
     	}
+
     }
     
 

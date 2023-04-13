@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class UserGUI extends JFrame {
@@ -20,6 +22,10 @@ public class UserGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnLogOut;
+	private JPanel findQuestion = new FindQuestionsGUI();
+	private JPanel createBet = new CreateBetGUI();
+	private JPanel AddSaldoGUI = new AddSaldoGUI();
+	private JPanel listUserBets = new ListUserBetsGUI();
 
 	/**
 	 * Launch the application.
@@ -45,9 +51,9 @@ public class UserGUI extends JFrame {
 		contentPane.setLayout(null);
 		setBackground(new Color(17, 110, 80));
 		setResizable(false);
-		setMaximumSize(new Dimension(886, 612));
+		setMaximumSize(new Dimension(886, 632));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 886, 612);
+		setBounds(100, 100, 886, 632);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(17, 110, 80));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -60,33 +66,41 @@ public class UserGUI extends JFrame {
 		tabbedPane.setForeground(new Color(222, 221, 218));
 		tabbedPane.setBackground(new Color(56, 56, 56));
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(12, 35, 850, 553);
+		tabbedPane.setBounds(12, 35, 850, 573);
 		tabbedPane.setUI(new CustomTabbedPaneUI());
 		
 		contentPane.add(tabbedPane);
 		
-		JPanel findQuestion = new FindQuestionsGUI();
-		ImageIcon icon = new ImageIcon(AdminGUI.class.getResource("/event-list.png"));
+		ImageIcon icon = new ImageIcon(UserGUI.class.getResource("/event-list.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		tabbedPane.addTab(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"), new ImageIcon(scaledIcon), findQuestion, null);
 		
-		JPanel createBet = new CreateBetGUI();
-		icon = new ImageIcon(AdminGUI.class.getResource("/chips-bet.png"));
+		icon = new ImageIcon(UserGUI.class.getResource("/chips-bet.png"));
 		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		tabbedPane.addTab("Apostar", new ImageIcon(scaledIcon), createBet);
 		
-		
-		JPanel AddSaldoGUI = new AddSaldoGUI();
-		icon = new ImageIcon(AdminGUI.class.getResource("/chip-exchange.png"));
+		icon = new ImageIcon(UserGUI.class.getResource("/chip-exchange.png"));
 		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		tabbedPane.addTab("Añadir Saldo", new ImageIcon(scaledIcon), AddSaldoGUI);
 		
-		JPanel listUserBets = new ListUserBetsGUI();
-		icon = new ImageIcon(AdminGUI.class.getResource("/bets-saldo.png"));
+		icon = new ImageIcon(UserGUI.class.getResource("/bets-saldo.png"));
 		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		tabbedPane.addTab("Apuestas", new ImageIcon(scaledIcon), listUserBets);
 		
-		
+		tabbedPane.addChangeListener(new ChangeListener() {
+		    public void stateChanged(ChangeEvent e) {
+		    	Integer i = tabbedPane.getSelectedIndex();
+		    	switch(i) {
+		    	case 2:
+		    		((AddSaldoGUI) tabbedPane.getSelectedComponent()).updateFrame();;
+		    		break;
+		    	case 3:
+		    		((ListUserBetsGUI) tabbedPane.getSelectedComponent()).updateTable();
+		    		System.out.print("upadte");
+		    		break;
+		    	}
+		    }
+		});
 		
 		btnLogOut = new JButton();
 		btnLogOut.setBorderPainted(false);
@@ -94,7 +108,7 @@ public class UserGUI extends JFrame {
 		btnLogOut.setBorder(null);
 		btnLogOut.setBackground(new Color(17, 110, 80));
 		btnLogOut.setToolTipText("Log Out");
-		icon = new ImageIcon(AdminGUI.class.getResource("/exit.png"));
+		icon = new ImageIcon(UserGUI.class.getResource("/exit.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));

@@ -98,7 +98,7 @@ public class FindQuestionsGUI extends JPanel {
 	}
 
 	
-	private void jbInit() throws Exception
+	public void jbInit() throws Exception
 	{
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		this.setLayout(null);

@@ -26,7 +26,14 @@ public class LoginUserGUI extends JFrame {
 	private JLabel userError;
 
 	public static User getUserRegistered() {
-		return userRegistered;
+		BLFacade facade = MainGUI.getBusinessLogic();
+		try {
+			return facade.getUser(userRegistered.getDni());
+		} catch (UserDoesntExist e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static void setUserRegistered(User userRegistered) {

@@ -77,6 +77,7 @@ public class CloseEventGUI extends JPanel {
 			"Pronostico#","Pronostico","Ganancia"
 	};
 	private final JButton btnAsignarResultado = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.btnAsignarResultado.text")); //$NON-NLS-1$ //$NON-NLS-2$
+	private JLabel lblResult = new JLabel();
 	
 	/**
 	 * Launch the application.
@@ -95,6 +96,7 @@ public class CloseEventGUI extends JPanel {
 	private void jbInit() throws Exception
 	{
 		lblNoFinalizado.setVisible(false);
+		lblResult.setVisible(false);
 		this.setLayout(null);
 		this.setSize(new Dimension(700, 500));
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
@@ -315,14 +317,21 @@ public class CloseEventGUI extends JPanel {
 		
 		btnAsignarResultado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblResult.setVisible(false);
 				BLFacade facade=MainGUI.getBusinessLogic();
 				int i=tableQueries.getSelectedRow();
 				int questionNumber = (int) tableModelQueries.getValueAt(i,0);
 				
 				i=tableForecast.getSelectedRow();
 				int forecastNumber = (int) tableModelForecast.getValueAt(i,0);
+		
 				try {
-					facade.assignResult(questionNumber, forecastNumber);
+					if(facade.getQuestion(questionNumber).getResult()!=null) {
+						lblResult.setVisible(true);
+					}else {
+						facade.assignResult(questionNumber, forecastNumber);
+						facade.updateCloseEvent(forecastNumber);
+					}
 				}catch(EventHasntFinished e1){
 					lblNoFinalizado.setVisible(true);
 				} catch (QuestionDoesntExist e1) {
@@ -330,7 +339,6 @@ public class CloseEventGUI extends JPanel {
 				} catch (ForecastDoesntExist e1) {
 					e1.printStackTrace();
 				}
-				facade.updateCloseEvent(forecastNumber);
 			}
 		});
 		btnAsignarResultado.setBounds(420, 421, 160, 27);
@@ -339,5 +347,11 @@ public class CloseEventGUI extends JPanel {
 		lblNoFinalizado.setBounds(420, 396, 180, 17);
 		this.add(lblNoFinalizado);
 		
+		
+		lblResult = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.lblYaTieneUn.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblResult.setVisible(false);
+		lblResult.setForeground(new Color(246, 97, 81));
+		lblResult.setBounds(430, 460, 150, 17);
+		add(lblResult);
 	}
 }
