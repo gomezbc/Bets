@@ -52,18 +52,12 @@ public class CreateForecastGUI extends JPanel {
 	private JComboBox<Question> jComboBoxQuestions =  new JComboBox<Question>();
 	private DefaultComboBoxModel<Question> modelQuestions = new DefaultComboBoxModel<Question>();
 	private DefaultTableModel tableModelEvents;
-	private DefaultTableModel tableModelQueries;
 	
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 	
 	private String[] columnNamesEvents = new String[] {
 			ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
 			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
-
-	};
-	private String[] columnNamesQueries = new String[] {
-			ResourceBundle.getBundle("Etiquetas").getString("QueryN"), 
-			ResourceBundle.getBundle("Etiquetas").getString("Query")
 
 	};
 	private final JLabel lblNewLabel = new JLabel("Pronostico :");
@@ -147,6 +141,7 @@ public class CreateForecastGUI extends JPanel {
 					try {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
+						modelQuestions.removeAllElements();
 
 						BLFacade facade=MainGUI.getBusinessLogic();
 
@@ -188,7 +183,6 @@ public class CreateForecastGUI extends JPanel {
 				//evento = ev; 
 				Vector<Question> queries=ev.getQuestions();
 
-				tableModelQueries.setDataVector(null, columnNamesQueries);
 
 				if (queries.isEmpty())
 					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries")+": "+ev.getDescription());
@@ -208,7 +202,6 @@ public class CreateForecastGUI extends JPanel {
 		tableEvents.setModel(tableModelEvents);
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(45);
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
 		this.add(scrollPaneEvents, null);
 		lblNewLabel.setBounds(394, 204, 102, 22);

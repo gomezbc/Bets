@@ -217,7 +217,7 @@ public class MainGUI extends JFrame {
 	
 	private JButton getJButtonEvents() {
 		if (jButtonEvents == null) {
-			jButtonEvents = new JButton("Mirar Eventos"); //$NON-NLS-1$ //$NON-NLS-2$
+			jButtonEvents = new JButton("Consultar Eventos"); //$NON-NLS-1$ //$NON-NLS-2$
 			ImageIcon icon = new ImageIcon(MainGUI.class.getResource("/event-list-black.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 			jButtonEvents.setIcon(new ImageIcon(scaledIcon));

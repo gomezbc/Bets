@@ -93,7 +93,7 @@ public class AdminGUI extends JFrame {
 		JPanel listUsers = new ListUsersGUI();
 		icon = new ImageIcon(AdminGUI.class.getResource("/users-list.png"));
 		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab("Listar Usuarios", new ImageIcon(scaledIcon), listUsers, null);
+		tabbedPane.addTab("Consultar Usuarios", new ImageIcon(scaledIcon), listUsers, null);
 		
 		
 		btnLogOut = new JButton();
