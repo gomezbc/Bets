@@ -87,7 +87,7 @@ public class CreateBetGUI extends JPanel {
 	private JLabel lblErrorApuesta = new JLabel("Apuesta creada");
 	private JLabel lblErrorExiste = new JLabel("Ya has apostado a este pronóstico");
 	private final JLabel lblNewLabel = new JLabel("No tienes suficiente saldo.");
-	private User userRegistered = LoginUserGUI.getUserRegistered();
+	private User userRegistered = MainGUI.getUserRegistered();
 
 
 
@@ -245,7 +245,7 @@ public class CreateBetGUI extends JPanel {
 		btnSaveForecast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BLFacade facade = MainGUI.getBusinessLogic();
-				userRegistered = LoginUserGUI.getUserRegistered();
+				userRegistered = MainGUI.getUserRegistered();
 				try {
 					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
 					float a = q1.getBetMinimum();
@@ -279,7 +279,7 @@ public class CreateBetGUI extends JPanel {
 				} catch (UserDoesntExist e1) {
 					e1.printStackTrace();
 				}
-				userRegistered = LoginUserGUI.getUserRegistered();
+				userRegistered = MainGUI.getUserRegistered();
 		   }
 		});
 		this.add(btnSaveForecast);

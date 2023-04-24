@@ -19,26 +19,26 @@ import exceptions.UserDoesntExist;
 public class LoginUserGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static User userRegistered;
+//	private static User userRegistered;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JLabel userError;
 
-	public static User getUserRegistered() {
-		BLFacade facade = MainGUI.getBusinessLogic();
-		try {
-			return facade.getUser(userRegistered.getDni());
-		} catch (UserDoesntExist e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public static User getUserRegistered() {
+//		BLFacade facade = MainGUI.getBusinessLogic();
+//		try {
+//			return facade.getUser(userRegistered.getDni());
+//		} catch (UserDoesntExist e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
-	public static void setUserRegistered(User userRegistered) {
-		LoginUserGUI.userRegistered = userRegistered;
-	}
+//	public static void setUserRegistered(User userRegistered) {
+//		LoginUserGUI.userRegistered = userRegistered;
+//	}
 	
 	/**
 	 * Launch the application.

@@ -5,6 +5,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import com.toedter.calendar.JCalendar;
@@ -31,13 +34,17 @@ import configuration.UtilDate;
 import domain.Forecast;
 import domain.Question;
 import exceptions.QuestionDoesntExist;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+
+import javax.swing.ScrollPaneConstants;
 
 
-public class FindQuestionsGUI extends JPanel {
+public class EventsGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
-	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
 	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
 
 	// Code for JCalendar
@@ -45,18 +52,15 @@ public class FindQuestionsGUI extends JPanel {
 	private Calendar calendarAnt = null;
 	private Calendar calendarAct = null;
 	private JScrollPane scrollPaneEvents = new JScrollPane();
-	private JScrollPane scrollPaneQueries = new JScrollPane();
-	private JScrollPane scrollPaneForecast = new JScrollPane();
+
 	
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
 
 	private JTable tableEvents= new JTable();
-	private JTable tableQueries = new JTable();
-	private JTable tableForecast = new JTable();;
+
 
 	private DefaultTableModel tableModelEvents;
-	private DefaultTableModel tableModelQueries;
-	private DefaultTableModel tableModelForecast;
+
 
 
 	
@@ -65,16 +69,9 @@ public class FindQuestionsGUI extends JPanel {
 			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
 
 	};
-	private String[] columnNamesQueries = new String[] {
-			ResourceBundle.getBundle("Etiquetas").getString("QueryN"), 
-			ResourceBundle.getBundle("Etiquetas").getString("Query")
+	private JButton betButton;
 
-	};
-	private String[] columnNamesForecast = new String[] {
-			"Pronostico#","Pronostico","Ganancia"
-	};
-
-	public FindQuestionsGUI()
+	public EventsGUI()
 	{
 		try
 		{
@@ -91,15 +88,15 @@ public class FindQuestionsGUI extends JPanel {
 	{
 		this.setLayout(null);
 		this.setSize(new Dimension(700, 500));
-		this.setBackground(new Color(255, 255, 255));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
+		this.setBackground(new Color(238, 238, 238));
+		setBorder(new LineBorder(new Color(146, 154, 171), 2, true));
+		jLabelEventDate.setFont(new Font("Roboto", Font.BOLD, 12));
 
-		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
-		jLabelQueries.setBounds(40, 248, 598, 14);
-		jLabelEvents.setBounds(295, 19, 259, 16);
+		jLabelEventDate.setBounds(new Rectangle(40, 23, 140, 25));
+		jLabelEvents.setFont(new Font("Roboto", Font.BOLD, 12));
+		jLabelEvents.setBounds(40, 212, 259, 16);
 
 		this.add(jLabelEventDate, null);
-		this.add(jLabelQueries);
 		this.add(jLabelEvents);
 
 
@@ -156,14 +153,6 @@ public class FindQuestionsGUI extends JPanel {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 						
-						tableModelQueries.setDataVector(null, columnNamesQueries);
-						tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-						tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-						
-						tableModelForecast.setDataVector(null, columnNamesForecast); 
-						tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-						tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-						tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
 						
 						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
 
@@ -188,7 +177,7 @@ public class FindQuestionsGUI extends JPanel {
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not shown in JTable
 					} catch (Exception e1) {
 
-						jLabelQueries.setText(e1.getMessage());
+//						jLabelQueries.setText(e1.getMessage());
 					}
 
 				}
@@ -196,35 +185,16 @@ public class FindQuestionsGUI extends JPanel {
 		});
 
 		this.add(jCalendar1, null);
+		scrollPaneEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		
-		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneQueries.setBounds(new Rectangle(40, 274, 322, 116));
+		scrollPaneEvents.setBounds(new Rectangle(40, 233, 610, 212));
+		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
+		
 
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				int i=tableEvents.getSelectedRow();
-				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
-				Vector<Question> queries = ev.getQuestions();
 				
-				tableModelForecast.setDataVector(null, columnNamesForecast); //Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
-				tableModelQueries.setDataVector(null, columnNamesQueries);
-
-				if (queries.isEmpty())
-					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries")+": "+ev.getDescription());
-				else 
-					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")+" "+ev.getDescription());
-
-				for (domain.Question q:queries){
-					Vector<Object> row = new Vector<Object>();
-
-					row.add(q.getQuestionNumber());
-					row.add(q.getQuestion());
-					tableModelQueries.addRow(row);	
-				}
-				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
 			}
 		});
 
@@ -235,66 +205,14 @@ public class FindQuestionsGUI extends JPanel {
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 
-
-		scrollPaneQueries.setViewportView(tableQueries);
-		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
-
-		tableQueries.setModel(tableModelQueries);
-		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-
 		this.add(scrollPaneEvents, null);
-		this.add(scrollPaneQueries, null);
 		
+		betButton = new JButton(""); //$NON-NLS-1$ //$NON-NLS-2$
+		betButton.setBounds(274, 457, 103, 27);
+		ImageIcon icon = new ImageIcon("icons/chips-bet.png");
+		Image scaledIcon = icon.getImage().getScaledInstance(20, betButton.getHeight(), Image.SCALE_SMOOTH);
+		betButton.setIcon(new ImageIcon(scaledIcon));
+		this.add(betButton);
 		
-		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
-		scrollPaneForecast.setBounds(366, 274, 286, 116);
-		add(scrollPaneForecast);
-		
-
-		scrollPaneForecast.setViewportView(tableForecast);
-		tableModelForecast = new DefaultTableModel(null, columnNamesForecast);
-		tableForecast.setModel(tableModelForecast);
-		scrollPaneForecast.setViewportView(tableForecast);
-		
-		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-		tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-		tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
-		
-		tableQueries.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int i=tableQueries.getSelectedRow();
-				BLFacade facade=MainGUI.getBusinessLogic();
-				int qNumber = (int) tableModelQueries.getValueAt(i,0);
-				Question q;
-				try {
-					q = facade.getQuestion(qNumber);
-					Vector<Forecast> forecasts = q.getForecasts();
-
-					tableModelForecast.setDataVector(null, columnNamesForecast);
-	
-					if (forecasts.isEmpty())
-						jLabelQueries.setText("No hay pronosticos para la pregunta " + q.getQuestion());
-					else 
-						jLabelQueries.setText("Pronosticos para la pregunta " + q.getQuestion());
-	
-					for (domain.Forecast f:forecasts){
-						Vector<Object> row = new Vector<Object>();
-						row.add(f.getForecastNumber());
-						row.add(f.getDescription());
-						row.add(f.getGain());
-						tableModelForecast.addRow(row);	
-					}
-					tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-					tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-					tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
-				} catch (QuestionDoesntExist e1) {
-					e1.printStackTrace();
-				}
-				
-			}
-		});
-
 	}
 }

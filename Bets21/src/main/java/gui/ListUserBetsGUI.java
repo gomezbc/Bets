@@ -61,7 +61,7 @@ public class ListUserBetsGUI extends JPanel {
 	public void updateTable() {
 		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		tableModelBets.setRowCount(0);
-		User u = LoginUserGUI.getUserRegistered();
+		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = new Vector<Bet>();
 		bets = u.getBets();
 		for(Bet b: bets) {
