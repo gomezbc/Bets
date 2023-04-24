@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-10 23:09:07 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' has been recovered (tr. 189-197)
+
+[2023-04-10 23:09:07 #2 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 9448@fedora-b
+
+[2023-04-10 23:09:07 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-10 23:09:07 #4 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-10 23:09:07 #5 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-10 23:09:07 #6 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-10 23:09:07 #7 type] 
+Type domain.User is not enhanced.
+

@@ -1,0 +1,200 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 18:22:02 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 20144@LAPTOP-UUGQSHIG
+
+[2023-04-03 18:22:03 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 18:22:03 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 18:22:03 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 18:22:03 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 18:22:03 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 18:54:00 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 22856@LAPTOP-UUGQSHIG
+
+[2023-04-03 18:54:00 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 18:54:00 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 18:54:00 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 18:54:00 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 18:54:00 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 18:56:09 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 7060@LAPTOP-UUGQSHIG
+
+[2023-04-03 18:56:09 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 18:56:09 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 18:56:09 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 18:56:09 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 18:56:09 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 18:58:46 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 13448@LAPTOP-UUGQSHIG
+
+[2023-04-03 18:58:46 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 18:58:46 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 18:58:46 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 18:58:46 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 18:58:46 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 18:59:52 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 24832@LAPTOP-UUGQSHIG
+
+[2023-04-03 18:59:52 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 18:59:52 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 18:59:52 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 18:59:52 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 18:59:52 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 19:07:07 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 19292@LAPTOP-UUGQSHIG
+
+[2023-04-03 19:07:07 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 19:07:07 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 19:07:07 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 19:07:07 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 19:07:07 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 19:53:28 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 5396@LAPTOP-UUGQSHIG
+
+[2023-04-03 19:53:28 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 19:53:28 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 19:53:28 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 19:53:28 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-04-03 19:53:28 #6 type] 
+Type domain.Bet is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 20:23:26 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 22248@LAPTOP-UUGQSHIG
+
+[2023-04-03 20:23:29 #2 type.registry] 
+New type domain.User
+
+[2023-04-03 20:23:29 #3 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 20:24:36 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' has been recovered (tr. 1-4)
+
+[2023-04-03 20:24:36 #2 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 16332@LAPTOP-UUGQSHIG
+
+[2023-04-03 20:24:36 #3 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-03 20:25:14 #1 store] 
+Database 'C:\Users\sarag\git\repository\Bets21\src\main\resources\bets.temp' is opened by 29664@LAPTOP-UUGQSHIG
+
+[2023-04-03 20:25:15 #2 type.registry] 
+New type domain.Question
+
+[2023-04-03 20:25:15 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-03 20:25:15 #4 type.registry] 
+New type domain.Forecast
+
+[2023-04-03 20:25:15 #5 type.registry] 
+New type java.util.Vector<domain.Forecast>
+
+[2023-04-03 20:25:15 #6 type.registry] 
+New type domain.Event
+
+[2023-04-03 20:25:15 #7 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-03 20:25:15 #8 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-03 20:25:15 #9 type.registry] 
+New type java.util.Vector<domain.Question>
+
+[2023-04-03 20:25:15 #10 type.registry] 
+New type java.util.Vector<java.lang.Object>
+
+[2023-04-03 20:25:17 #11 type.registry] 
+New type domain.User
+
+[2023-04-03 20:25:17 #12 type] 
+Type domain.User is not enhanced.
+

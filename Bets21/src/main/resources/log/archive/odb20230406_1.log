@@ -1,0 +1,66 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-06 22:57:36 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 7724@fedora-b
+
+[2023-04-06 22:57:36 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-06 22:57:36 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-06 22:57:36 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-06 22:57:36 #5 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-06 22:57:36 #6 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-06 23:00:23 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' has been recovered (tr. 171-182)
+
+[2023-04-06 23:00:23 #2 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 7857@fedora-b
+
+[2023-04-06 23:00:23 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-06 23:00:23 #4 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-06 23:00:23 #5 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-06 23:00:23 #6 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-06 23:00:23 #7 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-06 23:05:11 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' has been recovered (tr. 183-188)
+
+[2023-04-06 23:05:11 #2 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 8767@fedora-b
+
+[2023-04-06 23:05:11 #3 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-06 23:05:11 #4 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-06 23:05:11 #5 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-06 23:05:11 #6 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-06 23:05:11 #7 type] 
+Type domain.User is not enhanced.
+

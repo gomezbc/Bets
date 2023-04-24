@@ -3,8 +3,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
@@ -26,6 +30,7 @@ public class UserGUI extends JFrame {
 	private JPanel createBet = new CreateBetGUI();
 	private JPanel AddSaldoGUI = new AddSaldoGUI();
 	private JPanel listUserBets = new ListUserBetsGUI();
+	private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -49,15 +54,15 @@ public class UserGUI extends JFrame {
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setBackground(new Color(17, 110, 80));
-		setResizable(false);
-		setMaximumSize(new Dimension(886, 632));
+		setResizable(true);
+		setMinimumSize(new Dimension(886, 632));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 886, 632);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(17, 110, 80));
+		contentPane.setBackground(new Color(223, 234, 232));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		contentPane.setLayout(null);
+
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -66,7 +71,7 @@ public class UserGUI extends JFrame {
 		tabbedPane.setForeground(new Color(222, 221, 218));
 		tabbedPane.setBackground(new Color(56, 56, 56));
 		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(12, 35, 850, 573);
+		tabbedPane.setBounds(12, 35, this.getWidth()-20, this.getHeight()-60); 
 		tabbedPane.setUI(new CustomTabbedPaneUI());
 		
 		contentPane.add(tabbedPane);
@@ -119,8 +124,21 @@ public class UserGUI extends JFrame {
 		});
 		btnLogOut.setBounds(820, 0, 35, 35);
 		contentPane.add(btnLogOut);
+		
+		//Actualiza el tamaño de los componentes respecto al frame
+		ComponentListener componentListener = new ComponentAdapter() {
+		    @Override
+		    public void componentResized(ComponentEvent e) {
+		        // Actualizar el tamaño del JTabbedPane
+		        int nuevoAncho = e.getComponent().getWidth();
+		        int nuevoAlto = e.getComponent().getHeight();
+		        tabbedPane.setSize(nuevoAncho-20, nuevoAlto-30);
+		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
+		        btnLogOut.setAlignmentY(nuevoAncho-40);
+		    }
+		};
+		this.addComponentListener(componentListener);
 	}
-	
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 		this.setVisible(false);
