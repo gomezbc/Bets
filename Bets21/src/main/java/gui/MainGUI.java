@@ -40,16 +40,10 @@ public class MainGUI extends JFrame {
 	private JPanel jContentPane = null;
 
     private static BLFacade appFacadeInterface;
-	private static User userRegistered;
+	private static User userRegistered = null;
     
 	public static User getUserRegistered() {
-		BLFacade facade = MainGUI.getBusinessLogic();
-		try {
-			return facade.getUser(userRegistered.getDni());
-		} catch (UserDoesntExist e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if(userRegistered!=null)return userRegistered;
 		return null;
 	}
 	
@@ -86,6 +80,7 @@ public class MainGUI extends JFrame {
 	 */
 	public MainGUI() {
 		super();
+		setResizable(false);
 		setBackground(new Color(255, 255, 255));
 		
 		addWindowListener(new WindowAdapter() {
@@ -160,6 +155,7 @@ public class MainGUI extends JFrame {
 				@Override
 				public void focusGained(FocusEvent e) {
 					passwordField.setBorder(new LineBorder(new Color(26, 95, 180), 2, false));
+					if(MainGUI.getUserRegistered()!=null) textField.setText(getName());
 				}
 				@Override
 				public void focusLost(FocusEvent e) {

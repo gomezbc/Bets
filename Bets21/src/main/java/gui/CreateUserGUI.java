@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
+import domain.User;
 import exceptions.UserAlreadyExist;
 
 public class CreateUserGUI extends JFrame {
@@ -47,57 +48,70 @@ public class CreateUserGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
+		setResizable(false);
+		setBackground(new Color(0, 145, 202));
 		setTitle("Crear Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 370, 327);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 145, 202));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		username = new JTextField();
-		username.setBounds(198, 120, 180, 20);
+		username.setBounds(164, 116, 180, 20);
 		username.setColumns(10);
 		contentPane.add(username);
 		
 		passwd = new JPasswordField();
-		passwd.setBounds(198, 154, 180, 20);
+		passwd.setBounds(164, 150, 180, 20);
 		contentPane.add(passwd);
 		
 		dni = new JTextField();
-		dni.setBounds(198, 23, 180, 21);
+		dni.setBounds(164, 19, 180, 21);
 		contentPane.add(dni);
 		dni.setColumns(10);
 		
 		name = new JTextField();
-		name.setBounds(198, 56, 180, 21);
+		name.setBounds(164, 52, 180, 21);
 		contentPane.add(name);
 		name.setColumns(10);
 		
 		surname = new JTextField();
-		surname.setBounds(198, 87, 180, 21);
+		surname.setBounds(164, 83, 180, 21);
 		contentPane.add(surname);
 		surname.setColumns(10);
 		
 		JLabel lblDni = new JLabel("Dni:");
-		lblDni.setBounds(59, 23, 60, 17);
+		lblDni.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblDni.setForeground(Color.WHITE);
+		lblDni.setBounds(25, 19, 60, 17);
 		contentPane.add(lblDni);
 		
 		JLabel lblName = new JLabel("Nombre:");
-		lblName.setBounds(59, 58, 60, 17);
+		lblName.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblName.setForeground(Color.WHITE);
+		lblName.setBounds(25, 54, 60, 17);
 		contentPane.add(lblName);
 		
 		JLabel lblSurname = new JLabel("Apellido: ");
-		lblSurname.setBounds(59, 89, 60, 17);
+		lblSurname.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblSurname.setForeground(Color.WHITE);
+		lblSurname.setBounds(25, 85, 60, 17);
 		contentPane.add(lblSurname);
 		
 		JLabel lblUsername = new JLabel("Nombre de usuario: ");
-		lblUsername.setBounds(59, 122, 150, 17);
+		lblUsername.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblUsername.setForeground(Color.WHITE);
+		lblUsername.setBounds(25, 118, 150, 17);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Contraseña: ");
-		lblPassword.setBounds(59, 156, 133, 17);
+		lblPassword.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setBounds(25, 152, 133, 17);
 		contentPane.add(lblPassword);
 		
 		JButton btnCreateUser = new JButton("Crear Usuario");
@@ -110,29 +124,23 @@ public class CreateUserGUI extends JFrame {
 				} catch (UserAlreadyExist e1) {
 					lblUserAlreadyExists.setVisible(true);
 				}
-				
-			}
-		});
-		btnCreateUser.setBounds(71, 205, 138, 27);
-		contentPane.add(btnCreateUser);
-		
-		JButton btnClose = new JButton("Cerrar");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				btnClose_actionPerformed(e);
 			}
 		});
-		btnClose.setBounds(259, 205, 105, 27);
-		contentPane.add(btnClose);
+		btnCreateUser.setBounds(35, 210, 138, 27);
+		contentPane.add(btnCreateUser);
 		
 		lblUserAlreadyExists = new JLabel("Este usuario ya existe!");
 		lblUserAlreadyExists.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUserAlreadyExists.setForeground(new Color(220, 20, 60));
-		lblUserAlreadyExists.setBounds(255, 182, 191, 15);
+		lblUserAlreadyExists.setBounds(35, 256, 191, 15);
 		contentPane.add(lblUserAlreadyExists);
 		
 		checkbxisAdmin = new JCheckBox("Admin");
-		checkbxisAdmin.setBounds(170, 177, 114, 25);
+		checkbxisAdmin.setFont(new Font("Dialog", Font.BOLD, 14));
+		checkbxisAdmin.setForeground(new Color(255, 255, 255));
+		checkbxisAdmin.setBackground(new Color(0, 145, 202));
+		checkbxisAdmin.setBounds(25, 177, 114, 25);
 		contentPane.add(checkbxisAdmin);
 		lblUserAlreadyExists.setVisible(false);
 	}

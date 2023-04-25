@@ -33,6 +33,7 @@ public class UserGUI extends JFrame {
 	private JPanel createBet = new CreateBetGUI();
 	private JPanel AddSaldoGUI = new AddSaldoGUI();
 	private JPanel listUserBets = new ListUserBetsGUI();
+	private static JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
 	/**
 	 * Launch the application.
@@ -69,7 +70,7 @@ public class UserGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setForeground(new Color(222, 221, 218));
 		tabbedPane.setBackground(new Color(56, 56, 56));
 		tabbedPane.setBorder(null);
@@ -146,6 +147,11 @@ public class UserGUI extends JFrame {
 		    }
 		};
 		this.addComponentListener(componentListener);
+	}
+	
+	public static void updateTab(int index, String title, ImageIcon icon, JPanel panel) {
+		tabbedPane.removeTabAt(tabbedPane.getSelectedIndex());
+		tabbedPane.addTab(title, icon, panel);
 	}
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {

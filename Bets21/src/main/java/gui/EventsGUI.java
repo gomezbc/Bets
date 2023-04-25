@@ -14,6 +14,9 @@ import businessLogic.BLFacade;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -39,6 +42,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ScrollPaneConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class EventsGUI extends JPanel {
@@ -208,11 +213,30 @@ public class EventsGUI extends JPanel {
 		this.add(scrollPaneEvents, null);
 		
 		betButton = new JButton(""); //$NON-NLS-1$ //$NON-NLS-2$
+		betButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImageIcon icon = new ImageIcon("icons/chips-bet.png");
+				Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+				UserGUI.updateTab(2, "Apostar", new ImageIcon(scaledIcon), new CreateBetGUI());
+			}
+		});
 		betButton.setBounds(274, 457, 103, 27);
 		ImageIcon icon = new ImageIcon("icons/chips-bet.png");
 		Image scaledIcon = icon.getImage().getScaledInstance(20, betButton.getHeight(), Image.SCALE_SMOOTH);
 		betButton.setIcon(new ImageIcon(scaledIcon));
 		this.add(betButton);
+		
+		//Actualiza el tamaño de los componentes respecto al frame
+		ComponentListener componentListener = new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				// Actualizar el tamaño del JTabbedPane
+				int nuevoAncho = e.getComponent().getWidth();
+				int nuevoAlto = e.getComponent().getHeight();
+				System.out.println(nuevoAncho+", "+nuevoAlto);     
+			}
+		};
+		this.addComponentListener(componentListener);
 		
 	}
 }
