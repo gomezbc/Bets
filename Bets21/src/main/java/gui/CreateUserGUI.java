@@ -51,7 +51,6 @@ public class CreateUserGUI extends JFrame {
 		setResizable(false);
 		setBackground(new Color(0, 145, 202));
 		setTitle("Crear Usuario");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 370, 327);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 145, 202));

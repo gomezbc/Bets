@@ -21,12 +21,23 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.border.LineBorder;
 
+import domain.User;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JMenuBar;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class UserGUI3 extends JFrame {
 
 	private static JPanel contentPane;
 	private static JButton btnLogOut;
 	private static JPanel displayFrame;
-	private static JButton btnHome;
+	private JButton btnHome;
+	private static JLabel lblUser;
+	private static JMenuBar menuBar;
+	private JButton btnApuestasRealizadas;
 	/**
 	 * Launch the application.
 	 */
@@ -92,26 +103,59 @@ public class UserGUI3 extends JFrame {
 		displayFrame.setBounds(29, 49, 826, 541);
 		contentPane.add(displayFrame);
 		
-		btnHome = new JButton("Home");
+		lblUser = new JLabel("");
+		lblUser.setForeground(Color.WHITE);
+		lblUser.setFont(new Font("Dialog", Font.BOLD, 13));
+		lblUser.setBounds(29, 0, 485, 17);
+		User u = MainGUI.getUserRegistered();
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		contentPane.add(lblUser);
+		
+		menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(0, 145, 202));
+		menuBar.setBounds(30, 22, 243, 30);
+		contentPane.add(menuBar);
+		
+		btnHome = new JButton("     Eventos    ");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnHome.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHome.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		menuBar.add(btnHome);
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserGUI3.updateFrame(new EventsListGUI());
 			}
 		});
 		btnHome.setBorder(new EmptyBorder(3,3,3,3));
-		btnHome.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				btnHome.setBorder(new LineBorder(new Color(26, 95, 180), 2));
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				btnHome.setBorder(new EmptyBorder(3,3,3,3));
+		btnHome.setBackground(Color.WHITE);
+		
+		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
+		btnApuestasRealizadas.setBorder(null);
+		btnApuestasRealizadas.setBackground(Color.WHITE);
+		btnHome.setBorder(new EmptyBorder(3,3,3,3));
+		btnApuestasRealizadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI3.updateFrame(new ListUserBetsGUI());
 			}
 		});
-		btnHome.setBackground(Color.WHITE);
-		btnHome.setBounds(29, 8, 103, 27);
-		contentPane.add(btnHome);
+		btnApuestasRealizadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnApuestasRealizadas.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnApuestasRealizadas.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		menuBar.add(btnApuestasRealizadas);
 	}
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
@@ -121,11 +165,14 @@ public class UserGUI3 extends JFrame {
 	public static void updateFrame(JPanel panel) {
 		contentPane.removeAll();
 		contentPane.add(btnLogOut);
-		contentPane.add(btnHome);
+		contentPane.add(menuBar);
 		displayFrame = panel;
 		displayFrame.setBounds(29, 49, 826, 541);
 		contentPane.add(displayFrame);
 		contentPane.revalidate();
 		contentPane.repaint();
+		User u = MainGUI.getUserRegistered();
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		contentPane.add(lblUser);
 	}
 }

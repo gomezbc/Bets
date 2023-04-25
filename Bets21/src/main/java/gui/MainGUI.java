@@ -155,7 +155,6 @@ public class MainGUI extends JFrame {
 				@Override
 				public void focusGained(FocusEvent e) {
 					passwordField.setBorder(new LineBorder(new Color(26, 95, 180), 2, false));
-					if(MainGUI.getUserRegistered()!=null) textField.setText(getName());
 				}
 				@Override
 				public void focusLost(FocusEvent e) {

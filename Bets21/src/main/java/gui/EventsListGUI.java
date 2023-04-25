@@ -70,7 +70,7 @@ public class EventsListGUI extends JPanel {
 
 	
 	private String[] columnNamesEvents = new String[] {
-			ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
+			//ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
 			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
 
 	};
@@ -91,7 +91,7 @@ public class EventsListGUI extends JPanel {
 	public void jbInit() throws Exception
 	{
 		this.setLayout(null);
-		this.setSize(new Dimension(700, 500));
+		this.setSize(new Dimension(826, 500));
 		this.setBackground(new Color(238, 238, 238));
 		setBorder(new LineBorder(new Color(146, 154, 171), 2, true));
 		jLabelEventDate.setFont(new Font("Roboto", Font.BOLD, 12));
@@ -158,7 +158,7 @@ public class EventsListGUI extends JPanel {
 						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 						
 						
-						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
+						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
 
 
 						BLFacade facade=MainGUI.getBusinessLogic();
@@ -171,14 +171,14 @@ public class EventsListGUI extends JPanel {
 							Vector<Object> row = new Vector<Object>();
 
 							System.out.println("Events "+ev);
-							row.add(ev.getEventNumber());
-							row.add(ev.getDescription());
-							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,2)
+							row.add(new EventPanel(ev));
+							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
+							tableEvents.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender(ev));
+							tableEvents.setRowHeight(60);
 							tableModelEvents.addRow(row);		
 						}
-						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
-						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not shown in JTable
+						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
 					} catch (Exception e1) {
 
 //						jLabelQueries.setText(e1.getMessage());
@@ -191,7 +191,7 @@ public class EventsListGUI extends JPanel {
 		this.add(jCalendar1, null);
 		scrollPaneEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		
-		scrollPaneEvents.setBounds(new Rectangle(40, 233, 610, 212));
+		scrollPaneEvents.setBounds(new Rectangle(40, 233, 740, 212));
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		
 
@@ -199,7 +199,7 @@ public class EventsListGUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i=tableEvents.getSelectedRow();
-				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
+				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,1); // obtain ev object
 				if(ev!=null) UserGUI3.updateFrame(new FindQuestionsGUI(ev));
 			}
 		});
@@ -208,8 +208,7 @@ public class EventsListGUI extends JPanel {
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 
 		tableEvents.setModel(tableModelEvents);
-		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
-		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
+		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
 
 		this.add(scrollPaneEvents, null);
 		
