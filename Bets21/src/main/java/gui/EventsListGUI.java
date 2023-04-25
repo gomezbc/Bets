@@ -46,7 +46,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class EventsGUI extends JPanel {
+public class EventsListGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
@@ -74,9 +74,8 @@ public class EventsGUI extends JPanel {
 			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
 
 	};
-	private JButton betButton;
 
-	public EventsGUI()
+	public EventsListGUI()
 	{
 		try
 		{
@@ -199,7 +198,9 @@ public class EventsGUI extends JPanel {
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				int i=tableEvents.getSelectedRow();
+				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
+				if(ev!=null) UserGUI3.updateFrame(new FindQuestionsGUI(ev));
 			}
 		});
 
@@ -211,20 +212,6 @@ public class EventsGUI extends JPanel {
 		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
 
 		this.add(scrollPaneEvents, null);
-		
-		betButton = new JButton(""); //$NON-NLS-1$ //$NON-NLS-2$
-		betButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ImageIcon icon = new ImageIcon("icons/chips-bet.png");
-				Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-				UserGUI.updateTab(2, "Apostar", new ImageIcon(scaledIcon), new CreateBetGUI());
-			}
-		});
-		betButton.setBounds(274, 457, 103, 27);
-		ImageIcon icon = new ImageIcon("icons/chips-bet.png");
-		Image scaledIcon = icon.getImage().getScaledInstance(20, betButton.getHeight(), Image.SCALE_SMOOTH);
-		betButton.setIcon(new ImageIcon(scaledIcon));
-		this.add(betButton);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
 		ComponentListener componentListener = new ComponentAdapter() {

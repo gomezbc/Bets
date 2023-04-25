@@ -29,7 +29,7 @@ public class UserGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnLogOut;
-	private JPanel findQuestion = new EventsGUI();
+	private JPanel findQuestion = new EventsListGUI();
 	private JPanel createBet = new CreateBetGUI();
 	private JPanel AddSaldoGUI = new AddSaldoGUI();
 	private JPanel listUserBets = new ListUserBetsGUI();
