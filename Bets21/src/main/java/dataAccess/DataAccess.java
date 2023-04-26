@@ -60,10 +60,10 @@ public class DataAccess  {
 		   int year=today.get(Calendar.YEAR);
 		   if (month==12) { month=0; year+=1;}  
 	    
-			Event ev1=new Event(1, "Atlético-Athletic", UtilDate.newDate(year,month,17));
+			Event ev1=new Event(1, "Atletico-Athletic", UtilDate.newDate(year,month,17));
 			Event ev2=new Event(2, "Eibar-Barcelona", UtilDate.newDate(year,month,17));
 			Event ev3=new Event(3, "Getafe-Celta", UtilDate.newDate(year,month,17));
-			Event ev4=new Event(4, "Alavés-Deportivo", UtilDate.newDate(year,month,17));
+			Event ev4=new Event(4, "Alaves-Deportivo", UtilDate.newDate(year,month,17));
 			Event ev5=new Event(5, "Español-Villareal", UtilDate.newDate(year,month,17));
 			Event ev6=new Event(6, "Las Palmas-Sevilla", UtilDate.newDate(year,month,17));
 			Event ev7=new Event(7, "Malaga-Valencia", UtilDate.newDate(year,month,17));

@@ -7,7 +7,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import businessLogic.BLFacade;
 
@@ -34,6 +37,7 @@ import javax.swing.JLabel;
 import com.toedter.calendar.JCalendar;
 
 import configuration.UtilDate;
+import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import exceptions.QuestionDoesntExist;
@@ -44,6 +48,8 @@ import java.awt.Image;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 
 public class EventsListGUI extends JPanel {
@@ -66,8 +72,7 @@ public class EventsListGUI extends JPanel {
 
 	private DefaultTableModel tableModelEvents;
 
-
-
+	private Vector<Event> todayEvents;
 	
 	private String[] columnNamesEvents = new String[] {
 			//ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
@@ -91,7 +96,7 @@ public class EventsListGUI extends JPanel {
 	public void jbInit() throws Exception
 	{
 		this.setLayout(null);
-		this.setSize(new Dimension(826, 500));
+		this.setSize(new Dimension(826, 541));
 		this.setBackground(new Color(238, 238, 238));
 		setBorder(new LineBorder(new Color(146, 154, 171), 2, true));
 		jLabelEventDate.setFont(new Font("Roboto", Font.BOLD, 12));
@@ -157,9 +162,7 @@ public class EventsListGUI extends JPanel {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
 						
-						
 						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
-
 
 						BLFacade facade=MainGUI.getBusinessLogic();
 
@@ -167,21 +170,23 @@ public class EventsListGUI extends JPanel {
 
 						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
 						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));
+						todayEvents = events;
+						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(events));
+						MyTableCellRender.setIndex(0);
+						tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
 						for (domain.Event ev:events){
 							Vector<Object> row = new Vector<Object>();
-
 							System.out.println("Events "+ev);
 							row.add(new EventPanel(ev));
 							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
-							tableEvents.getColumnModel().getColumn(0).setCellRenderer(new TableActionCellRender(ev));
-							tableEvents.setRowHeight(60);
-							tableModelEvents.addRow(row);		
+							tableModelEvents.addRow(row);
+							tableModelEvents.fireTableDataChanged();
 						}
 						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+						tableEvents.setRowHeight(60);
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
 					} catch (Exception e1) {
 
-//						jLabelQueries.setText(e1.getMessage());
 					}
 
 				}
@@ -191,10 +196,12 @@ public class EventsListGUI extends JPanel {
 		this.add(jCalendar1, null);
 		scrollPaneEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		
-		scrollPaneEvents.setBounds(new Rectangle(40, 233, 740, 212));
-		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
+		scrollPaneEvents.setBounds(new Rectangle(40, 233, 740, 300));
 		
-
+//		tableEvents.setModel(tableModelEvents);
+		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
+		tableEvents = new JTable(tableModelEvents);
+		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -205,9 +212,7 @@ public class EventsListGUI extends JPanel {
 		});
 
 		scrollPaneEvents.setViewportView(tableEvents);
-		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 
-		tableEvents.setModel(tableModelEvents);
 		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
 
 		this.add(scrollPaneEvents, null);
@@ -223,6 +228,5 @@ public class EventsListGUI extends JPanel {
 			}
 		};
 		this.addComponentListener(componentListener);
-		
 	}
 }
