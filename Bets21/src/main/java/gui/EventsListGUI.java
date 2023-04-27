@@ -5,12 +5,9 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 import businessLogic.BLFacade;
 
@@ -30,26 +27,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import com.toedter.calendar.JCalendar;
 
 import configuration.UtilDate;
 import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import exceptions.QuestionDoesntExist;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 
-import javax.swing.ScrollPaneConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Font;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseMotionAdapter;
 
 
 public class EventsListGUI extends JPanel {
@@ -194,6 +182,11 @@ public class EventsListGUI extends JPanel {
 		});
 
 		this.add(jCalendar1, null);
+		scrollPaneEvents.addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				renderEventsTable();
+			}
+		});
 		scrollPaneEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		
 		scrollPaneEvents.setBounds(new Rectangle(40, 233, 740, 300));
@@ -224,9 +217,17 @@ public class EventsListGUI extends JPanel {
 				// Actualizar el tamaño del JTabbedPane
 				int nuevoAncho = e.getComponent().getWidth();
 				int nuevoAlto = e.getComponent().getHeight();
-				System.out.println(nuevoAncho+", "+nuevoAlto);     
+				
 			}
 		};
 		this.addComponentListener(componentListener);
+		
+	}
+	
+	public void renderEventsTable() {
+		Vector<Event> events = todayEvents;
+		MyTableCellRender.setIndex(0);
+		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(events));
+		tableModelEvents.fireTableDataChanged();
 	}
 }

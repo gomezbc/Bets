@@ -95,12 +95,14 @@ public class UserGUI3 extends JFrame {
 		        int nuevoAlto = e.getComponent().getHeight();
 		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
 		        btnLogOut.setAlignmentY(nuevoAncho-40);
+		        displayFrame.setBounds(new Rectangle(0, 50, nuevoAncho, contentPane.getHeight()-50));
+		        if(displayFrame instanceof EventsListGUI) ((EventsListGUI) displayFrame).renderEventsTable();
 		    }
 		};
 		this.addComponentListener(componentListener);
 		
 		displayFrame = new EventsListGUI();
-		displayFrame.setBounds(29, 49, 826, 541);
+		displayFrame.setBounds(0, 50, 886, 541);
 		contentPane.add(displayFrame);
 		
 		lblUser = new JLabel("");
