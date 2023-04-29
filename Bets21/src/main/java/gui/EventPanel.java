@@ -91,7 +91,7 @@ public class EventPanel extends JPanel {
 	public void updateBounds(int width, int height) {
 //		System.out.println(width+","+height);
 		this.setSize(width, height);
-		System.out.println(this.getWidth()+","+this.getHeight());
+//		System.out.println(this.getWidth()+","+this.getHeight());
 		ImageIcon icon = new ImageIcon("icons/laliga/"+local+".png");
 		Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
 		logoLocal.setIcon(new ImageIcon(scaledIcon));

@@ -135,11 +135,11 @@ public class UserGUI3 extends JFrame {
 				UserGUI3.updateFrame(new EventsListGUI());
 			}
 		});
-		btnHome.setBorder(new EmptyBorder(3,3,3,3));
+		btnHome.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnHome.setBackground(Color.WHITE);
 		
 		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
-		btnApuestasRealizadas.setBorder(null);
+		btnApuestasRealizadas.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnApuestasRealizadas.setBackground(Color.WHITE);
 		btnHome.setBorder(new EmptyBorder(3,3,3,3));
 		btnApuestasRealizadas.addActionListener(new ActionListener() {

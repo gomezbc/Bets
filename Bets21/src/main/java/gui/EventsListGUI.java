@@ -35,9 +35,15 @@ import configuration.UtilDate;
 import domain.Event;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class EventsListGUI extends JPanel {
@@ -50,7 +56,6 @@ public class EventsListGUI extends JPanel {
 	private JCalendar jCalendar1 = new JCalendar();
 	private Calendar calendarAnt = null;
 	private Calendar calendarAct = null;
-	private JScrollPane scrollPaneEvents = new JScrollPane();
 
 	
 	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
@@ -61,12 +66,17 @@ public class EventsListGUI extends JPanel {
 	private DefaultTableModel tableModelEvents;
 
 	private Vector<Event> todayEvents;
+	private Vector<Event> currentEvents = new Vector<Event>(4);
+	private int currentIndex;
+	private int currentMax;
 	
 	private String[] columnNamesEvents = new String[] {
 			//ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
 			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
 
 	};
+	private JButton next;
+	private JButton previous;
 
 	public EventsListGUI()
 	{
@@ -97,6 +107,7 @@ public class EventsListGUI extends JPanel {
 		this.add(jLabelEventDate, null);
 		this.add(jLabelEvents);
 
+		currentIndex=0;
 
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
@@ -150,9 +161,10 @@ public class EventsListGUI extends JPanel {
 					try {
 						tableModelEvents.setDataVector(null, columnNamesEvents);
 						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
-						
+						next.setVisible(false);
+						previous.setVisible(false);
 						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
-
+						
 						BLFacade facade=MainGUI.getBusinessLogic();
 
 						Vector<domain.Event> events = facade.getEvents(firstDay);
@@ -160,10 +172,16 @@ public class EventsListGUI extends JPanel {
 						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
 						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));
 						todayEvents = events;
-						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(events));
+						if(events.size()/4>0) currentMax=4;
+						else currentMax=events.size();
+						currentEvents.removeAllElements();
+						for(int i=0;i<currentMax;i++){
+							currentEvents.add(i, todayEvents.get(i));
+						}
+						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(currentEvents));
 						MyTableCellRender.setIndex(0);
 						tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
-						for (domain.Event ev:events){
+						for (domain.Event ev:currentEvents){
 							Vector<Object> row = new Vector<Object>();
 							System.out.println("Events "+ev);
 							row.add(new EventPanel(ev));
@@ -173,6 +191,10 @@ public class EventsListGUI extends JPanel {
 						}
 						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
+						if(currentIndex+4<events.size()) next.setVisible(true);
+						else next.setVisible(false);
+						if(currentIndex>0) previous.setVisible(true);
+						else previous.setVisible(false);
 					} catch (Exception e1) {
 
 					}
@@ -182,18 +204,13 @@ public class EventsListGUI extends JPanel {
 		});
 
 		this.add(jCalendar1, null);
-		scrollPaneEvents.addMouseWheelListener(new MouseWheelListener() {
-			public void mouseWheelMoved(MouseWheelEvent e) {
-				renderEventsTable();
-			}
-		});
-		scrollPaneEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
-		
-		scrollPaneEvents.setBounds(new Rectangle(40, 233, 740, 300));
 		
 //		tableEvents.setModel(tableModelEvents);
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
+		
 		tableEvents = new JTable(tableModelEvents);
+		tableEvents.setBounds(40, 233, 740, 280);
+		add(tableEvents);
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		tableEvents.setRowHeight(60);
 		tableEvents.addMouseListener(new MouseAdapter() {
@@ -204,12 +221,8 @@ public class EventsListGUI extends JPanel {
 				if(ev!=null) UserGUI3.updateFrame(new FindQuestionsGUI(ev));
 			}
 		});
-
-		scrollPaneEvents.setViewportView(tableEvents);
-
-		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
-
-		this.add(scrollPaneEvents, null);
+		
+				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
 		ComponentListener componentListener = new ComponentAdapter() {
@@ -218,7 +231,7 @@ public class EventsListGUI extends JPanel {
 				// Actualizar el tamaño del JTabbedPane
 				int nuevoAncho = e.getComponent().getWidth();
 				int nuevoAlto = e.getComponent().getHeight();
-				scrollPaneEvents.setSize(nuevoAncho-80, (int) (nuevoAlto*0.5));
+				tableEvents.setSize(nuevoAncho-80, (int) (nuevoAlto*0.5));
 				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(nuevoAncho-80);
 				tableEvents.setRowHeight((int) (nuevoAlto*0.12));
 				tableEvents.repaint();
@@ -227,13 +240,82 @@ public class EventsListGUI extends JPanel {
 		};
 		this.addComponentListener(componentListener);
 		
+		ImageIcon icon = new ImageIcon("icons/right.png");
+		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		next = new JButton(new ImageIcon(scaledIcon));
+		next.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(todayEvents.size()-(currentIndex+4)>=4) currentMax += 4;
+				else currentMax += todayEvents.size()-(currentIndex+4);
+				currentIndex += 4;
+				currentEvents.removeAllElements();
+				for(int i=0;i<4-(currentMax%4);i++){
+					currentEvents.add(i, todayEvents.get(currentIndex+i));
+				}
+				MyTableCellRender.setIndex(0);
+				tableModelEvents.setDataVector(null, columnNamesEvents);
+				tableModelEvents.setColumnCount(2);
+				tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
+				for (domain.Event ev:currentEvents){
+					Vector<Object> row = new Vector<Object>();
+					System.out.println("Events "+ev);
+					row.add(new EventPanel(ev));
+					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
+					tableModelEvents.addRow(row);
+				}
+				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+				tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
+				renderEventsTable();
+			}
+		});
+		next.setBorder(null);
+		next.setBounds(750, 200, 30, 30);
+		next.setVisible(false);
+		add(next);
+		
+		icon = new ImageIcon("icons/left.png");
+		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		previous = new JButton(new ImageIcon(scaledIcon));
+		previous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentIndex -= 4;
+				currentMax -= 4-(currentMax%4);
+				currentEvents.removeAllElements();
+				for(int i=0;i<4-(currentMax%4);i++){
+					currentEvents.add(i, todayEvents.get(currentIndex+i));
+				}
+				MyTableCellRender.setIndex(0);
+				tableModelEvents.setDataVector(null, columnNamesEvents);
+				tableModelEvents.setColumnCount(2);
+				tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
+				for (domain.Event ev:currentEvents){
+					Vector<Object> row = new Vector<Object>();
+					System.out.println("Events "+ev);
+					row.add(new EventPanel(ev));
+					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
+					tableModelEvents.addRow(row);
+				}
+				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+				tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
+				renderEventsTable();
+				renderEventsTable();
+			}
+		});
+		previous.setBorder(null);
+		previous.setBounds(708, 200, 30, 30);
+		previous.setVisible(false);
+		add(previous);
 	}
 	
 	public void renderEventsTable() {
-		Vector<Event> events = todayEvents;
 		MyTableCellRender.setIndex(0);
-		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(events));
+		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(currentEvents));
+		tableModelEvents.setRowCount(currentEvents.size());
 		tableModelEvents.fireTableDataChanged();
 		tableEvents.repaint();
+		if(todayEvents!=null && currentIndex+4<todayEvents.size()) next.setVisible(true);
+		else next.setVisible(false);
+		if(currentIndex>0) previous.setVisible(true);
+		else previous.setVisible(false);
 	}
 }
