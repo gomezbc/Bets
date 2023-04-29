@@ -31,6 +31,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JSeparator;
 
 
 public class MainGUI extends JFrame {
@@ -69,11 +70,13 @@ public class MainGUI extends JFrame {
 	private JButton jButtonEvents;
 	private JPanel login_panel;
 	private JTextField textField;
-	private JPasswordField passwordField;
+	private JPasswordField pwdIngreseSuContrasea;
 	private JLabel lblDni;
 	private JLabel lblPassword;
-	private JLabel lblRegistrateAhora;
 	private JLabel userError;
+	private JLabel lblIniciarSesin;
+	private JSeparator separatorDni;
+	private JSeparator separatorPasswd;
 	
 	/**
 	 * This is the default constructor
@@ -122,60 +125,47 @@ public class MainGUI extends JFrame {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
-			jContentPane.setBackground(new Color(238, 238, 238));
+			jContentPane.setBackground(new Color(0, 145, 202));
 			jContentPane.setLayout(null);
 			
 			login_panel = new JPanel();
-			login_panel.setBackground(new Color(0, 145, 202));
+			login_panel.setBackground(Color.WHITE);
 			login_panel.setBounds(262, 0, 333, 306);
 			jContentPane.add(login_panel);
 			login_panel.setLayout(null);
 			login_panel.add(getJButtonCreateUser());
 			login_panel.add(getJButtonLogin());
+			login_panel.add(getSeparatorDni());
 			login_panel.add(getPanel());
 			
 			textField = new JTextField();
-			textField.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusGained(FocusEvent e) {
-					textField.setBorder(new LineBorder(new Color(26, 95, 180), 2, false));
-				}
-				@Override
-				public void focusLost(FocusEvent e) {
-					textField.setBorder(null);
-				}
-			});
+			textField.setFont(new Font("Roboto", Font.PLAIN, 14));
+			textField.setBorder(null);
 			textField.setColumns(10);
-			textField.setBounds(128, 45, 180, 23);
+			textField.setBounds(20, 60, 200, 23);
 			login_panel.add(textField);
 			
-			passwordField = new JPasswordField();
-			passwordField.setBounds(128, 89, 180, 23);
-			passwordField.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusGained(FocusEvent e) {
-					passwordField.setBorder(new LineBorder(new Color(26, 95, 180), 2, false));
-				}
-				@Override
-				public void focusLost(FocusEvent e) {
-					passwordField.setBorder(null);
-				}
-			});
-			login_panel.add(passwordField);
+			pwdIngreseSuContrasea = new JPasswordField();
+			pwdIngreseSuContrasea.setFont(new Font("Roboto", Font.PLAIN, 14));
+			pwdIngreseSuContrasea.setCaretColor(Color.GRAY);
+			pwdIngreseSuContrasea.setBorder(null);
+			pwdIngreseSuContrasea.setBounds(20, 125, 200, 23);
+			login_panel.add(pwdIngreseSuContrasea);
 			
-			lblDni = new JLabel("Dni:");
-			lblDni.setFont(new Font("Dialog", Font.BOLD, 14));
-			lblDni.setForeground(Color.WHITE);
-			lblDni.setBounds(42, 48, 102, 17);
+			lblDni = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblDni.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			lblDni.setFont(new Font("Roboto", Font.PLAIN, 14));
+			lblDni.setForeground(Color.DARK_GRAY);
+			lblDni.setBounds(20, 40, 102, 20);
 			login_panel.add(lblDni);
 			
-			lblPassword = new JLabel("Contraseña: ");
-			lblPassword.setFont(new Font("Dialog", Font.BOLD, 14));
-			lblPassword.setForeground(Color.WHITE);
-			lblPassword.setBounds(42, 93, 102, 17);
+			lblPassword = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblPassword.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			lblPassword.setFont(new Font("Roboto", Font.PLAIN, 14));
+			lblPassword.setForeground(Color.DARK_GRAY);
+			lblPassword.setBounds(20, 100, 123, 20);
 			login_panel.add(lblPassword);
-			login_panel.add(getLblRegistrateAhora());
 			login_panel.add(getUserError());
+			login_panel.add(getLblIniciarSesin());
+			login_panel.add(getSeparatorPasswd());
 			jContentPane.add(getJButtonEvents());
 		}
 		return jContentPane;
@@ -184,7 +174,7 @@ public class MainGUI extends JFrame {
 		if (jLabelSelectOption == null) {
 			jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
 			jLabelSelectOption.setBounds(0, 0, 495, 30);
-			jLabelSelectOption.setFont(new Font("Tahoma", Font.BOLD, 13));
+			jLabelSelectOption.setFont(new Font("Roboto", Font.BOLD, 13));
 			jLabelSelectOption.setForeground(Color.BLACK);
 			jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
 		}
@@ -193,9 +183,10 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton() {
 		if (rdbtnNewRadioButton == null) {
 			rdbtnNewRadioButton = new JRadioButton("English");
+			rdbtnNewRadioButton.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton.setBorder(null);
-			rdbtnNewRadioButton.setForeground(Color.WHITE);
-			rdbtnNewRadioButton.setBackground(new Color(0, 145, 202));
+			rdbtnNewRadioButton.setForeground(Color.DARK_GRAY);
+			rdbtnNewRadioButton.setBackground(Color.WHITE);
 			rdbtnNewRadioButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Locale.setDefault(new Locale("en"));
@@ -209,9 +200,10 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton_1() {
 		if (rdbtnNewRadioButton_1 == null) {
 			rdbtnNewRadioButton_1 = new JRadioButton("Euskara");
+			rdbtnNewRadioButton_1.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton_1.setBorder(null);
-			rdbtnNewRadioButton_1.setForeground(Color.WHITE);
-			rdbtnNewRadioButton_1.setBackground(new Color(0, 145, 202));
+			rdbtnNewRadioButton_1.setForeground(Color.DARK_GRAY);
+			rdbtnNewRadioButton_1.setBackground(Color.WHITE);
 			rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					Locale.setDefault(new Locale("eus"));
@@ -227,9 +219,10 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton_2() {
 		if (rdbtnNewRadioButton_2 == null) {
 			rdbtnNewRadioButton_2 = new JRadioButton("Castellano");
+			rdbtnNewRadioButton_2.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton_2.setBorder(null);
-			rdbtnNewRadioButton_2.setForeground(Color.WHITE);
-			rdbtnNewRadioButton_2.setBackground(new Color(0, 145, 202));
+			rdbtnNewRadioButton_2.setForeground(Color.DARK_GRAY);
+			rdbtnNewRadioButton_2.setBackground(Color.WHITE);
 			rdbtnNewRadioButton_2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Locale.setDefault(new Locale("es"));
@@ -249,7 +242,7 @@ public class MainGUI extends JFrame {
 			panel.setBounds(12, 253, 285, 52);
 			panel.setForeground(new Color(255, 255, 255));
 			panel.setBorder(null);
-			panel.setBackground(new Color(0, 145, 202));
+			panel.setBackground(Color.WHITE);
 			panel.add(getRdbtnNewRadioButton_1());
 			panel.add(getRdbtnNewRadioButton_2());
 			panel.add(getRdbtnNewRadioButton());
@@ -265,10 +258,10 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonCreateUser() {
 		if (jButtonCreateUser == null) {
 			jButtonCreateUser = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnCreateUser.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			jButtonCreateUser.setBorder(null);
-			jButtonCreateUser.setForeground(new Color(10, 51, 100));
-			jButtonCreateUser.setBackground(new Color(0, 145, 202));
-			jButtonCreateUser.setBounds(155, 209, 142, 32);
+			jButtonCreateUser.setFont(new Font("Roboto", Font.BOLD, 14));
+			jButtonCreateUser.setForeground(Color.DARK_GRAY);
+			jButtonCreateUser.setBackground(Color.WHITE);
+			jButtonCreateUser.setBounds(170, 170, 140, 32);
 			ImageIcon icon = new ImageIcon("icons/user-create.png");
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 			jButtonCreateUser.setIcon(new ImageIcon(scaledIcon));
@@ -288,7 +281,8 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonLogin() {
 		if (jButtonLogin == null) {
 			jButtonLogin = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.jButtonLogin.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			jButtonLogin.setBounds(86, 145, 190, 32);
+			jButtonLogin.setFont(new Font("Roboto", Font.BOLD, 14));
+			jButtonLogin.setBounds(20, 170, 140, 32);
 			jButtonLogin.setBackground(new Color(255, 255, 255));
 			ImageIcon icon = new ImageIcon("icons/user-login.png");
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
@@ -296,25 +290,31 @@ public class MainGUI extends JFrame {
 			jButtonLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e1) {
 					BLFacade facade = MainGUI.getBusinessLogic();
-					User user = null;
-					try {
-						user = facade.getUser(textField.getText());
-						if(!user.checkCredentials(new String(passwordField.getPassword()))) userError.setText("La contraseña es incorrecta");
-						else {
-								setUserRegistered(user);
-								userError.setVisible(false);
-							if(user.isAdmin()) {
-								JFrame a = new AdminGUI();
-								a.setVisible(true);
-							}else {
-								JFrame a = new UserGUI3();
-								a.setVisible(true);
-							}
-						}
-					}catch(UserDoesntExist e2) {
+					if(userRegistered!= null) {
+						userError.setText("<html>Cierra sesión antes de iniciar <br>sesión con otro usuario</html>");
 						userError.setVisible(true);
-						userError.setText(e2.getMessage());
+					}else {
+						User user = null;
+						try {
+							user = facade.getUser(textField.getText());
+							if(!user.checkCredentials(new String(pwdIngreseSuContrasea.getPassword()))) userError.setText("La contraseña es incorrecta");
+							else {
+									setUserRegistered(user);
+									userError.setVisible(false);
+								if(user.isAdmin()) {
+									JFrame a = new AdminGUI();
+									a.setVisible(true);
+								}else {
+									JFrame a = new UserGUI3();
+									a.setVisible(true);
+								}
+							}
+						}catch(UserDoesntExist e2) {
+							userError.setVisible(true);
+							userError.setText(e2.getMessage());
+						}
 					}
+					
 				}
 			});
 		}
@@ -338,22 +338,38 @@ public class MainGUI extends JFrame {
 		}
 		return jButtonEvents;
 	}
-	private JLabel getLblRegistrateAhora() {
-		if (lblRegistrateAhora == null) {
-			lblRegistrateAhora = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblRegistrateAhora.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			lblRegistrateAhora.setFont(new Font("Dialog", Font.BOLD, 13));
-			lblRegistrateAhora.setForeground(Color.WHITE);
-			lblRegistrateAhora.setBounds(42, 217, 111, 17);
-		}
-		return lblRegistrateAhora;
-	}
 	private JLabel getUserError() {
 		if (userError == null) {
 			userError = new JLabel("");
-			userError.setForeground(Color.WHITE);
+			userError.setForeground(Color.DARK_GRAY);
 			userError.setHorizontalAlignment(SwingConstants.CENTER);
-			userError.setBounds(28, 180, 293, 17);
+			userError.setBounds(20, 211, 293, 30);
 		}
 		return userError;
+	}
+	private JLabel getLblIniciarSesin() {
+		if (lblIniciarSesin == null) {
+			lblIniciarSesin = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblIniciarSesin.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			lblIniciarSesin.setForeground(Color.DARK_GRAY);
+			lblIniciarSesin.setFont(new Font("Roboto", Font.BOLD, 18));
+			lblIniciarSesin.setBounds(20, 9, 162, 24);
+		}
+		return lblIniciarSesin;
+	}
+	private JSeparator getSeparatorDni() {
+		if (separatorDni == null) {
+			separatorDni = new JSeparator();
+			separatorDni.setBounds(20, 83, 200, 1);
+			separatorDni.setForeground(Color.DARK_GRAY);
+		}
+		return separatorDni;
+	}
+	private JSeparator getSeparatorPasswd() {
+		if (separatorPasswd == null) {
+			separatorPasswd = new JSeparator();
+			separatorPasswd.setForeground(Color.DARK_GRAY);
+			separatorPasswd.setBounds(20, 148, 200, 1);
+		}
+		return separatorPasswd;
 	}
 } // @jve:decl-index=0:visual-constraint="0,0"

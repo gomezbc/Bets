@@ -32,6 +32,7 @@ public class EventPanel extends JPanel {
 	}
 	private void jbInit(Event ev) {
 		setMinimumSize(new Dimension(740, 60));
+		setPreferredSize(new Dimension(806, 66));
 		setLayout(null);
 		
 		if(ev.getDescription().contains("-")) {
@@ -44,12 +45,12 @@ public class EventPanel extends JPanel {
 		}
 		
 		lblDescription = new JLabel("");
-		lblDescription.setBounds(300, 5, 377, 17);
+		lblDescription.setBounds(337, 5, 377, 17);
 		lblDescription.setText(ev.getDescription());
 		add(lblDescription);
 		
 		lblDate = new JLabel("");
-		lblDate.setBounds(271, 31, 209, 17);
+		lblDate.setBounds(304, 38, 209, 17);
 		lblDate.setText(ev.getEventDate().toString());
 		add(lblDate);
 		
@@ -68,7 +69,7 @@ public class EventPanel extends JPanel {
 		icon = new ImageIcon("icons/laliga/"+visitante+".png");
 		scaledIcon = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		logoVisitante = new JLabel(new ImageIcon(scaledIcon));
-		logoVisitante.setBounds(638, 5, 50, 50);
+		logoVisitante.setBounds(675, 5, 50, 50);
 		add(logoVisitante);
 		
 		lbllogoLiga = new JLabel("");

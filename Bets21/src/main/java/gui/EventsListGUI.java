@@ -65,8 +65,8 @@ public class EventsListGUI extends JPanel {
 
 	private DefaultTableModel tableModelEvents;
 
-	private Vector<Event> todayEvents;
-	private Vector<Event> currentEvents = new Vector<Event>(4);
+	private static Vector<Event> todayEvents;
+	private static Vector<Event> currentEvents = new Vector<Event>(4);
 	private int currentIndex;
 	private int currentMax;
 	
@@ -269,7 +269,7 @@ public class EventsListGUI extends JPanel {
 			}
 		});
 		next.setBorder(null);
-		next.setBounds(750, 200, 30, 30);
+		next.setBounds(784, 200, 30, 30);
 		next.setVisible(false);
 		add(next);
 		
@@ -298,13 +298,31 @@ public class EventsListGUI extends JPanel {
 				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
 				tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
 				renderEventsTable();
-				renderEventsTable();
 			}
 		});
 		previous.setBorder(null);
-		previous.setBounds(708, 200, 30, 30);
+		previous.setBounds(738, 200, 30, 30);
 		previous.setVisible(false);
 		add(previous);
+		
+		//Para que si el usuario vuelve a la pestaña de evntos se le cargue los anteriores
+		if(currentEvents!=null) {
+			MyTableCellRender.setIndex(0);
+			tableModelEvents.setDataVector(null, columnNamesEvents);
+			tableModelEvents.setColumnCount(2);
+			tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
+			for (domain.Event ev:currentEvents){
+				Vector<Object> row = new Vector<Object>();
+				System.out.println("Events "+ev);
+				row.add(new EventPanel(ev));
+				row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
+				tableModelEvents.addRow(row);
+			}
+			tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+			tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
+			renderEventsTable();
+		}
+		
 	}
 	
 	public void renderEventsTable() {

@@ -64,7 +64,7 @@ public class DataAccess  {
 			Event ev2=new Event(2, "Eibar-Barcelona", UtilDate.newDate(year,month,17));
 			Event ev3=new Event(3, "Getafe-Celta De Vigo", UtilDate.newDate(year,month,17));
 			Event ev4=new Event(4, "Alaves-Deportivo", UtilDate.newDate(year,month,17));
-			Event ev5=new Event(5, "Español-Villareal", UtilDate.newDate(year,month,17));
+			Event ev5=new Event(5, "Espanyol-Villareal", UtilDate.newDate(year,month,17));
 			Event ev6=new Event(6, "Las Palmas-Sevilla", UtilDate.newDate(year,month,17));
 			Event ev7=new Event(7, "Malaga-Valencia", UtilDate.newDate(year,month,17));
 			Event ev8=new Event(8, "Girona-Leganés", UtilDate.newDate(year,month,17));
@@ -73,9 +73,9 @@ public class DataAccess  {
 
 			Event ev11=new Event(11, "Atletico-Athletic", UtilDate.newDate(year,month,1));
 			Event ev12=new Event(12, "Eibar-Barcelona", UtilDate.newDate(year,month,1));
-			Event ev13=new Event(13, "Getafe-Celta", UtilDate.newDate(year,month,1));
+			Event ev13=new Event(13, "Getafe-Celta De Vigo", UtilDate.newDate(year,month,1));
 			Event ev14=new Event(14, "Alavés-Deportivo", UtilDate.newDate(year,month,1));
-			Event ev15=new Event(15, "Español-Villareal", UtilDate.newDate(year,month,1));
+			Event ev15=new Event(15, "Espanyol-Villareal", UtilDate.newDate(year,month,1));
 			Event ev16=new Event(16, "Las Palmas-Sevilla", UtilDate.newDate(year,month,1));
 			
 

@@ -38,6 +38,7 @@ public class UserGUI3 extends JFrame {
 	private static JLabel lblUser;
 	private static JMenuBar menuBar;
 	private JButton btnApuestasRealizadas;
+	private static JLabel lblLogoUser;
 	/**
 	 * Launch the application.
 	 */
@@ -59,8 +60,8 @@ public class UserGUI3 extends JFrame {
 		setTitle("User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		setResizable(true);
-		setMinimumSize(new Dimension(886, 632));
+		setResizable(false);
+		setMinimumSize(new Dimension(886, 652));
 		setBounds(100, 100, 886, 632);
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
@@ -95,27 +96,27 @@ public class UserGUI3 extends JFrame {
 		        int nuevoAlto = e.getComponent().getHeight();
 		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
 		        btnLogOut.setAlignmentY(nuevoAncho-40);
-		        displayFrame.setBounds(new Rectangle(0, 50, nuevoAncho, contentPane.getHeight()-50));
+		        displayFrame.setBounds(new Rectangle(0, 70, nuevoAncho, contentPane.getHeight()-70));
 		        if(displayFrame instanceof EventsListGUI) ((EventsListGUI) displayFrame).renderEventsTable();
 		    }
 		};
 		this.addComponentListener(componentListener);
 		
 		displayFrame = new EventsListGUI();
-		displayFrame.setBounds(0, 50, 886, 541);
+		displayFrame.setBounds(0, 70, 886, 541);
 		contentPane.add(displayFrame);
 		
 		lblUser = new JLabel("");
 		lblUser.setForeground(Color.WHITE);
-		lblUser.setFont(new Font("Dialog", Font.BOLD, 13));
-		lblUser.setBounds(29, 0, 485, 17);
+		lblUser.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblUser.setBounds(60, 10, 485, 25);
 		User u = MainGUI.getUserRegistered();
 		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
 		contentPane.add(lblUser);
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(30, 22, 243, 30);
+		menuBar.setBounds(20, 42, 243, 30);
 		contentPane.add(menuBar);
 		
 		btnHome = new JButton("     Eventos    ");
@@ -158,10 +159,17 @@ public class UserGUI3 extends JFrame {
 			}
 		});
 		menuBar.add(btnApuestasRealizadas);
+		
+		icon = new ImageIcon("icons/user.png");
+		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
+		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
+		lblLogoUser.setBounds(20, 8, 30, 25);
+		contentPane.add(lblLogoUser);
 	}
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 			this.setVisible(false);
+			MainGUI.setUserRegistered(null);
 	}
 	
 	public static void updateFrame(JPanel panel) {
@@ -169,9 +177,10 @@ public class UserGUI3 extends JFrame {
 		contentPane.add(btnLogOut);
 		contentPane.add(menuBar);
 		displayFrame = panel;
-		displayFrame.setBounds(0, 50, 886, 541);
-        displayFrame.setBounds(new Rectangle(0, 50, displayFrame.getWidth(), contentPane.getHeight()-50));
+		displayFrame.setBounds(0, 70, 886, 541);
+        displayFrame.setBounds(new Rectangle(0, 70, displayFrame.getWidth(), contentPane.getHeight()-70));
 		contentPane.add(displayFrame);
+		contentPane.add(lblLogoUser);
 		contentPane.revalidate();
 		contentPane.repaint();
 		User u = MainGUI.getUserRegistered();
