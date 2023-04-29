@@ -83,6 +83,7 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
+		setMinimumSize(new Dimension(826, 541));
 		this.setLayout(null);
 		this.setSize(new Dimension(826, 541));
 		this.setBackground(new Color(238, 238, 238));
@@ -171,7 +172,6 @@ public class EventsListGUI extends JPanel {
 							tableModelEvents.fireTableDataChanged();
 						}
 						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
-						tableEvents.setRowHeight(60);
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
 					} catch (Exception e1) {
 
@@ -195,6 +195,7 @@ public class EventsListGUI extends JPanel {
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 		tableEvents = new JTable(tableModelEvents);
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
+		tableEvents.setRowHeight(60);
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -217,7 +218,11 @@ public class EventsListGUI extends JPanel {
 				// Actualizar el tamaño del JTabbedPane
 				int nuevoAncho = e.getComponent().getWidth();
 				int nuevoAlto = e.getComponent().getHeight();
-				
+				scrollPaneEvents.setSize(nuevoAncho-80, (int) (nuevoAlto*0.5));
+				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(nuevoAncho-80);
+				tableEvents.setRowHeight((int) (nuevoAlto*0.12));
+				tableEvents.repaint();
+				renderEventsTable();
 			}
 		};
 		this.addComponentListener(componentListener);
@@ -229,5 +234,6 @@ public class EventsListGUI extends JPanel {
 		MyTableCellRender.setIndex(0);
 		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(events));
 		tableModelEvents.fireTableDataChanged();
+		tableEvents.repaint();
 	}
 }

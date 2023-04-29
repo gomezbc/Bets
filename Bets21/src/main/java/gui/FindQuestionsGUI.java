@@ -61,6 +61,7 @@ public class FindQuestionsGUI extends JPanel {
 	private String[] columnNamesForecast = new String[] {
 			"Pronostico#","Pronostico","Ganancia"
 	};
+	private JPanel EventInfo;
 
 	public FindQuestionsGUI(Event ev)
 	{
@@ -78,13 +79,13 @@ public class FindQuestionsGUI extends JPanel {
 	public void jbInit(Event ev) throws Exception
 	{
 		this.setLayout(null);
-		this.setSize(new Dimension(700, 500));
+		this.setSize(new Dimension(826, 541));
 		this.setBackground(new Color(238, 238, 238));
-		jLabelQueries.setBounds(40, 248, 598, 14);
+		jLabelQueries.setBounds(40, 188, 598, 14);
 		this.add(jLabelQueries);
 
 		BLFacade facade = MainGUI.getBusinessLogic();
-		scrollPaneQueries.setBounds(new Rectangle(40, 274, 322, 116));
+		scrollPaneQueries.setBounds(new Rectangle(40, 214, 368, 157));
 
 
 		scrollPaneQueries.setViewportView(tableQueries);
@@ -103,7 +104,7 @@ public class FindQuestionsGUI extends JPanel {
 		
 		
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
-		scrollPaneForecast.setBounds(366, 274, 286, 116);
+		scrollPaneForecast.setBounds(437, 214, 346, 157);
 		add(scrollPaneForecast);
 		
 
@@ -151,5 +152,9 @@ public class FindQuestionsGUI extends JPanel {
 			}
 		});
 
+		
+		EventInfo = new EventPanel(ev);
+		EventInfo.setBounds(40, 37, 743, 139);
+		add(EventInfo);
 	}
 }

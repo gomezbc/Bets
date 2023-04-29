@@ -169,7 +169,8 @@ public class UserGUI3 extends JFrame {
 		contentPane.add(btnLogOut);
 		contentPane.add(menuBar);
 		displayFrame = panel;
-		displayFrame.setBounds(29, 49, 826, 541);
+		displayFrame.setBounds(0, 50, 886, 541);
+        displayFrame.setBounds(new Rectangle(0, 50, displayFrame.getWidth(), contentPane.getHeight()-50));
 		contentPane.add(displayFrame);
 		contentPane.revalidate();
 		contentPane.repaint();
