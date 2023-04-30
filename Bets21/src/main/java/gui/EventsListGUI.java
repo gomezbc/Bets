@@ -172,7 +172,7 @@ public class EventsListGUI extends JPanel {
 						for (domain.Event ev:currentEvents){
 							Vector<Object> row = new Vector<Object>();
 							System.out.println("Events "+ev);
-							row.add(new EventPanel(ev));
+							row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 							tableModelEvents.addRow(row);
 							tableModelEvents.fireTableDataChanged();
@@ -200,7 +200,6 @@ public class EventsListGUI extends JPanel {
 		tableEvents.setBounds(40, 233, 803, 280);
 		add(tableEvents);
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
-		tableEvents.setRowHeight(60);
 		tableEvents.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -253,7 +252,7 @@ public class EventsListGUI extends JPanel {
 				for (domain.Event ev:currentEvents){
 					Vector<Object> row = new Vector<Object>();
 					System.out.println("Events "+ev);
-					row.add(new EventPanel(ev));
+					row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 					tableModelEvents.addRow(row);
 				}
@@ -284,7 +283,7 @@ public class EventsListGUI extends JPanel {
 				for (domain.Event ev:currentEvents){
 					Vector<Object> row = new Vector<Object>();
 					System.out.println("Events "+ev);
-					row.add(new EventPanel(ev));
+					row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 					tableModelEvents.addRow(row);
 				}
@@ -306,7 +305,7 @@ public class EventsListGUI extends JPanel {
 			for (domain.Event ev:currentEvents){
 				Vector<Object> row = new Vector<Object>();
 				System.out.println("Events "+ev);
-				row.add(new EventPanel(ev));
+				row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 				row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 				tableModelEvents.addRow(row);
 			}

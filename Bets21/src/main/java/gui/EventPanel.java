@@ -26,13 +26,19 @@ public class EventPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EventPanel(Event ev) {
-		jbInit(ev);
+	public EventPanel(Event ev, int width, int height) {
+		jbInit(ev, width, height);
 	}
-	private void jbInit(Event ev) {
+	
+	public EventPanel(Event ev) {
+		jbInit(ev, 806, 66);
+	}
+	
+	private void jbInit(Event ev, int width, int height) {
 		setMinimumSize(new Dimension(740, 60));
 		setPreferredSize(new Dimension(806, 66));
 		setLayout(null);
+		setSize(width, height);
 		
 		if(ev.getDescription().contains("-")) {
 			local = ev.getDescription().substring(0, ev.getDescription().indexOf("-"));
@@ -56,32 +62,34 @@ public class EventPanel extends JPanel {
 		add(lblDate);
 		
 		logoLocal = new JLabel("");
-		logoLocal.setBounds(62, 5, 50, 50);
+		logoLocal.setBounds(62, 5, (int) (height*0.7), (int) (height*0.7));
 		URL localF = null;
 		try {
 			localF = EventPanel.class.getResource("/icons/laliga/"+local+".png");
 			ImageIcon icon = new ImageIcon(localF);
-			Image scaledIcon = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-			logoLocal = new JLabel(new ImageIcon(scaledIcon));
+			Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
+			logoLocal.setIcon(new ImageIcon(scaledIcon));
+			logoLocal.setSize((int) (height*0.7), (int) (height*0.7));
+			logoLocal.setBounds(new Rectangle(62, (int) (height*0.1), logoLocal.getWidth(), logoLocal.getHeight()));
 		}catch (Exception eL) {
 			System.out.println("Error loading");
 		}
 		
-		logoLocal.setBounds(62, 5, 50, 50);
 		add(logoLocal);
 		
 		logoVisitante = new JLabel("");
-		logoVisitante.setBounds(622, 5, 50, 50);
+		logoVisitante.setBounds(622, 5, (int) (height*0.7), (int) (height*0.7));
 		URL visitanteF = null;
 		try {
 			visitanteF = EventPanel.class.getResource("/icons/laliga/"+visitante+".png");
 			ImageIcon icon = new ImageIcon(visitanteF);
-			Image scaledIcon = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-			logoVisitante = new JLabel(new ImageIcon(scaledIcon));
+			Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
+			logoVisitante.setIcon(new ImageIcon(scaledIcon));
+			logoVisitante.setSize((int) (height*0.7), (int) (height*0.7));
+			logoVisitante.setBounds(new Rectangle((int) (this.getWidth()*0.85), (int) (height*0.1), logoVisitante.getWidth(), logoVisitante.getHeight()));
 		}catch (Exception eV) {
 			System.out.println(eV.getMessage());
 		}
-		logoVisitante.setBounds(675, 5, 50, 50);
 		add(logoVisitante);
 		
 		if(localF!=null && visitanteF!=null) {

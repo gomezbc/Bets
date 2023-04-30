@@ -19,8 +19,7 @@ public class MyTableCellRender extends DefaultTableCellRenderer{
 	public Component getTableCellRendererComponent (JTable jtable, Object o, boolean bln, boolean bin, int i, int i1) {
 		Component com = super.getTableCellRendererComponent (jtable, o, bln, bln, i, i);
 		if(index<ev.size()) {
-			EventPanel ep = new EventPanel(ev.get(index));
-			ep.updateBounds(jtable.getWidth(), jtable.getRowHeight());
+			EventPanel ep = new EventPanel(ev.get(index), jtable.getWidth(), jtable.getRowHeight());
 			index++;
 			return ep;
 		}
