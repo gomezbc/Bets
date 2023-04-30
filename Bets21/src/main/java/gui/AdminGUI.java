@@ -31,12 +31,12 @@ public class AdminGUI extends JFrame {
 	private static JPanel contentPane;
 	private static JButton btnLogOut;
 	private static JPanel displayFrame;
-	private JButton btnHome;
+	private JButton btnCrearEvento;
 	private static JLabel lblUser;
 	private static JMenuBar menuBar;
-	private JButton btnApuestasRealizadas;
+	private JButton btnCerrarEventos;
 	private static JLabel lblLogoUser;
-	private JButton btnAñadirSaldo;
+	private JButton btnListUser;
 	/**
 	 * Launch the application.
 	 */
@@ -114,72 +114,72 @@ public class AdminGUI extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 340, 30);
+		menuBar.setBounds(20, 42, 400, 30);
 		contentPane.add(menuBar);
 		
-		btnHome = new JButton("     Eventos    ");
-		btnHome.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnHome.addMouseListener(new MouseAdapter() {
+		btnCrearEvento = new JButton("   Crear Eventos    ");
+		btnCrearEvento.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnCrearEvento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnHome.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+				btnCrearEvento.setBorder(new LineBorder(new Color(26, 95, 180), 2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnHome.setBorder(new EmptyBorder(3,3,3,3));
+				btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		menuBar.add(btnHome);
-		btnHome.addActionListener(new ActionListener() {
+		menuBar.add(btnCrearEvento);
+		btnCrearEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
-		btnHome.setBorder(new EmptyBorder(3, 3, 3, 3));
-		btnHome.setBackground(Color.WHITE);
+		btnCrearEvento.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnCrearEvento.setBackground(Color.WHITE);
 		
-		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
-		btnApuestasRealizadas.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnApuestasRealizadas.setBorder(new EmptyBorder(3, 3, 3, 3));
-		btnApuestasRealizadas.setBackground(Color.WHITE);
-		btnHome.setBorder(new EmptyBorder(3,3,3,3));
-		btnApuestasRealizadas.addActionListener(new ActionListener() {
+		btnCerrarEventos = new JButton("   Cerrar Eventos   ");
+		btnCerrarEventos.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnCerrarEventos.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnCerrarEventos.setBackground(Color.WHITE);
+		btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
+		btnCerrarEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminGUI.updateFrame(new ListUserBetsGUI());
+				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
-		btnApuestasRealizadas.addMouseListener(new MouseAdapter() {
+		btnCerrarEventos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnApuestasRealizadas.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+				btnCerrarEventos.setBorder(new LineBorder(new Color(26, 95, 180), 2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnApuestasRealizadas.setBorder(new EmptyBorder(3,3,3,3));
+				btnCerrarEventos.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		menuBar.add(btnApuestasRealizadas);
+		menuBar.add(btnCerrarEventos);
 		
-		btnAñadirSaldo = new JButton("  Añadir Saldo  ");
-		btnAñadirSaldo.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnAñadirSaldo.addMouseListener(new MouseAdapter() {
+		btnListUser = new JButton("   Lista de Usuarios   ");
+		btnListUser.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnListUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnAñadirSaldo.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+				btnListUser.setBorder(new LineBorder(new Color(26, 95, 180), 2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnAñadirSaldo.setBorder(new EmptyBorder(3,3,3,3));
+				btnListUser.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		btnAñadirSaldo.addActionListener(new ActionListener() {
+		btnListUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminGUI.updateFrame(new AddSaldoGUI());
+				AdminGUI.updateFrame(new ListUsersGUI());
 			}
 		});
-		btnAñadirSaldo.setBorder(new EmptyBorder(3, 3, 3, 3));
-		btnAñadirSaldo.setBackground(Color.WHITE);
-		menuBar.add(btnAñadirSaldo);
+		btnListUser.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnListUser.setBackground(Color.WHITE);
+		menuBar.add(btnListUser);
 		
 		icon = new ImageIcon("icons/user.png");
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);

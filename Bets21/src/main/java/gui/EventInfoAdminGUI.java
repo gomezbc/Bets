@@ -17,20 +17,31 @@ import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
-
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Calendar;
+import java.util.Date;
 
 import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
+import exceptions.EventFinished;
+import exceptions.ForecastAlreadyExist;
+import exceptions.QuestionAlreadyExist;
 import exceptions.QuestionDoesntExist;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 
 public class EventInfoAdminGUI extends JPanel {
@@ -55,10 +66,18 @@ public class EventInfoAdminGUI extends JPanel {
 			"Pronostico#","Pronostico","Ganancia"
 	};
 	private JPanel EventInfo;
-	private JLabel lblDineroAApostar;
-	private JTextField dineroApostar;
-	private JButton btnApostar;
-	private JLabel lblError;
+	private JLabel lblPronostico;
+	private JTextField pronostico;
+	private JButton btnAñadirPronostico;
+	private JLabel lblErrorPronostico;
+	private JLabel lblPregunta;
+	private JTextField pregunta;
+	private JButton btnAñadirPregunta;
+	private JLabel lblErrorPregunta;
+	private JTextField preguntaMinimo;
+	private JTextField pronosticoMinimo;
+	private JLabel lblDescripcinMnimo;
+	private JLabel lblDescripcinMnimo_2;
 
 	public EventInfoAdminGUI(Event ev)
 	{
@@ -161,64 +180,240 @@ public class EventInfoAdminGUI extends JPanel {
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		
-		lblDineroAApostar = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.lblDineroAApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblDineroAApostar.setFont(new Font("Roboto", Font.PLAIN, 14));
-		lblDineroAApostar.setBounds(502, 396, 153, 25);
-		add(lblDineroAApostar);
+		lblPronostico = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.lblDineroAApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblPronostico.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblPronostico.setBounds(437, 385, 201, 25);
+		add(lblPronostico);
 		
-		dineroApostar = new JTextField();
-		dineroApostar.setFont(new Font("Roboto", Font.PLAIN, 14));
-		dineroApostar.setText(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.textField.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		dineroApostar.setBounds(673, 396, 114, 25);
-		add(dineroApostar);
-		dineroApostar.setColumns(10);
+		pronostico = new JTextField();
+		pronostico.setFont(new Font("Roboto", Font.PLAIN, 14));
+		pronostico.setText(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.textField.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		pronostico.setBounds(437, 428, 298, 25);
+		add(pronostico);
+		pronostico.setColumns(10);
 		
-		btnApostar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		btnApostar.addActionListener(new ActionListener() {
+		btnAñadirPronostico = new JButton(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnAñadirPronostico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblError.setVisible(false);
-				BLFacade facade = MainGUI.getBusinessLogic();
-				User u = MainGUI.getUserRegistered();
-				int i = tableQueries.getSelectedRow();
-				int qNumber = (int) tableModelQueries.getValueAt(i,0);
-				Question q;
+				lblErrorPronostico.setVisible(false);
+				lblErrorPregunta.setVisible(false);
 				try {
-					q = facade.getQuestion(qNumber);
-					float minBet = q.getBetMinimum();
-					float dineroBet = Float.parseFloat(dineroApostar.getText());
-					if(u.getSaldo() < dineroBet) {
-						lblError.setText("Saldo insuficiente");
-						lblError.setVisible(true);
-					}else if(minBet > dineroBet) {
-						lblError.setText("El dinero de la apuesta no supera el dinero mínimo");
-						lblError.setVisible(true);
-					}else {
-						i = tableForecast.getSelectedRow();
-						int fNumber = (int) tableModelForecast.getValueAt(i,0);
-						Forecast f = facade.getForecast(fNumber);
-						facade.createBet(u.getDni(), dineroBet, f);
-						facade.modifySaldo(-dineroBet, u.getDni());
-						lblError.setText("Apuesta realizada");
-						lblError.setVisible(true);
+					if(Float.parseFloat(pronosticoMinimo.getText()) <= 1.00f || Float.parseFloat(pronosticoMinimo.getText()) <= 0.00f) {
+					lblErrorPronostico.setText("La ganancia debe ser mayor a 1");
+					lblErrorPronostico.setVisible(true);
+					return;
 					}
-				}catch(BetAlreadyExist e2) {
-					lblError.setText("Ya has apostado a este pronostico");
-					lblError.setVisible(true);
-				}catch(Exception ea) {
-					ea.printStackTrace();
+					BLFacade facade = MainGUI.getBusinessLogic();
+					int i = tableQueries.getSelectedRow();
+					int qNumber = (int) tableModelQueries.getValueAt(i,0);
+					Question q;
+					q = facade.getQuestion(qNumber);
+					Forecast f = facade.createForecast(pronostico.getText().trim(), Float.parseFloat(pronosticoMinimo.getText()), q);
+					Vector<Object> row = new Vector<Object>();
+					row.add(f.getForecastNumber());
+					row.add(f.getDescription());
+					row.add(String.format("%.2f", f.getGain()));
+					tableModelForecast.addRow(row);	
+					lblErrorPronostico.setText("Pronostico añadido correctamente");
+					lblErrorPronostico.setVisible(true);
+				}catch(ForecastAlreadyExist ef) {
+					lblErrorPronostico.setText("El pronostico ya existe");
+					lblErrorPronostico.setVisible(true);
+				}catch(QuestionDoesntExist eq) {
+					eq.printStackTrace();
+				}catch(Exception e1) {
+					lblErrorPronostico.setText("Asegurate de introducir un número");
+					lblErrorPronostico.setVisible(true);
 				}
 			}
 		});
-		btnApostar.setBackground(Color.WHITE);
-		btnApostar.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnApostar.setBounds(599, 433, 103, 27);
-		add(btnApostar);
+		btnAñadirPronostico.setBackground(Color.WHITE);
+		btnAñadirPronostico.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirPronostico.setBounds(595, 463, 103, 27);
+		btnAñadirPronostico.setEnabled(false);
+		add(btnAñadirPronostico);
 		
-		lblError = new JLabel("");
-		lblError.setForeground(new Color(220, 20, 60));
-		lblError.setFont(new Font("Roboto", Font.PLAIN, 14));
-		lblError.setHorizontalAlignment(SwingConstants.CENTER);
-		lblError.setBounds(437, 465, 410, 25);
-		add(lblError);
+		lblErrorPronostico = new JLabel("");
+		lblErrorPronostico.setForeground(new Color(220, 20, 60));
+		lblErrorPronostico.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblErrorPronostico.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorPronostico.setBounds(437, 504, 410, 25);
+		add(lblErrorPronostico);
+		
+		lblPregunta = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoAdminGUI.lblAadeUnaPregunta.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblPregunta.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblPregunta.setBounds(40, 385, 191, 25);
+		add(lblPregunta);
+		
+		pregunta = new JTextField();
+		pregunta.setText(" ");
+		pregunta.setFont(new Font("Roboto", Font.PLAIN, 14));
+		pregunta.setColumns(10);
+		pregunta.setBounds(40, 428, 275, 25);
+		add(pregunta);
+		
+		btnAñadirPregunta = new JButton("AÑADIR");
+		btnAñadirPregunta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblErrorPregunta.setVisible(false);
+				lblErrorPronostico.setVisible(false);
+				try {
+					if(Float.parseFloat(preguntaMinimo.getText()) < 1.00f || Float.parseFloat(preguntaMinimo.getText()) <= 0.00f) {
+					lblErrorPregunta.setText("La apuesta minima debe ser mayor a 1");
+					lblErrorPregunta.setVisible(true);
+					return;
+					}
+					BLFacade facade = MainGUI.getBusinessLogic();
+					Question q = facade.createQuestion(ev, pregunta.getText().trim(), Float.parseFloat(preguntaMinimo.getText()));
+					Vector<Object> row = new Vector<Object>();
+					row.add(q.getQuestionNumber());
+					row.add(q.getQuestion());
+					row.add(String.format("%.2f", q.getBetMinimum()));
+					tableModelQueries.addRow(row);	
+					lblErrorPregunta.setText("Pregunta añadida correctamente");
+					lblErrorPregunta.setVisible(true);
+				}catch(QuestionAlreadyExist ef) {
+					lblErrorPregunta.setText("La pregunta ya existe");
+					lblErrorPregunta.setVisible(true);
+				}catch(EventFinished eq) {
+					lblErrorPregunta.setText("El evento ha finalizado");
+					lblErrorPregunta.setVisible(true);
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAñadirPregunta.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirPregunta.setBackground(Color.WHITE);
+		btnAñadirPregunta.setBounds(177, 463, 103, 27);
+   	 	btnAñadirPregunta.setEnabled(false);
+		add(btnAñadirPregunta);
+		
+		lblErrorPregunta = new JLabel("");
+		lblErrorPregunta.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrorPregunta.setForeground(new Color(220, 20, 60));
+		lblErrorPregunta.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblErrorPregunta.setBounds(40, 504, 385, 25);
+		add(lblErrorPregunta);
+		
+		preguntaMinimo = new JTextField();
+		preguntaMinimo.setText(" ");
+		preguntaMinimo.setFont(new Font("Roboto", Font.PLAIN, 14));
+		preguntaMinimo.setColumns(10);
+		preguntaMinimo.setBounds(323, 428, 102, 25);
+		add(preguntaMinimo);
+		
+		pronosticoMinimo = new JTextField();
+		pronosticoMinimo.setText(" ");
+		pronosticoMinimo.setFont(new Font("Roboto", Font.PLAIN, 14));
+		pronosticoMinimo.setColumns(10);
+		pronosticoMinimo.setBounds(747, 428, 100, 25);
+		add(pronosticoMinimo);
+		
+		
+		lblDescripcinMnimo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoAdminGUI.lblDescripcinMnimo.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblDescripcinMnimo.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblDescripcinMnimo.setBounds(40, 407, 385, 25);
+		add(lblDescripcinMnimo);
+		
+		lblDescripcinMnimo_2 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoAdminGUI.lblDescripcinMnimo_2.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblDescripcinMnimo_2.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblDescripcinMnimo_2.setBounds(437, 407, 385, 25);
+		add(lblDescripcinMnimo_2);
+		
+		//Si la fecha actual es posterior a la del evento, no se puede añadir preguntas y pronosticos
+		Date today = Calendar.getInstance().getTime();
+		if(today.after(ev.getEventDate())) {
+			lblPronostico.setEnabled(false);
+			pronostico.setEnabled(false);
+			btnAñadirPronostico.setEnabled(false);
+			lblErrorPronostico.setEnabled(false);
+			lblPregunta.setEnabled(false);
+			pregunta.setEnabled(false);
+			btnAñadirPregunta.setEnabled(false);
+			lblErrorPregunta.setEnabled(false);
+			preguntaMinimo.setEnabled(false);
+			pronosticoMinimo.setEnabled(false);
+			lblDescripcinMnimo.setEnabled(false);
+			lblDescripcinMnimo_2.setEnabled(false);
+		}
+		//Comprobaciones para que el boton no este activo en caso de que no se haya rellenado todos los campos
+		
+		preguntaMinimo.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void check() {
+			     if (preguntaMinimo.getText().isBlank() || pregunta.getText().isBlank()){
+			    	 btnAñadirPregunta.setEnabled(false);
+			     }else {
+			    	 btnAñadirPregunta.setEnabled(true);
+			     }
+			  }
+			});
+		
+		pregunta.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void check() {
+			     if (preguntaMinimo.getText().isBlank() || pregunta.getText().isBlank()){
+			    	 btnAñadirPregunta.setEnabled(false);
+			     }else {
+			    	 btnAñadirPregunta.setEnabled(true);
+			     }
+			  }
+			});
+		
+		pronosticoMinimo.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void check() {
+			     if (pronosticoMinimo.getText().isBlank() || pronostico.getText().isBlank()){
+			    	 btnAñadirPronostico.setEnabled(false);
+			     }else {
+			    	 btnAñadirPronostico.setEnabled(true);
+			     }
+			  }
+			});
+		
+		pronostico.getDocument().addDocumentListener(new DocumentListener() {
+			  public void changedUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void removeUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void insertUpdate(DocumentEvent e) {
+				  check();
+			  }
+			  public void check() {
+			     if (pronosticoMinimo.getText().isBlank() || pronostico.getText().isBlank()){
+			    	 btnAñadirPronostico.setEnabled(false);
+			     }else {
+			    	 btnAñadirPronostico.setEnabled(true);
+			     }
+			  }
+			});
+		
 	}
 }

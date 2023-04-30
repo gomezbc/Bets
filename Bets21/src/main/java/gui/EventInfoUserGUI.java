@@ -14,6 +14,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
@@ -161,14 +163,14 @@ public class EventInfoUserGUI extends JPanel {
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		
-		lblDineroAApostar = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.lblDineroAApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblDineroAApostar = new JLabel("DINERO A APOSTAR");
 		lblDineroAApostar.setFont(new Font("Roboto", Font.PLAIN, 14));
 		lblDineroAApostar.setBounds(502, 396, 153, 25);
 		add(lblDineroAApostar);
 		
 		dineroApostar = new JTextField();
 		dineroApostar.setFont(new Font("Roboto", Font.PLAIN, 14));
-		dineroApostar.setText(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.textField.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		dineroApostar.setText("");
 		dineroApostar.setBounds(673, 396, 114, 25);
 		add(dineroApostar);
 		dineroApostar.setColumns(10);
@@ -198,6 +200,7 @@ public class EventInfoUserGUI extends JPanel {
 						Forecast f = facade.getForecast(fNumber);
 						facade.createBet(u.getDni(), dineroBet, f);
 						facade.modifySaldo(-dineroBet, u.getDni());
+						MainGUI.setUserRegistered(facade.getUser(u.getDni()));//Actualizamos los datos del usuario
 						lblError.setText("Apuesta realizada");
 						lblError.setVisible(true);
 					}
@@ -205,7 +208,8 @@ public class EventInfoUserGUI extends JPanel {
 					lblError.setText("Ya has apostado a este pronostico");
 					lblError.setVisible(true);
 				}catch(Exception ea) {
-					ea.printStackTrace();
+					lblError.setText("Asegurate que estes introduciendo un número");
+					lblError.setVisible(true);
 				}
 			}
 		});
@@ -220,5 +224,14 @@ public class EventInfoUserGUI extends JPanel {
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setBounds(437, 465, 410, 25);
 		add(lblError);
+		
+		//Si la fecha actual es posterior a la del evento, no se puede añadir preguntas y pronosticos
+		Date today = Calendar.getInstance().getTime();
+		if(today.after(ev.getEventDate())) {
+			lblDineroAApostar.setEnabled(false);
+			dineroApostar.setEnabled(false);
+			btnApostar.setEnabled(false);
+			lblError.setEnabled(false);
+		}
 	}
 }
