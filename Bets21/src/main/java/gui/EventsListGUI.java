@@ -235,12 +235,11 @@ public class EventsListGUI extends JPanel {
 		};
 		this.addComponentListener(componentListener);*/
 		
-		ImageIcon icon = new ImageIcon("icons/right.png");
+		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/right.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		next = new JButton(new ImageIcon(scaledIcon));
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("next");
 				if(todayEvents.size()-(currentIndex+4)>=4) currentMax += 4;
 				else currentMax += todayEvents.size()-(currentIndex+4);
 				currentIndex += 4;
@@ -268,12 +267,11 @@ public class EventsListGUI extends JPanel {
 		next.setVisible(false);
 		add(next);
 		
-		icon = new ImageIcon("icons/left.png");
+		icon = new ImageIcon(EventPanel.class.getResource("/icons/left.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		previous = new JButton(new ImageIcon(scaledIcon));
 		previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("previous");
 				currentIndex -= 4;
 				currentMax -= 4-(currentMax%4);
 				currentEvents.removeAllElements();

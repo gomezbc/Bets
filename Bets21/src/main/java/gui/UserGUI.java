@@ -73,7 +73,7 @@ public class UserGUI extends JFrame {
 		btnLogOut.setBorder(null);
 		btnLogOut.setBackground(new Color(17, 110, 80));
 		btnLogOut.setToolTipText("Log Out");
-		ImageIcon icon = new ImageIcon("icons/exit.png");
+		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/exit.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
@@ -181,7 +181,7 @@ public class UserGUI extends JFrame {
 		btnAñadirSaldo.setBackground(Color.WHITE);
 		menuBar.add(btnAñadirSaldo);
 		
-		icon = new ImageIcon("icons/user.png");
+		icon = new ImageIcon(EventPanel.class.getResource("/icons/user.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
 		lblLogoUser.setBounds(20, 8, 30, 25);

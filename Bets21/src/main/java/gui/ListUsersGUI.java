@@ -114,7 +114,7 @@ public class ListUsersGUI extends JPanel {
 				updateTable();
 			}
 		});
-		ImageIcon icon = new ImageIcon("icons/users-remove.png");
+		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/users-remove.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnEliminarUsuario.setIcon(new ImageIcon(scaledIcon));
 		btnEliminarUsuario.setBounds(333, 487, 180, 30);

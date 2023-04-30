@@ -259,7 +259,7 @@ public class MainGUI extends JFrame {
 			jButtonCreateUser.setForeground(Color.DARK_GRAY);
 			jButtonCreateUser.setBackground(Color.WHITE);
 			jButtonCreateUser.setBounds(170, 170, 140, 32);
-			ImageIcon icon = new ImageIcon("icons/user-create.png");
+			ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/user-create.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 			jButtonCreateUser.setIcon(new ImageIcon(scaledIcon));
 			jButtonCreateUser.addActionListener(new ActionListener() {
@@ -281,7 +281,7 @@ public class MainGUI extends JFrame {
 			jButtonLogin.setFont(new Font("Roboto", Font.BOLD, 14));
 			jButtonLogin.setBounds(20, 170, 140, 32);
 			jButtonLogin.setBackground(new Color(255, 255, 255));
-			ImageIcon icon = new ImageIcon("icons/user-login.png");
+			ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/user-login.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 			jButtonLogin.setIcon(new ImageIcon(scaledIcon));
 			jButtonLogin.addActionListener(new ActionListener() {
@@ -323,7 +323,7 @@ public class MainGUI extends JFrame {
 			jButtonEvents = new JButton("Consultar Eventos");
 			jButtonEvents.setBackground(new Color(238, 238, 238));
 			jButtonEvents.setBounds(34, 258, 200, 35);
-			ImageIcon icon = new ImageIcon("icons/event-list-black.png");
+			ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/event-list-black.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 			jButtonEvents.setIcon(new ImageIcon(scaledIcon));
 			jButtonEvents.addActionListener(new ActionListener() {
