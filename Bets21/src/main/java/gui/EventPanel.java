@@ -72,7 +72,7 @@ public class EventPanel extends JPanel {
 			logoLocal.setSize((int) (height*0.7), (int) (height*0.7));
 			logoLocal.setBounds(new Rectangle(62, (int) (height*0.1), logoLocal.getWidth(), logoLocal.getHeight()));
 		}catch (Exception eL) {
-			System.out.println("Error loading");
+
 		}
 		
 		add(logoLocal);
@@ -88,7 +88,7 @@ public class EventPanel extends JPanel {
 			logoVisitante.setSize((int) (height*0.7), (int) (height*0.7));
 			logoVisitante.setBounds(new Rectangle((int) (this.getWidth()*0.85), (int) (height*0.1), logoVisitante.getWidth(), logoVisitante.getHeight()));
 		}catch (Exception eV) {
-			System.out.println(eV.getMessage());
+
 		}
 		add(logoVisitante);
 		

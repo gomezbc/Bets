@@ -175,7 +175,7 @@ public class CreateEventGUI extends JPanel {
 							java.util.Date fechaConHoraCero = calendario.getTime();
 							
 							Event ev = new Event(textField.getText(), fechaConHoraCero);
-							preview = new EventPanel(ev);
+							preview = new EventPanel(ev, preview.getWidth(), preview.getHeight()-30);
 							preview.setBounds(40, 379, 804, 150);
 							add(preview);
 							preview.repaint();
