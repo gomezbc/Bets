@@ -20,7 +20,7 @@ public class NoUserGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnLogOut;
-	private JPanel findQuestion = new FindQuestionsGUI();
+	private JPanel findQuestion = new EventInfoUserGUI();
 	/**
 	 * Launch the application.
 	 */

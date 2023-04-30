@@ -305,7 +305,7 @@ public class MainGUI extends JFrame {
 									JFrame a = new AdminGUI();
 									a.setVisible(true);
 								}else {
-									JFrame a = new UserGUI3();
+									JFrame a = new UserGUI();
 									a.setVisible(true);
 								}
 							}

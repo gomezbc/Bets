@@ -1,17 +1,15 @@
 package gui;
 
-import java.awt.Color;
 import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import domain.*;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class ListUserBetsGUI extends JPanel {
 
@@ -21,7 +19,7 @@ public class ListUserBetsGUI extends JPanel {
 	private DefaultTableModel tableModelBets;
 	
 	private String[] columnNames = new String[] {
-			"#Apuesta","Evento","Pregunta","Pronostico","Ganancia","Dinero Apostado","Balance"
+			"#Apuesta","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"
 	};
 
 	/**
@@ -40,14 +38,17 @@ public class ListUserBetsGUI extends JPanel {
 
 	public void jbInit() {
 		setSize(new Dimension(886, 541));
-		setBounds(100, 100, 863, 629);
 		setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 12, 839, 455);
+		scrollPane.setFont(new Font("Roboto", Font.PLAIN, 14));
+		scrollPane.setBorder(null);
+		scrollPane.setBounds(12, 12, 862, 481);
 		add(scrollPane);
 		
 		tableBets = new JTable();
+		tableBets.setFont(new Font("Roboto", Font.PLAIN, 14));
+		tableBets.setBorder(null);
 		tableBets.setBounds(0, 0, 1, 1);
 		
 		scrollPane.setViewportView(tableBets);
@@ -60,7 +61,11 @@ public class ListUserBetsGUI extends JPanel {
 	}
 	
 	public void updateTable() {
-		tableModelBets.setRowCount(0);
+		tableModelBets.setDataVector(null, columnNames);
+		tableBets.getColumnModel().getColumn(0).setPreferredWidth(20);
+		tableBets.getColumnModel().getColumn(4).setPreferredWidth(20);
+		tableBets.getColumnModel().getColumn(5).setPreferredWidth(20);
+		tableBets.getColumnModel().getColumn(6).setPreferredWidth(20);
 		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = new Vector<Bet>();
 		bets = u.getBets();
@@ -70,14 +75,14 @@ public class ListUserBetsGUI extends JPanel {
 			row.add(b.getForecast().getQuestion().getEvent().getDescription());
 			row.add(b.getForecast().getQuestion().getQuestion());
 			row.add(b.getForecast().getDescription());
-			row.add(b.getForecast().getGain());
+			row.add(String.format("%.2f", b.getForecast().getGain()));
 			row.add(b.getBetMoney());
-			if(b.getForecast().getQuestion().getResult()==null) row.add(b.getBetMoney());
+			if(b.getForecast().getQuestion().getResult()==null) row.add(String.format("%.2f", b.getBetMoney()));
 			else {
 				if(b.getForecast().getQuestion().getResult() == b.getForecast()) {
-					row.add("+ "+b.getBetMoney() * b.getForecast().getGain());
+					row.add("+ "+String.format("%.2f", b.getBetMoney() * b.getForecast().getGain()));
 				}else {
-					row.add("- "+b.getBetMoney());
+					row.add("- "+String.format("%.2f", b.getBetMoney()));
 				}
 			}
 			tableModelBets.addRow(row);

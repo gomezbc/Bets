@@ -3,38 +3,40 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ResourceBundle;
+import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
+import javax.swing.border.LineBorder;
+
+import domain.User;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JMenuBar;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class UserGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JButton btnLogOut;
-	private JPanel findQuestion = new EventsListGUI();
-	private JPanel createBet = new CreateBetGUI();
-	private JPanel AddSaldoGUI = new AddSaldoGUI();
-	private JPanel listUserBets = new ListUserBetsGUI();
-	private static JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-
+	private static JPanel contentPane;
+	private static JButton btnLogOut;
+	private static JPanel displayFrame;
+	private JButton btnHome;
+	private static JLabel lblUser;
+	private static JMenuBar menuBar;
+	private JButton btnApuestasRealizadas;
+	private static JLabel lblLogoUser;
+	private JButton btnAñadirSaldo;
 	/**
 	 * Launch the application.
 	 */
@@ -52,69 +54,18 @@ public class UserGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public void jbInit() throws Exception {
+	public void jbInit() {
 		setTitle("User");
-		contentPane = new JPanel();
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setResizable(true);
-		setMinimumSize(new Dimension(886, 632));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		setResizable(false);
+		setMinimumSize(new Dimension(886, 652));
 		setBounds(100, 100, 886, 632);
 		contentPane = new JPanel();
+		contentPane.setLayout(null);
 		contentPane.setBackground(new Color(0, 146, 202));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-		contentPane.setLayout(null);
-
-		
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setForeground(new Color(222, 221, 218));
-		tabbedPane.setBackground(new Color(56, 56, 56));
-		tabbedPane.setBorder(null);
-		tabbedPane.setBounds(15, 35, this.getWidth()-40, this.getHeight()-60); 
-	    tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
-		tabbedPane.setUI(new CustomTabbedPaneUI());
-		UIManager.put("TabbedPane.selected", new Color(146, 154, 171));	
-		UIManager.put("TabbedPane.borderHightlightColor", Color.TRANSLUCENT);
-//		UIManager.put("TabbedPane.highlight", Color.RED);//Se actualiza cunado hago log out y log in
-		UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
-		SwingUtilities.updateComponentTreeUI(tabbedPane);
-		
-		contentPane.add(tabbedPane);
-		
-		ImageIcon icon = new ImageIcon("icons/event-list.png");
-		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"), new ImageIcon(scaledIcon), findQuestion, null);
-		
-		icon = new ImageIcon("icons/chips-bet.png");
-		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab("Apostar", new ImageIcon(scaledIcon), createBet);
-		
-		icon = new ImageIcon("icons/chip-exchange.png");
-		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab("Añadir Saldo", new ImageIcon(scaledIcon), AddSaldoGUI);
-		
-		icon = new ImageIcon("icons/bets-saldo.png");
-		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		tabbedPane.addTab("Apuestas", new ImageIcon(scaledIcon), listUserBets);
-		
-		tabbedPane.addChangeListener(new ChangeListener() {
-		    public void stateChanged(ChangeEvent e) {
-		    	Integer i = tabbedPane.getSelectedIndex();
-		    	switch(i) {
-		    	case 2:
-		    		((AddSaldoGUI) tabbedPane.getSelectedComponent()).updateFrame();;
-		    		break;
-		    	case 3:
-		    		((ListUserBetsGUI) tabbedPane.getSelectedComponent()).updateTable();
-		    		System.out.print("upadte");
-		    		break;
-		    	}
-		    }
-		});
 		
 		btnLogOut = new JButton();
 		btnLogOut.setBorderPainted(false);
@@ -122,8 +73,8 @@ public class UserGUI extends JFrame {
 		btnLogOut.setBorder(null);
 		btnLogOut.setBackground(new Color(17, 110, 80));
 		btnLogOut.setToolTipText("Log Out");
-		icon = new ImageIcon("icons/exit.png");
-		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+		ImageIcon icon = new ImageIcon("icons/exit.png");
+		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
 		btnLogOut.addActionListener(new ActionListener() {
@@ -141,33 +92,119 @@ public class UserGUI extends JFrame {
 		        // Actualizar el tamaño del JTabbedPane
 		        int nuevoAncho = e.getComponent().getWidth();
 		        int nuevoAlto = e.getComponent().getHeight();
-		        tabbedPane.setSize(nuevoAncho-40, nuevoAlto-75);
 		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
 		        btnLogOut.setAlignmentY(nuevoAncho-40);
+		        displayFrame.setBounds(new Rectangle(0, 70, nuevoAncho, contentPane.getHeight()-70));
+		        if(displayFrame instanceof EventsListGUI) ((EventsListGUI) displayFrame).renderEventsTable();
 		    }
 		};
 		this.addComponentListener(componentListener);
-	}
-	
-	public static void updateTab(int index, String title, ImageIcon icon, JPanel panel) {
-		tabbedPane.removeTabAt(tabbedPane.getSelectedIndex());
-		tabbedPane.addTab(title, icon, panel);
+		
+		displayFrame = new EventsListGUI();
+		displayFrame.setBounds(0, 70, 886, 541);
+		contentPane.add(displayFrame);
+		
+		lblUser = new JLabel("");
+		lblUser.setForeground(Color.WHITE);
+		lblUser.setFont(new Font("Dialog", Font.BOLD, 15));
+		lblUser.setBounds(60, 10, 485, 25);
+		User u = MainGUI.getUserRegistered();
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		contentPane.add(lblUser);
+		
+		menuBar = new JMenuBar();
+		menuBar.setBackground(new Color(0, 145, 202));
+		menuBar.setBounds(20, 42, 340, 30);
+		contentPane.add(menuBar);
+		
+		btnHome = new JButton("     Eventos    ");
+		btnHome.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnHome.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnHome.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		menuBar.add(btnHome);
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI.updateFrame(new EventsListGUI());
+			}
+		});
+		btnHome.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnHome.setBackground(Color.WHITE);
+		
+		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
+		btnApuestasRealizadas.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnApuestasRealizadas.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnApuestasRealizadas.setBackground(Color.WHITE);
+		btnHome.setBorder(new EmptyBorder(3,3,3,3));
+		btnApuestasRealizadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI.updateFrame(new ListUserBetsGUI());
+			}
+		});
+		btnApuestasRealizadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnApuestasRealizadas.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnApuestasRealizadas.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		menuBar.add(btnApuestasRealizadas);
+		
+		btnAñadirSaldo = new JButton("  Añadir Saldo  ");
+		btnAñadirSaldo.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirSaldo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAñadirSaldo.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAñadirSaldo.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		btnAñadirSaldo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI.updateFrame(new AddSaldoGUI());
+			}
+		});
+		btnAñadirSaldo.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnAñadirSaldo.setBackground(Color.WHITE);
+		menuBar.add(btnAñadirSaldo);
+		
+		icon = new ImageIcon("icons/user.png");
+		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
+		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
+		lblLogoUser.setBounds(20, 8, 30, 25);
+		contentPane.add(lblLogoUser);
 	}
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
+			this.setVisible(false);
+			MainGUI.setUserRegistered(null);
 	}
 	
-	protected class CustomTabbedPaneUI extends BasicTabbedPaneUI {
-	    
-	    @Override
-	    protected void installDefaults() {
-	        super.installDefaults();
-	        tabPane.setBackground(new Color(57, 62, 70));; // establecer el color de fondo de la pestaña
-	        tabPane.setFocusable(true);
-	        tabPane.setForeground(new Color(238, 238, 238));
-	        tabPane.setOpaque(false); // establecer la opacidad de la pestaña a verdadero
-	        UIManager.put("TabbedPane.selected", Color.red);
-	    }
+	public static void updateFrame(JPanel panel) {
+		contentPane.removeAll();
+		contentPane.add(btnLogOut);
+		contentPane.add(menuBar);
+		displayFrame = panel;
+        displayFrame.setBounds(new Rectangle(0, 70, contentPane.getWidth(), contentPane.getHeight()-70));
+		contentPane.add(displayFrame);
+		contentPane.add(lblLogoUser);
+		contentPane.revalidate();
+		contentPane.repaint();
+		User u = MainGUI.getUserRegistered();
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		contentPane.add(lblUser);
 	}
 }

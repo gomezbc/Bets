@@ -100,7 +100,7 @@ public class AddSaldoGUI extends JPanel {
 					lblError.setVisible(true);
 					
 				}
-				UserGUI3.updateFrame(new AddSaldoGUI());
+				UserGUI.updateFrame(new AddSaldoGUI());
 			} });
 		
 		add(btnNewButton);

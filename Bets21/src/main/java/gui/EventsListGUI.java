@@ -3,9 +3,7 @@ package gui;
 import java.util.Vector;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,9 +12,7 @@ import businessLogic.BLFacade;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -33,12 +29,11 @@ import com.toedter.calendar.JCalendar;
 
 import configuration.UtilDate;
 import domain.Event;
+import domain.User;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseMotionAdapter;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -205,6 +200,7 @@ public class EventsListGUI extends JPanel {
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 		
 		tableEvents = new JTable(tableModelEvents);
+		tableEvents.setBackground(new Color(238, 238, 238));
 		tableEvents.setBounds(40, 233, 803, 280);
 		add(tableEvents);
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
@@ -214,7 +210,11 @@ public class EventsListGUI extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int i=tableEvents.getSelectedRow();
 				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,1); // obtain ev object
-				if(ev!=null) UserGUI3.updateFrame(new FindQuestionsGUI(ev));
+				if(ev!=null) {
+					User u = MainGUI.getUserRegistered();
+					if(!u.isAdmin()) UserGUI.updateFrame(new EventInfoUserGUI(ev));
+					else AdminGUI.updateFrame(new EventInfoAdminGUI(ev));
+				}
 			}
 		});
 		
