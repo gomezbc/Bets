@@ -285,6 +285,8 @@ public class DataAccess  {
 		db.getTransaction().commit();
 	}
 	
+	
+	
 	public boolean removeUser(String dni) {
 		System.out.println(">> DataAccess: removeUser => " + dni);
 		User u = db.find(User.class, dni);

@@ -79,7 +79,7 @@ public class CreateBetGUI extends JPanel {
 
 	};
 	private final JLabel lblPronostico = new JLabel("PRONOSTICO: ");
-	private final JLabel lblNewLabel_1 = new JLabel("Dinero Apuesta : ");
+	private final JLabel lblNewLabel_Finalizada = new JLabel("Dinero Apuesta : ");
 	private final JTextField textFieldDinero = new JTextField();
 	
 	private JLabel lblErrorDinero = new JLabel("El dinero de la apuesta no supera el dinero mínimo ");
@@ -87,6 +87,9 @@ public class CreateBetGUI extends JPanel {
 	private JLabel lblErrorApuesta = new JLabel("Apuesta creada");
 	private JLabel lblErrorExiste = new JLabel("Ya has apostado a este pronóstico");
 	private final JLabel lblNewLabel = new JLabel("No tienes suficiente saldo.");
+	private JLabel lblNewLabel_2 = new JLabel("Este evento ya ha sucedido");
+	private JLabel lblNewLabel_1 = new JLabel("Introduce un número positivo.");
+	
 	private User userRegistered = LoginUserGUI.getUserRegistered();
 
 
@@ -247,18 +250,44 @@ public class CreateBetGUI extends JPanel {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				userRegistered = LoginUserGUI.getUserRegistered();
 				try {
+					JCalendar jCalendar = new JCalendar();
+					java.util.Date fechaSeleccionada = jCalendar.getDate();
+					Calendar calendario = Calendar.getInstance();
+					calendario.setTime(fechaSeleccionada);
+					calendario.set(Calendar.HOUR_OF_DAY, 0);
+					calendario.set(Calendar.MINUTE, 0);
+					calendario.set(Calendar.SECOND, 0);
+					calendario.set(Calendar.MILLISECOND, 0);
+					
+					
 					Question q1 = (Question) jComboBoxQuestions.getSelectedItem();
 					float a = q1.getBetMinimum();
-					if( userRegistered.getSaldo() < Float.parseFloat(textFieldDinero.getText())){
+					if ( fechaSeleccionada.after(q1.getEvent().getEventDate())) {
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(false);
 						lblErrorExiste.setVisible(false);
-						lblNewLabel.setVisible(true);
+						lblNewLabel.setVisible(false);
+						lblNewLabel_Finalizada.setVisible(true);
+						lblNewLabel_2.setVisible(true);
+						lblNewLabel_1.setVisible(false);
+						
 					} else if( Float.parseFloat(textFieldDinero.getText()) < a){
 							lblErrorDinero.setVisible(true);
 							lblErrorApuesta.setVisible(false);
 							lblErrorExiste.setVisible(false);
+							lblNewLabel_Finalizada.setVisible(false);
 							lblNewLabel.setVisible(false);
+							lblNewLabel_2.setVisible(false);
+							lblNewLabel_1.setVisible(false);
+							
+					}else if( userRegistered.getSaldo() < Float.parseFloat(textFieldDinero.getText())){
+						lblErrorDinero.setVisible(false);
+						lblErrorApuesta.setVisible(false);
+						lblErrorExiste.setVisible(false);
+						lblNewLabel_Finalizada.setVisible(false);
+						lblNewLabel.setVisible(true);
+						lblNewLabel_2.setVisible(false);
+						lblNewLabel_1.setVisible(false);
 						
 					} else {
 						facade.createBet(userRegistered.getDni(), Float.parseFloat(textFieldDinero.getText()), (Forecast) JComboBoxForecast.getSelectedItem());
@@ -266,18 +295,33 @@ public class CreateBetGUI extends JPanel {
 						lblErrorDinero.setVisible(false);
 						lblErrorApuesta.setVisible(true);
 						lblErrorExiste.setVisible(false);
+						lblNewLabel_Finalizada.setVisible(false);
 						lblNewLabel.setVisible(false);
+						lblNewLabel_2.setVisible(false);
+						lblNewLabel_1.setVisible(false);
 					}
 				} catch (BetAlreadyExist ea){
 					lblErrorDinero.setVisible(false);
 					lblErrorApuesta.setVisible(false);
 					lblErrorExiste.setVisible(true);
+					lblNewLabel_Finalizada.setVisible(false);
 					lblNewLabel.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+					lblNewLabel_1.setVisible(false);
 					
 				} catch (NumberFormatException e1) {
-					e1.printStackTrace();
+					lblNewLabel_1.setVisible(true);
+					lblErrorDinero.setVisible(false);
+					lblErrorApuesta.setVisible(false);
+					lblErrorExiste.setVisible(false);
+					lblNewLabel_Finalizada.setVisible(false);
+					lblNewLabel.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+					
+					
 				} catch (UserDoesntExist e1) {
 					e1.printStackTrace();
+					
 				}
 				userRegistered = LoginUserGUI.getUserRegistered();
 		   }
@@ -320,10 +364,11 @@ public class CreateBetGUI extends JPanel {
 		lblPronostico.setBounds(399, 282, 105, 20);
 		
 		this.add(lblPronostico);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(174, 358, 119, 20);
+		lblNewLabel_Finalizada.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblNewLabel_Finalizada.setVisible(false);
+		lblNewLabel_Finalizada.setBounds(174, 358, 119, 20);
 		
-		this.add(lblNewLabel_1);
+		this.add(lblNewLabel_Finalizada);
 		
 		this.add(textFieldDinero);
 		
@@ -352,6 +397,18 @@ public class CreateBetGUI extends JPanel {
 		lblNewLabel.setBounds(199, 446, 193, 20);
 		
 		add(lblNewLabel);
+		
+
+		lblNewLabel_2.setVisible(false);
+		lblNewLabel_2.setForeground(new Color(0, 0, 205));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_2.setBounds(398, 225, 185, 32);
+		add(lblNewLabel_2);
+		
+	
+		lblNewLabel_1.setVisible(false);
+		lblNewLabel_1.setBounds(455, 449, 193, 17);
+		add(lblNewLabel_1);
 		
 
 
