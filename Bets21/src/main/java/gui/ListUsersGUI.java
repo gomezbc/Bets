@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import businessLogic.BLFacade;
@@ -19,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 public class ListUsersGUI extends JPanel {
 
@@ -57,16 +57,17 @@ public class ListUsersGUI extends JPanel {
 	 */
 	public void jbInit() {
 		lblResBtn.setVisible(false);
-		setBounds(100, 100, 863, 609);
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		this.setLayout(null);
+		this.setSize(new Dimension(886, 541));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 0, 826, 480);
+		tabbedPane.setFont(new Font("Roboto", Font.PLAIN, 14));
+		tabbedPane.setBounds(11, 0, 860, 480);
 		this.add(tabbedPane);
+		scrollPaneUser.setFont(new Font("Roboto", Font.PLAIN, 14));
 		
 		scrollPaneUser.setViewportView(tableUsers);
+		scrollPaneAdmin.setFont(new Font("Roboto", Font.PLAIN, 14));
 		scrollPaneAdmin.setViewportView(tableAdmins);
 		tabbedPane.addTab("Users", null, scrollPaneUser, null);
 		tabbedPane.addTab("Admins", null, scrollPaneAdmin, null);
@@ -80,6 +81,8 @@ public class ListUsersGUI extends JPanel {
 		updateTable();
 		
 		btnEliminarUsuario = new JButton("Eliminar Usuario");
+		btnEliminarUsuario.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnEliminarUsuario.setBackground(Color.WHITE);
 		btnEliminarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblResBtn.setText("");
@@ -111,10 +114,10 @@ public class ListUsersGUI extends JPanel {
 				updateTable();
 			}
 		});
-		ImageIcon icon = new ImageIcon(AdminGUI.class.getResource("/users-remove.png"));
+		ImageIcon icon = new ImageIcon("icons/users-remove.png");
 		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnEliminarUsuario.setIcon(new ImageIcon(scaledIcon));
-		btnEliminarUsuario.setBounds(333, 487, 180, 27);
+		btnEliminarUsuario.setBounds(333, 487, 180, 30);
 		add(btnEliminarUsuario);
 		
 		lblResBtn.setForeground(new Color(246, 97, 81));
@@ -123,9 +126,8 @@ public class ListUsersGUI extends JPanel {
 	}
 	
 	public void updateTable() {
-		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
-		tableModelUser.setRowCount(0);
-		tableModelAdmin.setRowCount(0);
+		tableModelUser.setDataVector(null, columnNames);
+		tableModelAdmin.setDataVector(null, columnNames);
 		BLFacade facade=MainGUI.getBusinessLogic();
 		Vector<User> users = new Vector<User>();
 		users = facade.getAllUsers();

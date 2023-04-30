@@ -209,7 +209,8 @@ public class EventsListGUI extends JPanel {
 				if(ev!=null) {
 					User u = MainGUI.getUserRegistered();
 					if(!u.isAdmin()) UserGUI.updateFrame(new EventInfoUserGUI(ev));
-					else AdminGUI.updateFrame(new EventInfoAdminGUI(ev));
+					else if(u.isAdmin()) AdminGUI.updateFrame(new EventInfoAdminGUI(ev));
+//					else NoUserGUI.updateFrame(new EventInfoNoUserGUI(ev));
 				}
 			}
 		});
