@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import businessLogic.BLFacade;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
@@ -104,7 +105,7 @@ public class EventsListGUI extends JPanel {
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-		CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+		paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener()
@@ -124,9 +125,6 @@ public class EventsListGUI extends JPanel {
      				jCalendar1.setCalendar(calendarAct);
 					Date firstDay = UtilDate.trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
 					
-
-					 
-					
 					int monthAnt = calendarAnt.get(Calendar.MONTH);
 					int monthAct = calendarAct.get(Calendar.MONTH);
 					
@@ -141,9 +139,7 @@ public class EventsListGUI extends JPanel {
 						datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
 					}
 
-
-
-					CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+					paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 													
 					
 
@@ -331,5 +327,45 @@ public class EventsListGUI extends JPanel {
 		else next.setVisible(false);
 		if(currentIndex>0) previous.setVisible(true);
 		else previous.setVisible(false);
+	}
+	
+	public static void paintDaysWithEvents(JCalendar jCalendar,Vector<Date> datesWithEventsCurrentMonth) {
+		// For each day with events in current month, the background color for that day is changed to cyan.
+
+		Calendar calendar = jCalendar.getCalendar();
+		
+		int month = calendar.get(Calendar.MONTH);
+		int today=calendar.get(Calendar.DAY_OF_MONTH);
+		int year=calendar.get(Calendar.YEAR);
+		
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		int offset = calendar.get(Calendar.DAY_OF_WEEK);
+
+		if (Locale.getDefault().equals(new Locale("es")))
+			offset += 4;
+		else
+			offset += 5;
+
+	 	for (Date d:datesWithEventsCurrentMonth){
+
+	 		calendar.setTime(d);
+	 		System.out.println(d);
+			// Obtain the component of the day in the panel of the DayChooser of the
+			// JCalendar.
+			// The component is located after the decorator buttons of "Sun", "Mon",... or
+			// "Lun", "Mar"...,
+			// the empty days before day 1 of month, and all the days previous to each day.
+			// That number of components is calculated with "offset" and is different in
+			// English and Spanish
+//			    		  Component o=(Component) jCalendar.getDayChooser().getDayPanel().getComponent(i+offset);; 
+			Component o = (Component) jCalendar.getDayChooser().getDayPanel()
+					.getComponent(calendar.get(Calendar.DAY_OF_MONTH) + offset);
+			o.setBackground(Color.CYAN);
+	 	}
+ 			calendar.set(Calendar.DAY_OF_MONTH, today);
+	 		calendar.set(Calendar.MONTH, month);
+	 		calendar.set(Calendar.YEAR, year);
+
+	 	
 	}
 }

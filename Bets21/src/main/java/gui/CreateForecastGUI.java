@@ -91,7 +91,7 @@ public class CreateForecastGUI extends JPanel {
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-		CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+		EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 		jCalendar1.setBounds(30, 10, 213, 164);
 
 		// Code for JCalendar
@@ -134,7 +134,7 @@ public class CreateForecastGUI extends JPanel {
 
 
 
-					CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+					EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 													
 					
 

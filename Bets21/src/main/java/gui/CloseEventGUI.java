@@ -115,7 +115,7 @@ public class CloseEventGUI extends JPanel {
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-		CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+		EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener()
@@ -156,7 +156,7 @@ public class CloseEventGUI extends JPanel {
 
 
 
-					CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+					EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 													
 					
 

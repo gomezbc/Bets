@@ -31,12 +31,13 @@ public class AdminGUI extends JFrame {
 	private static JPanel contentPane;
 	private static JButton btnLogOut;
 	private static JPanel displayFrame;
-	private JButton btnCrearEvento;
+	private JButton btnAñadirPreguntasPronosticos;
 	private static JLabel lblUser;
 	private static JMenuBar menuBar;
 	private JButton btnCerrarEventos;
 	private static JLabel lblLogoUser;
 	private JButton btnListUser;
+	private JButton btnCrearEvento;
 	/**
 	 * Launch the application.
 	 */
@@ -100,7 +101,7 @@ public class AdminGUI extends JFrame {
 		};
 		this.addComponentListener(componentListener);
 		
-		displayFrame = new EventsListGUI();
+		displayFrame = new CreateEventGUI();
 		displayFrame.setBounds(0, 70, 886, 541);
 		contentPane.add(displayFrame);
 		
@@ -114,35 +115,46 @@ public class AdminGUI extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 400, 30);
+		menuBar.setBounds(20, 42, 600, 30);
 		contentPane.add(menuBar);
 		
-		btnCrearEvento = new JButton("   Crear Eventos    ");
-		btnCrearEvento.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnCrearEvento.addMouseListener(new MouseAdapter() {
+		btnAñadirPreguntasPronosticos = new JButton("Añadir Preguntas y Pronosticos");
+		btnAñadirPreguntasPronosticos.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirPreguntasPronosticos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnCrearEvento.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+				btnAñadirPreguntasPronosticos.setBorder(new LineBorder(new Color(26, 95, 180), 2));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
+				btnAñadirPreguntasPronosticos.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		menuBar.add(btnCrearEvento);
+		
+		btnCrearEvento = new JButton("   Crear Eventos    ");
 		btnCrearEvento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdminGUI.updateFrame(new CreateEventGUI());
+			}
+		});
+		btnCrearEvento.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnCrearEvento.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnCrearEvento.setBackground(Color.WHITE);
+		menuBar.add(btnCrearEvento);
+		menuBar.add(btnAñadirPreguntasPronosticos);
+		btnAñadirPreguntasPronosticos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
-		btnCrearEvento.setBorder(new EmptyBorder(3, 3, 3, 3));
-		btnCrearEvento.setBackground(Color.WHITE);
+		btnAñadirPreguntasPronosticos.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnAñadirPreguntasPronosticos.setBackground(Color.WHITE);
 		
 		btnCerrarEventos = new JButton("   Cerrar Eventos   ");
 		btnCerrarEventos.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnCerrarEventos.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnCerrarEventos.setBackground(Color.WHITE);
-		btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
+		btnAñadirPreguntasPronosticos.setBorder(new EmptyBorder(3,3,3,3));
 		btnCerrarEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminGUI.updateFrame(new EventsListGUI());

@@ -122,7 +122,7 @@ public class CreateBetGUI extends JPanel {
 
 		BLFacade facade = MainGUI.getBusinessLogic();
 		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-		CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+		EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
 		// Code for JCalendar
@@ -163,12 +163,8 @@ public class CreateBetGUI extends JPanel {
 						datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
 					}
 
-
-
-					CreateQuestionGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+					EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 													
-					
-
 					try {
 						modelQuestions.removeAllElements();
 						modelForecast.removeAllElements();
