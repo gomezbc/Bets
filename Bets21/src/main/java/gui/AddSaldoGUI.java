@@ -14,6 +14,7 @@ import domain.User;
 
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class AddSaldoGUI extends JPanel {
 
@@ -48,30 +49,36 @@ public class AddSaldoGUI extends JPanel {
 	
 	
 	public void jbInit() {
+		setSize(new Dimension(886, 541));
 		
 		User userRegistered = MainGUI.getUserRegistered();
-		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
+		lblSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
 		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 		
 		setLayout(null);
 
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(70, 134, 154, 69);
+		lblNewLabel.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblNewLabel.setBounds(62, 94, 154, 51);
 		add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(229, 152, 96, 37);
+		textField.setBorder(null);
+		textField.setFont(new Font("Roboto Black", Font.PLAIN, 16));
+		textField.setBounds(203, 102, 72, 30);
 		add(textField);
 		textField.setColumns(10);
 		
 
-		lblInfoSaldo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblInfoSaldo.setBounds(70, 94, 139, 37);
+		lblInfoSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblInfoSaldo.setBounds(64, 46, 139, 37);
 		add(lblInfoSaldo);
 		
 		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
+		btnNewButton.setFont(new Font("Roboto", Font.BOLD, 16));
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		btnNewButton.setBounds(150, 252, 112, 37);
+		btnNewButton.setBounds(127, 158, 112, 37);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User userRegistered = MainGUI.getUserRegistered();
@@ -80,8 +87,7 @@ public class AddSaldoGUI extends JPanel {
 					lblError.setVisible(false);
 					try {
 						facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-						userRegistered = MainGUI.getUserRegistered();//Actualizamos los datos del usuario
-						lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
+						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));//Actualizamos los datos del usuario
 						lblDineroAñadido.setVisible(true);
 						textField.setText("");
 						
@@ -94,32 +100,29 @@ public class AddSaldoGUI extends JPanel {
 					lblError.setVisible(true);
 					
 				}
-				updateFrame();
+				UserGUI3.updateFrame(new AddSaldoGUI());
 			} });
 		
 		add(btnNewButton);
-		lblSaldo.setBounds(253, 102, 72, 24);
+		lblSaldo.setBounds(222, 52, 72, 24);
 		add(lblSaldo);
+		lblDineroAñadido.setFont(new Font("Roboto", Font.BOLD, 14));
 		
 	
 		
 		lblDineroAñadido.setVisible(false);
 		lblDineroAñadido.setForeground(new Color(199, 21, 133));
 		lblDineroAñadido.setBackground(Color.BLACK);
-		lblDineroAñadido.setBounds(70, 201, 129, 27);
+		lblDineroAñadido.setBounds(70, 214, 129, 30);
 		add(lblDineroAñadido);
+		lblError.setFont(new Font("Roboto", Font.BOLD, 14));
 		
 		
 		lblError.setVisible(false);
 		lblError.setForeground(new Color(255, 0, 0));
-		lblError.setBounds(211, 181, 169, 60);
+		lblError.setBounds(199, 214, 169, 30);
 		
 		add(lblError);
 		
-	}
-	
-	public void updateFrame() {
-		User userRegistered = MainGUI.getUserRegistered();
-		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 	}
 }

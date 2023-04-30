@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -15,10 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import javax.swing.border.LineBorder;
 
 import domain.User;
@@ -39,6 +35,7 @@ public class UserGUI3 extends JFrame {
 	private static JMenuBar menuBar;
 	private JButton btnApuestasRealizadas;
 	private static JLabel lblLogoUser;
+	private JButton btnAñadirSaldo;
 	/**
 	 * Launch the application.
 	 */
@@ -116,10 +113,11 @@ public class UserGUI3 extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 243, 30);
+		menuBar.setBounds(20, 42, 340, 30);
 		contentPane.add(menuBar);
 		
 		btnHome = new JButton("     Eventos    ");
+		btnHome.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -140,6 +138,7 @@ public class UserGUI3 extends JFrame {
 		btnHome.setBackground(Color.WHITE);
 		
 		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
+		btnApuestasRealizadas.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnApuestasRealizadas.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnApuestasRealizadas.setBackground(Color.WHITE);
 		btnHome.setBorder(new EmptyBorder(3,3,3,3));
@@ -160,6 +159,27 @@ public class UserGUI3 extends JFrame {
 		});
 		menuBar.add(btnApuestasRealizadas);
 		
+		btnAñadirSaldo = new JButton("  Añadir Saldo  ");
+		btnAñadirSaldo.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirSaldo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnAñadirSaldo.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnAñadirSaldo.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		btnAñadirSaldo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI3.updateFrame(new AddSaldoGUI());
+			}
+		});
+		btnAñadirSaldo.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnAñadirSaldo.setBackground(Color.WHITE);
+		menuBar.add(btnAñadirSaldo);
+		
 		icon = new ImageIcon("icons/user.png");
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
@@ -177,8 +197,7 @@ public class UserGUI3 extends JFrame {
 		contentPane.add(btnLogOut);
 		contentPane.add(menuBar);
 		displayFrame = panel;
-		displayFrame.setBounds(0, 70, 886, 541);
-        displayFrame.setBounds(new Rectangle(0, 70, displayFrame.getWidth(), contentPane.getHeight()-70));
+        displayFrame.setBounds(new Rectangle(0, 70, contentPane.getWidth(), contentPane.getHeight()-70));
 		contentPane.add(displayFrame);
 		contentPane.add(lblLogoUser);
 		contentPane.revalidate();

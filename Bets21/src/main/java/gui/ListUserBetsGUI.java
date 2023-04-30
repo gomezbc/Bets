@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import domain.*;
+import java.awt.Dimension;
 
 public class ListUserBetsGUI extends JPanel {
 
@@ -38,12 +39,12 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
+		setSize(new Dimension(886, 541));
 		setBounds(100, 100, 863, 629);
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 12, 820, 500);
+		scrollPane.setBounds(12, 12, 839, 455);
 		add(scrollPane);
 		
 		tableBets = new JTable();
@@ -59,7 +60,6 @@ public class ListUserBetsGUI extends JPanel {
 	}
 	
 	public void updateTable() {
-		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
 		tableModelBets.setRowCount(0);
 		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = new Vector<Bet>();

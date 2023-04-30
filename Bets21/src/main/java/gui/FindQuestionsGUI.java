@@ -79,13 +79,13 @@ public class FindQuestionsGUI extends JPanel {
 	public void jbInit(Event ev) throws Exception
 	{
 		this.setLayout(null);
-		this.setSize(new Dimension(826, 541));
+		this.setSize(new Dimension(886, 541));
 		this.setBackground(new Color(238, 238, 238));
 		jLabelQueries.setBounds(40, 188, 598, 14);
 		this.add(jLabelQueries);
 
 		BLFacade facade = MainGUI.getBusinessLogic();
-		scrollPaneQueries.setBounds(new Rectangle(40, 214, 368, 157));
+		scrollPaneQueries.setBounds(new Rectangle(40, 214, 368, 170));
 
 
 		scrollPaneQueries.setViewportView(tableQueries);
@@ -104,7 +104,7 @@ public class FindQuestionsGUI extends JPanel {
 		
 		
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
-		scrollPaneForecast.setBounds(437, 214, 346, 157);
+		scrollPaneForecast.setBounds(437, 214, 410, 170);
 		add(scrollPaneForecast);
 		
 
@@ -139,7 +139,7 @@ public class FindQuestionsGUI extends JPanel {
 						Vector<Object> row = new Vector<Object>();
 						row.add(f.getForecastNumber());
 						row.add(f.getDescription());
-						row.add(f.getGain());
+						row.add(String.format("%.2f", f.getGain()));
 						tableModelForecast.addRow(row);	
 					}
 					tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
@@ -154,7 +154,7 @@ public class FindQuestionsGUI extends JPanel {
 
 		
 		EventInfo = new EventPanel(ev);
-		EventInfo.setBounds(40, 37, 743, 139);
+		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 	}
 }

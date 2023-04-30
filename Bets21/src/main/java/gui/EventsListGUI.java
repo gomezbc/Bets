@@ -67,13 +67,11 @@ public class EventsListGUI extends JPanel {
 
 	private static Vector<Event> todayEvents;
 	private static Vector<Event> currentEvents = new Vector<Event>(4);
-	private int currentIndex;
-	private int currentMax;
+	private static int currentIndex;
+	private static int currentMax;
 	
 	private String[] columnNamesEvents = new String[] {
-			//ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
-			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
-
+			ResourceBundle.getBundle("Etiquetas").getString("Event")
 	};
 	private JButton next;
 	private JButton previous;
@@ -93,21 +91,19 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
-		setMinimumSize(new Dimension(826, 541));
+		setMinimumSize(new Dimension(886, 541));
 		this.setLayout(null);
-		this.setSize(new Dimension(826, 541));
+		this.setSize(new Dimension(886, 541));
 		this.setBackground(new Color(238, 238, 238));
-		setBorder(new LineBorder(new Color(146, 154, 171), 2, true));
-		jLabelEventDate.setFont(new Font("Roboto", Font.BOLD, 12));
+		jLabelEventDate.setFont(new Font("Roboto", Font.BOLD, 15));
 
 		jLabelEventDate.setBounds(new Rectangle(40, 23, 140, 25));
-		jLabelEvents.setFont(new Font("Roboto", Font.BOLD, 12));
-		jLabelEvents.setBounds(40, 212, 259, 16);
+		jLabelEvents.setFont(new Font("Roboto", Font.BOLD, 14));
+		jLabelEvents.setBounds(40, 205, 443, 25);
 
 		this.add(jLabelEventDate, null);
 		this.add(jLabelEvents);
 
-		currentIndex=0;
 
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
@@ -147,8 +143,6 @@ public class EventsListGUI extends JPanel {
 						
 						jCalendar1.setCalendar(calendarAct);
 
-						BLFacade facade = MainGUI.getBusinessLogic();
-
 						datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
 					}
 
@@ -165,16 +159,19 @@ public class EventsListGUI extends JPanel {
 						previous.setVisible(false);
 						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
 						
-						BLFacade facade=MainGUI.getBusinessLogic();
-
 						Vector<domain.Event> events = facade.getEvents(firstDay);
 
 						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
 						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));
+						
 						todayEvents = events;
+						currentIndex=0;
+						
 						if(events.size()/4>0) currentMax=4;
 						else currentMax=events.size();
+						
 						currentEvents.removeAllElements();
+						
 						for(int i=0;i<currentMax;i++){
 							currentEvents.add(i, todayEvents.get(i));
 						}
@@ -205,11 +202,10 @@ public class EventsListGUI extends JPanel {
 
 		this.add(jCalendar1, null);
 		
-//		tableEvents.setModel(tableModelEvents);
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 		
 		tableEvents = new JTable(tableModelEvents);
-		tableEvents.setBounds(40, 233, 740, 280);
+		tableEvents.setBounds(40, 233, 803, 280);
 		add(tableEvents);
 		tableEvents.setFont(new Font("Roboto", Font.PLAIN, 12));
 		tableEvents.setRowHeight(60);
@@ -222,12 +218,14 @@ public class EventsListGUI extends JPanel {
 			}
 		});
 		
-				tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(300);
+		tableEvents.setRowHeight(tableEvents.getHeight()/4);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
-		ComponentListener componentListener = new ComponentAdapter() {
+		/*ComponentListener componentListener = new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
+				System.out.println("componentResized");
 				// Actualizar el tamaño del JTabbedPane
 				int nuevoAncho = e.getComponent().getWidth();
 				int nuevoAlto = e.getComponent().getHeight();
@@ -238,13 +236,14 @@ public class EventsListGUI extends JPanel {
 				renderEventsTable();
 			}
 		};
-		this.addComponentListener(componentListener);
+		this.addComponentListener(componentListener);*/
 		
 		ImageIcon icon = new ImageIcon("icons/right.png");
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		next = new JButton(new ImageIcon(scaledIcon));
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("next");
 				if(todayEvents.size()-(currentIndex+4)>=4) currentMax += 4;
 				else currentMax += todayEvents.size()-(currentIndex+4);
 				currentIndex += 4;
@@ -252,7 +251,6 @@ public class EventsListGUI extends JPanel {
 				for(int i=0;i<4-(currentMax%4);i++){
 					currentEvents.add(i, todayEvents.get(currentIndex+i));
 				}
-				MyTableCellRender.setIndex(0);
 				tableModelEvents.setDataVector(null, columnNamesEvents);
 				tableModelEvents.setColumnCount(2);
 				tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
@@ -269,7 +267,7 @@ public class EventsListGUI extends JPanel {
 			}
 		});
 		next.setBorder(null);
-		next.setBounds(784, 200, 30, 30);
+		next.setBounds(813, 200, 30, 30);
 		next.setVisible(false);
 		add(next);
 		
@@ -278,13 +276,13 @@ public class EventsListGUI extends JPanel {
 		previous = new JButton(new ImageIcon(scaledIcon));
 		previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("previous");
 				currentIndex -= 4;
 				currentMax -= 4-(currentMax%4);
 				currentEvents.removeAllElements();
 				for(int i=0;i<4-(currentMax%4);i++){
 					currentEvents.add(i, todayEvents.get(currentIndex+i));
 				}
-				MyTableCellRender.setIndex(0);
 				tableModelEvents.setDataVector(null, columnNamesEvents);
 				tableModelEvents.setColumnCount(2);
 				tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
@@ -301,13 +299,12 @@ public class EventsListGUI extends JPanel {
 			}
 		});
 		previous.setBorder(null);
-		previous.setBounds(738, 200, 30, 30);
+		previous.setBounds(771, 200, 30, 30);
 		previous.setVisible(false);
 		add(previous);
 		
 		//Para que si el usuario vuelve a la pestaña de evntos se le cargue los anteriores
 		if(currentEvents!=null) {
-			MyTableCellRender.setIndex(0);
 			tableModelEvents.setDataVector(null, columnNamesEvents);
 			tableModelEvents.setColumnCount(2);
 			tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
@@ -328,7 +325,6 @@ public class EventsListGUI extends JPanel {
 	public void renderEventsTable() {
 		MyTableCellRender.setIndex(0);
 		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(currentEvents));
-		tableModelEvents.setRowCount(currentEvents.size());
 		tableModelEvents.fireTableDataChanged();
 		tableEvents.repaint();
 		if(todayEvents!=null && currentIndex+4<todayEvents.size()) next.setVisible(true);

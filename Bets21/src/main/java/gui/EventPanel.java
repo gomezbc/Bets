@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.Dimension;
+import java.awt.Font;
 
 public class EventPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -45,11 +46,13 @@ public class EventPanel extends JPanel {
 		}
 		
 		lblDescription = new JLabel("");
+		lblDescription.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblDescription.setBounds(337, 5, 377, 17);
 		lblDescription.setText(ev.getDescription());
 		add(lblDescription);
 		
 		lblDate = new JLabel("");
+		lblDate.setFont(new Font("Roboto", Font.BOLD, 14));
 		lblDate.setBounds(304, 38, 209, 17);
 		lblDate.setText(ev.getEventDate().toString());
 		add(lblDate);
