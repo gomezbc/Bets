@@ -28,9 +28,6 @@ import exceptions.UserDoesntExist;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import javax.swing.border.LineBorder;
 import javax.swing.JSeparator;
 
 

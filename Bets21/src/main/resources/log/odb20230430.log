@@ -2420,3 +2420,83 @@ Type domain.Bet is not enhanced.
 [2023-04-30 23:33:58 #7 type] 
 Type domain.User is not enhanced.
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-30 23:40:57 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 50366@fedora-b
+
+[2023-04-30 23:40:57 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-30 23:40:57 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-30 23:40:57 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-30 23:40:57 #5 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-30 23:40:57 #6 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-30 23:42:26 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 50640@fedora-b
+
+[2023-04-30 23:42:26 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-30 23:42:26 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-30 23:42:26 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-30 23:42:26 #5 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-30 23:42:26 #6 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-30 23:43:41 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 50892@fedora-b
+
+[2023-04-30 23:43:42 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-30 23:43:42 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-30 23:43:42 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-30 23:43:42 #5 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-30 23:43:42 #6 type] 
+Type domain.User is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-04-30 23:44:15 #1 store] 
+Database '/home/borja/git/RepositorioPBL/Bets21/src/main/resources/bets.temp' is opened by 50979@fedora-b
+
+[2023-04-30 23:44:15 #2 type] 
+Type domain.Question is not enhanced.
+
+[2023-04-30 23:44:15 #3 type] 
+Type domain.Forecast is not enhanced.
+
+[2023-04-30 23:44:15 #4 type] 
+Type domain.Event is not enhanced.
+
+[2023-04-30 23:44:15 #5 type] 
+Type domain.Bet is not enhanced.
+
+[2023-04-30 23:44:15 #6 type] 
+Type domain.User is not enhanced.
+
