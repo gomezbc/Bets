@@ -1,91 +1,81 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.toedter.calendar.JCalendar;
-
 import businessLogic.BLFacade;
-import configuration.UtilDate;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ResourceBundle;
+
+import javax.swing.JLabel;
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Calendar;
+import java.util.Date;
+
+import domain.Event;
 import domain.Forecast;
 import domain.Question;
+import domain.User;
+import exceptions.BetAlreadyExist;
+import exceptions.EventFinished;
 import exceptions.EventHasntFinished;
+import exceptions.ForecastAlreadyExist;
 import exceptions.ForecastDoesntExist;
+import exceptions.QuestionAlreadyExist;
 import exceptions.QuestionDoesntExist;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+
 
 public class CloseEventGUI extends JPanel {
-
 	private static final long serialVersionUID = 1L;
-	
-	private final JLabel jLabelEventDate = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventDate"));
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
-	private final JLabel jLabelEvents = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Events")); 
-	private JLabel lblNoFinalizado = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.lblNoFinalizado.text"));
-
-	// Code for JCalendar
-	private JCalendar jCalendar1 = new JCalendar();
-	private Calendar calendarAnt = null;
-	private Calendar calendarAct = null;
-	private JScrollPane scrollPaneEvents = new JScrollPane();
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 	private JScrollPane scrollPaneForecast = new JScrollPane();
-
 	
-	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
-	
-	private JTable tableEvents= new JTable();
 	private JTable tableQueries = new JTable();
 	private JTable tableForecast = new JTable();;
-	
-	private DefaultTableModel tableModelEvents;
+
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecast;
-
 	
-	private String[] columnNamesEvents = new String[] {
-			ResourceBundle.getBundle("Etiquetas").getString("EventN"), 
-			ResourceBundle.getBundle("Etiquetas").getString("Event"), 
-
-	};
 	private String[] columnNamesQueries = new String[] {
 			ResourceBundle.getBundle("Etiquetas").getString("QueryN"), 
-			ResourceBundle.getBundle("Etiquetas").getString("Query")
+			ResourceBundle.getBundle("Etiquetas").getString("Query"),
+			"Apuesta Mínima"
 
 	};
 	private String[] columnNamesForecast = new String[] {
 			"Pronostico#","Pronostico","Ganancia"
 	};
-	private final JButton btnAsignarResultado = new JButton(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.btnAsignarResultado.text")); //$NON-NLS-1$ //$NON-NLS-2$
-	private JLabel lblResult = new JLabel();
-	
-	/**
-	 * Launch the application.
-	 */
-	public CloseEventGUI() {
+	private JPanel EventInfo;
+	private JButton btnAñadirPronostico;
+	private JLabel lblInfo;
+
+	public CloseEventGUI(Event ev)
+	{
 		try
 		{
-			jbInit();
+			jbInit(ev);
 		}
 		catch(Exception e)
 		{
@@ -93,195 +83,59 @@ public class CloseEventGUI extends JPanel {
 		}
 	}
 
-	private void jbInit() throws Exception
+	
+	public void jbInit(Event ev) throws Exception
 	{
-		lblNoFinalizado.setVisible(false);
-		lblResult.setVisible(false);
 		this.setLayout(null);
-		this.setSize(new Dimension(700, 500));
-		setBorder(new LineBorder(new Color(17, 110, 80), 2, true));
-//		this.setTitle(ResourceBundle.getBundle("Etiquetas").getString("QueryQueries"));
-
-		jLabelEventDate.setBounds(new Rectangle(40, 15, 140, 25));
-		jLabelQueries.setBounds(40, 248, 598, 14);
-		jLabelEvents.setBounds(295, 19, 259, 16);
-
-		this.add(jLabelEventDate, null);
+		this.setSize(new Dimension(886, 541));
+		this.setBackground(new Color(238, 238, 238));
+		jLabelQueries.setFont(new Font("Roboto", Font.PLAIN, 14));
+		jLabelQueries.setBounds(40, 188, 598, 20);
 		this.add(jLabelQueries);
-		this.add(jLabelEvents);
 
-
-		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
-
-		BLFacade facade = MainGUI.getBusinessLogic();
-		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-		EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
-
-		// Code for JCalendar
-		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener()
-		{
-			public void propertyChange(PropertyChangeEvent propertychangeevent)
-			{
-
-				if (propertychangeevent.getPropertyName().equals("locale"))
-				{
-					jCalendar1.setLocale((Locale) propertychangeevent.getNewValue());
-				}
-				else if (propertychangeevent.getPropertyName().equals("calendar"))
-				{
-					calendarAnt = (Calendar) propertychangeevent.getOldValue();
-					calendarAct = (Calendar) propertychangeevent.getNewValue();
-					DateFormat dateformat1 = DateFormat.getDateInstance(1, jCalendar1.getLocale());
-     				jCalendar1.setCalendar(calendarAct);
-					Date firstDay = UtilDate.trim(new Date(jCalendar1.getCalendar().getTime().getTime()));
-					
-
-					 
-					
-					int monthAnt = calendarAnt.get(Calendar.MONTH);
-					int monthAct = calendarAct.get(Calendar.MONTH);
-					
-					if (monthAct!=monthAnt) {
-						if (monthAct==monthAnt+2) {
-							calendarAct.set(Calendar.MONTH, monthAnt+1);
-							calendarAct.set(Calendar.DAY_OF_MONTH, 1);
-						}						
-						
-						jCalendar1.setCalendar(calendarAct);
-
-						BLFacade facade = MainGUI.getBusinessLogic();
-
-						datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
-					}
-
-
-
-					EventsListGUI.paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
-													
-					
-
-					try {
-						lblNoFinalizado.setVisible(false);
-						tableModelEvents.setDataVector(null, columnNamesEvents);
-						//Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
-						
-						tableModelQueries.setDataVector(null, columnNamesQueries);
-						tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-						tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-						
-						tableModelForecast.setDataVector(null, columnNamesForecast); 
-						tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-						tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-						tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
-						
-						tableModelEvents.setColumnCount(3); // another column added to allocate ev objects
-
-
-						BLFacade facade=MainGUI.getBusinessLogic();
-
-						Vector<domain.Event> events = facade.getEvents(firstDay);
-
-						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
-						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));
-						for (domain.Event ev:events){
-							Vector<Object> row = new Vector<Object>();
-
-							System.out.println("Events "+ev);
-							row.add(ev.getEventNumber());
-							row.add(ev.getDescription());
-							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,2)
-							tableModelEvents.addRow(row);		
-						}
-						tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
-						tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
-						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(2)); // not shown in JTable
-					} catch (Exception e1) {
-
-						jLabelQueries.setText(e1.getMessage());
-					}
-
-				}
-			} 
-		});
-
-		this.add(jCalendar1, null);
-		
-		scrollPaneEvents.setBounds(new Rectangle(292, 50, 346, 150));
-		scrollPaneQueries.setBounds(new Rectangle(40, 274, 322, 116));
-
-		tableEvents.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				lblNoFinalizado.setVisible(false);
-				int i=tableEvents.getSelectedRow();
-				domain.Event ev=(domain.Event)tableModelEvents.getValueAt(i,2); // obtain ev object
-				Vector<Question> queries = ev.getQuestions();
-				
-				tableModelQueries.setDataVector(null, columnNamesQueries);
-				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-				
-				tableModelForecast.setDataVector(null, columnNamesForecast); //Limpia el contenido de la tabla de pronosticos, para evitar que aparezcan resultados previos
-				tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-				tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-				tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
-
-				tableModelQueries.setColumnCount(3); // another column added to allocate q objects
-				
-				if (queries.isEmpty())
-					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("NoQueries")+": "+ev.getDescription());
-				else 
-					jLabelQueries.setText(ResourceBundle.getBundle("Etiquetas").getString("SelectedEvent")+" "+ev.getDescription());
-
-				for (domain.Question q:queries){
-					Vector<Object> row = new Vector<Object>();
-					row.add(q.getQuestionNumber());
-					row.add(q.getQuestion());
-					row.add(q);
-					tableModelQueries.addRow(row);	
-				}
-				tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-				tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-				tableQueries.getColumnModel().removeColumn(tableQueries.getColumnModel().getColumn(2)); // not shown in JTable
-			}
-		});
-
-		scrollPaneEvents.setViewportView(tableEvents);
-		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
-
-		tableEvents.setModel(tableModelEvents);
-		tableEvents.getColumnModel().getColumn(0).setPreferredWidth(25);
-		tableEvents.getColumnModel().getColumn(1).setPreferredWidth(268);
+		scrollPaneQueries.setBounds(new Rectangle(40, 214, 385, 170));
+		tableQueries.setFont(new Font("Roboto", Font.PLAIN, 14));
 
 
 		scrollPaneQueries.setViewportView(tableQueries);
 		tableModelQueries = new DefaultTableModel(null, columnNamesQueries);
 
+		scrollPaneQueries.setFont(tableQueries.getFont());
 		tableQueries.setModel(tableModelQueries);
-		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(25);
-		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(268);
-
-		this.add(scrollPaneEvents, null);
+		tableQueries.setRowHeight(20);
+		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(40);
+		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(190);
+		tableQueries.getColumnModel().getColumn(2).setPreferredWidth(55);
 		this.add(scrollPaneQueries, null);
-
+		for(Question q: ev.getQuestions()) {
+			Vector<Object> row = new Vector<Object>();
+			row.add(q.getQuestionNumber());
+			row.add(q.getQuestion());
+			row.add(q.getBetMinimum());
+			tableModelQueries.addRow(row);
+		}
+		
+		
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
-		scrollPaneForecast.setBounds(366, 274, 286, 116);
-		this.add(scrollPaneForecast);
+		scrollPaneForecast.setBounds(437, 214, 410, 170);
+		add(scrollPaneForecast);
+		tableForecast.setFont(new Font("Roboto", Font.PLAIN, 14));
 		
 
 		scrollPaneForecast.setViewportView(tableForecast);
 		tableModelForecast = new DefaultTableModel(null, columnNamesForecast);
 		tableForecast.setModel(tableModelForecast);
 		scrollPaneForecast.setViewportView(tableForecast);
+		scrollPaneForecast.setFont(tableForecast.getFont());
 		
-		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
+		tableForecast.setRowHeight(20);
+		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(40);
 		tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-		tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
+		tableForecast.getColumnModel().getColumn(2).setPreferredWidth(60);
 		
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblNoFinalizado.setVisible(false);
 				int i=tableQueries.getSelectedRow();
 				BLFacade facade=MainGUI.getBusinessLogic();
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
@@ -301,23 +155,27 @@ public class CloseEventGUI extends JPanel {
 						Vector<Object> row = new Vector<Object>();
 						row.add(f.getForecastNumber());
 						row.add(f.getDescription());
-						row.add(f.getGain());
-						row.add(f.getQuestion());
+						row.add(String.format("%.2f", f.getGain()));
 						tableModelForecast.addRow(row);	
 					}
-					tableForecast.getColumnModel().getColumn(0).setPreferredWidth(35);
-					tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
-					tableForecast.getColumnModel().getColumn(2).setPreferredWidth(70);
 				} catch (QuestionDoesntExist e1) {
 					e1.printStackTrace();
 				}
-				
+				tableForecast.getColumnModel().getColumn(0).setPreferredWidth(40);
+				tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
+				tableForecast.getColumnModel().getColumn(2).setPreferredWidth(60);
 			}
 		});
+
 		
-		btnAsignarResultado.addActionListener(new ActionListener() {
+		EventInfo = new EventPanel(ev, 806, 100);
+		EventInfo.setBounds(40, 37, 807, 165);
+		add(EventInfo);
+		
+		btnAñadirPronostico = new JButton(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnAñadirPronostico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblResult.setVisible(false);
+				lblInfo.setVisible(false);
 				BLFacade facade=MainGUI.getBusinessLogic();
 				int i=tableQueries.getSelectedRow();
 				int questionNumber = (int) tableModelQueries.getValueAt(i,0);
@@ -327,31 +185,44 @@ public class CloseEventGUI extends JPanel {
 		
 				try {
 					if(facade.getQuestion(questionNumber).getResult()!=null) {
-						lblResult.setVisible(true);
+						lblInfo.setText("Ya tiene un resultado");
+						lblInfo.setVisible(true);
 					}else {
 						facade.assignResult(questionNumber, forecastNumber);
 						facade.updateCloseEvent(forecastNumber);
 					}
 				}catch(EventHasntFinished e1){
-					lblNoFinalizado.setVisible(true);
+					lblInfo.setText("El evento no ha finalizado");
+					lblInfo.setVisible(true);
 				} catch (QuestionDoesntExist e1) {
 					e1.printStackTrace();
 				} catch (ForecastDoesntExist e1) {
 					e1.printStackTrace();
 				}
-			}
+			}	
 		});
-		btnAsignarResultado.setBounds(420, 421, 160, 27);
-		this.add(btnAsignarResultado);
+		btnAñadirPronostico.setBackground(Color.WHITE);
+		btnAñadirPronostico.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirPronostico.setBounds(584, 411, 103, 27);
+		btnAñadirPronostico.setEnabled(false);
+		add(btnAñadirPronostico);
 		
-		lblNoFinalizado.setBounds(420, 396, 180, 17);
-		this.add(lblNoFinalizado);
+		lblInfo = new JLabel("");
+		lblInfo.setForeground(new Color(220, 20, 60));
+		lblInfo.setFont(new Font("Roboto", Font.PLAIN, 14));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setBounds(437, 450, 410, 25);
+		add(lblInfo);
 		
+		//Si la fecha actual es posterior a la del evento, no se puede añadir preguntas y pronosticos
+		Date today = Calendar.getInstance().getTime();
+		if(today.before(ev.getEventDate())) {
+			btnAñadirPronostico.setEnabled(false);
+			lblInfo.setEnabled(false);
+		}else {
+			btnAñadirPronostico.setEnabled(true);
+			lblInfo.setEnabled(true);
+		}
 		
-		lblResult = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CloseEventGUI.lblYaTieneUn.text")); //$NON-NLS-1$ //$NON-NLS-2$
-		lblResult.setVisible(false);
-		lblResult.setForeground(new Color(246, 97, 81));
-		lblResult.setBounds(430, 460, 150, 17);
-		add(lblResult);
 	}
 }

@@ -38,6 +38,9 @@ public class AdminGUI extends JFrame {
 	private static JLabel lblLogoUser;
 	private JButton btnListUser;
 	private JButton btnCrearEvento;
+	
+	private static String currentTab = null;
+
 	/**
 	 * Launch the application.
 	 */
@@ -134,6 +137,7 @@ public class AdminGUI extends JFrame {
 		btnCrearEvento = new JButton("   Crear Eventos    ");
 		btnCrearEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminGUI.setCurrentTab("CreateEventGUI");
 				AdminGUI.updateFrame(new CreateEventGUI());
 			}
 		});
@@ -144,6 +148,7 @@ public class AdminGUI extends JFrame {
 		menuBar.add(btnAñadirPreguntasPronosticos);
 		btnAñadirPreguntasPronosticos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminGUI.setCurrentTab("EventsListGUI");
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
@@ -157,6 +162,7 @@ public class AdminGUI extends JFrame {
 		btnAñadirPreguntasPronosticos.setBorder(new EmptyBorder(3,3,3,3));
 		btnCerrarEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminGUI.setCurrentTab("EventsListGUI");
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
@@ -186,6 +192,7 @@ public class AdminGUI extends JFrame {
 		});
 		btnListUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminGUI.setCurrentTab("ListUsersGUI");
 				AdminGUI.updateFrame(new ListUsersGUI());
 			}
 		});
@@ -218,5 +225,13 @@ public class AdminGUI extends JFrame {
 		User u = MainGUI.getUserRegistered();
 		if(u!=null) lblUser.setText("User: "+u.getUsername());
 		contentPane.add(lblUser);
+	}
+
+	public static String getCurrentTab() {
+		return currentTab;
+	}
+
+	public static void setCurrentTab(String currentTab) {
+		AdminGUI.currentTab = currentTab;
 	}
 }
