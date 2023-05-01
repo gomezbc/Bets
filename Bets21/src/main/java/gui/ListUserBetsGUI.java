@@ -1,6 +1,10 @@
 package gui;
 
 import java.util.Vector;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,9 +22,7 @@ public class ListUserBetsGUI extends JPanel {
 	private JTable tableBets;
 	private DefaultTableModel tableModelBets;
 	
-	private String[] columnNames = new String[] {
-			"#Apuesta","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"
-	};
+	private Vector<String> columnNames = new Vector<String>(Arrays.asList("Fecha","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"));
 
 	/**
 	 * Create the panel.
@@ -62,16 +64,14 @@ public class ListUserBetsGUI extends JPanel {
 	
 	public void updateTable() {
 		tableModelBets.setDataVector(null, columnNames);
-		tableBets.getColumnModel().getColumn(0).setPreferredWidth(20);
-		tableBets.getColumnModel().getColumn(4).setPreferredWidth(20);
-		tableBets.getColumnModel().getColumn(5).setPreferredWidth(20);
-		tableBets.getColumnModel().getColumn(6).setPreferredWidth(20);
 		User u = MainGUI.getUserRegistered();
-		Vector<Bet> bets = new Vector<Bet>();
-		bets = u.getBets();
+		Vector<Bet> bets = u.getBets();
+		Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
 		for(Bet b: bets) {
 			Vector<Object> row = new Vector<Object>();
-			row.add(b.getBetNumber());
+			Date d = b.getForecast().getQuestion().getEvent().getEventDate();
+			List<String> dateList = Arrays.asList(d.toLocaleString().split(","));
+			row.add(dateList.get(0)+dateList.get(1));
 			row.add(b.getForecast().getQuestion().getEvent().getDescription());
 			row.add(b.getForecast().getQuestion().getQuestion());
 			row.add(b.getForecast().getDescription());
@@ -85,7 +85,21 @@ public class ListUserBetsGUI extends JPanel {
 					row.add("- "+String.format("%.2f", b.getBetMoney()));
 				}
 			}
-			tableModelBets.addRow(row);
+			tableData.add(row);
 		}
+		tableData.sort(new Comparator<Object>() {
+			@Override
+            public int compare(Object o1, Object o2) {
+                Vector<Object> v1 = (Vector<Object>) o1;
+                Vector<Object> v2 = (Vector<Object>) o2;
+                return ((String) v1.get(0)).compareTo((String) v2.get(0));
+            }
+		});
+		tableModelBets.setDataVector(tableData, columnNames);
+		tableBets.getColumnModel().getColumn(0).setPreferredWidth(15);
+		tableBets.getColumnModel().getColumn(2).setPreferredWidth(110);
+		tableBets.getColumnModel().getColumn(4).setPreferredWidth(20);
+		tableBets.getColumnModel().getColumn(5).setPreferredWidth(20);
+		tableBets.getColumnModel().getColumn(6).setPreferredWidth(20);
 	}
 }

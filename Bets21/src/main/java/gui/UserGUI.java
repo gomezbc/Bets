@@ -109,7 +109,7 @@ public class UserGUI extends JFrame {
 		lblUser.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblUser.setBounds(60, 10, 485, 25);
 		User u = MainGUI.getUserRegistered();
-		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+String.format("%.2f", u.getSaldo()));
 		contentPane.add(lblUser);
 		
 		menuBar = new JMenuBar();
@@ -204,7 +204,7 @@ public class UserGUI extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 		User u = MainGUI.getUserRegistered();
-		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+u.getSaldo());
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+String.format("%.2f", u.getSaldo()));
 		contentPane.add(lblUser);
 	}
 }

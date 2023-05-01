@@ -296,9 +296,9 @@ public class BLFacadeImplementation  implements BLFacade {
     		Bet b = u.DoesBetExists(numResultado);
     		if(b!=null) {
     			if(b.getForecast().getForecastNumber()==numResultado) {
-    				this.modifySaldo( (float) (u.getSaldo() + (b.getForecast().getGain() * b.getBetMoney())), u.getDni());
+    				this.modifySaldo( (float) ((b.getForecast().getGain() * b.getBetMoney())), u.getDni());
     			}else {
-    				this.modifySaldo( (float) ( u.getSaldo() - b.getBetMoney()), u.getDni()) ;
+    				this.modifySaldo( (float) (- b.getBetMoney()), u.getDni()) ;
     			}
     		}
     	}

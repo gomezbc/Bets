@@ -291,15 +291,15 @@ public class DataAccess  {
 	
 	
 	public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist {
-		System.out.println(">> DataAccess: getEvents => questionNumber="+questionNumber+" forecastNumber="+forecastNumber);
+		System.out.println(">> DataAccess: assignResult => questionNumber="+questionNumber+" forecastNumber="+forecastNumber);
 		Question q = db.find(Question.class, questionNumber);
 		Forecast f = db.find(Forecast.class, forecastNumber);
 		if(q==null) {
-			System.out.println(">> DataAccess: getEvents => error QuestionDoesntExist: No existe una pregunta con este identificador " + questionNumber);
+			System.out.println(">> DataAccess: assignResult => error QuestionDoesntExist: No existe una pregunta con este identificador " + questionNumber);
 			throw new QuestionDoesntExist("No existe una pregunta con este identificador " + questionNumber);
 		}
 		if(f==null) {
-			System.out.println(">> DataAccess: getEvents => error ForecastDoesntExist: No existe un pronostico con este identificador " + forecastNumber);
+			System.out.println(">> DataAccess: assignResult => error ForecastDoesntExist: No existe un pronostico con este identificador " + forecastNumber);
 			throw new ForecastDoesntExist("No existe un pronostico con este identificador " + forecastNumber);
 		}
 		db.getTransaction().begin();

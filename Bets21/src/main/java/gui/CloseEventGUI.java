@@ -17,33 +17,24 @@ import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
-import java.text.DateFormat;
-import java.util.Locale;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import domain.Event;
 import domain.Forecast;
 import domain.Question;
-import domain.User;
-import exceptions.BetAlreadyExist;
-import exceptions.EventFinished;
+
 import exceptions.EventHasntFinished;
-import exceptions.ForecastAlreadyExist;
 import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
 import exceptions.QuestionDoesntExist;
 import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
+
 
 
 public class CloseEventGUI extends JPanel {
