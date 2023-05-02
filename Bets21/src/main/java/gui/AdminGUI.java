@@ -148,7 +148,7 @@ public class AdminGUI extends JFrame {
 		menuBar.add(btnAñadirPreguntasPronosticos);
 		btnAñadirPreguntasPronosticos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminGUI.setCurrentTab("EventsListGUI");
+				AdminGUI.setCurrentTab("EventInfoAdminGUI");
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});
@@ -162,7 +162,7 @@ public class AdminGUI extends JFrame {
 		btnAñadirPreguntasPronosticos.setBorder(new EmptyBorder(3,3,3,3));
 		btnCerrarEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminGUI.setCurrentTab("EventsListGUI");
+				AdminGUI.setCurrentTab("CloseEventGUI");
 				AdminGUI.updateFrame(new EventsListGUI());
 			}
 		});

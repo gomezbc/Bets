@@ -192,7 +192,7 @@ public class EventInfoAdminGUI extends JPanel {
 		add(pronostico);
 		pronostico.setColumns(10);
 		
-		btnAñadirPronostico = new JButton(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnAñadirPronostico = new JButton("AÑADIR"); //$NON-NLS-1$ //$NON-NLS-2$
 		btnAñadirPronostico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblErrorPronostico.setVisible(false);
