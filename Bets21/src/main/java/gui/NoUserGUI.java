@@ -52,7 +52,7 @@ public class NoUserGUI extends JFrame {
 	public void jbInit() {
 		setTitle("User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 914, 680);
 		setResizable(false);
 		setMinimumSize(new Dimension(886, 652));
 		setBounds(100, 100, 886, 632);
@@ -77,7 +77,7 @@ public class NoUserGUI extends JFrame {
 				jButtonClose_actionPerformed(e);
 			}
 		});
-		btnLogOut.setBounds(820, 0, 35, 35);
+		btnLogOut.setBounds(810, 8, 35, 35);
 		contentPane.add(btnLogOut);
 		
 		//Actualiza el tamaño de los componentes respecto al frame

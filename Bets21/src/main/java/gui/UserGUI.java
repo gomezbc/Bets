@@ -82,7 +82,7 @@ public class UserGUI extends JFrame {
 				jButtonClose_actionPerformed(e);
 			}
 		});
-		btnLogOut.setBounds(820, 0, 35, 35);
+		btnLogOut.setBounds(813, 10, 35, 35);
 		contentPane.add(btnLogOut);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
@@ -114,7 +114,7 @@ public class UserGUI extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 340, 30);
+		menuBar.setBounds(20, 42, 370, 30);
 		contentPane.add(menuBar);
 		
 		btnHome = new JButton("     Eventos    ");

@@ -12,6 +12,7 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -38,6 +39,7 @@ public class AdminGUI extends JFrame {
 	private static JLabel lblLogoUser;
 	private JButton btnListUser;
 	private JButton btnCrearEvento;
+
 	
 	private static String currentTab = null;
 
@@ -61,7 +63,7 @@ public class AdminGUI extends JFrame {
 	public void jbInit() {
 		setTitle("User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 966, 704);
 		setResizable(false);
 		setMinimumSize(new Dimension(886, 652));
 		setBounds(100, 100, 886, 632);
@@ -86,7 +88,7 @@ public class AdminGUI extends JFrame {
 				jButtonClose_actionPerformed(e);
 			}
 		});
-		btnLogOut.setBounds(820, 0, 35, 35);
+		btnLogOut.setBounds(775, 0, 35, 35);
 		contentPane.add(btnLogOut);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
@@ -116,9 +118,13 @@ public class AdminGUI extends JFrame {
 		if(u!=null) lblUser.setText("User: "+u.getUsername());
 		contentPane.add(lblUser);
 		
+		
+		
+		
+		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 600, 30);
+		menuBar.setBounds(40, 42, 640, 30);
 		contentPane.add(menuBar);
 		
 		btnAñadirPreguntasPronosticos = new JButton("Añadir Preguntas y Pronosticos");
@@ -205,7 +211,10 @@ public class AdminGUI extends JFrame {
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
 		lblLogoUser.setBounds(20, 8, 30, 25);
 		contentPane.add(lblLogoUser);
+		
+		
 	}
+	
 	
 	private void jButtonClose_actionPerformed(ActionEvent e) {
 			this.setVisible(false);

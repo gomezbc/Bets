@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -14,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 import domain.*;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ListUserBetsGUI extends JPanel {
 
@@ -39,6 +43,17 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
+		JButton btnNewButton2 = new JButton("AYUDA");
+		btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton2.setBounds(731, 504, 89, 23);
+		btnNewButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog a = new AyudaUserGUI();
+				a.setVisible(true);
+				
+			}
+		});
+		this.add(btnNewButton2);
 		setSize(new Dimension(886, 541));
 		setLayout(null);
 		

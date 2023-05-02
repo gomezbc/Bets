@@ -13,6 +13,8 @@ import businessLogic.BLFacade;
 import domain.User;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -49,6 +51,18 @@ public class AddSaldoGUI extends JPanel {
 	
 	
 	public void jbInit() {
+		JButton btnNewButton2 = new JButton("AYUDA");
+		btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton2.setBounds(726, 46, 89, 23);
+		btnNewButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog a = new AyudaUserGUI();
+				a.setVisible(true);
+				
+			}
+		});
+		this.add(btnNewButton2);
+		
 		setSize(new Dimension(886, 541));
 		
 		User userRegistered = MainGUI.getUserRegistered();

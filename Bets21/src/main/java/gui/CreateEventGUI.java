@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -63,6 +64,19 @@ public class CreateEventGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
+		
+		JButton btnNewButton = new JButton("AYUDA");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBounds(749, 42, 89, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog a = new AyudaAdminGUI();
+				a.setVisible(true);
+				
+			}
+		});
+		this.add(btnNewButton);
+		
 		setMinimumSize(new Dimension(886, 541));
 		setSize(new Dimension(886, 541));
 

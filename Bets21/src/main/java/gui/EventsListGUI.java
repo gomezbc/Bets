@@ -38,6 +38,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -87,6 +89,36 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
+		User u = MainGUI.getUserRegistered();
+		if(u.isAdmin()) {
+			JButton btnNewButton = new JButton("AYUDA");
+			btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+			btnNewButton.setBounds(749, 42, 89, 23);
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog a = new AyudaAdminGUI();
+					a.setVisible(true);
+					
+				}
+			});
+			this.add(btnNewButton);
+			
+		} else {
+			JButton btnNewButton2 = new JButton("AYUDA");
+			btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
+			btnNewButton2.setBounds(749, 42, 89, 23);
+			btnNewButton2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JDialog a = new AyudaUserGUI();
+					a.setVisible(true);
+					
+				}
+			});
+			this.add(btnNewButton2);	
+			
+		}
+		
+		
 		setMinimumSize(new Dimension(886, 541));
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
@@ -209,7 +241,9 @@ public class EventsListGUI extends JPanel {
 					User u = MainGUI.getUserRegistered();
 					if(u==null) NoUserGUI.updateFrame(new EventInfoNoUserGUI(ev));
 					else if(!u.isAdmin()) UserGUI.updateFrame(new EventInfoUserGUI(ev));
-					else if(AdminGUI.getCurrentTab().equals("EventInfoAdminGUI"))AdminGUI.updateFrame(new EventInfoAdminGUI(ev));
+					else if(AdminGUI.getCurrentTab().equals("EventInfoAdminGUI")) {
+						AdminGUI.updateFrame(new EventInfoAdminGUI(ev));
+					}
 					else if(AdminGUI.getCurrentTab().equals("CloseEventGUI"))AdminGUI.updateFrame(new CloseEventGUI(ev));
 				}
 			}
