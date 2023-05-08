@@ -26,20 +26,25 @@ public class AddSaldoGUI extends JPanel {
 	
 	private JLabel lblNewLabel = new JLabel("Dinero a añadir : ");
 	private JLabel lblInfoSaldo = new JLabel("Saldo actual:");
-	private JButton btnNewButton = new JButton("Aceptar");
+	private JButton btnNewButton = new JButton("Añadir");
 	private final JLabel lblSaldo = new JLabel(" ");
+	private final JLabel lblNewLabel_1 = new JLabel("Sacar dinero:");
+	private final JTextField textField_1 = new JTextField();
+	private JLabel lblNewLabel_2;
 	private JLabel lblDineroAñadido = new JLabel("Dinero añadido");
-	private final JLabel lblError = new JLabel("Tiene que ser positivo");
+	private JLabel lblError = new JLabel("Tiene que ser positivo");
+
 	
 	
 	/**
 	 * Create the panel.
 	 */
 	public AddSaldoGUI() {
+		textField_1.setBounds(201, 215, 72, 30);
+		textField_1.setColumns(10);
 			
 		try
 		{
-			
 			jbInit();
 		}
 		catch(Exception e)
@@ -65,6 +70,7 @@ public class AddSaldoGUI extends JPanel {
 		
 		setSize(new Dimension(886, 541));
 		
+		
 		User userRegistered = MainGUI.getUserRegistered();
 		lblSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
 		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
@@ -72,13 +78,13 @@ public class AddSaldoGUI extends JPanel {
 		setLayout(null);
 
 		lblNewLabel.setFont(new Font("Roboto", Font.BOLD, 16));
-		lblNewLabel.setBounds(62, 94, 154, 51);
+		lblNewLabel.setBounds(64, 119, 154, 51);
 		add(lblNewLabel);
 		
 		textField = new JTextField();
 		textField.setBorder(null);
 		textField.setFont(new Font("Roboto Black", Font.PLAIN, 16));
-		textField.setBounds(203, 102, 72, 30);
+		textField.setBounds(223, 130, 72, 30);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -92,26 +98,30 @@ public class AddSaldoGUI extends JPanel {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		btnNewButton.setBounds(127, 158, 112, 37);
+		btnNewButton.setBounds(394, 126, 112, 37);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				User userRegistered = MainGUI.getUserRegistered();
 				BLFacade facade = MainGUI.getBusinessLogic();
 				if (Float.parseFloat(textField.getText()) > 0){
-					lblError.setVisible(false);
+					lblNewLabel_2.setVisible(true);
 					try {
 						facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));//Actualizamos los datos del usuario
+						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
 						lblDineroAñadido.setVisible(true);
+						lblError.setVisible(false);
 						textField.setText("");
+					} catch (NumberFormatException e3) {
+						lblError.setVisible(true);
+						lblDineroAñadido.setVisible(false);
 						
 					} catch (Exception e2) {
 						lblDineroAñadido.setVisible(false);
-						e2.printStackTrace();
-			    	
-					}
+						lblError.setVisible(false);
+					
+				}  
 				} else {
-					lblError.setVisible(true);
+
 					
 				}
 				UserGUI.updateFrame(new AddSaldoGUI());
@@ -120,23 +130,55 @@ public class AddSaldoGUI extends JPanel {
 		add(btnNewButton);
 		lblSaldo.setBounds(222, 52, 72, 24);
 		add(lblSaldo);
-		lblDineroAñadido.setFont(new Font("Roboto", Font.BOLD, 14));
+		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(64, 212, 142, 30);
 		
-	
+		add(lblNewLabel_1);
 		
-		lblDineroAñadido.setVisible(false);
-		lblDineroAñadido.setForeground(new Color(199, 21, 133));
-		lblDineroAñadido.setBackground(Color.BLACK);
-		lblDineroAñadido.setBounds(70, 214, 129, 30);
-		add(lblDineroAñadido);
-		lblError.setFont(new Font("Roboto", Font.BOLD, 14));
+		add(textField_1);
+		
+		JButton btnNewButton_1 = new JButton("Sacar");
+		btnNewButton_1.setFont(new Font("Dialog", Font.BOLD, 16));
+		btnNewButton_1.setBounds(339, 212, 112, 37);
+		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblNewLabel_2.setVisible(false);
+				User userRegistered = MainGUI.getUserRegistered();
+				BLFacade facade = MainGUI.getBusinessLogic();
+				if (Float.parseFloat(textField_1.getText()) > 0){
+					try {
+						lblNewLabel_2.setText("Dinero añadido");
+						lblNewLabel_2.setVisible(true);
+						
+						facade.modifySaldo(-(Float.parseFloat(textField_1.getText())), userRegistered.getDni());
+						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
+						textField.setText("");
+					} catch (NumberFormatException e3) {
+
+						
+					} catch (Exception e2) {
+
+						//e2.printStackTrace();
+			    	
+					}
+				} else {
+
+					
+				}
+				UserGUI.updateFrame(new AddSaldoGUI());
+			}
+		});
 		
 		
-		lblError.setVisible(false);
-		lblError.setForeground(new Color(255, 0, 0));
-		lblError.setBounds(199, 214, 169, 30);
-		
-		add(lblError);
+		add(btnNewButton_1);
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel_2.setForeground(new Color(46, 139, 87));
+		lblNewLabel_2.setBounds(79, 299, 134, 23);
+		add(lblNewLabel_2);
+
+
 		
 	}
 }
