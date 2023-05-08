@@ -22,6 +22,7 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 	private boolean isClosed = false;
 	
 	private Color finished = new Color(255,204,128);
+	private Color onGoing = new Color(224,224,224);
 	private Color win = new Color(139,195,74);
 	private Color lose = new Color(255,205,210);
 	
@@ -39,7 +40,7 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 		List<String> dateList = Arrays.asList(today.toLocaleString().split(","));
 		String todayDate = dateList.get(0)+dateList.get(1);
 		String betDate = ((String) jtable.getModel().getValueAt(row, 0));
-		if(todayDate.compareTo(betDate)>0){
+		if(todayDate.compareTo(betDate)<=0){
 			hasFinished = true;
 		}
 		
@@ -58,6 +59,8 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 			this.setBackground(win);
 		}else if(!hasWin && isClosed){
 			this.setBackground(lose);
+		}else {
+			this.setBackground(onGoing);
 		}
 		
 		return this;

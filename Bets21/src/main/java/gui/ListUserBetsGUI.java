@@ -102,7 +102,19 @@ public class ListUserBetsGUI extends JPanel {
             public int compare(Object o1, Object o2) {
                 Vector<Object> v1 = (Vector<Object>) o1;
                 Vector<Object> v2 = (Vector<Object>) o2;
-                return ((String) v1.get(0)).compareTo((String) v2.get(0));
+                String[] v1Date =  ((String) v1.get(0)).split(" ");
+                String[] v2Date =  ((String) v2.get(0)).split(" ");
+                //Divide el string en mes,dia y año
+                //Si es el mismo año, mira el mes. Si es el mismo mes, mira el dia.
+                if(v1Date[2].compareTo(v2Date[2]) == 0){
+                	if(v1Date[0].compareTo(v2Date[0]) == 0){
+                		return (v1Date[1]).compareTo(v2Date[1]);
+                	}else {
+                		return (v1Date[0]).compareTo(v2Date[0]);
+                	}
+                }else {
+                	return (v1Date[2]).compareTo(v2Date[2]);
+                }
             }
 		});
 		tableModelBets.setDataVector(tableData, columnNames);
