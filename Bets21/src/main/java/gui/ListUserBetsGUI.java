@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import domain.*;
 import java.awt.Dimension;
@@ -63,7 +64,11 @@ public class ListUserBetsGUI extends JPanel {
 		scrollPane.setBounds(12, 12, 862, 481);
 		add(scrollPane);
 		
-		tableBets = new JTable();
+		tableBets = new JTable() {
+			public TableCellRenderer getCellRenderer(int row, int column) {
+		        return new BetsTableCellRender();
+		    }
+		};
 		tableBets.setFont(new Font("Roboto", Font.PLAIN, 14));
 		tableBets.setBorder(null);
 		tableBets.setBounds(0, 0, 1, 1);
@@ -79,6 +84,7 @@ public class ListUserBetsGUI extends JPanel {
 	
 	public void updateTable() {
 		tableModelBets.setDataVector(null, columnNames);
+		
 		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = u.getBets();
 		Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
@@ -91,7 +97,7 @@ public class ListUserBetsGUI extends JPanel {
 			row.add(b.getForecast().getQuestion().getQuestion());
 			row.add(b.getForecast().getDescription());
 			row.add(String.format("%.2f", b.getForecast().getGain()));
-			row.add(b.getBetMoney());
+			row.add(String.format("%.2f", b.getBetMoney()));
 			if(b.getForecast().getQuestion().getResult()==null) row.add(String.format("%.2f", b.getBetMoney()));
 			else {
 				if(b.getForecast().getQuestion().getResult() == b.getForecast()) {
