@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Font;
 
-public class EventPanel extends JPanel {
+public class EventInfoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblDescription;
 	private JLabel lblDate;
@@ -26,11 +26,11 @@ public class EventPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EventPanel(Event ev, int width, int height) {
+	public EventInfoPanel(Event ev, int width, int height) {
 		jbInit(ev, width, height);
 	}
 	
-	public EventPanel(Event ev) {
+	public EventInfoPanel(Event ev) {
 		jbInit(ev, 806, 66);
 	}
 	
@@ -65,7 +65,7 @@ public class EventPanel extends JPanel {
 		logoLocal.setBounds(62, 5, (int) (height*0.7), (int) (height*0.7));
 		URL localF = null;
 		try {
-			localF = EventPanel.class.getResource("/icons/laliga/"+local+".png");
+			localF = EventInfoPanel.class.getResource("/icons/laliga/"+local+".png");
 			ImageIcon icon = new ImageIcon(localF);
 			Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
 			logoLocal.setIcon(new ImageIcon(scaledIcon));
@@ -81,7 +81,7 @@ public class EventPanel extends JPanel {
 		logoVisitante.setBounds(622, 5, (int) (height*0.7), (int) (height*0.7));
 		URL visitanteF = null;
 		try {
-			visitanteF = EventPanel.class.getResource("/icons/laliga/"+visitante+".png");
+			visitanteF = EventInfoPanel.class.getResource("/icons/laliga/"+visitante+".png");
 			ImageIcon icon = new ImageIcon(visitanteF);
 			Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
 			logoVisitante.setIcon(new ImageIcon(scaledIcon));
@@ -94,7 +94,7 @@ public class EventPanel extends JPanel {
 		
 		if(localF!=null && visitanteF!=null) {
 			lbllogoLiga = new JLabel("");
-			ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/laliga/laliga.png"));
+			ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/laliga/laliga.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(50, 55, Image.SCALE_SMOOTH);
 			lbllogoLiga.setIcon(new ImageIcon(scaledIcon));
 			lbllogoLiga.setBounds(302, 5, 55, 17);
@@ -104,13 +104,13 @@ public class EventPanel extends JPanel {
 	
 	public void updateBounds(int width, int height) {
 		this.setSize(width, height);
-		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/laliga/"+local+".png"));
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/laliga/"+local+".png"));
 		Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
 		logoLocal.setIcon(new ImageIcon(scaledIcon));
 		logoLocal.setSize((int) (height*0.7), (int) (height*0.7));
 		logoLocal.setBounds(new Rectangle(62, (int) (height*0.1), logoLocal.getWidth(), logoLocal.getHeight()));
 		
-		icon = new ImageIcon(EventPanel.class.getResource("/icons/laliga/"+visitante+".png"));
+		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/laliga/"+visitante+".png"));
 		scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
 		logoVisitante.setIcon(new ImageIcon(scaledIcon));
 		logoVisitante.setSize((int) (height*0.7), (int) (height*0.7));

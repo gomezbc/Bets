@@ -7,11 +7,11 @@ import javax.swing.table. DefaultTableCellRenderer;
 
 import domain.Event;
 
-public class MyTableCellRender extends DefaultTableCellRenderer{
+public class EventInfoCellRender extends DefaultTableCellRenderer{
 	private Vector<Event> ev;
 	private static int index=0;
 	
-	public MyTableCellRender(Vector<Event> ev) {	
+	public EventInfoCellRender(Vector<Event> ev) {	
 		this.ev = ev;
 	}
 
@@ -19,7 +19,7 @@ public class MyTableCellRender extends DefaultTableCellRenderer{
 	public Component getTableCellRendererComponent (JTable jtable, Object o, boolean bln, boolean bin, int i, int i1) {
 		Component com = super.getTableCellRendererComponent (jtable, o, bln, bln, i, i);
 		if(index<ev.size()) {
-			EventPanel ep = new EventPanel(ev.get(index), jtable.getWidth(), jtable.getRowHeight());
+			EventInfoPanel ep = new EventInfoPanel(ev.get(index), jtable.getWidth(), jtable.getRowHeight());
 			index++;
 			return ep;
 		}
@@ -31,7 +31,7 @@ public class MyTableCellRender extends DefaultTableCellRenderer{
 	}
 
 	public static void setIndex(int index) {
-		MyTableCellRender.index = index;
+		EventInfoCellRender.index = index;
 	}
 
 

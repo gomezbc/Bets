@@ -78,17 +78,6 @@ public class EventInfoUserGUI extends JPanel {
 	
 	public void jbInit(Event ev) throws Exception
 	{
-		JButton btnNewButton2 = new JButton("AYUDA");
-		btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton2.setBounds(758, 0, 89, 23);
-		btnNewButton2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaUserGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton2);
 		
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
@@ -172,7 +161,7 @@ public class EventInfoUserGUI extends JPanel {
 		});
 
 		
-		EventInfo = new EventPanel(ev, 806, 100);
+		EventInfo = new EventInfoPanel(ev, 806, 100);
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		

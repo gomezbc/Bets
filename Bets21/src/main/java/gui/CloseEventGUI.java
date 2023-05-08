@@ -30,7 +30,6 @@ import exceptions.ForecastDoesntExist;
 import exceptions.QuestionDoesntExist;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
 import java.awt.event.ActionListener;
@@ -78,19 +77,6 @@ public class CloseEventGUI extends JPanel {
 	
 	public void jbInit(Event ev) throws Exception
 	{
-		
-		
-		JButton btnNewButton = new JButton("AYUDA");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(743, 0, 89, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaAdminGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton);
 		
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
@@ -174,7 +160,7 @@ public class CloseEventGUI extends JPanel {
 		});
 
 		
-		EventInfo = new EventPanel(ev, 806, 100);
+		EventInfo = new EventInfoPanel(ev, 806, 100);
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		

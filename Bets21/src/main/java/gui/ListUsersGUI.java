@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import businessLogic.BLFacade;
 import domain.User;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -57,18 +56,6 @@ public class ListUsersGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() {
-		
-		JButton btnNewButton = new JButton("AYUDA");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(747, 491, 89, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaAdminGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton);
 		
 		lblResBtn.setVisible(false);
 		this.setLayout(null);
@@ -128,7 +115,7 @@ public class ListUsersGUI extends JPanel {
 				updateTable();
 			}
 		});
-		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/users-remove.png"));
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/users-remove.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnEliminarUsuario.setIcon(new ImageIcon(scaledIcon));
 		btnEliminarUsuario.setBounds(333, 487, 180, 30);

@@ -13,10 +13,10 @@ import businessLogic.BLFacade;
 import domain.User;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.border.EmptyBorder;
 
 public class AddSaldoGUI extends JPanel {
 
@@ -40,7 +40,8 @@ public class AddSaldoGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public AddSaldoGUI() {
-		textField_1.setBounds(201, 215, 72, 30);
+		textField_1.setBorder(new EmptyBorder(0, 0, 0, 0));
+		textField_1.setBounds(223, 214, 110, 30);
 		textField_1.setColumns(10);
 			
 		try
@@ -56,24 +57,13 @@ public class AddSaldoGUI extends JPanel {
 	
 	
 	public void jbInit() {
-		JButton btnNewButton2 = new JButton("AYUDA");
-		btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton2.setBounds(726, 46, 89, 23);
-		btnNewButton2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaUserGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton2);
 		
 		setSize(new Dimension(886, 541));
 		
 		
 		User userRegistered = MainGUI.getUserRegistered();
 		lblSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
-		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
+		lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
 		
 		setLayout(null);
 
@@ -84,7 +74,7 @@ public class AddSaldoGUI extends JPanel {
 		textField = new JTextField();
 		textField.setBorder(null);
 		textField.setFont(new Font("Roboto Black", Font.PLAIN, 16));
-		textField.setBounds(223, 130, 72, 30);
+		textField.setBounds(223, 130, 110, 30);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -93,7 +83,6 @@ public class AddSaldoGUI extends JPanel {
 		lblInfoSaldo.setBounds(64, 46, 139, 37);
 		add(lblInfoSaldo);
 		
-		lblSaldo.setText( Float.toString(userRegistered.getSaldo()));
 		btnNewButton.setFont(new Font("Roboto", Font.BOLD, 16));
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -130,7 +119,7 @@ public class AddSaldoGUI extends JPanel {
 		add(btnNewButton);
 		lblSaldo.setBounds(222, 52, 72, 24);
 		add(lblSaldo);
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
+		lblNewLabel_1.setFont(new Font("Roboto", Font.BOLD, 16));
 		lblNewLabel_1.setBounds(64, 212, 142, 30);
 		
 		add(lblNewLabel_1);
@@ -138,8 +127,9 @@ public class AddSaldoGUI extends JPanel {
 		add(textField_1);
 		
 		JButton btnNewButton_1 = new JButton("Sacar");
-		btnNewButton_1.setFont(new Font("Dialog", Font.BOLD, 16));
-		btnNewButton_1.setBounds(339, 212, 112, 37);
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setFont(new Font("Roboto", Font.BOLD, 16));
+		btnNewButton_1.setBounds(394, 210, 112, 37);
 		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

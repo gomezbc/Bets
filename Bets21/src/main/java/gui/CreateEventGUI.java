@@ -1,22 +1,18 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Vector;
+
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -27,10 +23,8 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import exceptions.EventAlreadyExist;
 import domain.Event;
-import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableCellRenderer;
 
 import java.awt.Dimension;
 
@@ -64,18 +58,6 @@ public class CreateEventGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
-		
-		JButton btnNewButton = new JButton("AYUDA");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(749, 42, 89, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaAdminGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton);
 		
 		setMinimumSize(new Dimension(886, 541));
 		setSize(new Dimension(886, 541));
@@ -189,7 +171,7 @@ public class CreateEventGUI extends JPanel {
 							java.util.Date fechaConHoraCero = calendario.getTime();
 							
 							Event ev = new Event(textField.getText(), fechaConHoraCero);
-							preview = new EventPanel(ev, preview.getWidth(), preview.getHeight()-30);
+							preview = new EventInfoPanel(ev, preview.getWidth(), preview.getHeight()-30);
 							preview.setBounds(40, 379, 804, 150);
 							add(preview);
 							preview.repaint();

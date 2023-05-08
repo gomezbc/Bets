@@ -38,7 +38,6 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -89,36 +88,6 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
-		User u = MainGUI.getUserRegistered();
-		if(u.isAdmin()) {
-			JButton btnNewButton = new JButton("AYUDA");
-			btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-			btnNewButton.setBounds(749, 42, 89, 23);
-			btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog a = new AyudaAdminGUI();
-					a.setVisible(true);
-					
-				}
-			});
-			this.add(btnNewButton);
-			
-		} else {
-			JButton btnNewButton2 = new JButton("AYUDA");
-			btnNewButton2.setFont(new Font("Tahoma", Font.BOLD, 11));
-			btnNewButton2.setBounds(749, 42, 89, 23);
-			btnNewButton2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JDialog a = new AyudaUserGUI();
-					a.setVisible(true);
-					
-				}
-			});
-			this.add(btnNewButton2);	
-			
-		}
-		
-		
 		setMinimumSize(new Dimension(886, 541));
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
@@ -198,13 +167,13 @@ public class EventsListGUI extends JPanel {
 						for(int i=0;i<currentMax;i++){
 							currentEvents.add(i, todayEvents.get(i));
 						}
-						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(currentEvents));
-						MyTableCellRender.setIndex(0);
+						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(currentEvents));
+						EventInfoCellRender.setIndex(0);
 						tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
 						for (domain.Event ev:currentEvents){
 							Vector<Object> row = new Vector<Object>();
 							System.out.println("Events "+ev);
-							row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
+							row.add(new EventInfoPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 							row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 							tableModelEvents.addRow(row);
 							tableModelEvents.fireTableDataChanged();
@@ -269,7 +238,7 @@ public class EventsListGUI extends JPanel {
 		};
 		this.addComponentListener(componentListener);*/
 		
-		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/right.png"));
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/right.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		next = new JButton(new ImageIcon(scaledIcon));
 		next.addActionListener(new ActionListener() {
@@ -287,7 +256,7 @@ public class EventsListGUI extends JPanel {
 				for (domain.Event ev:currentEvents){
 					Vector<Object> row = new Vector<Object>();
 					System.out.println("Events "+ev);
-					row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
+					row.add(new EventInfoPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 					tableModelEvents.addRow(row);
 				}
@@ -301,7 +270,7 @@ public class EventsListGUI extends JPanel {
 		next.setVisible(false);
 		add(next);
 		
-		icon = new ImageIcon(EventPanel.class.getResource("/icons/left.png"));
+		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/left.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		previous = new JButton(new ImageIcon(scaledIcon));
 		previous.addActionListener(new ActionListener() {
@@ -318,7 +287,7 @@ public class EventsListGUI extends JPanel {
 				for (domain.Event ev:currentEvents){
 					Vector<Object> row = new Vector<Object>();
 					System.out.println("Events "+ev);
-					row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
+					row.add(new EventInfoPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 					row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 					tableModelEvents.addRow(row);
 				}
@@ -340,7 +309,7 @@ public class EventsListGUI extends JPanel {
 			for (domain.Event ev:currentEvents){
 				Vector<Object> row = new Vector<Object>();
 				System.out.println("Events "+ev);
-				row.add(new EventPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
+				row.add(new EventInfoPanel(ev, tableEvents.getColumnModel().getColumn(0).getWidth(), tableEvents.getRowHeight()));
 				row.add(ev); // ev object added in order to obtain it with tableModelEvents.getValueAt(i,1)
 				tableModelEvents.addRow(row);
 			}
@@ -352,8 +321,8 @@ public class EventsListGUI extends JPanel {
 	}
 	
 	public void renderEventsTable() {
-		MyTableCellRender.setIndex(0);
-		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new MyTableCellRender(currentEvents));
+		EventInfoCellRender.setIndex(0);
+		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(currentEvents));
 		tableModelEvents.fireTableDataChanged();
 		tableEvents.repaint();
 		if(todayEvents!=null && currentIndex+4<todayEvents.size()) next.setVisible(true);

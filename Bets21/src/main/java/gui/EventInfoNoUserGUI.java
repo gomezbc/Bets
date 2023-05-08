@@ -151,7 +151,7 @@ public class EventInfoNoUserGUI extends JPanel {
 		});
 
 		
-		EventInfo = new EventPanel(ev, 806, 100);
+		EventInfo = new EventInfoPanel(ev, 806, 100);
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		

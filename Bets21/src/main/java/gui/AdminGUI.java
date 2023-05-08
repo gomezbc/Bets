@@ -42,6 +42,7 @@ public class AdminGUI extends JFrame {
 
 	
 	private static String currentTab = null;
+	private static JButton btnHelp;
 
 	/**
 	 * Launch the application.
@@ -79,7 +80,7 @@ public class AdminGUI extends JFrame {
 		btnLogOut.setBorder(null);
 		btnLogOut.setBackground(new Color(17, 110, 80));
 		btnLogOut.setToolTipText("Log Out");
-		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/exit.png"));
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/exit.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
@@ -88,7 +89,7 @@ public class AdminGUI extends JFrame {
 				jButtonClose_actionPerformed(e);
 			}
 		});
-		btnLogOut.setBounds(775, 0, 35, 35);
+		btnLogOut.setBounds(839, 5, 35, 35);
 		contentPane.add(btnLogOut);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
@@ -98,8 +99,6 @@ public class AdminGUI extends JFrame {
 		        // Actualizar el tamaño del JTabbedPane
 		        int nuevoAncho = e.getComponent().getWidth();
 		        int nuevoAlto = e.getComponent().getHeight();
-		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
-		        btnLogOut.setAlignmentY(nuevoAncho-40);
 		        displayFrame.setBounds(new Rectangle(0, 70, nuevoAncho, contentPane.getHeight()-70));
 		        if(displayFrame instanceof EventsListGUI) ((EventsListGUI) displayFrame).renderEventsTable();
 		    }
@@ -117,6 +116,24 @@ public class AdminGUI extends JFrame {
 		User u = MainGUI.getUserRegistered();
 		if(u!=null) lblUser.setText("User: "+u.getUsername());
 		contentPane.add(lblUser);
+		
+		
+		
+		btnHelp = new JButton("");
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog a = new AyudaAdminGUI();
+				a.setVisible(true);
+			}
+		});
+		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/help.png"));
+		scaledIcon = icon.getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+		btnHelp.setIcon(new ImageIcon(scaledIcon));
+		btnHelp.setFont(new Font("Dialog", Font.BOLD, 11));
+		btnHelp.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnHelp.setBackground(new Color(0, 145, 202));
+		btnHelp.setBounds(794, 5, 35, 35);
+		contentPane.add(btnHelp);
 		
 		
 		
@@ -206,13 +223,11 @@ public class AdminGUI extends JFrame {
 		btnListUser.setBackground(Color.WHITE);
 		menuBar.add(btnListUser);
 		
-		icon = new ImageIcon(EventPanel.class.getResource("/icons/user.png"));
+		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/user.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
 		lblLogoUser.setBounds(20, 8, 30, 25);
 		contentPane.add(lblLogoUser);
-		
-		
 	}
 	
 	
@@ -229,11 +244,12 @@ public class AdminGUI extends JFrame {
         displayFrame.setBounds(new Rectangle(0, 70, contentPane.getWidth(), contentPane.getHeight()-70));
 		contentPane.add(displayFrame);
 		contentPane.add(lblLogoUser);
-		contentPane.revalidate();
-		contentPane.repaint();
 		User u = MainGUI.getUserRegistered();
 		if(u!=null) lblUser.setText("User: "+u.getUsername());
 		contentPane.add(lblUser);
+		contentPane.add(btnHelp);
+		contentPane.revalidate();
+		contentPane.repaint();
 	}
 
 	public static String getCurrentTab() {

@@ -68,7 +68,7 @@ public class NoUserGUI extends JFrame {
 		btnLogOut.setBorder(null);
 		btnLogOut.setBackground(new Color(17, 110, 80));
 		btnLogOut.setToolTipText("Log Out");
-		ImageIcon icon = new ImageIcon(EventPanel.class.getResource("/icons/exit.png"));
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/exit.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
@@ -77,7 +77,7 @@ public class NoUserGUI extends JFrame {
 				jButtonClose_actionPerformed(e);
 			}
 		});
-		btnLogOut.setBounds(810, 8, 35, 35);
+		btnLogOut.setBounds(839, 5, 35, 35);
 		contentPane.add(btnLogOut);
 		
 		//Actualiza el tamaño de los componentes respecto al frame
@@ -87,8 +87,6 @@ public class NoUserGUI extends JFrame {
 		        // Actualizar el tamaño del JTabbedPane
 		        int nuevoAncho = e.getComponent().getWidth();
 		        int nuevoAlto = e.getComponent().getHeight();
-		        btnLogOut.setBounds(new Rectangle(nuevoAncho-40,0,btnLogOut.getWidth(),btnLogOut.getHeight()));
-		        btnLogOut.setAlignmentY(nuevoAncho-40);
 		        displayFrame.setBounds(new Rectangle(0, 70, nuevoAncho, contentPane.getHeight()-70));
 		        if(displayFrame instanceof EventsListGUI) ((EventsListGUI) displayFrame).renderEventsTable();
 		    }
@@ -126,7 +124,7 @@ public class NoUserGUI extends JFrame {
 		btnHome.setBackground(Color.WHITE);
 		btnHome.setBorder(new EmptyBorder(3,3,3,3));
 		
-		icon = new ImageIcon(EventPanel.class.getResource("/icons/user.png"));
+		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/user.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
 		lblLogoUser.setBounds(20, 8, 30, 25);

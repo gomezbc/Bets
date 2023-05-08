@@ -17,16 +17,12 @@ import java.awt.event.MouseEvent;
 import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
-import java.text.DateFormat;
-import java.util.Locale;
 import java.util.Calendar;
 import java.util.Date;
 
 import domain.Event;
 import domain.Forecast;
 import domain.Question;
-import domain.User;
-import exceptions.BetAlreadyExist;
 import exceptions.EventFinished;
 import exceptions.ForecastAlreadyExist;
 import exceptions.QuestionAlreadyExist;
@@ -34,15 +30,12 @@ import exceptions.QuestionDoesntExist;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 
 
 public class EventInfoAdminGUI extends JPanel {
@@ -95,18 +88,6 @@ public class EventInfoAdminGUI extends JPanel {
 	
 	public void jbInit(Event ev) throws Exception
 	{
-		
-		JButton btnNewButton = new JButton("AYUDA");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(758, 3, 89, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JDialog a = new AyudaAdminGUI();
-				a.setVisible(true);
-				
-			}
-		});
-		this.add(btnNewButton);
 		
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
@@ -190,7 +171,7 @@ public class EventInfoAdminGUI extends JPanel {
 		});
 
 		
-		EventInfo = new EventPanel(ev, 806, 100);
+		EventInfo = new EventInfoPanel(ev, 806, 100);
 		EventInfo.setBounds(40, 37, 807, 165);
 		add(EventInfo);
 		
