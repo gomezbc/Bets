@@ -1,24 +1,21 @@
 package gui;
 
-import java.util.Vector;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import domain.*;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import domain.Bet;
+import domain.User;
 
 public class ListUserBetsGUI extends JPanel {
 
@@ -54,6 +51,7 @@ public class ListUserBetsGUI extends JPanel {
 		add(scrollPane);
 		
 		tableBets = new JTable() {
+
 			public TableCellRenderer getCellRenderer(int row, int column) {
 		        return new BetsTableCellRender();
 		    }

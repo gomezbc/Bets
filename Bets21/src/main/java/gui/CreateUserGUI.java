@@ -11,15 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
-import domain.User;
 import exceptions.UserAlreadyExist;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
 
 public class CreateUserGUI extends JFrame {
 

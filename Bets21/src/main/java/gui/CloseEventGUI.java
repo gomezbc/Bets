@@ -1,39 +1,33 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import businessLogic.BLFacade;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ResourceBundle;
-
-import javax.swing.JLabel;
-
-import java.util.Calendar;
-import java.util.Date;
-
 import domain.Event;
 import domain.Forecast;
 import domain.Question;
-
 import exceptions.EventHasntFinished;
 import exceptions.ForecastDoesntExist;
 import exceptions.QuestionDoesntExist;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
 

@@ -8,6 +8,7 @@ import javax.swing.table. DefaultTableCellRenderer;
 import domain.Event;
 
 public class EventInfoCellRender extends DefaultTableCellRenderer{
+	private static final long serialVersionUID = 1L;
 	private Vector<Event> ev;
 	private static int index=0;
 	

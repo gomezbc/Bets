@@ -7,8 +7,21 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 //import domain.Booking;
-import domain.*;
-import exceptions.*;
+import domain.Bet;
+import domain.Event;
+import domain.Forecast;
+import domain.Question;
+import domain.User;
+import exceptions.BetAlreadyExist;
+import exceptions.EventAlreadyExist;
+import exceptions.EventFinished;
+import exceptions.EventHasntFinished;
+import exceptions.ForecastAlreadyExist;
+import exceptions.ForecastDoesntExist;
+import exceptions.QuestionAlreadyExist;
+import exceptions.QuestionDoesntExist;
+import exceptions.UserAlreadyExist;
+import exceptions.UserDoesntExist;
 
 /**
  * Interface that specifies the business logic.

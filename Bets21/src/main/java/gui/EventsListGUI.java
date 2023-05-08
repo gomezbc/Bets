@@ -1,19 +1,13 @@
 package gui;
 
-import java.util.Vector;
-
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-
-import businessLogic.BLFacade;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -23,24 +17,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import javax.swing.JLabel;
-
-import com.toedter.calendar.JCalendar;
-
-import configuration.UtilDate;
-import domain.Event;
-import domain.User;
-
-import java.awt.Font;
-import java.awt.Image;
-
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.toedter.calendar.JCalendar;
+
+import businessLogic.BLFacade;
+import configuration.UtilDate;
+import domain.Event;
+import domain.User;
 
 
 public class EventsListGUI extends JPanel {

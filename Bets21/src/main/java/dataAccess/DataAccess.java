@@ -17,8 +17,19 @@ import javax.persistence.TypedQuery;
 
 import configuration.ConfigXML;
 import configuration.UtilDate;
-import domain.*;
-import exceptions.*;
+import domain.Bet;
+import domain.Event;
+import domain.Forecast;
+import domain.Question;
+import domain.User;
+import exceptions.BetAlreadyExist;
+import exceptions.EventAlreadyExist;
+import exceptions.ForecastAlreadyExist;
+import exceptions.ForecastDoesntExist;
+import exceptions.QuestionAlreadyExist;
+import exceptions.QuestionDoesntExist;
+import exceptions.UserAlreadyExist;
+import exceptions.UserDoesntExist;
 
 /**
  * It implements the data access to the objectDb database

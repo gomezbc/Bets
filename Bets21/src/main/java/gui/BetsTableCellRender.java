@@ -1,22 +1,19 @@
 package gui;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table. DefaultTableCellRenderer;
 
-import configuration.UtilDate;
-import domain.Event;
-
 public class BetsTableCellRender extends DefaultTableCellRenderer{
 
+	private static final long serialVersionUID = 1L;
 	private boolean hasWin = false;
 	private boolean hasFinished = false;
 	private boolean isClosed = false;

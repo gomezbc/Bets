@@ -1,17 +1,18 @@
 package gui;
 
-import javax.swing.JPanel;
-
-import domain.Event;
-import java.net.URL;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Rectangle;
-import org.apache.commons.lang3.StringUtils;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.JPanel;
+
+import org.apache.commons.lang3.StringUtils;
+
+import domain.Event;
 
 public class EventInfoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;

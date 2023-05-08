@@ -14,21 +14,20 @@ import java.util.ResourceBundle;
  * @author Software Engineering teachers
  */
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
-
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
 
 
 public class MainGUI extends JFrame {
