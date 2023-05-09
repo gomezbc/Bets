@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
 import exceptions.QuestionDoesntExist;
+import javax.swing.ImageIcon;
 
 
 public class EventInfoUserGUI extends JPanel {
@@ -180,6 +182,9 @@ public class EventInfoUserGUI extends JPanel {
 		dineroApostar.setColumns(10);
 		
 		btnApostar = new JButton("Apostar"); 
+		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/bet.png"));
+		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnApostar.setIcon(new ImageIcon(scaledIcon));
 		btnApostar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblError.setVisible(false);
@@ -220,7 +225,7 @@ public class EventInfoUserGUI extends JPanel {
 		});
 		btnApostar.setBackground(Color.WHITE);
 		btnApostar.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnApostar.setBounds(599, 433, 103, 27);
+		btnApostar.setBounds(599, 433, 118, 27);
 		btnApostar.setEnabled(false);
 		add(btnApostar);
 		
