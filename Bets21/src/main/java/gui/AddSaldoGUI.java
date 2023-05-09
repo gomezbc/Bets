@@ -111,7 +111,7 @@ public class AddSaldoGUI extends JPanel {
 
 					
 				}
-				UserGUI.updateFrame(new AddSaldoGUI());
+				UserGUI.updateSaldo();
 			} });
 		
 		add(btnNewButton);

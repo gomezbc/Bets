@@ -13,6 +13,7 @@ import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
+import exceptions.BetDoesntExist;
 import exceptions.EventAlreadyExist;
 import exceptions.EventFinished;
 import exceptions.EventHasntFinished;
@@ -88,4 +89,6 @@ public interface BLFacade  {
 	@WebMethod public Forecast getForecast (Integer forecastNumber) throws ForecastDoesntExist;
 	
 	@WebMethod public void updateCloseEvent(Integer numResultado);
+	
+	@WebMethod public void removeBet(Integer betNumber) throws BetDoesntExist;
 }

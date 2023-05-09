@@ -14,6 +14,7 @@ import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
+import exceptions.BetDoesntExist;
 import exceptions.EventAlreadyExist;
 import exceptions.EventFinished;
 import exceptions.EventHasntFinished;
@@ -146,9 +147,10 @@ public class BLFacadeImplementation  implements BLFacade {
  	   try {   
  		   user = dbManager.createUser(username, passwd, dni, name, apellido, isAdmin);
  	   }catch(UserAlreadyExist e) {
- 		   throw new UserAlreadyExist();
+ 		   throw e;
+ 	   }finally {
+ 		   dbManager.close();
  	   }
- 	   dbManager.close();
  	   return user;
     }
     
@@ -160,9 +162,10 @@ public class BLFacadeImplementation  implements BLFacade {
 		try {
 			ev = dbManager.getQuestion(questionNumber);
 		} catch (QuestionDoesntExist e) {
-			throw new QuestionDoesntExist(e.getMessage());
+			throw e;
+		}finally {
+			dbManager.close();
 		}
-		dbManager.close();
 		return ( ev ) ;
 		
 	}
@@ -177,9 +180,10 @@ public class BLFacadeImplementation  implements BLFacade {
     	try {
     		event = dbManager.createEvent(description, eventDate);
     	} catch (EventAlreadyExist e){
-    		throw new EventAlreadyExist();
+    		throw e;
+    	}finally {
+    		dbManager.close();
     	}
-    	dbManager.close();
     	return event; 
     }
     
@@ -194,9 +198,10 @@ public class BLFacadeImplementation  implements BLFacade {
  	   try {
  		  forecast = dbManager.createForecast(description, gain, question);
  	   }catch(ForecastAlreadyExist e) {
- 		   throw new ForecastAlreadyExist(e.getMessage());
+ 		   throw e;
+ 	   }finally {
+ 		   dbManager.close();
  	   }
- 	   dbManager.close();
  	   return forecast;
     }
     
@@ -210,8 +215,9 @@ public class BLFacadeImplementation  implements BLFacade {
   		   u = dbManager.getUser(Dni);
   	   }catch(UserDoesntExist e) {
   		 throw new UserDoesntExist(e.getMessage());
+  	   }finally {
+  		   dbManager.close();
   	   }
- 	   dbManager.close();
  	   return u;
     }
     
@@ -229,8 +235,9 @@ public class BLFacadeImplementation  implements BLFacade {
     		dbManager.assignResult(questionNumber, forecastNumber);
     	}catch(Exception e) {
     		throw e;
+    	}finally {
+    		dbManager.close();
     	}
-  	   dbManager.close();
     }
     
     
@@ -265,8 +272,9 @@ public class BLFacadeImplementation  implements BLFacade {
 			throw e;
 		}catch (UserDoesntExist e1) {
 			throw e1;
+		}finally {
+			dbManager.close();
 		}
-		dbManager.close();
 		return bet;
     }
     
@@ -280,8 +288,9 @@ public class BLFacadeImplementation  implements BLFacade {
     		user = dbManager.modifySaldo(saldo, user2);
     	} catch ( Exception e) {
     		throw e;
+    	}finally {
+    		dbManager.close();
     	}
-    	dbManager.close();
     	return user;
     }
     
@@ -294,8 +303,9 @@ public class BLFacadeImplementation  implements BLFacade {
     		    ret = dbManager.getForecast(forecastNumber);
     	}catch(ForecastDoesntExist e) {
     		throw e;
+    	}finally {
+    		dbManager.close();
     	}
-    	dbManager.close();
     	return ret;
     }
     
@@ -317,6 +327,18 @@ public class BLFacadeImplementation  implements BLFacade {
     	}
 
     }
+
+	@Override
+	public void removeBet(Integer betNumber) throws BetDoesntExist {
+		dbManager.open(false);
+		try {
+            dbManager.removeBet(betNumber);
+		}catch(BetDoesntExist e) {
+        	throw e;
+        }finally {
+        	dbManager.close();
+        }
+	}
     
 
 }

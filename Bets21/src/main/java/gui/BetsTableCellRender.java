@@ -20,7 +20,7 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 	
 	private Color finished = new Color(255,204,128);
 	private Color onGoing = new Color(224,224,224);
-	private Color win = new Color(139,195,74);
+	private Color win = new Color(153,204,102);
 	private Color lose = new Color(255,205,210);
 	
 	public BetsTableCellRender() {	
@@ -33,11 +33,11 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 		this.setFont(new Font("Roboto", Font.PLAIN, 14));
 		this.setForeground(Color.black);
 
-		Date today = Calendar.getInstance().getTime();
-		List<String> dateList = Arrays.asList(today.toLocaleString().split(","));
-		String todayDate = dateList.get(0)+dateList.get(1);
-		String betDate = ((String) jtable.getModel().getValueAt(row, 0));
-		if(todayDate.compareTo(betDate)<=0){
+		Date todayDate = Calendar.getInstance().getTime();
+		long todayTime = todayDate.getTime();
+		String eventDate = ((String) jtable.getModel().getValueAt(row, 0));
+		long eventTime = Date.parse(eventDate);
+		if(todayTime>eventTime){
 			hasFinished = true;
 		}
 		
@@ -51,14 +51,19 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 		}
 
 		if(hasFinished && !isClosed){
-			this.setBackground(finished);
+			if(isSelected) this.setBackground(new Color(232,186,118));
+			else this.setBackground(finished);
 		}else if(hasWin && isClosed){
-			this.setBackground(win);
+			if(isSelected) this.setBackground(new Color(102,153,51));
+			else this.setBackground(win);
 		}else if(!hasWin && isClosed){
-			this.setBackground(lose);
+			if(isSelected) this.setBackground(new Color(255,153,153));
+			else this.setBackground(lose);
 		}else {
-			this.setBackground(onGoing);
+			if(isSelected) this.setBackground(new Color(204,204,204));
+			else this.setBackground(onGoing);
 		}
+
 		
 		return this;
 	}

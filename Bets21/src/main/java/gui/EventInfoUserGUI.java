@@ -107,6 +107,12 @@ public class EventInfoUserGUI extends JPanel {
 		scrollPaneForecast.setBounds(new Rectangle(40, 274, 406, 116));
 		scrollPaneForecast.setBounds(437, 214, 410, 170);
 		add(scrollPaneForecast);
+		tableForecast.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnApostar.setEnabled(true);
+			}
+		});
 		tableForecast.setFont(new Font("Roboto", Font.PLAIN, 14));
 		
 
@@ -124,6 +130,7 @@ public class EventInfoUserGUI extends JPanel {
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				btnApostar.setEnabled(false);
 				int i=tableQueries.getSelectedRow();
 				BLFacade facade=MainGUI.getBusinessLogic();
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
@@ -172,7 +179,7 @@ public class EventInfoUserGUI extends JPanel {
 		add(dineroApostar);
 		dineroApostar.setColumns(10);
 		
-		btnApostar = new JButton(ResourceBundle.getBundle("Etiquetas").getString("EventInfoGUI.btnApostar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		btnApostar = new JButton("Apostar"); 
 		btnApostar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblError.setVisible(false);
@@ -198,6 +205,7 @@ public class EventInfoUserGUI extends JPanel {
 						facade.createBet(u.getDni(), dineroBet, f);
 						facade.modifySaldo(-dineroBet, u.getDni());
 						MainGUI.setUserRegistered(facade.getUser(u.getDni()));//Actualizamos los datos del usuario
+						UserGUI.updateSaldo();
 						lblError.setText("Apuesta realizada");
 						lblError.setVisible(true);
 					}
@@ -213,6 +221,7 @@ public class EventInfoUserGUI extends JPanel {
 		btnApostar.setBackground(Color.WHITE);
 		btnApostar.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnApostar.setBounds(599, 433, 103, 27);
+		btnApostar.setEnabled(false);
 		add(btnApostar);
 		
 		lblError = new JLabel("");

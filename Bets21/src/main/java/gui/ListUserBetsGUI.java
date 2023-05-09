@@ -3,6 +3,7 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +12,22 @@ import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import businessLogic.BLFacade;
 import domain.Bet;
 import domain.User;
+import exceptions.BetDoesntExist;
+import exceptions.UserDoesntExist;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListUserBetsGUI extends JPanel {
 
@@ -25,6 +37,7 @@ public class ListUserBetsGUI extends JPanel {
 	private DefaultTableModel tableModelBets;
 	
 	private Vector<String> columnNames = new Vector<String>(Arrays.asList("Fecha","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"));
+	private JButton btnAnularApuesta;
 
 	/**
 	 * Create the panel.
@@ -56,6 +69,22 @@ public class ListUserBetsGUI extends JPanel {
 		        return new BetsTableCellRender();
 		    }
 		};
+		tableBets.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = tableBets.getSelectedRow();
+				Date todayDate = Calendar.getInstance().getTime();
+				long todayTime = todayDate.getTime();
+				String eventDate = ((String) tableBets.getModel().getValueAt(row, 0));
+				long eventTime = Date.parse(eventDate);
+				if(todayTime < eventTime) {
+					btnAnularApuesta.setEnabled(true);
+				}else {
+					btnAnularApuesta.setEnabled(false);
+				}
+			}
+		});
+		tableBets.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableBets.setFont(new Font("Roboto", Font.PLAIN, 14));
 		tableBets.setBorder(null);
 		tableBets.setBounds(0, 0, 1, 1);
@@ -67,11 +96,38 @@ public class ListUserBetsGUI extends JPanel {
 		
 		updateTable();
 
+		btnAnularApuesta = new JButton("Anular Apuesta");
+		btnAnularApuesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = tableBets.getSelectedRow();
+				int betNumber = ((int) tableBets.getModel().getValueAt(row, 7));
+				User u = MainGUI.getUserRegistered();
+				BLFacade facade = MainGUI.getBusinessLogic();
+				try {
+					facade.removeBet(betNumber);
+					try {
+						//Actualizamos el saldo del usuario
+						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+						UserGUI.updateSaldo();
+					} catch (UserDoesntExist e1) {
+						e1.printStackTrace();
+					}
+				} catch (BetDoesntExist e1) {
+					e1.printStackTrace();
+				}
+				tableModelBets.removeRow(row);
+			}
+		});
+		btnAnularApuesta.setEnabled(false);
+		btnAnularApuesta.setBackground(Color.WHITE);
+		btnAnularApuesta.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAnularApuesta.setBounds(357, 502, 137, 30);
+		add(btnAnularApuesta);
 	}
 	
 	public void updateTable() {
 		tableModelBets.setDataVector(null, columnNames);
-		
+		tableModelBets.addColumn("#B"); //Bet number, no aparece en la tabla, se usa para identificar la apuesta
 		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = u.getBets();
 		Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
@@ -93,6 +149,7 @@ public class ListUserBetsGUI extends JPanel {
 					row.add("- "+String.format("%.2f", b.getBetMoney()));
 				}
 			}
+			row.add(b.getBetNumber());
 			tableData.add(row);
 		}
 		tableData.sort(new Comparator<Object>() {
@@ -100,19 +157,11 @@ public class ListUserBetsGUI extends JPanel {
             public int compare(Object o1, Object o2) {
                 Vector<Object> v1 = (Vector<Object>) o1;
                 Vector<Object> v2 = (Vector<Object>) o2;
-                String[] v1Date =  ((String) v1.get(0)).split(" ");
-                String[] v2Date =  ((String) v2.get(0)).split(" ");
-                //Divide el string en mes,dia y año
-                //Si es el mismo año, mira el mes. Si es el mismo mes, mira el dia.
-                if(v1Date[2].compareTo(v2Date[2]) == 0){
-                	if(v1Date[0].compareTo(v2Date[0]) == 0){
-                		return (v1Date[1]).compareTo(v2Date[1]);
-                	}else {
-                		return (v1Date[0]).compareTo(v2Date[0]);
-                	}
-                }else {
-                	return (v1Date[2]).compareTo(v2Date[2]);
-                }
+                long t1 = Date.parse(v1.get(0).toString());
+                long t2 = Date.parse(v2.get(0).toString());
+                if(t1 < t2) return -1;
+                else if(t1 > t2) return 1;
+                else return 0;
             }
 		});
 		tableModelBets.setDataVector(tableData, columnNames);
@@ -121,5 +170,6 @@ public class ListUserBetsGUI extends JPanel {
 		tableBets.getColumnModel().getColumn(4).setPreferredWidth(20);
 		tableBets.getColumnModel().getColumn(5).setPreferredWidth(20);
 		tableBets.getColumnModel().getColumn(6).setPreferredWidth(20);
+		tableBets.getColumnModel().removeColumn(tableBets.getColumnModel().getColumn(7));
 	}
 }

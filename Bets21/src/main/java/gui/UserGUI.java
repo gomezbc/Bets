@@ -223,4 +223,12 @@ public class UserGUI extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
+	
+	public static void updateSaldo() {
+		User u = MainGUI.getUserRegistered();
+		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+String.format("%.2f", u.getSaldo()));
+		contentPane.add(lblUser);
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
 }

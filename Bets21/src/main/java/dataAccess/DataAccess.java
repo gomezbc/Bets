@@ -23,6 +23,7 @@ import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
+import exceptions.BetDoesntExist;
 import exceptions.EventAlreadyExist;
 import exceptions.ForecastAlreadyExist;
 import exceptions.ForecastDoesntExist;
@@ -352,6 +353,19 @@ public class DataAccess  {
  			return b;
 	}
 	
+	public void removeBet(Integer betNumber) throws BetDoesntExist{
+		System.out.println(">> DataAccess: removeBet => betNumber="+betNumber);
+		Bet b = db.find(Bet.class, betNumber);
+		if(b==null) {
+			System.out.println(">> DataAccess: removeBet => error BetDoesntExist: No hay una apuesta con este identificador "+betNumber);
+			throw new BetDoesntExist("No hay una apuesta con este identificador "+betNumber);
+		}
+		db.getTransaction().begin();
+		db.remove(b);
+		b.getUser().removeBet(b.getBetNumber());
+		b.getUser().setSaldo((float) (b.getUser().getSaldo() + b.getBetMoney()));
+		db.getTransaction().commit();
+	}
  
 	
 	

@@ -49,6 +49,15 @@ public class User {
 		return null;
 	}
 	
+	public void removeBet(Integer betNumber) {
+		for(int i=0; i<this.getBets().size(); i++) {
+			if(this.getBets().get(i).getBetNumber()== betNumber) {
+				this.getBets().remove(i);
+				return;
+			}
+		}
+	}
+	
 	public Vector<Bet> getBets() {
 		return bets;
 	}
