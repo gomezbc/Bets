@@ -25,7 +25,7 @@ public class AddSaldoGUI extends JPanel {
 	private JLabel lblNewLabel = new JLabel("Dinero a añadir : ");
 	private JLabel lblInfoSaldo = new JLabel("Saldo actual:");
 	private JButton btnNewButton = new JButton("Añadir");
-	private final JLabel lblSaldo = new JLabel(" ");
+	private final JLabel lblSaldo = new JLabel("");
 	private final JLabel lblNewLabel_1 = new JLabel("Sacar dinero:");
 	private final JTextField textField_1 = new JTextField();
 	private JLabel lblNewLabel_2;
@@ -38,6 +38,7 @@ public class AddSaldoGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public AddSaldoGUI() {
+		textField_1.setFont(new Font("Dialog", Font.PLAIN, 16));
 		textField_1.setBorder(new EmptyBorder(0, 0, 0, 0));
 		textField_1.setBounds(223, 214, 110, 30);
 		textField_1.setColumns(10);
@@ -62,6 +63,8 @@ public class AddSaldoGUI extends JPanel {
 		User userRegistered = MainGUI.getUserRegistered();
 		lblSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
 		lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
+		lblSaldo.setBounds(222, 52, 72, 24);
+		add(lblSaldo);
 		
 		setLayout(null);
 
@@ -85,6 +88,9 @@ public class AddSaldoGUI extends JPanel {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
+		lblSaldo.setText("hola");
+		lblSaldo.setText((String.format("%.2f", userRegistered.getSaldo())));
+		
 		btnNewButton.setBounds(394, 126, 112, 37);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +104,7 @@ public class AddSaldoGUI extends JPanel {
 						lblDineroAñadido.setVisible(true);
 						lblError.setVisible(false);
 						textField.setText("");
+						
 					} catch (NumberFormatException e3) {
 						lblError.setVisible(true);
 						lblDineroAñadido.setVisible(false);
@@ -111,12 +118,15 @@ public class AddSaldoGUI extends JPanel {
 
 					
 				}
-				UserGUI.updateSaldo();
+				UserGUI.updateFrame(new AddSaldoGUI());
 			} });
 		
+		
 		add(btnNewButton);
-		lblSaldo.setBounds(222, 52, 72, 24);
-		add(lblSaldo);
+
+		
+		
+		
 		lblNewLabel_1.setFont(new Font("Roboto", Font.BOLD, 16));
 		lblNewLabel_1.setBounds(64, 212, 142, 30);
 		

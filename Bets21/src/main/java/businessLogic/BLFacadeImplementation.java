@@ -340,6 +340,21 @@ public class BLFacadeImplementation  implements BLFacade {
         }
 	}
     
+	@WebMethod
+	public Bet modifyBet (float betMoney, int betNumber) throws UserDoesntExist {
+		dbManager.open(false);
+    	Bet bet;
+    	try {
+    		bet = dbManager.modifyBet(betMoney, betNumber);
+    	} catch ( Exception e) {
+    		throw e;
+    	}finally {
+    		dbManager.close();
+    	}
+    	return bet;
+	}
+
+	
 
 }
 

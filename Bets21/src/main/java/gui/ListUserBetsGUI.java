@@ -25,6 +25,9 @@ import exceptions.UserDoesntExist;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,10 +37,46 @@ public class ListUserBetsGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JScrollPane scrollPane;
 	private JTable tableBets;
-	private DefaultTableModel tableModelBets;
+	private static DefaultTableModel tableModelBets;
 	
+	public static int getFila() {
+		return fila;
+	}
+
+
+
+	public static void setFila(int fila) {
+		ListUserBetsGUI.fila = fila;
+	}
+
+
+
+	public static DefaultTableModel getTableModelBets() {
+		return tableModelBets;
+	}
+
+
+
+	public static void setTableModelBets(DefaultTableModel tableModelBets) {
+		ListUserBetsGUI.tableModelBets = tableModelBets;
+	}
+
 	private Vector<String> columnNames = new Vector<String>(Arrays.asList("Fecha","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"));
 	private JButton btnAnularApuesta;
+	private JButton btnAumentarApuesta;
+
+	private static int betNumber2;
+	private static int fila;
+	
+	
+
+	
+	
+	public static int getBetNumber2() {
+		return betNumber2;
+	}
+
+	
 
 	/**
 	 * Create the panel.
@@ -45,6 +84,7 @@ public class ListUserBetsGUI extends JPanel {
 	public ListUserBetsGUI() {
 		try
 		{
+			
 			jbInit();
 		}
 		catch(Exception e)
@@ -54,6 +94,9 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
+		
+		
+		
 		setSize(new Dimension(886, 541));
 		setLayout(null);
 		
@@ -79,8 +122,11 @@ public class ListUserBetsGUI extends JPanel {
 				long eventTime = Date.parse(eventDate);
 				if(todayTime < eventTime) {
 					btnAnularApuesta.setEnabled(true);
+					btnAumentarApuesta.setEnabled(true);
+					
 				}else {
 					btnAnularApuesta.setEnabled(false);
+					btnAumentarApuesta.setEnabled(false);
 				}
 			}
 		});
@@ -96,6 +142,7 @@ public class ListUserBetsGUI extends JPanel {
 		
 		updateTable();
 
+	
 		btnAnularApuesta = new JButton("Anular Apuesta");
 		btnAnularApuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,8 +168,39 @@ public class ListUserBetsGUI extends JPanel {
 		btnAnularApuesta.setEnabled(false);
 		btnAnularApuesta.setBackground(Color.WHITE);
 		btnAnularApuesta.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnAnularApuesta.setBounds(357, 502, 137, 30);
+		btnAnularApuesta.setBounds(220, 504, 186, 26);
 		add(btnAnularApuesta);
+		
+		
+		
+		
+		btnAumentarApuesta = new JButton("Aumentar Apuesta");
+		btnAumentarApuesta.setBackground(Color.WHITE);
+		btnAumentarApuesta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fila = tableBets.getSelectedRow();
+				
+				betNumber2 = ((int) tableBets.getModel().getValueAt(fila, 7));
+				
+				JFrame a = new AumentarApuestaGUI();
+				a.setVisible(true);
+			
+			}
+			
+		});
+		updateTable();
+		
+		
+		
+		
+		btnAumentarApuesta.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnAumentarApuesta.setEnabled(false);
+		btnAumentarApuesta.setBounds(444, 504, 209, 27);
+		add(btnAumentarApuesta);
+		
+		
+		
+		
 	}
 	
 	public void updateTable() {
