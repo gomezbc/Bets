@@ -73,6 +73,7 @@ public class MainGUI extends JFrame {
 	private JLabel lblIniciarSesin;
 	private JSeparator separatorDni;
 	private JSeparator separatorPasswd;
+	private JLabel logo;
 	
 	/**
 	 * This is the default constructor
@@ -163,6 +164,13 @@ public class MainGUI extends JFrame {
 			login_panel.add(getLblIniciarSesin());
 			login_panel.add(getSeparatorPasswd());
 			jContentPane.add(getJButtonEvents());
+			
+			logo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.label.text")); //$NON-NLS-1$ //$NON-NLS-2$
+			ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/bets21.png"));
+			Image scaledIcon = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+			logo.setIcon(new ImageIcon(scaledIcon));
+			logo.setBounds(34, 26, 200, 200);
+			jContentPane.add(logo);
 		}
 		return jContentPane;
 	}
