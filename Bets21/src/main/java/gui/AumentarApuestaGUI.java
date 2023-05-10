@@ -14,6 +14,7 @@ import businessLogic.BLFacade;
 import domain.Bet;
 import domain.User;
 import exceptions.UserDoesntExist;
+import theme.Bets21Theme;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -52,12 +53,7 @@ public class AumentarApuestaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AumentarApuestaGUI() {
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		lblNewLabel_1.setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 386, 276);

@@ -34,6 +34,8 @@ import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
 import exceptions.QuestionDoesntExist;
+import theme.Bets21Theme;
+
 import javax.swing.ImageIcon;
 
 
@@ -79,12 +81,7 @@ public class EventInfoUserGUI extends JPanel {
 	
 	public void jbInit(Event ev) throws Exception
 	{
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
 		this.setBackground(new Color(238, 238, 238));

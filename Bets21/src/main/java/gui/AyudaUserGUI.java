@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import theme.Bets21Theme;
+
 public class AyudaUserGUI extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -38,12 +40,7 @@ public class AyudaUserGUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public AyudaUserGUI() {
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		setBounds(100, 100, 595, 584);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 571, 536);

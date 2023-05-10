@@ -25,6 +25,7 @@ import domain.Bet;
 import domain.User;
 import exceptions.BetDoesntExist;
 import exceptions.UserDoesntExist;
+import theme.Bets21Theme;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -98,12 +99,7 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		
 		setSize(new Dimension(886, 541));
 		setLayout(null);

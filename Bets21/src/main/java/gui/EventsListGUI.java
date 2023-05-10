@@ -36,6 +36,7 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Event;
 import domain.User;
+import theme.Bets21Theme;
 
 
 public class EventsListGUI extends JPanel {
@@ -83,12 +84,7 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		setMinimumSize(new Dimension(886, 541));
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));

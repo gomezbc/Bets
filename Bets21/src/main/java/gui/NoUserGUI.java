@@ -26,6 +26,8 @@ import javax.swing.border.LineBorder;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
+import theme.Bets21Theme;
+
 public class NoUserGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -53,12 +55,7 @@ public class NoUserGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() {
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		setTitle("User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 914, 680);
@@ -75,7 +72,7 @@ public class NoUserGUI extends JFrame {
 		btnLogOut.setBorderPainted(false);
 		btnLogOut.setOpaque(false);
 		btnLogOut.setBorder(null);
-		btnLogOut.setBackground(new Color(17, 110, 80));
+		btnLogOut.setBackground(new Color(0, 146, 202));
 		btnLogOut.setToolTipText("Log Out");
 		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/exit.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);

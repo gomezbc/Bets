@@ -28,6 +28,7 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Event;
 import exceptions.EventAlreadyExist;
+import theme.Bets21Theme;
 
 public class CreateEventGUI extends JPanel {
 
@@ -59,13 +60,7 @@ public class CreateEventGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
-		
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		
 		setMinimumSize(new Dimension(886, 541));
 		setSize(new Dimension(886, 541));

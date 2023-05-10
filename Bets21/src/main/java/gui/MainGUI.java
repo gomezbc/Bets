@@ -30,6 +30,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
+import theme.Bets21Theme;
 
 
 public class MainGUI extends JFrame {
@@ -108,12 +109,7 @@ public class MainGUI extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		// this.setSize(271, 295);
 		this.setSize(593, 336);
 		this.setContentPane(getJContentPane());

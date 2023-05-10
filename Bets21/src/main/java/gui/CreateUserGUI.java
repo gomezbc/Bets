@@ -21,6 +21,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import exceptions.UserAlreadyExist;
+import theme.Bets21Theme;
 
 public class CreateUserGUI extends JFrame {
 
@@ -58,12 +59,7 @@ public class CreateUserGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
-		try {
-			FlatLaf.registerCustomDefaultsSource( "main.resources");
-			UIManager.setLookAndFeel( new FlatLightLaf() );
-		} catch( Exception ex ) {
-		    System.err.println( "Failed to initialize LaF" );
-		}
+		Bets21Theme.setup();
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setTitle("Registrarse");
