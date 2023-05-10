@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +20,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -75,8 +73,6 @@ public class MainGUI extends JFrame {
 	private JLabel lblPassword;
 	private JLabel userError;
 	private JLabel lblIniciarSesin;
-	private JSeparator separatorDni;
-	private JSeparator separatorPasswd;
 	private JLabel logo;
 	
 	/**
@@ -142,37 +138,26 @@ public class MainGUI extends JFrame {
 			login_panel.setLayout(null);
 			login_panel.add(getJButtonCreateUser());
 			login_panel.add(getJButtonLogin());
-			login_panel.add(getSeparatorDni());
 			login_panel.add(getPanel());
 			
 			textField = new JTextField();
-			textField.setFont(new Font("Roboto", Font.PLAIN, 14));
-			textField.setBorder(null);
 			textField.setColumns(10);
 			textField.setBounds(20, 60, 200, 23);
 			login_panel.add(textField);
 			
 			pwdIngreseSuContrasea = new JPasswordField();
-			pwdIngreseSuContrasea.setFont(new Font("Roboto", Font.PLAIN, 14));
-			pwdIngreseSuContrasea.setCaretColor(Color.GRAY);
-			pwdIngreseSuContrasea.setBorder(null);
 			pwdIngreseSuContrasea.setBounds(20, 125, 200, 23);
 			login_panel.add(pwdIngreseSuContrasea);
 			
 			lblDni = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblDni.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			lblDni.setFont(new Font("Roboto", Font.PLAIN, 14));
-			lblDni.setForeground(Color.DARK_GRAY);
 			lblDni.setBounds(20, 40, 102, 20);
 			login_panel.add(lblDni);
 			
 			lblPassword = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblPassword.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			lblPassword.setFont(new Font("Roboto", Font.PLAIN, 14));
-			lblPassword.setForeground(Color.DARK_GRAY);
 			lblPassword.setBounds(20, 100, 123, 20);
 			login_panel.add(lblPassword);
 			login_panel.add(getUserError());
 			login_panel.add(getLblIniciarSesin());
-			login_panel.add(getSeparatorPasswd());
 			jContentPane.add(getJButtonEvents());
 			
 			logo = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.label.text")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -188,8 +173,6 @@ public class MainGUI extends JFrame {
 		if (jLabelSelectOption == null) {
 			jLabelSelectOption = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("SelectOption"));
 			jLabelSelectOption.setBounds(0, 0, 495, 30);
-			jLabelSelectOption.setFont(new Font("Roboto", Font.BOLD, 13));
-			jLabelSelectOption.setForeground(Color.BLACK);
 			jLabelSelectOption.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return jLabelSelectOption;
@@ -197,7 +180,6 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton() {
 		if (rdbtnNewRadioButton == null) {
 			rdbtnNewRadioButton = new JRadioButton("English");
-			rdbtnNewRadioButton.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton.setBorder(null);
 			rdbtnNewRadioButton.setForeground(Color.DARK_GRAY);
 			rdbtnNewRadioButton.setBackground(Color.WHITE);
@@ -214,7 +196,6 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton_1() {
 		if (rdbtnNewRadioButton_1 == null) {
 			rdbtnNewRadioButton_1 = new JRadioButton("Euskara");
-			rdbtnNewRadioButton_1.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton_1.setBorder(null);
 			rdbtnNewRadioButton_1.setForeground(Color.DARK_GRAY);
 			rdbtnNewRadioButton_1.setBackground(Color.WHITE);
@@ -233,7 +214,6 @@ public class MainGUI extends JFrame {
 	private JRadioButton getRdbtnNewRadioButton_2() {
 		if (rdbtnNewRadioButton_2 == null) {
 			rdbtnNewRadioButton_2 = new JRadioButton("Castellano");
-			rdbtnNewRadioButton_2.setFont(new Font("Roboto", Font.BOLD, 13));
 			rdbtnNewRadioButton_2.setBorder(null);
 			rdbtnNewRadioButton_2.setForeground(Color.DARK_GRAY);
 			rdbtnNewRadioButton_2.setBackground(Color.WHITE);
@@ -272,7 +252,6 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonCreateUser() {
 		if (jButtonCreateUser == null) {
 			jButtonCreateUser = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.btnCreateUser.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			jButtonCreateUser.setFont(new Font("Roboto", Font.BOLD, 14));
 			jButtonCreateUser.setForeground(Color.DARK_GRAY);
 			jButtonCreateUser.setBackground(Color.WHITE);
 			jButtonCreateUser.setBounds(170, 170, 140, 32);
@@ -295,7 +274,6 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonLogin() {
 		if (jButtonLogin == null) {
 			jButtonLogin = new JButton(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.jButtonLogin.text")); //$NON-NLS-1$ //$NON-NLS-2$
-			jButtonLogin.setFont(new Font("Roboto", Font.BOLD, 14));
 			jButtonLogin.setBounds(20, 170, 140, 32);
 			jButtonLogin.setBackground(new Color(255, 255, 255));
 			ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/user-login.png"));
@@ -365,25 +343,7 @@ public class MainGUI extends JFrame {
 		if (lblIniciarSesin == null) {
 			lblIniciarSesin = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("MainGUI.lblIniciarSesin.text")); //$NON-NLS-1$ //$NON-NLS-2$
 			lblIniciarSesin.setForeground(Color.DARK_GRAY);
-			lblIniciarSesin.setFont(new Font("Roboto", Font.BOLD, 18));
-			lblIniciarSesin.setBounds(20, 9, 162, 24);
 		}
 		return lblIniciarSesin;
-	}
-	private JSeparator getSeparatorDni() {
-		if (separatorDni == null) {
-			separatorDni = new JSeparator();
-			separatorDni.setBounds(20, 83, 200, 1);
-			separatorDni.setForeground(Color.DARK_GRAY);
-		}
-		return separatorDni;
-	}
-	private JSeparator getSeparatorPasswd() {
-		if (separatorPasswd == null) {
-			separatorPasswd = new JSeparator();
-			separatorPasswd.setForeground(Color.DARK_GRAY);
-			separatorPasswd.setBounds(20, 148, 200, 1);
-		}
-		return separatorPasswd;
 	}
 } // @jve:decl-index=0:visual-constraint="0,0"
