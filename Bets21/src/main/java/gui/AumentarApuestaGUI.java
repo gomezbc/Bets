@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import businessLogic.BLFacade;
 import domain.Bet;
 import domain.User;
@@ -18,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.Color;
 
@@ -48,6 +52,12 @@ public class AumentarApuestaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public AumentarApuestaGUI() {
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		lblNewLabel_1.setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 386, 276);

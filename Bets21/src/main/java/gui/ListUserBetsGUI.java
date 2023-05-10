@@ -13,8 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Bet;
@@ -94,8 +98,12 @@ public class ListUserBetsGUI extends JPanel {
 	}
 
 	public void jbInit() {
-		
-		
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		
 		setSize(new Dimension(886, 541));
 		setLayout(null);

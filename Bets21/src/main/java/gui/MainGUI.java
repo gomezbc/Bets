@@ -24,6 +24,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.User;
@@ -108,6 +112,12 @@ public class MainGUI extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		// this.setSize(271, 295);
 		this.setSize(593, 336);
 		this.setContentPane(getJContentPane());

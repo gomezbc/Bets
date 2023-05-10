@@ -10,7 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class AyudaUserGUI extends JDialog {
 
@@ -34,6 +38,12 @@ public class AyudaUserGUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public AyudaUserGUI() {
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		setBounds(100, 100, 595, 584);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 571, 536);

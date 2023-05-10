@@ -13,7 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import exceptions.UserAlreadyExist;
@@ -54,6 +58,12 @@ public class CreateUserGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		setResizable(false);
 		setBackground(Color.WHITE);
 		setTitle("Registrarse");

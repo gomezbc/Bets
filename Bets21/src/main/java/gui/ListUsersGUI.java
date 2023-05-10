@@ -15,7 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.User;
@@ -56,6 +60,12 @@ public class ListUsersGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() {
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		
 		lblResBtn.setVisible(false);
 		this.setLayout(null);

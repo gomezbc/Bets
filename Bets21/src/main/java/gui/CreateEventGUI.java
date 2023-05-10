@@ -16,9 +16,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
@@ -56,6 +59,13 @@ public class CreateEventGUI extends JPanel {
 	 * Create the frame.
 	 */
 	public void jbInit() throws Exception{
+		
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		
 		setMinimumSize(new Dimension(886, 541));
 		setSize(new Dimension(886, 541));

@@ -20,9 +20,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Event;
@@ -84,7 +88,12 @@ public class EventInfoAdminGUI extends JPanel {
 	
 	public void jbInit(Event ev) throws Exception
 	{
-		
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));
 		this.setBackground(new Color(238, 238, 238));

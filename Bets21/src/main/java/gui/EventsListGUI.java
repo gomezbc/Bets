@@ -24,9 +24,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
@@ -80,6 +83,12 @@ public class EventsListGUI extends JPanel {
 	
 	public void jbInit() throws Exception
 	{
+		try {
+			FlatLaf.registerCustomDefaultsSource( "main.resources");
+			UIManager.setLookAndFeel( new FlatLightLaf() );
+		} catch( Exception ex ) {
+		    System.err.println( "Failed to initialize LaF" );
+		}
 		setMinimumSize(new Dimension(886, 541));
 		this.setLayout(null);
 		this.setSize(new Dimension(886, 541));

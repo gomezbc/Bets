@@ -8,8 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table. DefaultTableCellRenderer;
+
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class BetsTableCellRender extends DefaultTableCellRenderer{
 
