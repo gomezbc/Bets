@@ -212,6 +212,7 @@ public class ListUserBetsGUI extends JPanel {
 		for(Bet b: bets) {
 			Vector<Object> row = new Vector<Object>();
 			Date d = b.getForecast().getQuestion().getEvent().getEventDate();
+			if(d == null) continue;
 			List<String> dateList = Arrays.asList(d.toLocaleString().split(","));
 			row.add(dateList.get(0)+dateList.get(1));
 			row.add(b.getForecast().getQuestion().getEvent().getDescription());
