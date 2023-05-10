@@ -46,7 +46,7 @@ public class AddSaldoGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public AddSaldoGUI() {
-		textField_1.setFont(new Font("Roboto", Font.PLAIN, 16));
+		textField_1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		textField_1.setBorder(new EmptyBorder(0, 0, 0, 0));
 		textField_1.setBounds(223, 214, 110, 30);
 		textField_1.setColumns(10);
@@ -70,33 +70,30 @@ public class AddSaldoGUI extends JPanel {
 		
 		
 		User userRegistered = MainGUI.getUserRegistered();
-		lblSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblSaldo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
 		
 		setLayout(null);
 
-		lblAñadirInfo.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblAñadirInfo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblAñadirInfo.setBounds(64, 119, 154, 51);
 		add(lblAñadirInfo);
 		
 		textField = new JTextField();
 		textField.setBorder(null);
-		textField.setFont(new Font("Roboto", Font.PLAIN, 16));
+		textField.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		textField.setBounds(223, 130, 110, 30);
 		add(textField);
 		textField.setColumns(10);
 		
 
-		lblInfoSaldo.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblInfoSaldo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblInfoSaldo.setBounds(64, 46, 139, 37);
 		add(lblInfoSaldo);
 		
 		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/addmoney.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnAñadir.setIcon(new ImageIcon(scaledIcon));
-		btnAñadir.setFont(new Font("Roboto", Font.BOLD, 16));
-		btnAñadir.setBackground(Color.WHITE);
-		btnAñadir.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		btnAñadir.setBounds(394, 126, 112, 37);
 		btnAñadir.addActionListener(new ActionListener() {
@@ -132,7 +129,7 @@ public class AddSaldoGUI extends JPanel {
 		add(btnAñadir);
 		lblSaldo.setBounds(222, 52, 72, 24);
 		add(lblSaldo);
-		lblSacarInfo.setFont(new Font("Roboto", Font.BOLD, 16));
+		lblSacarInfo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblSacarInfo.setBounds(64, 212, 142, 30);
 		
 		add(lblSacarInfo);
@@ -143,10 +140,7 @@ public class AddSaldoGUI extends JPanel {
 		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/withdraw.png"));
 		scaledIcon = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnSacar.setIcon(new ImageIcon(scaledIcon));
-		btnSacar.setBackground(Color.WHITE);
-		btnSacar.setFont(new Font("Roboto", Font.BOLD, 16));
 		btnSacar.setBounds(394, 210, 112, 37);
-		btnSacar.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnSacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblSacar.setVisible(false);
@@ -181,7 +175,7 @@ public class AddSaldoGUI extends JPanel {
 		
 		lblAñadir = new JLabel("Dinero añadido");
 		lblAñadir.setVisible(false);
-		lblAñadir.setFont(new Font("Roboto", Font.PLAIN, 16));
+		lblAñadir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblAñadir.setForeground(new Color(46, 139, 87));
 		lblAñadir.setBounds(523, 130, 134, 23);
 		add(lblAñadir);
@@ -192,7 +186,7 @@ public class AddSaldoGUI extends JPanel {
 		lblSacar = new JLabel("Dinero sacado");
 		lblSacar.setVisible(false);
 		lblSacar.setForeground(new Color(46, 139, 87));
-		lblSacar.setFont(new Font("Roboto", Font.PLAIN, 16));
+		lblSacar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblSacar.setBounds(523, 214, 139, 23);
 		add(lblSacar);
 	}

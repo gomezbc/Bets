@@ -141,7 +141,7 @@ public class UserGUI extends JFrame {
 		contentPane.add(menuBar);
 		
 		btnHome = new JButton("     Eventos    ");
-		btnHome.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnHome.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -162,7 +162,7 @@ public class UserGUI extends JFrame {
 		btnHome.setBackground(Color.WHITE);
 		
 		btnApuestasRealizadas = new JButton("Apuestas Realizadas");
-		btnApuestasRealizadas.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnApuestasRealizadas.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		btnApuestasRealizadas.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnApuestasRealizadas.setBackground(Color.WHITE);
 		btnHome.setBorder(new EmptyBorder(3,3,3,3));
@@ -184,7 +184,7 @@ public class UserGUI extends JFrame {
 		menuBar.add(btnApuestasRealizadas);
 		
 		btnAñadirSaldo = new JButton("  Añadir Saldo  ");
-		btnAñadirSaldo.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnAñadirSaldo.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
 		btnAñadirSaldo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {

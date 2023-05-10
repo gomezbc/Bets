@@ -312,7 +312,6 @@ public class MainGUI extends JFrame {
 	private JButton getJButtonEvents() {
 		if (jButtonEvents == null) {
 			jButtonEvents = new JButton("Consultar Eventos");
-			jButtonEvents.setBackground(new Color(238, 238, 238));
 			jButtonEvents.setBounds(34, 258, 200, 35);
 			ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/event-list-black.png"));
 			Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
