@@ -106,8 +106,7 @@ public class AumentarApuestaGUI extends JFrame {
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
 					
-					
-					u.setSaldo(u.getSaldo() - Float.parseFloat(textField.getText())); 
+					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
 					UserGUI.updateSaldo();
 					
 					} else {
