@@ -33,6 +33,8 @@ public class UserGUI extends JFrame {
 	private static JPanel displayFrame;
 	private JButton btnHome;
 	private static JLabel lblUser;
+
+
 	private static JMenuBar menuBar;
 	private JButton btnApuestasRealizadas;
 	private static JLabel lblLogoUser;
@@ -232,4 +234,14 @@ public class UserGUI extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
+	
+	public static JLabel getLblUser() {
+		return lblUser;
+	}
+
+	public static void setLblUser(JLabel lblUser) {
+		UserGUI.lblUser = lblUser;
+	}
+
+
 }

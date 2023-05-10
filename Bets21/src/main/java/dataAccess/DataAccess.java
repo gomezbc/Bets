@@ -354,17 +354,19 @@ public class DataAccess  {
 	}
 	
 	
-	public Bet modifyBet (float betMoney, int betNumber) throws UserDoesntExist {
+	public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist {
 		Bet bet = db.find(Bet.class, betNumber);
+		User user2 = db.find(User.class, user);
 		if ( bet == null) {
 			System.out.println(">> DataAccess: modifyBet => error - No existe una apuesta ha modificar");
 		}
-		
-			db.getTransaction().begin();
 			double betMoneyAntes = bet.getBetMoney();
 			double betTotal = betMoney + betMoneyAntes;
+			db.getTransaction().begin();
+			user2.setSaldo(user2.getSaldo() - betMoney);
 			bet.setBetMoney((float)betTotal);
- 	    	db.persist(bet); 
+			db.persist(user2);
+ 	    	db.persist(bet);
  			db.getTransaction().commit();
  			return bet;
 	}

@@ -341,11 +341,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
     
 	@WebMethod
-	public Bet modifyBet (float betMoney, int betNumber) throws UserDoesntExist {
+	public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist {
 		dbManager.open(false);
     	Bet bet;
     	try {
-    		bet = dbManager.modifyBet(betMoney, betNumber);
+    		bet = dbManager.modifyBet(betMoney, betNumber, user);
     	} catch ( Exception e) {
     		throw e;
     	}finally {

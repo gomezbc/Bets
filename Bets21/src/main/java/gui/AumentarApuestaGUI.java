@@ -84,14 +84,21 @@ public class AumentarApuestaGUI extends JFrame {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				int BetNumber = ListUserBetsGUI.getBetNumber2();
 				int fila = ListUserBetsGUI.getFila();
+				User u = MainGUI.getUserRegistered();
+				
+				
 			
 				try {
 					if(Float.parseFloat(textField.getText()) > 0) {
-					Bet b = facade.modifyBet(Float.parseFloat(textField.getText()), BetNumber );
+					Bet b = facade.modifyBet(Float.parseFloat(textField.getText()), BetNumber, u );
 					lblNewLabel_1.setVisible(true);
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
+					
+					
+					u.setSaldo(u.getSaldo() - Float.parseFloat(textField.getText())); 
+					UserGUI.updateSaldo();
 					
 					} else {
 						System.out.println("error");
@@ -103,7 +110,8 @@ public class AumentarApuestaGUI extends JFrame {
 					System.out.println("error");
 					
 				}
-	        	
+	        	System.out.println(u.getSaldo());
+				
 				
 				try {
 					Thread.sleep(5*100);

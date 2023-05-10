@@ -92,7 +92,7 @@ public interface BLFacade  {
 	
 	@WebMethod public void removeBet(Integer betNumber) throws BetDoesntExist;
 	
-	@WebMethod public Bet modifyBet (float betMoney, int betNumber) throws UserDoesntExist ;
+	@WebMethod public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist ;
 	
 
 
