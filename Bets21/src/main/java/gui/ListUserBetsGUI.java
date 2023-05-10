@@ -66,7 +66,7 @@ public class ListUserBetsGUI extends JPanel {
 		ListUserBetsGUI.tableModelBets = tableModelBets;
 	}
 
-	private Vector<String> columnNames = new Vector<String>(Arrays.asList("Fecha","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance"));
+	private Vector<String> columnNames = new Vector<String>(Arrays.asList("Fecha","Evento","Pregunta","Pronostico","Ganancia","Apostado","Balance","#B"));
 	private JButton btnAnularApuesta;
 	private JButton btnAumentarApuesta;
 
@@ -107,7 +107,7 @@ public class ListUserBetsGUI extends JPanel {
 		scrollPane = new JScrollPane();
 		scrollPane.setFont(new Font("Roboto", Font.PLAIN, 14));
 		scrollPane.setBorder(null);
-		scrollPane.setBounds(12, 12, 862, 481);
+		scrollPane.setBounds(12, 12, 849, 481);
 		add(scrollPane);
 		
 		tableBets = new JTable() {
@@ -209,7 +209,6 @@ public class ListUserBetsGUI extends JPanel {
 	
 	public void updateTable() {
 		tableModelBets.setDataVector(null, columnNames);
-		tableModelBets.addColumn("#B"); //Bet number, no aparece en la tabla, se usa para identificar la apuesta
 		User u = MainGUI.getUserRegistered();
 		Vector<Bet> bets = u.getBets();
 		Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
@@ -254,5 +253,6 @@ public class ListUserBetsGUI extends JPanel {
 		tableBets.getColumnModel().getColumn(5).setPreferredWidth(20);
 		tableBets.getColumnModel().getColumn(6).setPreferredWidth(20);
 		tableBets.getColumnModel().removeColumn(tableBets.getColumnModel().getColumn(7));
+		tableBets.revalidate();
 	}
 }
