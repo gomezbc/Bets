@@ -353,6 +353,13 @@ public class BLFacadeImplementation  implements BLFacade {
     	}
     	return bet;
 	}
+	
+	
+	public boolean bApostado (User u, int ForecastNumber) {
+		dbManager.open(false);
+		boolean a = dbManager.bApostado(u, ForecastNumber);
+		return a;
+	}
 
 	
 

@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -46,7 +47,7 @@ public class EventInfoUserGUI extends JPanel {
 	private JScrollPane scrollPaneForecast = new JScrollPane();
 	
 	private JTable tableQueries = new JTable();
-	private JTable tableForecast = new JTable();;
+	private JTable tableForecast = new JTable();
 
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecast;
@@ -134,6 +135,17 @@ public class EventInfoUserGUI extends JPanel {
 		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(40);
 		tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
 		tableForecast.getColumnModel().getColumn(2).setPreferredWidth(60);
+		
+		
+		/*
+		tableForecast = new JTable() {
+
+			public TableCellRenderer getCellRenderer(int row, int column) {
+		        return new BetsTableCellRender();
+		    }
+		};
+		*/
+		
 		
 		tableQueries.addMouseListener(new MouseAdapter() {
 			@Override

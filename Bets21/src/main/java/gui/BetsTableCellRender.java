@@ -30,6 +30,7 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 	public BetsTableCellRender() {	
 	}
 
+	
 	@Override
 	public Component getTableCellRendererComponent (JTable jtable, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		super.getTableCellRendererComponent (jtable, value, isSelected, hasFocus, row, column);

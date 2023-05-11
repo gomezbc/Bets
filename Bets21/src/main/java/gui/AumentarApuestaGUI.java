@@ -79,7 +79,7 @@ public class AumentarApuestaGUI extends JFrame {
 	            jButtonClose_actionPerformed(e);
 	        }
 	    });
-		btnNewButton.setBounds(70, 145, 102, 38);
+		btnNewButton.setBounds(60, 145, 112, 38);
 		contentPane.add(btnNewButton);
 		
 		
@@ -101,6 +101,7 @@ public class AumentarApuestaGUI extends JFrame {
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
+					
 					
 					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
 					UserGUI.updateSaldo();
@@ -125,7 +126,7 @@ public class AumentarApuestaGUI extends JFrame {
 	            jButtonClose_actionPerformed(e);
 	        }
 	    });
-		btnNewButton_1.setBounds(182, 145, 112, 38);
+		btnNewButton_1.setBounds(182, 145, 123, 38);
 		contentPane.add(btnNewButton_1);
 		
 		
