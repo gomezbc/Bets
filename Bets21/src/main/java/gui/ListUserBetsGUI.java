@@ -178,7 +178,7 @@ public class ListUserBetsGUI extends JPanel {
 		
 		
 		
-		btnAumentarApuesta = new JButton("Aumentar Apuesta");
+		btnAumentarApuesta = new JButton("Modificar Apuesta");
 		btnAumentarApuesta.setBackground(Color.WHITE);
 		btnAumentarApuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
