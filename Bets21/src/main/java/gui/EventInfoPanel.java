@@ -73,7 +73,16 @@ public class EventInfoPanel extends JPanel {
 			logoLocal.setSize((int) (height*0.7), (int) (height*0.7));
 			logoLocal.setBounds(new Rectangle(62, (int) (height*0.1), logoLocal.getWidth(), logoLocal.getHeight()));
 		}catch (Exception eL) {
-
+			if(ev.getDescription().contains("-")) {
+				localF = EventInfoPanel.class.getResource("/icons/laliga/unknown.png");
+				ImageIcon icon = new ImageIcon(localF);
+				Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
+				logoLocal.setIcon(new ImageIcon(scaledIcon));
+				logoLocal.setSize((int) (height*0.7), (int) (height*0.7));
+				logoLocal.setBounds(new Rectangle(62, (int) (height*0.1), logoLocal.getWidth(), logoLocal.getHeight()));
+				localF = null;
+			}
+			
 		}
 		
 		add(logoLocal);
@@ -89,7 +98,15 @@ public class EventInfoPanel extends JPanel {
 			logoVisitante.setSize((int) (height*0.7), (int) (height*0.7));
 			logoVisitante.setBounds(new Rectangle((int) (this.getWidth()*0.85), (int) (height*0.1), logoVisitante.getWidth(), logoVisitante.getHeight()));
 		}catch (Exception eV) {
-
+			if(ev.getDescription().contains("-")) {
+				visitanteF = EventInfoPanel.class.getResource("/icons/laliga/unknown.png");
+				ImageIcon icon = new ImageIcon(visitanteF);
+				Image scaledIcon = icon.getImage().getScaledInstance((int) (height*0.7), (int) (height*0.7), Image.SCALE_SMOOTH);
+				logoVisitante.setIcon(new ImageIcon(scaledIcon));
+				logoVisitante.setSize((int) (height*0.7), (int) (height*0.7));
+				logoVisitante.setBounds(new Rectangle((int) (this.getWidth()*0.85), (int) (height*0.1), logoVisitante.getWidth(), logoVisitante.getHeight()));
+				visitanteF = null;
+			}
 		}
 		add(logoVisitante);
 		
