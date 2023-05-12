@@ -47,10 +47,14 @@ public class EventInfoUserGUI extends JPanel {
 	private JScrollPane scrollPaneForecast = new JScrollPane();
 	private JTable tableQueries = new JTable() {
 		public TableCellRenderer getCellRenderer(int row, int column) {
-	        return new EventTableCellRender();
+	        return new QuestionTableCellRender();
 	    }
 	};
-	private JTable tableForecast = new JTable();
+	private JTable tableForecast = new JTable() {
+		public TableCellRenderer getCellRenderer(int row, int column) {
+	        return new ForecastTableCellRender();
+	    }
+	};
 
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecast;

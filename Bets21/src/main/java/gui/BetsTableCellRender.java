@@ -2,18 +2,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.JTable;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table. DefaultTableCellRenderer;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class BetsTableCellRender extends DefaultTableCellRenderer{
 
@@ -24,8 +18,11 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 	
 	private Color finished = new Color(255,204,128);
 	private Color onGoing = new Color(224,224,224);
-	private Color win = new Color(153,204,102);
+	private Color onGoingS = new Color(204,204,204);
+	private Color win = new Color(153, 217, 89);
+	private Color winS = new Color(153,204,102);
 	private Color lose = new Color(255,205,210);
+	private Color loseS = new Color(255,153,153);
 	
 	public BetsTableCellRender() {	
 	}
@@ -59,13 +56,13 @@ public class BetsTableCellRender extends DefaultTableCellRenderer{
 			if(isSelected) this.setBackground(new Color(232,186,118));
 			else this.setBackground(finished);
 		}else if(hasWin && isClosed){
-			if(isSelected) this.setBackground(new Color(102,153,51));
+			if(isSelected) this.setBackground(winS);
 			else this.setBackground(win);
 		}else if(!hasWin && isClosed){
-			if(isSelected) this.setBackground(new Color(255,153,153));
+			if(isSelected) this.setBackground(loseS);
 			else this.setBackground(lose);
 		}else {
-			if(isSelected) this.setBackground(new Color(204,204,204));
+			if(isSelected) this.setBackground(onGoingS);
 			else this.setBackground(onGoing);
 		}
 
