@@ -45,8 +45,11 @@ public class EventInfoUserGUI extends JPanel {
 	private final JLabel jLabelQueries = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("Queries")); 
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 	private JScrollPane scrollPaneForecast = new JScrollPane();
-	
-	private JTable tableQueries = new JTable();
+	private JTable tableQueries = new JTable() {
+		public TableCellRenderer getCellRenderer(int row, int column) {
+	        return new EventTableCellRender();
+	    }
+	};
 	private JTable tableForecast = new JTable();
 
 	private DefaultTableModel tableModelQueries;

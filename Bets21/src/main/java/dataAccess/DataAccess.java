@@ -413,19 +413,6 @@ public class DataAccess  {
 	
 	
 	
-	public boolean bApostado (User u, int ForecastNumber) {
-		User user2 = db.find(User.class, u);
-		Vector<Bet> a = user2.getBets();
-		for (Bet b:a) {
-			if (b.getBetNumber() == ForecastNumber) {
-				return true;
-			}
-		}
-		return false; 
-	}
-	
-	
-	
 	/**
 	 * This method retrieves from the database the events of a given date 
 	 * 
