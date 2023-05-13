@@ -242,8 +242,8 @@ public class ListUserBetsGUI extends JPanel {
                 Vector<Object> v2 = (Vector<Object>) o2;
                 long t1 = Date.parse(v1.get(0).toString());
                 long t2 = Date.parse(v2.get(0).toString());
-                if(t1 < t2) return -1;
-                else if(t1 > t2) return 1;
+                if(t1 > t2) return -1;
+                else if(t1 < t2) return 1;
                 else return 0;
             }
 		});

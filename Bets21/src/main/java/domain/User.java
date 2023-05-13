@@ -42,7 +42,7 @@ public class User {
 		if(this.getBets() == null) {
 			return null; }
 		for (Bet b:this.getBets()){
-			if(b.getForecast().getForecastNumber()== forecastNumber) {
+			if(b.getForecast().getForecastNumber().equals(forecastNumber)) {
 				return b;
 			}		
 		}

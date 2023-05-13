@@ -194,9 +194,9 @@ public class EventInfoAdminGUI extends JPanel {
 				lblErrorPregunta.setVisible(false);
 				try {
 					if(Float.parseFloat(pronosticoMinimo.getText()) <= 1.00f || Float.parseFloat(pronosticoMinimo.getText()) <= 0.00f) {
-					lblErrorPronostico.setText("La ganancia debe ser mayor a 1");
-					lblErrorPronostico.setVisible(true);
-					return;
+						lblErrorPronostico.setText("La ganancia debe ser mayor a 1");
+						lblErrorPronostico.setVisible(true);
+						return;
 					}
 					BLFacade facade = MainGUI.getBusinessLogic();
 					int i = tableQueries.getSelectedRow();
@@ -209,13 +209,19 @@ public class EventInfoAdminGUI extends JPanel {
 					tableModelForecast.addRow(row);	
 					lblErrorPronostico.setText("Pronostico añadido correctamente");
 					lblErrorPronostico.setVisible(true);
+					pronostico.setText("");
+					pronosticoMinimo.setText("");
 				}catch(ForecastAlreadyExist ef) {
 					lblErrorPronostico.setText("El pronostico ya existe");
 					lblErrorPronostico.setVisible(true);
 				}catch(QuestionDoesntExist eq) {
 					eq.printStackTrace();
-				}catch(Exception e1) {
+				}catch(NumberFormatException nf) {
 					lblErrorPronostico.setText("Asegurate de introducir un número");
+					lblErrorPronostico.setVisible(true);
+				}
+				catch(Exception e1) {
+					lblErrorPronostico.setText("Selecciona una pregunta");
 					lblErrorPronostico.setVisible(true);
 				}
 			}
@@ -252,9 +258,9 @@ public class EventInfoAdminGUI extends JPanel {
 				lblErrorPronostico.setVisible(false);
 				try {
 					if(Float.parseFloat(preguntaMinimo.getText()) < 1.00f || Float.parseFloat(preguntaMinimo.getText()) <= 0.00f) {
-					lblErrorPregunta.setText("La apuesta minima debe ser mayor a 1");
-					lblErrorPregunta.setVisible(true);
-					return;
+						lblErrorPregunta.setText("La apuesta minima debe ser mayor a 1");
+						lblErrorPregunta.setVisible(true);
+						return;
 					}
 					BLFacade facade = MainGUI.getBusinessLogic();
 					Question q = facade.createQuestion(ev, pregunta.getText().trim(), Float.parseFloat(preguntaMinimo.getText()));
@@ -265,11 +271,16 @@ public class EventInfoAdminGUI extends JPanel {
 					tableModelQueries.addRow(row);	
 					lblErrorPregunta.setText("Pregunta añadida correctamente");
 					lblErrorPregunta.setVisible(true);
+					preguntaMinimo.setText("");
+					pregunta.setText("");
 				}catch(QuestionAlreadyExist ef) {
 					lblErrorPregunta.setText("La pregunta ya existe");
 					lblErrorPregunta.setVisible(true);
 				}catch(EventFinished eq) {
 					lblErrorPregunta.setText("El evento ha finalizado");
+					lblErrorPregunta.setVisible(true);
+				}catch(NumberFormatException nf) {
+					lblErrorPregunta.setText("Asegurate de introducir un número");
 					lblErrorPregunta.setVisible(true);
 				}catch(Exception e1) {
 					e1.printStackTrace();

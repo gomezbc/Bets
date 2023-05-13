@@ -42,8 +42,9 @@ public class ForecastUserTableCellRender extends DefaultTableCellRenderer{
 		Forecast f = null;
 		try {
 			f = facade.getForecast(numForecast);
+			u = facade.getUser(u.getDni());
 			Boolean isResult = (f == f.getQuestion().getResult()); 
-			Bet b = u.DoesBetExists(f.getForecastNumber());
+			Bet b = u.DoesBetExists(numForecast);
 			Boolean hasBets = (b != null);
 			Boolean hasFinished = (f.getQuestion().getResult() != null);
 			if(hasBets) {
@@ -62,6 +63,8 @@ public class ForecastUserTableCellRender extends DefaultTableCellRenderer{
 				else setBackground(onGoing);
 			}
 		} catch (ForecastDoesntExist e) {
+			return this;
+		}catch (Exception e1) {
 			return this;
 		}
 		
