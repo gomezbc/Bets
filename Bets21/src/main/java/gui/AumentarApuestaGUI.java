@@ -1,18 +1,14 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-
 import businessLogic.BLFacade;
 import domain.Bet;
 import domain.User;
+import exceptions.BetDoesntExist;
 import exceptions.UserDoesntExist;
 import theme.Bets21Theme;
 
@@ -22,37 +18,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.Color;
 
 public class AumentarApuestaGUI extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel_1 = new JLabel("Dinero Añadido");
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AumentarApuestaGUI frame = new AumentarApuestaGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public AumentarApuestaGUI() {
+		JBinit();
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public AumentarApuestaGUI() {
+	public void JBinit() {
 		Bets21Theme.setup();
 		lblNewLabel_1.setVisible(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +80,7 @@ public class AumentarApuestaGUI extends JFrame {
 			
 				try {
 					if(Float.parseFloat(textField.getText()) > 0) {
-					Bet b = facade.modifyBet(Float.parseFloat(textField.getText()), BetNumber, u );
+					Bet b = facade.modifyBet(Float.parseFloat(textField.getText()), BetNumber, u.getDni() );
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
@@ -114,6 +98,7 @@ public class AumentarApuestaGUI extends JFrame {
 					System.out.println("error");
 				} catch  (NumberFormatException e2) {
 					System.out.println("error");
+				} catch (BetDoesntExist e3) {
 					
 				}
 	        	System.out.println(u.getSaldo());
@@ -146,7 +131,7 @@ public class AumentarApuestaGUI extends JFrame {
 			
 				try {
 					if(Float.parseFloat(textField.getText()) > 0) {
-					Bet b = facade.modifyBet(-(Float.parseFloat(textField.getText())), BetNumber, u );
+					Bet b = facade.modifyBet(-(Float.parseFloat(textField.getText())), BetNumber, u.getDni() );
 					lblNewLabel_1.setVisible(true);
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
@@ -164,6 +149,7 @@ public class AumentarApuestaGUI extends JFrame {
 					System.out.println("error");
 				} catch  (NumberFormatException e2) {
 					System.out.println("error");
+				} catch (BetDoesntExist e3) {
 					
 				}
 	        	System.out.println(u.getSaldo());

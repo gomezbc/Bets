@@ -20,13 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Event;
@@ -202,9 +198,7 @@ public class EventInfoAdminGUI extends JPanel {
 					BLFacade facade = MainGUI.getBusinessLogic();
 					int i = tableQueries.getSelectedRow();
 					int qNumber = (int) tableModelQueries.getValueAt(i,0);
-					Question q;
-					q = facade.getQuestion(qNumber);
-					Forecast f = facade.createForecast(pronostico.getText().trim(), Float.parseFloat(pronosticoMinimo.getText()), q);
+					Forecast f = facade.createForecast(pronostico.getText().trim(), Float.parseFloat(pronosticoMinimo.getText()), qNumber);
 					Vector<Object> row = new Vector<Object>();
 					row.add(f.getForecastNumber());
 					row.add(f.getDescription());

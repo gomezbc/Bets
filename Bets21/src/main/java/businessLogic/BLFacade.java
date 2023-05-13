@@ -91,11 +91,12 @@ public interface BLFacade  {
 	 * This method invokes the data access to create a new Forecast for a Question
 	 * @param description description of the forecast
 	 * @param gain gain of the forecast
-	 * @param question the question for which the forecast is created
+	 * @param questionNumber number of the question
 	 * @return the created forecast
 	 * @throws ForecastAlreadyExist if the forecast already exists
+	 * @throws QuestionDoesntExist if the question doesn't exist
 	 */
-	@WebMethod public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist;
+	@WebMethod public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist;
 	
 	/**
 	 * This method invokes the data access to get a User from the database given its DNI
@@ -145,7 +146,7 @@ public interface BLFacade  {
 	 * @throws BetAlreadyExist if the bet already exists
 	 * @throws UserDoesntExist if the user doesn't exist
 	 */
-	@WebMethod public Bet createBet (String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist;	
+	@WebMethod public Bet createBet(String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist;	
 	
 	/**
 	 * This method invokes the data access to modify the balance of a user
@@ -182,6 +183,6 @@ public interface BLFacade  {
 	 * @param betNumber number of the bet to modify
 	 * @param user user who made the bet
 	 */
-	@WebMethod public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist ;	
+	@WebMethod public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist ;	
 
 }

@@ -215,17 +215,18 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * This method invokes the data access to create a new Forecast for a Question
 	 * @param description description of the forecast
 	 * @param gain gain of the forecast
-	 * @param question the question for which the forecast is created
+	 * @param questionNumber number of the question
 	 * @return the created forecast
 	 * @throws ForecastAlreadyExist if the forecast already exists
+	 * @throws QuestionDoesntExist if the question doesn't exist
 	 */
     @WebMethod
-    public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
+    public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
  	   dbManager.open(false);
  	  Forecast forecast = null;
  	   try {
- 		  forecast = dbManager.createForecast(description, gain, question);
- 	   }catch(ForecastAlreadyExist e) {
+ 		  forecast = dbManager.createForecast(description, gain, questionNumber);
+ 	   }catch(ForecastAlreadyExist | QuestionDoesntExist e) {
  		   throw e;
  	   }finally {
  		   dbManager.close();
@@ -312,21 +313,19 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * This method invokes the data access to create a new Bet for a Forecast by a User
 	 * @param user dni of the user
 	 * @param betMoney amount of money of the bet
-	 * @param forecast the forecast for which the bet is created
+	 * @param forecastNumber number of the forecast for which the bet is created
 	 * @return the created bet
 	 * @throws BetAlreadyExist if the bet already exists
 	 * @throws UserDoesntExist if the user doesn't exist
 	 */
     @WebMethod
-	public Bet createBet(String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist{
+	public Bet createBet(String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
 		dbManager.open(false);
 		Bet bet = null;
 		try {
-			bet = dbManager.createBet(user, betMoney, forecast);
-		} catch (BetAlreadyExist e) {
+			bet = dbManager.createBet(user, betMoney, forecastNumber);
+		} catch (BetAlreadyExist | UserDoesntExist | ForecastDoesntExist e) {
 			throw e;
-		}catch (UserDoesntExist e1) {
-			throw e1;
 		}finally {
 			dbManager.close();
 		}
@@ -418,14 +417,14 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * This method invokes the data access to modify the betModey from a bet in the database
 	 * @param betMoney the new amount of money of the bet
 	 * @param betNumber number of the bet to modify
-	 * @param user user who made the bet
+	 * @param dni dni of the user who made the bet
 	 */
 	@WebMethod
-	public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist {
+	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 		dbManager.open(false);
     	Bet bet;
     	try {
-    		bet = dbManager.modifyBet(betMoney, betNumber, user);
+    		bet = dbManager.modifyBet(betMoney, betNumber, dni);
     	} catch ( Exception e) {
     		throw e;
     	}finally {

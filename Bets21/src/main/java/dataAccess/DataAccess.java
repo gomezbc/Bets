@@ -189,7 +189,7 @@ public class DataAccess  {
 			Event ev = db.find(Event.class, event.getEventNumber());
 			
 			if (ev.DoesQuestionExists(question)) {
-				System.out.println(">> DataAccess: createQuestion=> error QuestionAlreadyExist: " + question + " already exists");
+				System.err.println(">> DataAccess: createQuestion=> error QuestionAlreadyExist: " + question + " already exists");
 				throw new QuestionAlreadyExist(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
 			}
 			
@@ -203,22 +203,30 @@ public class DataAccess  {
 	
 
 
-
+	/**
+	 * This method retrieves a question identified by its number from the database 
+	 * @param questionNumber number of the question we want to retrieve
+	 * @return the question
+	 * @throws QuestionDoesntExist if the question does not exist in the database
+	 */
 	public  Question getQuestion (Integer questionNumber) throws QuestionDoesntExist {
 		System.out.println(">> DataAccess: getQuestion => questionNumber="+questionNumber);
 		Question q = db.find(Question.class, questionNumber);
 		if(q==null) {
-			System.out.println(">> DataAccess: getQuestion => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
+			System.err.println(">> DataAccess: getQuestion => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
 			throw new QuestionDoesntExist("No existe una pregunta con este identificador: " + questionNumber);
 		}
 		return q;
 		
 	}
 	
-
-	
-	
-	
+	/**
+	 * This method creates an event with a description and a date
+	 * @param description description of the event
+	 * @param eventDate date of the event
+	 * @return the created event
+	 * @throws EventAlreadyExist if the event already exists in the database
+	 */
    public Event createEvent(String description,Date eventDate) throws EventAlreadyExist{
 	   System.out.println(">> DataAccess: createEvent => description="+description+" eventDate="+eventDate);
 	   Vector<String> a = getEvents2(eventDate);
@@ -230,14 +238,22 @@ public class DataAccess  {
 		   db.getTransaction().commit();
 		   return event;
 	   }else {
-		   System.out.println(">> DataAccess: createEvent => error EventAlreadyExist: "+ description + " already exists");
+		   System.err.println(">> DataAccess: createEvent => error EventAlreadyExist: "+ description + " already exists");
 		   throw new EventAlreadyExist (description+" already exists!");
 	   }	   
    }
 
-   
-   
-	
+   /**
+	* This method creates a user
+	* @param username username of the user
+	* @param passwd password of the user
+	* @param dni dni of the user (unique)
+	* @param name name of the user
+	* @param apellido apellido of the user
+	* @param isAdmin if the user is admin or not
+	* @return the created user
+	* @throws UserAlreadyExist if the user already exists in the database
+    */
 	public User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist {
 		System.out.println(">> DataAccess: createUser => username="+username+" dni="+dni+" name="+name+" apellido="+apellido+" isAdmin="+isAdmin);
 		   User user = db.find(User.class, dni);
@@ -247,24 +263,34 @@ public class DataAccess  {
 			   db.persist(user);
 			   db.getTransaction().commit();
 		   }else {
-			   System.out.println(">> DataAccess: createUser => error UserAlreadyExist: "+ user.toString() + " already exists!");
+			   System.err.println(">> DataAccess: createUser => error UserAlreadyExist: "+ user.toString() + " already exists!");
 			   throw new UserAlreadyExist(user.toString() + " already exists!");
 		   }
 		   return user;
 	}
 	
-	
-	
-	
-	public Forecast createForecast(String description, float gain, Question question) throws ForecastAlreadyExist {
-		  System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+question.getQuestionNumber()+";"+question.getQuestion());
-	 	  Question ques = db.find(Question.class, question.getQuestionNumber());
-	 	  if (ques.DoesForecastExists(description)) {
-	 		  System.out.println(">> DataAccess: createForecast => error ForecastAlreadyExist: Esta predicción ya existe");
+	/**
+	 * This method creates a forecast for a question
+	 * @param description description of the forecast
+	 * @param gain gain of the forecast
+	 * @param questionNumber number of the question to which the forecast is added
+	 * @return the created forecast
+	 * @throws ForecastAlreadyExist if the forecast already exists in the database
+	 * @throws QuestionDoesntExist if the question does not exist in the database
+	 */
+	public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
+		  System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+questionNumber);
+	 	  Question ques = db.find(Question.class, questionNumber);
+		  if (ques == null) {
+			System.err.println(">> DataAccess: createForecast => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
+			throw new QuestionDoesntExist("No existe una pregunta con este identificador: " + questionNumber);
+		  }
+		  if (ques.DoesForecastExists(description)) {
+	 		  System.err.println(">> DataAccess: createForecast => error ForecastAlreadyExist: Esta predicción ya existe");
 	 		  throw new ForecastAlreadyExist("Esta predicción ya existe");
 	 	  }
 	 	    db.getTransaction().begin();
-			Forecast f = ques.addForecast(description, gain, question);
+			Forecast f = ques.addForecast(description, gain, ques);
 			//db.persist(f);
 			db.persist(ques); // db.persist(f) not required when CascadeType.PERSIST is added in questions property of Event class
 							// @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
@@ -272,22 +298,26 @@ public class DataAccess  {
 			return f;
 	    }
 	
-
-
-	
+	/**
+	 * This method retrieves a user identified by its dni from the database 
+	 * @param Dni dni of the user we want to retrieve
+	 * @return the user
+	 * @throws UserDoesntExist if the user does not exist in the database
+	 */
 	public User getUser(String Dni) throws UserDoesntExist{
 		System.out.println(">> DataAccess: getUser => Dni="+Dni);
 		User u = db.find(User.class, Dni);
 		if(u==null) {
-			System.out.println(">> DataAccess: getUser => error UserDoesntExist: No existe un usuario con este DNI "+Dni);
+			System.err.println(">> DataAccess: getUser => error UserDoesntExist: No existe un usuario con este DNI "+Dni);
 			throw new UserDoesntExist("No existe un usuario con este DNI "+Dni);
 		}
 		return u;
 	}
 	
-	
-	
-	
+	/**
+	 * This method retrieves all the users from the database 
+	 * @return a vector with all the users
+	 */
 	public Vector<User> getAllUsers(){
 		System.out.println(">> DataAccess: getAllUsers");
 		Vector<User> res = new Vector<User>();	
@@ -300,18 +330,23 @@ public class DataAccess  {
 	}
 	
 	
-	
-	
+	/**
+	 * This method assigns a result to a question
+	 * @param questionNumber number of the question to which the result is assigned
+	 * @param forecastNumber number of the forecast that is the result
+	 * @throws QuestionDoesntExist if the question does not exist in the database
+	 * @throws ForecastDoesntExist if the forecast does not exist in the database
+	 */
 	public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist {
 		System.out.println(">> DataAccess: assignResult => questionNumber="+questionNumber+" forecastNumber="+forecastNumber);
 		Question q = db.find(Question.class, questionNumber);
 		Forecast f = db.find(Forecast.class, forecastNumber);
 		if(q==null) {
-			System.out.println(">> DataAccess: assignResult => error QuestionDoesntExist: No existe una pregunta con este identificador " + questionNumber);
+			System.err.println(">> DataAccess: assignResult => error QuestionDoesntExist: No existe una pregunta con este identificador " + questionNumber);
 			throw new QuestionDoesntExist("No existe una pregunta con este identificador " + questionNumber);
 		}
 		if(f==null) {
-			System.out.println(">> DataAccess: assignResult => error ForecastDoesntExist: No existe un pronostico con este identificador " + forecastNumber);
+			System.err.println(">> DataAccess: assignResult => error ForecastDoesntExist: No existe un pronostico con este identificador " + forecastNumber);
 			throw new ForecastDoesntExist("No existe un pronostico con este identificador " + forecastNumber);
 		}
 		db.getTransaction().begin();
@@ -319,6 +354,11 @@ public class DataAccess  {
 		db.getTransaction().commit();
 	}
 	
+	/**
+	 * This method removes a user from the database
+	 * @param dni dni of the user we want to remove
+	 * @return true if the user has been removed successfully, false otherwise
+	 */
 	public boolean removeUser(String dni) {
 		System.out.println(">> DataAccess: removeUser => " + dni);
 		User u = db.find(User.class, dni);
@@ -332,43 +372,69 @@ public class DataAccess  {
 		}
 	}
 	
-	
-	
-	public Bet createBet (String user, float betMoney, Forecast forecast) throws BetAlreadyExist, UserDoesntExist {
-		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecast.toString());
-		Forecast forcast = db.find(Forecast.class, forecast.getForecastNumber());
+	/**
+	 * This method creates a bet for a user and a forecast
+	 * @param user dni of the user
+	 * @param betMoney amount of money that the user bets
+	 * @param forecastNumber number of the forecast to which the user bets
+	 * @return the created bet
+	 * @throws BetAlreadyExist if the bet already exists in the database
+	 * @throws UserDoesntExist if the user does not exist in the database
+	 * @throws ForecastDoesntExist if the forecast does not exist in the database
+	 */
+	public Bet createBet (String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
+		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecastNumber);
+		Forecast forecast = db.find(Forecast.class, forecastNumber);
 		User u = db.find(User.class, user);
 		if(u==null) {
-			System.out.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la bas de datos, dni="+user);
-			throw new UserDoesntExist("No hay un usuario con este DNI en la bas de datos, dni="+user);
+			System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+user);
+			throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+user);
 		}
-		if ( u.DoesBetExists(forecast.getForecastNumber()) != null) {
-			System.out.println(">> DataAccess: createBet => error BetAlreadyExist: Ya existe una apuesta a este pronostico");
+		if (forecast == null) {
+			System.err.println(">> DataAccess: createBet => error ForecastDoesntExist: No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
+			throw new ForecastDoesntExist("No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
+		}
+
+		if ( u.DoesBetExists(forecastNumber) != null) {
+			System.err.println(">> DataAccess: createBet => error BetAlreadyExist: Ya existe una apuesta a este pronostico");
 			throw new BetAlreadyExist("Ya existe una apuesta a este pronostico");
 		}
 			db.getTransaction().begin();
  	    	Bet b = u.addBet(betMoney, forecast);
- 	    	db.persist(forcast); 
+ 	    	db.persist(forecast); 
  			db.getTransaction().commit();
  			return b;
 	}
 	
-	
-	public Bet modifyBet (float betMoney, int betNumber, User user) throws UserDoesntExist {
+	/**
+	 * This method modifies the betModey of a bet
+	 * @param betMoney 
+	 * @param betNumber number of the bet to modify
+	 * @param dni dni of the user
+	 * @return
+	 * @throws UserDoesntExist
+	 */
+	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 		Bet bet = db.find(Bet.class, betNumber);
-		User user2 = db.find(User.class, user);
+		User user2 = db.find(User.class, dni);
 		if ( bet == null) {
-			System.out.println(">> DataAccess: modifyBet => error - No existe una apuesta ha modificar");
+			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
+			throw new BetDoesntExist("No existe la apuesta ha modificar");
 		}
-			double betMoneyAntes = bet.getBetMoney();
-			double betTotal = betMoney + betMoneyAntes;
-			db.getTransaction().begin();
-			user2.setSaldo(user2.getSaldo() - betMoney);
-			bet.setBetMoney((float)betTotal);
-			db.persist(user2);
- 	    	db.persist(bet);
- 			db.getTransaction().commit();
- 			return bet;
+		if ( user2 == null) {
+			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos, dni="+dni);
+			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos, dni="+dni);
+		}
+			
+		double betMoneyAntes = bet.getBetMoney();
+		double betTotal = betMoney + betMoneyAntes;
+		db.getTransaction().begin();
+		user2.setSaldo(user2.getSaldo() - betMoney);
+		bet.setBetMoney((float)betTotal);
+		db.persist(user2);
+ 	    db.persist(bet);
+ 		db.getTransaction().commit();
+ 		return bet;
 	}
 	
 	
@@ -379,7 +445,7 @@ public class DataAccess  {
 		System.out.println(">> DataAccess: removeBet => betNumber="+betNumber);
 		Bet b = db.find(Bet.class, betNumber);
 		if(b==null) {
-			System.out.println(">> DataAccess: removeBet => error BetDoesntExist: No hay una apuesta con este identificador "+betNumber);
+			System.err.println(">> DataAccess: removeBet => error BetDoesntExist: No hay una apuesta con este identificador "+betNumber);
 			throw new BetDoesntExist("No hay una apuesta con este identificador "+betNumber);
 		}
 		db.getTransaction().begin();
@@ -405,7 +471,7 @@ public class DataAccess  {
 		System.out.println(">> DataAccess: getForecast => forecastNumber="+forecastNumber);
 		Forecast f = db.find(Forecast.class, forecastNumber);
 		if(f==null) {
-			System.out.println(">> DataAccess: getForecast => error ForecastDoesntExist: No existe un pronostico con este identificador"+forecastNumber);
+			System.err.println(">> DataAccess: getForecast => error ForecastDoesntExist: No existe un pronostico con este identificador"+forecastNumber);
 			throw new ForecastDoesntExist("No existe un pronostico con este identificador " + forecastNumber);
 		}
 		return f;
@@ -503,16 +569,6 @@ public class DataAccess  {
     	   }
 		
 	}
-
-
-
-	public boolean existQuestion(Event event, String question) {
-		System.out.println(">> DataAccess: existQuestion=> event= "+event+" question= "+question);
-		Event ev = db.find(Event.class, event.getEventNumber());
-		return ev.DoesQuestionExists(question);
-	
-	}
-
 
 	public void close(){
 		db.close();

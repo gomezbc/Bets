@@ -21,12 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Event;
@@ -231,8 +227,7 @@ public class EventInfoUserGUI extends JPanel {
 					}else {
 						i = tableForecast.getSelectedRow();
 						int fNumber = (int) tableModelForecast.getValueAt(i,0);
-						Forecast f = facade.getForecast(fNumber);
-						facade.createBet(u.getDni(), dineroBet, f);
+						facade.createBet(u.getDni(), dineroBet, fNumber);
 						facade.modifySaldo(-dineroBet, u.getDni());
 						MainGUI.setUserRegistered(facade.getUser(u.getDni()));//Actualizamos los datos del usuario
 						UserGUI.updateSaldo();
