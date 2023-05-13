@@ -19,11 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Event;
@@ -43,7 +41,13 @@ public class CloseEventGUI extends JPanel {
 	private JScrollPane scrollPaneForecast = new JScrollPane();
 	
 	private JTable tableQueries = new JTable();
-	private JTable tableForecast = new JTable();;
+	private JTable tableForecast = new JTable() {
+		private static final long serialVersionUID = 1L;
+
+		public TableCellRenderer getCellRenderer(int row, int column) {
+	        return new ForecastAdminTableCellRender();
+	    }
+	};
 
 	private DefaultTableModel tableModelQueries;
 	private DefaultTableModel tableModelForecast;
