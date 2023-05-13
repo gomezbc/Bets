@@ -15,11 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.User;
@@ -81,9 +78,11 @@ public class ListUsersGUI extends JPanel {
 		
 		tableModelUser = new DefaultTableModel(null, columnNames);
 		tableUsers.setModel(tableModelUser);
+		tableUsers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		tableModelAdmin = new DefaultTableModel(null, columnNames);
 		tableAdmins.setModel(tableModelAdmin);
+		tableAdmins.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		updateTable();
 		

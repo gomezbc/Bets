@@ -143,6 +143,7 @@ public class ListUserBetsGUI extends JPanel {
 
 		tableModelBets = new DefaultTableModel(null, columnNames);
 		tableBets.setModel(tableModelBets);
+		tableBets.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		updateTable();
 

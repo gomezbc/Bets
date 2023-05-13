@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -105,6 +106,7 @@ public class CloseEventGUI extends JPanel {
 		scrollPaneQueries.setFont(tableQueries.getFont());
 		tableQueries.setModel(tableModelQueries);
 		tableQueries.setRowHeight(20);
+		tableQueries.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(40);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(190);
 		tableQueries.getColumnModel().getColumn(2).setPreferredWidth(55);
@@ -126,6 +128,7 @@ public class CloseEventGUI extends JPanel {
 
 		scrollPaneForecast.setViewportView(tableForecast);
 		tableModelForecast = new DefaultTableModel(null, columnNamesForecast);
+		tableForecast.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableForecast.setModel(tableModelForecast);
 		scrollPaneForecast.setViewportView(tableForecast);
 		scrollPaneForecast.setFont(tableForecast.getFont());

@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -194,6 +195,7 @@ public class EventsListGUI extends JPanel {
 		tableModelEvents = new DefaultTableModel(null, columnNamesEvents);
 		
 		tableEvents = new JTable(tableModelEvents);
+		tableEvents.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableEvents.setBackground(new Color(238, 238, 238));
 		tableEvents.setBounds(40, 233, 803, 280);
 		add(tableEvents);

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -103,6 +104,7 @@ public class EventInfoUserGUI extends JPanel {
 		scrollPaneQueries.setFont(tableQueries.getFont());
 		tableQueries.setModel(tableModelQueries);
 		tableQueries.setRowHeight(20);
+		tableQueries.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableQueries.getColumnModel().getColumn(0).setPreferredWidth(40);
 		tableQueries.getColumnModel().getColumn(1).setPreferredWidth(190);
 		tableQueries.getColumnModel().getColumn(2).setPreferredWidth(55);
@@ -131,6 +133,7 @@ public class EventInfoUserGUI extends JPanel {
 		scrollPaneForecast.setViewportView(tableForecast);
 		tableModelForecast = new DefaultTableModel(null, columnNamesForecast);
 		tableForecast.setModel(tableModelForecast);
+		tableForecast.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneForecast.setViewportView(tableForecast);
 		scrollPaneForecast.setFont(tableForecast.getFont());
 		
@@ -138,16 +141,6 @@ public class EventInfoUserGUI extends JPanel {
 		tableForecast.getColumnModel().getColumn(0).setPreferredWidth(40);
 		tableForecast.getColumnModel().getColumn(1).setPreferredWidth(150);
 		tableForecast.getColumnModel().getColumn(2).setPreferredWidth(60);
-		
-		
-		/*
-		tableForecast = new JTable() {
-
-			public TableCellRenderer getCellRenderer(int row, int column) {
-		        return new BetsTableCellRender();
-		    }
-		};
-		*/
 		
 		
 		tableQueries.addMouseListener(new MouseAdapter() {
