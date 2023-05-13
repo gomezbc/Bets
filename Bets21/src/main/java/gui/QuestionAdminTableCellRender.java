@@ -3,22 +3,19 @@ package gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-
-import java.util.Vector;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import businessLogic.BLFacade;
-import domain.Bet;
-import domain.Forecast;
 import domain.Question;
-import domain.User;
 import exceptions.QuestionDoesntExist;
 
 
-public class QuestionTableCellRender extends DefaultTableCellRenderer{
+public class QuestionAdminTableCellRender extends DefaultTableCellRenderer{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -39,29 +36,26 @@ public class QuestionTableCellRender extends DefaultTableCellRenderer{
 		if (isSelected) setBackground(onGoingS);
 		
 		int numQuestion = ((int) jtable.getModel().getValueAt(row, 0));
-		User u = MainGUI.getUserRegistered();
 		BLFacade facade = MainGUI.getBusinessLogic();
 		Question q = null;
 		try {
 			q = facade.getQuestion(numQuestion);
+			Date todayDate = Calendar.getInstance().getTime();
+			Date eventDate = q.getEvent().getEventDate();
+			Boolean readyToClose = (todayDate.compareTo(eventDate)>=1);
 			Boolean isClosed = (q.getResult() != null);
-			if (isClosed) {
-				if(isSelected) setBackground(closedS);
-				else setBackground(closed);
-				return this;
-			}
-			Vector<Forecast> fList=  q.getForecasts();
-			for (Forecast f:fList) {
-				Bet b = u.DoesBetExists(f.getForecastNumber());
-				Boolean hasBet = (b != null);
-				if(hasBet) {
+			if (readyToClose) {
+				if(isClosed) {
+					if(isSelected) setBackground(closedS);
+					else setBackground(closed);
+				}else {
 					if(isSelected) setBackground(pendingS);
 					else setBackground(pending);
-					return this;
 				}
+			}else {
+				if(isSelected) setBackground(onGoingS);
+				else setBackground(onGoing);
 			}
-			if(isSelected) setBackground(onGoingS);
-			else setBackground(onGoing);
 			
 		} catch (QuestionDoesntExist e) {
 			return this;

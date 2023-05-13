@@ -40,7 +40,13 @@ public class CloseEventGUI extends JPanel {
 	private JScrollPane scrollPaneQueries = new JScrollPane();
 	private JScrollPane scrollPaneForecast = new JScrollPane();
 	
-	private JTable tableQueries = new JTable();
+	private JTable tableQueries = new JTable() {
+		private static final long serialVersionUID = 1L;
+
+		public TableCellRenderer getCellRenderer(int row, int column) {
+	        return new QuestionAdminTableCellRender();
+	    }
+	};
 	private JTable tableForecast = new JTable() {
 		private static final long serialVersionUID = 1L;
 
