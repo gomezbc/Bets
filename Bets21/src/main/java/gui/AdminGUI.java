@@ -172,6 +172,16 @@ public class AdminGUI extends JFrame {
 		btnCrearEvento.setFont(new Font("Roboto", Font.BOLD, 14));
 		btnCrearEvento.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnCrearEvento.setBackground(Color.WHITE);
+		btnCrearEvento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCrearEvento.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
 		menuBar.add(btnCrearEvento);
 		menuBar.add(btnAñadirPreguntasPronosticos);
 		btnAñadirPreguntasPronosticos.addActionListener(new ActionListener() {
