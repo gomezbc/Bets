@@ -219,5 +219,12 @@ public interface BLFacade  {
 	 */
 	@WebMethod public void modifyUserPasswd (User user, String passwd);
 	
+	/**
+	 * Este metodo invoca al data access para modificar la tarjeta de credito
+	 * @param dni dni del usuario
+	 * @param newCard la nueva tarjeta de credito
+	 */
+	@WebMethod public void modifyUserCreditCard(String user, Long newCard);
+	
 	
 }

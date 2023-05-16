@@ -11,12 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.User;
@@ -39,6 +35,7 @@ public class AddSaldoGUI extends JPanel {
 	private JLabel lblAñadir;
 	private JLabel lblError = new JLabel("Tiene que ser positivo");
 	private JLabel lblSacar;
+	private final JLabel lblAñadeUnaTarjeta = new JLabel("AÑADE UNA TARJETA DE CREDITO EN EL APARTADO DATOS PERSONALES");
 
 	
 	
@@ -189,5 +186,20 @@ public class AddSaldoGUI extends JPanel {
 		lblSacar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
 		lblSacar.setBounds(523, 214, 139, 23);
 		add(lblSacar);
+		lblAñadeUnaTarjeta.setForeground(new Color(246, 97, 81));
+		
+		
+		lblAñadeUnaTarjeta.setBounds(145, 312, 577, 30);
+		lblAñadeUnaTarjeta.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblAñadeUnaTarjeta.setVisible(false);
+		add(lblAñadeUnaTarjeta);
+		
+		User u = MainGUI.getUserRegistered();
+		if (u.getCreditCard() == null) {
+			btnSacar.setEnabled(false);
+			btnAñadir.setEnabled(false);
+			lblAñadeUnaTarjeta.setVisible(true);
+		}
+		
 	}
 }

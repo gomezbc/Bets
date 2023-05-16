@@ -18,6 +18,7 @@ public class User {
 	private String passwd;
 	private String username;
 	private boolean isAdmin;
+	private Long creditCard;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	 private Vector<Bet> bets = new Vector<Bet>();
@@ -125,6 +126,20 @@ public class User {
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	/**
+	 * @return the creditCard
+	 */
+	public Long getCreditCard() {
+		return creditCard;
+	}
+
+	/**
+	 * @param creditCard the creditCard to set
+	 */
+	public void setCreditCard(Long creditCard) {
+		this.creditCard = creditCard;
 	}
 	
 	

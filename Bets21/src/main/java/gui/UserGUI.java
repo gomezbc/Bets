@@ -270,16 +270,6 @@ public class UserGUI extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
-	
-
-	
-	public static JLabel getLblUser() {
-		return lblUser;
-	}
-
-	public static void setLblUser(JLabel lblUser) {
-		UserGUI.lblUser = lblUser;
-	}
 
 
 }

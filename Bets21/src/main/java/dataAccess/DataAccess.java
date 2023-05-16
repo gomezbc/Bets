@@ -486,7 +486,14 @@ public class DataAccess  {
 		
 	}
 
-	
+	public void modifyUserCreditCard (String dni, Long newCard) {
+		User user2 = db.find(User.class, dni);
+		db.getTransaction().begin();
+		user2.setCreditCard(newCard);
+		db.persist(user2);
+		db.getTransaction().commit();
+		
+	}
 
 	
 	public void removeBet(Integer betNumber) throws BetDoesntExist{

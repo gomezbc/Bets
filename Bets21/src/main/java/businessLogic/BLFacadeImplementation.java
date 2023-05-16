@@ -518,16 +518,27 @@ public class BLFacadeImplementation  implements BLFacade {
 
 	 @WebMethod
 	 public void modifyUserPasswd (User user, String passwd) {
-			 dbManager.open(false);
-				try {
-					dbManager.modifyUserPasswd(user, passwd);
-					
-				} catch ( Exception e) {
-					throw e;
-					
-				} finally {
-					dbManager.close();
-				}
+		dbManager.open(false);
+			try {
+				dbManager.modifyUserPasswd(user, passwd);	
+			} catch ( Exception e) {
+				throw e;	
+			} finally {
+				dbManager.close();
+			}
+	 }
+	 
+	 @WebMethod
+	 public void modifyUserCreditCard(String dni, Long newCard) {
+		 dbManager.open(false);
+			try {
+				dbManager.modifyUserCreditCard(dni, newCard);
+			} catch ( Exception e) {
+				throw e;
+				
+			} finally {
+				dbManager.close();
+			}
 	 }
 	
 	
