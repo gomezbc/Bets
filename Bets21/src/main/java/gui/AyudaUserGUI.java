@@ -41,9 +41,9 @@ public class AyudaUserGUI extends JDialog {
 	 */
 	public AyudaUserGUI() {
 		Bets21Theme.setup();
-		setBounds(100, 100, 595, 584);
+		setBounds(100, 100, 658, 584);
 		getContentPane().setLayout(null);
-		contentPanel.setBounds(0, 0, 571, 536);
+		contentPanel.setBounds(10, 0, 607, 536);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
@@ -62,78 +62,87 @@ public class AyudaUserGUI extends JDialog {
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("1. Seleccionar el día del partido al que se quiere apostar.");
-			lblNewLabel_2.setBounds(81, 94, 397, 14);
+			lblNewLabel_2.setBounds(81, 94, 526, 14);
 			contentPanel.add(lblNewLabel_2);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("2. Hacer doble click sobre el evento al que se quiere apostar");
-			lblNewLabel_3.setBounds(81, 119, 429, 14);
+			lblNewLabel_3.setBounds(81, 119, 478, 14);
 			contentPanel.add(lblNewLabel_3);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("3. Seleccionar la pregunta y el pronóstico sobre el que se quiere apostar.");
-			lblNewLabel_4.setBounds(81, 143, 443, 14);
+			lblNewLabel_4.setBounds(81, 143, 543, 14);
 			contentPanel.add(lblNewLabel_4);
 		}
 		{
 			JLabel lblNewLabel_5 = new JLabel("4. Introducir el dinero que se quiere apostar.");
-			lblNewLabel_5.setBounds(81, 170, 368, 14);
+			lblNewLabel_5.setBounds(81, 170, 543, 14);
 			contentPanel.add(lblNewLabel_5);
 		}
 		{
 			JLabel lblNewLabel_6 = new JLabel("5. Cuando estés seguro, haz click sobre el botón ASIGNAR. Se creará la apuesta.");
-			lblNewLabel_6.setBounds(81, 195, 478, 14);
+			lblNewLabel_6.setBounds(81, 195, 543, 14);
 			contentPanel.add(lblNewLabel_6);
 		}
 		{
 			JLabel lblNewLabel_7 = new JLabel("Apuestas realizadas:");
 			lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 13));
-			lblNewLabel_7.setBounds(35, 254, 149, 14);
+			lblNewLabel_7.setBounds(34, 245, 149, 14);
 			contentPanel.add(lblNewLabel_7);
 		}
 		{
 			JLabel lblNewLabel_8 = new JLabel("1. Puedes visualizar todas las apuestas que has creado.");
-			lblNewLabel_8.setBounds(81, 279, 478, 14);
+			lblNewLabel_8.setBounds(81, 270, 526, 14);
 			contentPanel.add(lblNewLabel_8);
 		}
 		{
 			JLabel lblNewLabel_9 = new JLabel("Añadir Saldo: ");
 			lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 13));
-			lblNewLabel_9.setBounds(35, 347, 100, 14);
+			lblNewLabel_9.setBounds(35, 366, 100, 14);
 			contentPanel.add(lblNewLabel_9);
 		}
 		{
 			JLabel lblNewLabel_10 = new JLabel("1. Puedes ver el saldo que tienes. ");
-			lblNewLabel_10.setBounds(81, 372, 478, 14);
+			lblNewLabel_10.setBounds(81, 391, 478, 14);
 			contentPanel.add(lblNewLabel_10);
 		}
 		{
 			JLabel lblNewLabel_11 = new JLabel("2. Si quieres añadir saldo, primero, introduce la cantidad a ingresar.");
-			lblNewLabel_11.setBounds(81, 398, 478, 14);
+			lblNewLabel_11.setBounds(81, 405, 478, 29);
 			contentPanel.add(lblNewLabel_11);
 		}
 		{
 			JLabel lblNewLabel_12 = new JLabel("Luego, pulsa el botón de ACEPTAR.");
-			lblNewLabel_12.setBounds(81, 421, 478, 14);
+			lblNewLabel_12.setBounds(81, 431, 478, 26);
 			contentPanel.add(lblNewLabel_12);
 		}
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(81, 476, 478, 33);
-			contentPanel.add(buttonPane);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-			    okButton.addActionListener(new ActionListener() {
-			        public void actionPerformed(ActionEvent e) {
-			            jButtonClose_actionPerformed(e);
-			        }
-			    });
-				getRootPane().setDefaultButton(okButton);
-			}
-
+			JLabel lblNewLabel_13 = new JLabel("2. Las apuestas que se encuentran en rojo son las que has perdido");
+			lblNewLabel_13.setBounds(81, 287, 526, 14);
+			contentPanel.add(lblNewLabel_13);
+		}
+		{
+			JLabel lblNewLabel_14 = new JLabel("3. Las que se encuentran en verde, son las que has ganado.");
+			lblNewLabel_14.setBounds(81, 307, 383, 14);
+			contentPanel.add(lblNewLabel_14);
+		}
+		{
+			JLabel lblNewLabel_15 = new JLabel("4. Las que están en gris todavía no han sucedido, las puedes eliminar o modificar. ");
+			lblNewLabel_15.setBounds(81, 324, 553, 14);
+			contentPanel.add(lblNewLabel_15);
+		}
+		{
+			JButton okButton = new JButton("OK");
+			okButton.setBounds(494, 456, 83, 57);
+			contentPanel.add(okButton);
+			okButton.setActionCommand("OK");
+		    okButton.addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		            jButtonClose_actionPerformed(e);
+		        }
+		    });
+			getRootPane().setDefaultButton(okButton);
 		}
 	}
 	

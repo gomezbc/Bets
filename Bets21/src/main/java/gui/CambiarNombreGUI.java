@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,8 +20,10 @@ import javax.swing.JTextField;
 
 public class CambiarNombreGUI extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -42,6 +45,14 @@ public class CambiarNombreGUI extends JDialog {
 		User u = MainGUI.getUserRegistered();
 		BLFacade facade = MainGUI.getBusinessLogic();
 		
+		
+	    lblNewLabel_1 = new JLabel("Lo introducido no es correcto");
+	    lblNewLabel_1.setForeground(Color.RED);
+	    lblNewLabel_1.setBounds(10, 11, 214, 14);
+	    lblNewLabel_1.setVisible(false);
+	    contentPanel.add(lblNewLabel_1);
+	    
+	    
 		setBounds(100, 100, 364, 223);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(10, 0, 350, 175);
@@ -66,19 +77,29 @@ public class CambiarNombreGUI extends JDialog {
 			getRootPane().setDefaultButton(okButton);
 			okButton.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
-			    	facade.modifyUserName(u, textField.getText());
 			    	
-			    	try {
-						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
-					} catch (UserDoesntExist e1) {
-						e1.printStackTrace();
-					}
+			    	if(textField.getText().trim().length()>0) {
+			    		facade.modifyUserName(u, textField.getText().trim());
+			    		lblNewLabel_1.setVisible(false);
+
 			    	
-			    	CambiarDatosGUI.UpdateName();
+			    		try {
+			    			MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+			    		} catch (UserDoesntExist e1) {
+			    			e1.printStackTrace();
+			    		}
 			    	
-			    	 jButtonClose_actionPerformed(e);
+			    		CambiarDatosGUI.UpdateName();
+			    		jButtonClose_actionPerformed(e);
 			    	
 			    	
+			    	} else {
+			    		
+			    		lblNewLabel_1.setVisible(true);
+			    		
+			    	}
+			    	
+			    		
 			    	
 			    }
 			});

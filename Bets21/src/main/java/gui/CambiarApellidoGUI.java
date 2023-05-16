@@ -1,7 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +14,15 @@ import javax.swing.border.EmptyBorder;
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
+import java.awt.Color;
 
 public class CambiarApellidoGUI extends JDialog {
 
+
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -40,6 +43,13 @@ public class CambiarApellidoGUI extends JDialog {
 	public CambiarApellidoGUI() {
 		User u = MainGUI.getUserRegistered();
 		BLFacade facade = MainGUI.getBusinessLogic();
+		
+		
+	    lblNewLabel_1 = new JLabel("Lo introducido no es correcto");
+	    lblNewLabel_1.setForeground(Color.RED);
+	    lblNewLabel_1.setBounds(10, 11, 214, 14);
+	    lblNewLabel_1.setVisible(false);
+	    contentPanel.add(lblNewLabel_1);
 		
 		setBounds(100, 100, 364, 223);
 		getContentPane().setLayout(null);
@@ -65,7 +75,11 @@ public class CambiarApellidoGUI extends JDialog {
 			getRootPane().setDefaultButton(okButton);
 			okButton.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
-			    	facade.modifyUserApellido(u, textField.getText());
+			    	
+			    	if(textField.getText().trim().length()>0) {
+			    		facade.modifyUserApellido(u, textField.getText().trim());
+			    		lblNewLabel_1.setVisible(false);
+
 			    	
 			    	try {
 						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
@@ -74,12 +88,19 @@ public class CambiarApellidoGUI extends JDialog {
 					}
 			    	
 			    	CambiarDatosGUI.UpdateApellido();
-			    	
 			    	jButtonClose_actionPerformed(e);
 			    	
 			    	
+			    	} else {
+			    		lblNewLabel_1.setVisible(true);
+			    		
+			    	}
+			  
+			    	
 			    	
 			    }
+			    
+			    
 			});
 			
 		}

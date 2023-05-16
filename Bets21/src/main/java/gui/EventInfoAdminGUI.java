@@ -322,7 +322,7 @@ public class EventInfoAdminGUI extends JPanel {
 		
 		lblDescripcinMnimo_2 = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("EventInfoAdminGUI.lblDescripcinMnimo_2.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblDescripcinMnimo_2.setFont(new Font("Roboto", Font.PLAIN, 14));
-		lblDescripcinMnimo_2.setBounds(437, 407, 385, 25);
+		lblDescripcinMnimo_2.setBounds(437, 407, 410, 25);
 		add(lblDescripcinMnimo_2);
 		
 		//Si la fecha actual es posterior a la del evento, no se puede añadir preguntas y pronosticos
@@ -343,6 +343,8 @@ public class EventInfoAdminGUI extends JPanel {
 		}
 		//Comprobaciones para que el boton no este activo en caso de que no se haya rellenado todos los campos
 		
+		
+		
 		preguntaMinimo.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 				  check();
@@ -361,6 +363,8 @@ public class EventInfoAdminGUI extends JPanel {
 			     }
 			  }
 			});
+		
+		
 		
 		pregunta.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
@@ -381,6 +385,8 @@ public class EventInfoAdminGUI extends JPanel {
 			  }
 			});
 		
+		
+		
 		pronosticoMinimo.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 				  check();
@@ -399,6 +405,8 @@ public class EventInfoAdminGUI extends JPanel {
 			     }
 			  }
 			});
+		
+		
 		
 		pronostico.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {

@@ -110,9 +110,12 @@ public class CreateEventGUI extends JPanel {
 					
 					
 					facade.createEvent( textField.getText(), fechaConHoraCero);
+					
+					textField.setText("");
+					
 					lblYaExiste.setVisible(false);
 					lblCreado.setVisible(true);
-					
+				
 					
 					
 				} catch (EventAlreadyExist e1) {
