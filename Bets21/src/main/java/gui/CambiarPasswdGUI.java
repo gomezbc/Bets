@@ -1,8 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,19 +8,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
 import domain.User;
 import exceptions.UserDoesntExist;
+import javax.swing.JPasswordField;
 
 public class CambiarPasswdGUI extends JDialog {
 
 	
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JPasswordField passwordField;
 	private JLabel lblNewLabel_1;
 
 	/**
@@ -58,15 +56,15 @@ public class CambiarPasswdGUI extends JDialog {
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblNewLabel = new JLabel("NOMBRE :  ");
-			lblNewLabel.setBounds(43, 34, 87, 31);
+			JLabel lblNewLabel = new JLabel("CONTRASEÑA :  ");
+			lblNewLabel.setBounds(20, 34, 110, 31);
 			contentPanel.add(lblNewLabel);
 		}
 		
-		textField = new JTextField();
-		textField.setBounds(140, 34, 96, 31);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(140, 34, 96, 31);
+		contentPanel.add(passwordField);
+		passwordField.setColumns(10);
 		{
 			JButton okButton = new JButton("OK");
 			okButton.setBounds(76, 109, 79, 31);
@@ -76,8 +74,8 @@ public class CambiarPasswdGUI extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 			    public void actionPerformed(ActionEvent e) {
 			    	
-			    	if(textField.getText().trim().length()>0) {
-			    		facade.modifyUserPasswd(u, textField.getText().trim());
+			    	if(String.valueOf(passwordField.getPassword()).trim().length()>0) {
+			    		facade.modifyUserPasswd(u, String.valueOf(passwordField.getPassword()).trim());
 			    		lblNewLabel_1.setVisible(false);
 			    		
 			    	try {

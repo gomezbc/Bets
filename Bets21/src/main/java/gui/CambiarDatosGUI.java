@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.JPanel;
 
-import domain.Event;
 import domain.User;
 import exceptions.UserDoesntExist;
 
@@ -11,14 +10,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -26,7 +22,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import businessLogic.BLFacade;
-import configuration.UtilDate;
 
 public class CambiarDatosGUI extends JPanel {
 	
