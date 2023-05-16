@@ -184,5 +184,40 @@ public interface BLFacade  {
 	 * @param user user who made the bet
 	 */
 	@WebMethod public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist ;	
+	
+	
+	
+	/**
+	 * Este metodo invoca al data access para modificar el nombre de un usuario.
+	 * @param user, el usuario al que se le quiere modificar el nombre
+	 * @param Nombre2, el nuevo nombre que se quiere poner
+	 */
+	@WebMethod public void modifyUserName (User user, String Nombre2);
 
+	
+	/**
+	 * Este metodo invoca al data access para modificar el apellido de un usuario.
+	 * @param user, el usuario al que se le quiere modificar el nombre
+	 * @param Apellido, el nuevo apellido que se quiere poner
+	 */
+	@WebMethod public void modifyUserApellido (User user, String Apellido);
+	
+	
+	/**
+	 * Este metodo invoca al data access para modificar el nombre de usuario de un user.
+	 * @param user, el usuario al que se le quiere modificar el nombre de usuario
+	 * @param Usuario, el nuevo nombre de usuario que se quiere poner
+	 */
+	@WebMethod public void modifyUserUsuario (User user, String Usuario);
+	
+	
+	
+	/**
+	 * Este metodo invoca al data access para modificar la contraseña de un user.
+	 * @param user, el usuario al que se le quiere modificar la contraseña de usuario
+	 * @param passwd, la nueva contraseña que se quiere poner
+	 */
+	@WebMethod public void modifyUserPasswd (User user, String passwd);
+	
+	
 }

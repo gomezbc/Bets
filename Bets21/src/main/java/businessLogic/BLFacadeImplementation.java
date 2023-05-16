@@ -164,6 +164,8 @@ public class BLFacadeImplementation  implements BLFacade {
  	   return user;
     }
     
+    
+    
     /**
 	 * This method invokes the data access to get a Question from the database
 	 * @param questionNumber number of the question
@@ -187,6 +189,8 @@ public class BLFacadeImplementation  implements BLFacade {
 	
     
     
+    
+    
     /**
 	 * This method invokes the data access to create a new Event
 	 * @param description description of the event
@@ -207,6 +211,7 @@ public class BLFacadeImplementation  implements BLFacade {
     	}
     	return event; 
     }
+    
     
     
     
@@ -235,6 +240,9 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
+    
+    
+    
     /**
 	 * This method invokes the data access to get a User from the database given its DNI
 	 * @param Dni dni of the user
@@ -254,6 +262,9 @@ public class BLFacadeImplementation  implements BLFacade {
   	   }
  	   return u;
     }
+    
+    
+    
     
     
     /**
@@ -282,6 +293,8 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
+    
+    
     /**
 	 * This method invokes the data access to get all the events from the database
 	 * @return a vector with all the events
@@ -293,6 +306,9 @@ public class BLFacadeImplementation  implements BLFacade {
   	    dbManager.close();
   	    return users;
     }
+    
+    
+    
     
     
     /**
@@ -307,6 +323,8 @@ public class BLFacadeImplementation  implements BLFacade {
   	    dbManager.close();
   	    return ret;
     }
+    
+    
     
     
     /**
@@ -333,6 +351,9 @@ public class BLFacadeImplementation  implements BLFacade {
     }
     
     
+    
+    
+    
     /**
 	 * This method invokes the data access to modify the balance of a user
 	 * @param saldo amount of money to add to the user's balance (+) to add, (-) to remove
@@ -353,6 +374,9 @@ public class BLFacadeImplementation  implements BLFacade {
     	return user;
     }
     
+    
+    
+    
     /**
 	 * This method invokes the data access to get a Forecast from the database given its number
 	 * @param forecastNumber number of the forecast
@@ -372,6 +396,9 @@ public class BLFacadeImplementation  implements BLFacade {
     	}
     	return ret;
     }
+    
+    
+    
     
 	/**
 	 * This method invokes the data access to get all the users from the database, and modify their balance according to the result of the event
@@ -396,6 +423,9 @@ public class BLFacadeImplementation  implements BLFacade {
 
     }
 
+    
+    
+    
 	/**
 	 * This method invokes the data access to remove a bet from the database
 	 * @param betNumber number of the bet to remove
@@ -413,6 +443,9 @@ public class BLFacadeImplementation  implements BLFacade {
         }
 	}
     
+	
+	
+	
 	/**
 	 * This method invokes the data access to modify the betModey from a bet in the database
 	 * @param betMoney the new amount of money of the bet
@@ -433,6 +466,70 @@ public class BLFacadeImplementation  implements BLFacade {
     	return bet;
 	}
 
+	
+	
+	@WebMethod
+	 public void modifyUserName (User user, String Nombre2) {
+		dbManager.open(false);
+		try {
+			dbManager.modifyUserName(user, Nombre2);
+			
+		} catch ( Exception e) {
+			throw e;
+			
+		} finally {
+			dbManager.close();
+		}
+		 
+	 }
+	
+	@WebMethod
+	 public void modifyUserApellido (User user, String Apellido) {
+		dbManager.open(false);
+		try {
+			dbManager.modifyUserApellido(user, Apellido);
+			
+		} catch ( Exception e) {
+			throw e;
+			
+		} finally {
+			dbManager.close();
+		}
+		 
+	 }
+	
+	
+	 @WebMethod
+	 public void modifyUserUsuario (User user, String Usuario) {
+		 dbManager.open(false);
+			try {
+				dbManager.modifyUserUsuario(user, Usuario);
+				
+			} catch ( Exception e) {
+				throw e;
+				
+			} finally {
+				dbManager.close();
+			}
+			 
+	 }
+	
+	 
+
+	 @WebMethod
+	 public void modifyUserPasswd (User user, String passwd) {
+			 dbManager.open(false);
+				try {
+					dbManager.modifyUserPasswd(user, passwd);
+					
+				} catch ( Exception e) {
+					throw e;
+					
+				} finally {
+					dbManager.close();
+				}
+	 }
+	
 	
 
 }

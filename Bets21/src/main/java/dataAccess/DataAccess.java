@@ -429,8 +429,10 @@ public class DataAccess  {
 		double betMoneyAntes = bet.getBetMoney();
 		double betTotal = betMoney + betMoneyAntes;
 		db.getTransaction().begin();
-		user2.setSaldo(user2.getSaldo() - betMoney);
-		bet.setBetMoney((float)betTotal);
+		if((betTotal)>0) {
+			user2.setSaldo(user2.getSaldo() - betMoney);
+			bet.setBetMoney((float)betTotal);
+		}
 		db.persist(user2);
  	    db.persist(bet);
  		db.getTransaction().commit();
@@ -438,6 +440,52 @@ public class DataAccess  {
 	}
 	
 	
+	
+	
+	public void modifyUserName (User user, String Nombre2) {
+		
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		user2.setName(Nombre2);
+		db.persist(user2);
+		db.getTransaction().commit();
+		
+		
+	}
+	
+	
+	public void modifyUserApellido (User user, String Apellido) {
+		
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		user2.setApellido(Apellido);
+		db.persist(user2);
+		db.getTransaction().commit();
+		
+		
+	}
+	
+	
+	
+	public void modifyUserUsuario (User user, String Usuario) {
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		user2.setUsername(Usuario);
+		db.persist(user2);
+		db.getTransaction().commit();
+		
+	}
+	
+	
+	public void modifyUserPasswd (User user, String passwd) {
+		User user2 = db.find(User.class, user);
+		db.getTransaction().begin();
+		user2.setPasswd(passwd);
+		db.persist(user2);
+		db.getTransaction().commit();
+		
+	}
+
 	
 
 	

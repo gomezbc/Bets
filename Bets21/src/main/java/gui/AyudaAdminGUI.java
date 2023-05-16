@@ -17,6 +17,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import theme.Bets21Theme;
+import javax.swing.JScrollBar;
 
 public class AyudaAdminGUI extends JDialog {
 
@@ -42,9 +43,9 @@ public class AyudaAdminGUI extends JDialog {
 	public AyudaAdminGUI() {
 		Bets21Theme.setup();
 		
-		setBounds(100, 100, 813, 871);
+		setBounds(100, 100, 807, 800);
 		getContentPane().setLayout(null);
-		contentPanel.setBounds(10, 11, 795, 813);
+		contentPanel.setBounds(10, 11, 795, 818);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);

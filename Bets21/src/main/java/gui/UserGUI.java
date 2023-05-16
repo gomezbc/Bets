@@ -44,6 +44,7 @@ public class UserGUI extends JFrame {
 	private JButton btnApuestasRealizadas;
 	private static JLabel lblLogoUser;
 	private JButton btnAñadirSaldo;
+	private JButton btnCambiarDatos;
 	private static JButton btnHelp;
 	/**
 	 * Launch the application.
@@ -114,7 +115,7 @@ public class UserGUI extends JFrame {
 		lblUser = new JLabel("");
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblUser.setBounds(60, 10, 485, 25);
+		lblUser.setBounds(60, 10, 800, 25);
 		User u = MainGUI.getUserRegistered();
 		if(u!=null) lblUser.setText("User: "+u.getUsername()+"     Saldo: "+String.format("%.2f", u.getSaldo()));
 		contentPane.add(lblUser);
@@ -137,7 +138,7 @@ public class UserGUI extends JFrame {
 		
 		menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(20, 42, 370, 30);
+		menuBar.setBounds(20, 42, 500, 30);
 		contentPane.add(menuBar);
 		
 		btnHome = new JButton("     Eventos    ");
@@ -204,6 +205,35 @@ public class UserGUI extends JFrame {
 		btnAñadirSaldo.setBackground(Color.WHITE);
 		menuBar.add(btnAñadirSaldo);
 		
+		
+		
+		
+		
+		btnCambiarDatos = new JButton(" Datos Personales ");
+		btnCambiarDatos.setFont(new Font("Segoe UI Semibold", Font.BOLD, 14));
+		btnCambiarDatos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnCambiarDatos.setBorder(new LineBorder(new Color(26, 95, 180), 2));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCambiarDatos.setBorder(new EmptyBorder(3,3,3,3));
+			}
+		});
+		btnCambiarDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserGUI.updateFrame(new CambiarDatosGUI());
+			}
+		});
+		btnCambiarDatos.setBorder(new EmptyBorder(3, 3, 3, 3));
+		btnCambiarDatos.setBackground(Color.WHITE);
+		menuBar.add(btnCambiarDatos);
+		
+		
+		
+		
+		
 		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/user.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
 		lblLogoUser = new JLabel(new ImageIcon(scaledIcon));
@@ -240,6 +270,8 @@ public class UserGUI extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
+	
+
 	
 	public static JLabel getLblUser() {
 		return lblUser;
