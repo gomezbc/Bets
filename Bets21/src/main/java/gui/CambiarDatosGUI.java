@@ -22,6 +22,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import businessLogic.BLFacade;
+import java.awt.SystemColor;
 
 public class CambiarDatosGUI extends JPanel {
 	
@@ -186,14 +187,16 @@ public class CambiarDatosGUI extends JPanel {
 		
 		lblTarjeta = new JLabel("TARJETA DE CREDITO:");
 		lblTarjeta.setFont(new Font("Dialog", Font.PLAIN, 13));
-		lblTarjeta.setBounds(80, 321, 156, 14);
+		lblTarjeta.setBounds(80, 351, 156, 14);
 		add(lblTarjeta);
 		
 		textFieldTarjeta = new JTextField();
 		if(u.getCreditCard() != null)textFieldTarjeta.setText(u.getCreditCard().toString());
-		textFieldTarjeta.setBounds(237, 318, 257, 21);
+		textFieldTarjeta.setBounds(237, 349, 257, 21);
 		add(textFieldTarjeta);
 		textFieldTarjeta.setColumns(10);
+		
+		
 		
 		btnTarjeta = new JButton("Cambiar Tarjeta");
 		btnTarjeta.setEnabled(false);
@@ -204,6 +207,8 @@ public class CambiarDatosGUI extends JPanel {
 					Long newCard = Long.parseLong(textFieldTarjeta.getText().toString().trim());
 					facade.modifyUserCreditCard(u.getDni(), newCard);
 					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+					
+					
 				}catch (NumberFormatException eN) {
 					lblWarning.setVisible(true);
 				} catch (UserDoesntExist e1) {
@@ -212,7 +217,7 @@ public class CambiarDatosGUI extends JPanel {
 				
 				}
 		});
-		btnTarjeta.setBounds(253, 354, 175, 40);
+		btnTarjeta.setBounds(256, 390, 175, 40);
 		add(btnTarjeta);
 		
 		textFieldTarjeta.getDocument().addDocumentListener(new DocumentListener() {
@@ -239,8 +244,13 @@ public class CambiarDatosGUI extends JPanel {
 		
 		lblWarning = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CambiarDatosGUI.lblAsegurateQueSolamente.text")); //$NON-NLS-1$ //$NON-NLS-2$
 		lblWarning.setForeground(new Color(220, 20, 60));
-		lblWarning.setBounds(201, 406, 294, 17);
+		lblWarning.setBounds(253, 458, 294, 17);
 		add(lblWarning);
+		
+		JLabel lblNewLabel = new JLabel(ResourceBundle.getBundle("Etiquetas").getString("CambiarDatosGUI.lblNewLabel.text")); //$NON-NLS-1$ //$NON-NLS-2$
+		lblNewLabel.setForeground(new Color(25, 25, 112));
+		lblNewLabel.setBounds(80, 313, 266, 14);
+		add(lblNewLabel);
 		lblWarning.setVisible(false);
 	}
 	

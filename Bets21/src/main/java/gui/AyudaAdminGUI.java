@@ -43,9 +43,9 @@ public class AyudaAdminGUI extends JDialog {
 	public AyudaAdminGUI() {
 		Bets21Theme.setup();
 		
-		setBounds(100, 100, 790, 656);
+		setBounds(100, 100, 784, 675);
 		getContentPane().setLayout(null);
-		contentPanel.setBounds(10, 36, 758, 572);
+		contentPanel.setBounds(10, 61, 758, 566);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
@@ -146,13 +146,6 @@ public class AyudaAdminGUI extends JDialog {
 			contentPanel.add(lblNewLabel_18);
 		}
 		{
-			JLabel lblNewLabel_19 = new JLabel("AYUDA");
-			lblNewLabel_19.setForeground(new Color(0, 0, 205));
-			lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 20));
-			lblNewLabel_19.setBounds(10, 0, 79, 28);
-			contentPanel.add(lblNewLabel_19);
-		}
-		{
 			JLabel lblNewLabel_20 = new JLabel("1. Puedes ver todos los usuarios registrados, con todos sus datos.");
 			lblNewLabel_20.setBounds(192, 491, 604, 14);
 			contentPanel.add(lblNewLabel_20);
@@ -173,9 +166,16 @@ public class AyudaAdminGUI extends JDialog {
 			contentPanel.add(lblNewLabel_23);
 		}
 		{
+			JLabel lblNewLabel_19 = new JLabel("AYUDA");
+			lblNewLabel_19.setBounds(52, 8, 103, 39);
+			getContentPane().add(lblNewLabel_19);
+			lblNewLabel_19.setForeground(new Color(0, 0, 205));
+			lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 20));
+		}
+		{
 		    JButton okButton = new JButton("OK");
-		    okButton.setBounds(643, 24, 79, 40);
-		    contentPanel.add(okButton);
+		    okButton.setBounds(651, 11, 79, 40);
+		    getContentPane().add(okButton);
 		    okButton.setActionCommand("OK");
 		    okButton.addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {

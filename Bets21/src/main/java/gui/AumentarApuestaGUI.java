@@ -28,6 +28,8 @@ public class AumentarApuestaGUI extends JFrame {
 	private JTextField textField;
 	private JButton btnNewButton_1;
 	private JLabel lblNewLabel_1 = new JLabel("Dinero Añadido");
+	private JLabel lblNewLabel_2;
+
 
 	public AumentarApuestaGUI() {
 		JBinit();
@@ -90,8 +92,12 @@ public class AumentarApuestaGUI extends JFrame {
 					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
 					UserGUI.updateSaldo();
 					
+					jButtonClose_actionPerformed(e);
+					
 					} else {
-						System.out.println("error");
+						
+						lblNewLabel_2.setVisible(true);
+						
 					}
 					
 				} catch (UserDoesntExist e1) {
@@ -103,12 +109,7 @@ public class AumentarApuestaGUI extends JFrame {
 				}
 	        	System.out.println(u.getSaldo());
 				
-				
-				try {
-					Thread.sleep(5*100);
-				} catch (InterruptedException e1) {
-				}
-	            jButtonClose_actionPerformed(e);
+	            
 	        }
 	    });
 		btnNewButton_1.setBounds(55, 132, 123, 38);
@@ -116,7 +117,7 @@ public class AumentarApuestaGUI extends JFrame {
 		
 		
 		lblNewLabel_1.setForeground(new Color(0, 0, 255));
-		lblNewLabel_1.setBounds(44, 99, 102, 22);
+		lblNewLabel_1.setBounds(237, 76, 102, 22);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton_2 = new JButton("DISMINUIR");
@@ -141,8 +142,11 @@ public class AumentarApuestaGUI extends JFrame {
 					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
 					UserGUI.updateSaldo();
 					
+					
+					jButtonClose_actionPerformed(e);
+					
 					} else {
-						System.out.println("error");
+						lblNewLabel_2.setVisible(true);
 					}
 					
 				} catch (UserDoesntExist e1) {
@@ -154,16 +158,19 @@ public class AumentarApuestaGUI extends JFrame {
 				}
 	        	System.out.println(u.getSaldo());
 				
-				
-				try {
-					Thread.sleep(5*100);
-				} catch (InterruptedException e1) {
-				}
-	            jButtonClose_actionPerformed(e);
+			
+	            
 	        }
 	    });
 		btnNewButton_2.setBounds(188, 132, 123, 38);
 		contentPane.add(btnNewButton_2);
+		
+		
+		lblNewLabel_2 = new JLabel("No se pudo modificar la apuesta.");
+		lblNewLabel_2.setForeground(new Color(25, 25, 112));
+		lblNewLabel_2.setBounds(29, 107, 244, 14);
+		lblNewLabel_2.setVisible(false);
+		contentPane.add(lblNewLabel_2);
 		
 		
 		
