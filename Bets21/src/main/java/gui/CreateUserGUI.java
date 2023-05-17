@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import businessLogic.BLFacade;
 import exceptions.UserAlreadyExist;
 import theme.Bets21Theme;
+import javax.swing.ImageIcon;
 
 public class CreateUserGUI extends JFrame {
 
@@ -106,6 +108,9 @@ public class CreateUserGUI extends JFrame {
 		contentPane.add(lblPassword);
 		
 		JButton btnCreateUser = new JButton("Crear Usuario");
+		ImageIcon icon = new ImageIcon(CreateUserGUI.class.getResource("/icons/create-user.png"));
+		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnCreateUser.setIcon(new ImageIcon(scaledIcon));
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(username.getText().contentEquals("") || new String(passwd.getPassword()).contentEquals("") || dni.getText().contentEquals("") || name.getText().contentEquals("") || surname.getText().contentEquals("")) {
@@ -125,7 +130,7 @@ public class CreateUserGUI extends JFrame {
 				
 			}
 		});
-		btnCreateUser.setBounds(69, 313, 138, 27);
+		btnCreateUser.setBounds(69, 313, 164, 27);
 		contentPane.add(btnCreateUser);
 		
 		lblUserAlreadyExists = new JLabel("Este usuario ya existe!");

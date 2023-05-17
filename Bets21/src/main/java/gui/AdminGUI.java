@@ -20,12 +20,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import domain.User;
 import theme.Bets21Theme;
@@ -87,7 +84,6 @@ public class AdminGUI extends JFrame {
 		btnLogOut.setToolTipText("Log Out");
 		ImageIcon icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/exit.png"));
 		Image scaledIcon = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-		
 		btnLogOut.setIcon(new ImageIcon(scaledIcon));
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

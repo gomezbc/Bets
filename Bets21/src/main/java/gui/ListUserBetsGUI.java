@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -13,12 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import domain.Bet;
@@ -29,8 +26,9 @@ import theme.Bets21Theme;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import java.awt.Color;
@@ -149,6 +147,9 @@ public class ListUserBetsGUI extends JPanel {
 
 	
 		btnAnularApuesta = new JButton("Anular Apuesta");
+		ImageIcon icon = new ImageIcon(ListUserBetsGUI.class.getResource("/icons/cancel-bet.png"));
+		Image scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnAnularApuesta.setIcon(new ImageIcon(scaledIcon));
 		btnAnularApuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = tableBets.getSelectedRow();
@@ -172,8 +173,7 @@ public class ListUserBetsGUI extends JPanel {
 		});
 		btnAnularApuesta.setEnabled(false);
 		btnAnularApuesta.setBackground(Color.WHITE);
-		btnAnularApuesta.setFont(new Font("Roboto", Font.BOLD, 14));
-		btnAnularApuesta.setBounds(220, 504, 186, 26);
+		btnAnularApuesta.setBounds(220, 504, 190, 27);
 		add(btnAnularApuesta);
 		
 		
@@ -181,6 +181,9 @@ public class ListUserBetsGUI extends JPanel {
 		
 		btnAumentarApuesta = new JButton("Modificar Apuesta");
 		btnAumentarApuesta.setBackground(Color.WHITE);
+		icon = new ImageIcon(ListUserBetsGUI.class.getResource("/icons/modify-bet.png"));
+		scaledIcon = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnAumentarApuesta.setIcon(new ImageIcon(scaledIcon));
 		btnAumentarApuesta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fila = tableBets.getSelectedRow();
@@ -198,9 +201,8 @@ public class ListUserBetsGUI extends JPanel {
 		
 		
 		
-		btnAumentarApuesta.setFont(new Font("Dialog", Font.BOLD, 14));
 		btnAumentarApuesta.setEnabled(false);
-		btnAumentarApuesta.setBounds(444, 504, 209, 27);
+		btnAumentarApuesta.setBounds(457, 504, 190, 27);
 		add(btnAumentarApuesta);
 		
 		
