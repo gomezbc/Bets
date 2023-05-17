@@ -98,28 +98,27 @@ public class AddSaldoGUI extends JPanel {
 				lblAñadir.setVisible(false);
 				User userRegistered = MainGUI.getUserRegistered();
 				BLFacade facade = MainGUI.getBusinessLogic();
-				if (Float.parseFloat(textField.getText()) > 0){
-					try {
-						facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
-						userRegistered = MainGUI.getUserRegistered();
-						lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
-						lblAñadir.setVisible(true);
-						lblSacar.setVisible(false);
-						lblError.setVisible(false);
-						textField.setText("");
-					} catch (NumberFormatException e3) {
+				try {
+					if (Float.parseFloat(textField.getText()) > 0){
+						
+							facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
+							MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
+							userRegistered = MainGUI.getUserRegistered();
+							lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
+							lblAñadir.setVisible(true);
+							lblSacar.setVisible(false);
+							lblError.setVisible(false);
+							textField.setText("");
+					}
+				} catch (NumberFormatException e3) {
 						lblError.setVisible(true);
 						lblAñadir.setVisible(false);
 						lblSacar.setVisible(false);
-					} catch (Exception e2) {
+				} catch (Exception e2) {
 						lblError.setVisible(true);
 						lblAñadir.setVisible(false);
 						lblSacar.setVisible(false);
 				}  
-				} else {
-
-				}
 				UserGUI.updateSaldo();
 			} });
 		
@@ -143,8 +142,8 @@ public class AddSaldoGUI extends JPanel {
 				lblSacar.setVisible(false);
 				User userRegistered = MainGUI.getUserRegistered();
 				BLFacade facade = MainGUI.getBusinessLogic();
-				if (Float.parseFloat(textField_1.getText()) > 0){
-					try {
+				try {
+					if (Float.parseFloat(textField_1.getText()) > 0){
 						facade.modifySaldo(-(Float.parseFloat(textField_1.getText())), userRegistered.getDni());
 						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
 						userRegistered = MainGUI.getUserRegistered();
@@ -152,18 +151,15 @@ public class AddSaldoGUI extends JPanel {
 						textField_1.setText("");
 						lblSacar.setVisible(true);
 						lblAñadir.setVisible(false);
-					} catch (NumberFormatException e3) {
-						lblError.setVisible(true);
-						lblSacar.setVisible(false);
-						lblAñadir.setVisible(false);
-					} catch (Exception e2) {
-						lblError.setVisible(true);
-						lblSacar.setVisible(false);
-						lblAñadir.setVisible(false);
 					}
-				} else {
-
-					
+				} catch (NumberFormatException e3) {
+					lblError.setVisible(true);
+					lblSacar.setVisible(false);
+					lblAñadir.setVisible(false);
+				} catch (Exception e2) {
+					lblError.setVisible(true);
+					lblSacar.setVisible(false);
+					lblAñadir.setVisible(false);
 				}
 				UserGUI.updateSaldo();
 			}

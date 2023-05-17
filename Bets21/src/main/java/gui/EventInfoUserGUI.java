@@ -124,7 +124,10 @@ public class EventInfoUserGUI extends JPanel {
 		tableForecast.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				btnApostar.setEnabled(true);
+				Date today = Calendar.getInstance().getTime();
+				if(!today.after(ev.getEventDate())) {
+					btnApostar.setEnabled(true);
+				}
 			}
 		});
 		tableForecast.setFont(new Font("Roboto", Font.PLAIN, 14));
