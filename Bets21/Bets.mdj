@@ -395,13 +395,30 @@
 											"height": 13,
 											"text": "+createQuestion(evi, q, minBet)",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGIKvip5Y836xg=",
+											"_parent": {
+												"$ref": "AAAAAAFhA6Bxrv2uq9g="
+											},
+											"model": {
+												"$ref": "AAAAAAGIKUIj3lmowco="
+											},
+											"font": "Arial;13;0",
+											"left": 853,
+											"top": 478,
+											"width": 243,
+											"height": 13,
+											"text": "+createBet(user, betModey, forecast)",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 848,
 									"top": 443,
 									"width": 253,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -13794,8 +13811,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -64,
-											"top": -96,
+											"left": -80,
+											"top": -112,
 											"height": 13
 										},
 										{
@@ -13805,8 +13822,8 @@
 												"$ref": "AAAAAAGHk3+wIrJvwso="
 											},
 											"font": "Arial;13;1",
-											"left": 574.5,
-											"top": 51.5,
+											"left": 566.5,
+											"top": 43.5,
 											"width": 113,
 											"height": 13,
 											"text": "Consultar eventos"
@@ -13819,8 +13836,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -64,
-											"top": -96,
+											"left": -80,
+											"top": -112,
 											"width": 80.9072265625,
 											"height": 13,
 											"text": "(from MCU)"
@@ -13833,15 +13850,15 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -64,
-											"top": -96,
+											"left": -80,
+											"top": -112,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 569.5,
-									"top": 44.5,
+									"left": 561.5,
+									"top": 36.5,
 									"width": 123.41357421875,
 									"height": 25,
 									"stereotypeLabel": {
@@ -13868,8 +13885,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -32,
-									"top": -48,
+									"left": -40,
+									"top": -56,
 									"width": 10,
 									"height": 10
 								},
@@ -13884,8 +13901,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -32,
-									"top": -48,
+									"left": -40,
+									"top": -56,
 									"width": 10,
 									"height": 10
 								},
@@ -13900,8 +13917,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -32,
-									"top": -48,
+									"left": -40,
+									"top": -56,
 									"width": 10,
 									"height": 10
 								},
@@ -13916,8 +13933,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -32,
-									"top": -48,
+									"left": -40,
+									"top": -56,
 									"width": 10,
 									"height": 10
 								},
@@ -13932,16 +13949,16 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -32,
-									"top": -48,
+									"left": -40,
+									"top": -56,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 544,
-							"top": 40,
+							"left": 536,
+							"top": 32,
 							"width": 174,
 							"height": 35,
 							"nameCompartment": {
@@ -14440,8 +14457,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 503,
-									"top": 95,
+									"left": 500,
+									"top": 89,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -14461,8 +14478,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 496,
-									"top": 81,
+									"left": 493,
+									"top": 76,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -14482,8 +14499,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 516,
-									"top": 122,
+									"left": 513,
+									"top": 116,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -14503,8 +14520,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 443,
-									"top": 124,
+									"left": 442,
+									"top": 120,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -14524,8 +14541,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 440,
-									"top": 111,
+									"left": 438,
+									"top": 107,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -14546,7 +14563,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 451,
-									"top": 150,
+									"top": 146,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -14566,8 +14583,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 563,
-									"top": 66,
+									"left": 558,
+									"top": 59,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -14586,8 +14603,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 555,
-									"top": 55,
+									"left": 549,
+									"top": 49,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -14606,8 +14623,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 578,
-									"top": 89,
+									"left": 574,
+									"top": 82,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -14652,7 +14669,7 @@
 								"$ref": "AAAAAAGHk3+wIbJkC0M="
 							},
 							"lineStyle": 1,
-							"points": "427:155;593:75",
+							"points": "427:152;588:67",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGHk3+wIrKSQWA="
@@ -14716,7 +14733,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -188,
+											"left": -204,
 											"top": -32,
 											"height": 13
 										},
@@ -14727,7 +14744,7 @@
 												"$ref": "AAAAAAGHk3+wIrKet9w="
 											},
 											"font": "Arial;13;1",
-											"left": 598,
+											"left": 590,
 											"top": 99.5,
 											"width": 69,
 											"height": 13,
@@ -14741,7 +14758,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -188,
+											"left": -204,
 											"top": -32,
 											"width": 80.9072265625,
 											"height": 13,
@@ -14755,14 +14772,14 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -188,
+											"left": -204,
 											"top": -32,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 593,
+									"left": 585,
 									"top": 92.5,
 									"width": 79,
 									"height": 25,
@@ -14790,7 +14807,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -94,
+									"left": -102,
 									"top": -16,
 									"width": 10,
 									"height": 10
@@ -14806,7 +14823,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -94,
+									"left": -102,
 									"top": -16,
 									"width": 10,
 									"height": 10
@@ -14822,7 +14839,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -94,
+									"left": -102,
 									"top": -16,
 									"width": 10,
 									"height": 10
@@ -14838,7 +14855,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -94,
+									"left": -102,
 									"top": -16,
 									"width": 10,
 									"height": 10
@@ -14854,7 +14871,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 576,
+									"left": 568,
 									"top": 135,
 									"width": 103.95166015625,
 									"height": 10
@@ -14862,7 +14879,7 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 576,
+							"left": 568,
 							"top": 88,
 							"width": 113,
 							"height": 35,
@@ -14908,7 +14925,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 496,
+									"left": 492,
 									"top": 124,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -14929,7 +14946,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 492,
+									"left": 488,
 									"top": 110,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -14950,7 +14967,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 505,
+									"left": 501,
 									"top": 153,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -14972,7 +14989,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 447,
-									"top": 140,
+									"top": 138,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -14993,7 +15010,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 445,
-									"top": 126,
+									"top": 125,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -15014,7 +15031,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 451,
-									"top": 167,
+									"top": 166,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -15034,7 +15051,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 545,
+									"left": 537,
 									"top": 110,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -15054,7 +15071,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 539,
+									"left": 531,
 									"top": 98,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -15074,7 +15091,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 557,
+									"left": 550,
 									"top": 135,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -15120,7 +15137,7 @@
 								"$ref": "AAAAAAGHk3+wIbJkC0M="
 							},
 							"lineStyle": 1,
-							"points": "427:168;575:123",
+							"points": "427:167;567:123",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGHk3+wIrKpHlM="
@@ -16875,7 +16892,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -272,
-											"top": -16,
+											"top": -32,
 											"height": 13
 										},
 										{
@@ -16886,7 +16903,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 376,
-											"top": 515.5,
+											"top": 507.5,
 											"width": 80,
 											"height": 13,
 											"text": "Crear evento"
@@ -16900,7 +16917,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -272,
-											"top": -16,
+											"top": -32,
 											"width": 80.9072265625,
 											"height": 13,
 											"text": "(from MCU)"
@@ -16914,14 +16931,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": -272,
-											"top": -16,
+											"top": -32,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 371,
-									"top": 508.5,
+									"top": 500.5,
 									"width": 90,
 									"height": 25,
 									"stereotypeLabel": {
@@ -16949,7 +16966,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -152,
-									"top": -40,
+									"top": -48,
 									"width": 10,
 									"height": 10
 								},
@@ -16965,7 +16982,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -152,
-									"top": -40,
+									"top": -48,
 									"width": 10,
 									"height": 10
 								},
@@ -16981,7 +16998,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -152,
-									"top": -40,
+									"top": -48,
 									"width": 10,
 									"height": 10
 								},
@@ -16997,7 +17014,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -152,
-									"top": -40,
+									"top": -48,
 									"width": 10,
 									"height": 10
 								},
@@ -17013,7 +17030,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": -152,
-									"top": -40,
+									"top": -48,
 									"width": 10,
 									"height": 10
 								}
@@ -17021,7 +17038,7 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 352,
-							"top": 504,
+							"top": 496,
 							"width": 128,
 							"height": 35,
 							"nameCompartment": {
@@ -17471,7 +17488,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 448,
+											"left": 432,
 											"top": -112,
 											"height": 13
 										},
@@ -17482,7 +17499,7 @@
 												"$ref": "AAAAAAGHk3+wJLMqH5U="
 											},
 											"font": "Arial;13;1",
-											"left": 765,
+											"left": 757,
 											"top": 683.5,
 											"width": 104,
 											"height": 13,
@@ -17496,7 +17513,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 448,
+											"left": 432,
 											"top": -112,
 											"width": 80.9072265625,
 											"height": 13,
@@ -17510,14 +17527,14 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 448,
+											"left": 432,
 											"top": -112,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 760,
+									"left": 752,
 									"top": 676.5,
 									"width": 114.74267578125,
 									"height": 25,
@@ -17545,7 +17562,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": -56,
 									"width": 10,
 									"height": 10
@@ -17561,7 +17578,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": -56,
 									"width": 10,
 									"height": 10
@@ -17577,7 +17594,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": -56,
 									"width": 10,
 									"height": 10
@@ -17593,7 +17610,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": -56,
 									"width": 10,
 									"height": 10
@@ -17609,7 +17626,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 224,
+									"left": 216,
 									"top": -56,
 									"width": 10,
 									"height": 10
@@ -17617,7 +17634,7 @@
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 736,
+							"left": 728,
 							"top": 672,
 							"width": 162,
 							"height": 35,
@@ -18054,7 +18071,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 316,
-									"top": 576,
+									"top": 571,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -18075,7 +18092,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 306,
-									"top": 564,
+									"top": 560,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -18096,7 +18113,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 335,
-									"top": 599,
+									"top": 594,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -18116,8 +18133,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 269,
-									"top": 614,
+									"left": 268,
+									"top": 613,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -18137,8 +18154,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 262,
-									"top": 603,
+									"left": 261,
+									"top": 602,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -18159,7 +18176,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 283,
-									"top": 638,
+									"top": 637,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -18179,8 +18196,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 363,
-									"top": 537,
+									"left": 364,
+									"top": 530,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -18199,8 +18216,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 353,
-									"top": 529,
+									"left": 354,
+									"top": 522,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -18219,8 +18236,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 384,
-									"top": 556,
+									"left": 385,
+									"top": 548,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -18265,7 +18282,7 @@
 								"$ref": "AAAAAAGHk3+wIrKD4TY="
 							},
 							"lineStyle": 1,
-							"points": "259:649;393:539",
+							"points": "259:648;394:531",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGHk3+wJLNL+ZA="
@@ -18591,7 +18608,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 497,
+									"left": 493,
 									"top": 658,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -18612,7 +18629,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 497,
+									"left": 493,
 									"top": 643,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -18633,7 +18650,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 496,
+									"left": 492,
 									"top": 687,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -18717,7 +18734,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 709,
+									"left": 701,
 									"top": 664,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -18737,7 +18754,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 707,
+									"left": 699,
 									"top": 650,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -18757,7 +18774,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 712,
+									"left": 704,
 									"top": 691,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -18803,7 +18820,7 @@
 								"$ref": "AAAAAAGHk3+wIrKD4TY="
 							},
 							"lineStyle": 1,
-							"points": "259:672;735:686",
+							"points": "259:672;727:686",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGHk3+wJLNj3N4="
@@ -21128,7 +21145,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGIKQtMOXcH1I4="
 							},
-							"showEndOrder": "hide",
 							"tailRoleNameLabel": {
 								"$ref": "AAAAAAGIKQtMOXcIaZU="
 							},
@@ -21398,7 +21414,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGIKQtbO4LPyuc="
 							},
-							"showEndOrder": "hide",
 							"tailRoleNameLabel": {
 								"$ref": "AAAAAAGIKQtbO4LQpto="
 							},
@@ -21651,7 +21666,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"top": 16,
+											"left": -16,
 											"height": 13
 										},
 										{
@@ -21661,8 +21676,8 @@
 												"$ref": "AAAAAAGIKQw8x8yOUz8="
 											},
 											"font": "Arial;13;1",
-											"left": 938,
-											"top": 243.5,
+											"left": 930,
+											"top": 235.5,
 											"width": 168,
 											"height": 13,
 											"text": "Modificar datos personales"
@@ -21675,7 +21690,7 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"top": 16,
+											"left": -16,
 											"width": 67.87548828125,
 											"height": 13,
 											"text": "(from MCU)"
@@ -21688,14 +21703,14 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"top": 16,
+											"left": -16,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 933,
-									"top": 236.5,
+									"left": 925,
+									"top": 228.5,
 									"width": 178.32080078125,
 									"height": 25,
 									"stereotypeLabel": {
@@ -21722,7 +21737,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"top": 8,
+									"left": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -21737,7 +21752,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"top": 8,
+									"left": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -21752,7 +21767,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"top": 8,
+									"left": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -21767,7 +21782,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"top": 8,
+									"left": -8,
 									"width": 10,
 									"height": 10
 								},
@@ -21782,15 +21797,15 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"top": 8,
+									"left": -8,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 896,
-							"top": 232,
+							"left": 888,
+							"top": 224,
 							"width": 252,
 							"height": 35,
 							"nameCompartment": {
@@ -21835,8 +21850,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 818,
-									"top": 249,
+									"left": 814,
+									"top": 245,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -21855,8 +21870,8 @@
 										"$ref": "AAAAAAGIKQx1pdt+P3w="
 									},
 									"font": "Arial;13;0",
-									"left": 791,
-									"top": 251,
+									"left": 788,
+									"top": 247,
 									"width": 55.65625,
 									"height": 13,
 									"alpha": 1.5993605810255598,
@@ -21878,8 +21893,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 819,
-									"top": 220,
+									"left": 815,
+									"top": 216,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -21897,7 +21912,7 @@
 								"$ref": "AAAAAAGIKQw8x8yN9pg="
 							},
 							"lineStyle": 1,
-							"points": "895:244;744:238",
+							"points": "887:238;744:236",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGIKQx1ptuBfiU="
@@ -22153,7 +22168,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGIKQyK+OZrH0Y="
 							},
-							"showEndOrder": "hide",
 							"tailRoleNameLabel": {
 								"$ref": "AAAAAAGIKQyK+OZsZSo="
 							},
@@ -22200,8 +22214,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 641,
-									"top": 289,
+									"left": 642,
+									"top": 285,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -22222,7 +22236,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 639,
-									"top": 274,
+									"top": 270,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -22242,8 +22256,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 646,
-									"top": 318,
+									"left": 647,
+									"top": 314,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -22263,8 +22277,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 401,
-									"top": 329,
+									"left": 400,
+									"top": 328,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -22284,7 +22298,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 401,
+									"left": 400,
 									"top": 315,
 									"height": 13,
 									"alpha": 0.7853981633974483,
@@ -22326,8 +22340,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 882,
-									"top": 250,
+									"left": 883,
+									"top": 242,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -22346,8 +22360,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 878,
-									"top": 237,
+									"left": 879,
+									"top": 230,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -22366,8 +22380,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 891,
-									"top": 276,
+									"left": 892,
+									"top": 269,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -22412,7 +22426,7 @@
 								"$ref": "AAAAAAGHk3+wIrJ5zfs="
 							},
 							"lineStyle": 1,
-							"points": "378:354;911:267",
+							"points": "378:354;912:259",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGIKQyXVvDPTaY="
@@ -22423,7 +22437,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGIKQyXVvDRZRw="
 							},
-							"showEndOrder": "hide",
 							"tailRoleNameLabel": {
 								"$ref": "AAAAAAGIKQyXVvDS9wE="
 							},
@@ -22892,7 +22905,6 @@
 							"propertyLabel": {
 								"$ref": "AAAAAAGIKSWNCFAUjXs="
 							},
-							"showEndOrder": "hide",
 							"tailRoleNameLabel": {
 								"$ref": "AAAAAAGIKSWNCFAVaIM="
 							},
@@ -23044,7 +23056,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Consultar eventos"
+					"name": "Consultar eventos",
+					"documentation": "# Flow of events\n\n## Basic Flow: Consultar eventos\n\n1. *System* shows a Calendar where days with events are highlighted\n2. *Admin* selects a **Date** in a Calendar\n3. *System* displays the **events** of this **date**\n4. *Admin* selects an **event**\n5. *System* displays the **questions** asssociated to the selected **event**\n6. *Admin* selects an **question**\n7. *System* displays the **forecast** asssociated to the selected **question**\n\n\n## Alternative flow\n1. There are no events on this date. Events cannot be shown.\n2. There are no questions associated to the event. Questions cannot be shown.\n3. There are no forecast associated to a question. Forcast cannot be shown.\n4. If the event has finished and has been asigned a result. \n\t*System* paint in green the forecast that has win. \n    *System* paint in red the forecast that has lose."
 				},
 				{
 					"_type": "UMLActor",
@@ -23511,7 +23524,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Login"
+					"name": "Login",
+					"documentation": "# Flow of events\n\n## Basic Flow: Login\n\n1. La persona indica su dni y su contraseña\n2. El sistema busca a la persona con ese dni y contraseña y le asigna el rol que le corresponda\n\n## Alternative flow\n* Si no existe una persona con ese dni y contraseña se deniega el permiso de entrada"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23534,7 +23548,8 @@
 								"$ref": "AAAAAAGHk3+wJ7PuqU4="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Crear Usuario\n\n1. Pide los siguientes datos a la persona ( dni, nombre, apellido, nombre de usuario, contraseña, y si es administrador.\n\n## Alternative flow\n* Si ya existe un usuario con ese dni, se deniega el poder registrarse"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23557,7 +23572,8 @@
 								"$ref": "AAAAAAGHk3+wJrPKA/U="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Apostar\n\n1. *usuario* tiene que consultar los eventos, las preguntas y los pronósticos que hay para apostar.\n2. *usuario* tiene que elegir el pronóstico sobre el que quiere apostar.\n3. *usuario* tiene que introducir el dinero que quiere apostar. \n4. *System* añade la nueva apuesta con el dinero apostado, con el pronóstico sobre el que se apuesta y el usuario.\n\n## Alternative flow\n* Si ya existe una apuesta de un usuario a un pronóstico no se puede volver a apostar a ese pronóstico\n* Si el dinero de la apuesta introducido por el usuario es menor al dinero mínimo de la apuesta no se puede apostar\n* Si el usuario introduce un dinero mayor a su saldo, no podrá apostar\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23573,7 +23589,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Añadir saldo"
+					"name": "Añadir saldo",
+					"documentation": "# Flow of events\n\n## Basic Flow: Añadir Saldo\n\n1. *usuario* introduce el dinero que quiere añadir a su saldo\n2. *System* añade el dinero introducido por el usuario a su saldo\n\n## Alternative flow\n* El dinero introducido por el usuario tiene que ser un número positivo\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23581,7 +23598,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Consultar apuestas realizadas"
+					"name": "Consultar apuestas realizadas",
+					"documentation": "# Flow of events\n\n## Basic Flow: Consultar apuestas realizadas\n\n1. *System* visualiza todas las apuestas que ha hecho un usuario.\n2. *System* visualiza la apuesta perdida en rojo.\n3. *System* visualiza la apuesta ganada en verde.\n4. *System* visualiza la apuesta ya pasada pero sin resultado asignado en naranja.\n5. *System* visualiza la apuesta no pasada en gris.\n6. *usuario* puede consultar las apuestas que ha realizado.\n\n\n## Alternative flow\n\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23589,7 +23607,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Crear evento"
+					"name": "Crear evento",
+					"documentation": "# Flujo de eventos: Crear Evento\n\n1. *Admin* selects a **Date** in a Calendar\n2. *Admin* introduces two **teams**  \n3. *System* adds the new **event** with the **Date** and with the **teams** \n\n\n## Alternative flow\n\n* Si ya hay un evento en la fecha selecionada con los mismos equipos, se deniega el volver a crearlo"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23612,7 +23631,8 @@
 								"$ref": "AAAAAAGHk3+wJ7QC+LQ="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Cerrar evento\n\n1. *System* mira si se ha asignado un resultado sobre un pronóstico.\n2. *System* se cierra un evento si se asigna un resultado sobre un pronóstico\n\n## Alternative flow\n1. Para cerrar un evento, el evento tiene que haber pasado. Es decir, que la fecha del evento tiene que ser posterior a la fecha actual."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23635,7 +23655,8 @@
 								"$ref": "AAAAAAGHk3+wJrPKA/U="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Crear pregunta\n\n1. *System* shows a Calendar where days with events are highlighted\n2. *Admin* selects a **Date** in a Calendar\n3. *System* displays the **events** of this **date**\n4. *Admin* selects an **event**\n5. *Admin* introduces a **question** and a minimum **betting price** \n6. *System* adds the new **question** with a minimun **betting price** to the selected **event**\n\n## Alternative flow\n1. There are no events on this date. Question cannot be added.\n2. The question field is empty. Question cannot be added.\n3. The minimum betting price is empty or it is not a number. Question cannot be added.\n4. Event date has already finished (event day is before current day). Question cannot be added."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23658,7 +23679,8 @@
 								"$ref": "AAAAAAGHk3+wJrPKA/U="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Crear Pronostico\n\n1. *System* shows a Calendar where days with events are highlighted\n2. *Admin* selects a **Date** in a Calendar\n3. *System* displays the **events** of this **date**\n4. *Admin* selects an **event**\n5. *Admin* selects a **question**\n6. *Admin* introduces a **Forecast** and the **gain** \n7. *System* adds the new **Forecast** with a **Forecast** and with a **gain** to the **question** selected of an **event**\n\n## Alternative flow\n1. There are no events on this date. Forecast cannot be added.\n2. There are no questions on an event. Forecast cannot be added.\n3. Forcast that it's already created. Forecast cannot be added."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23666,7 +23688,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Consultar usuarios"
+					"name": "Consultar usuarios",
+					"documentation": "# Flow of events\n\n## Basic Flow: Consultar usuarios\n\n1. *System* visualiza todos los usuarios\n2. *Admin* puede ver todos los usuarios\n\n## Alternative flow"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23689,7 +23712,8 @@
 								"$ref": "AAAAAAGHk3+wJ7P9CnA="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Eliminar usuario\n\n1. *Admin* tiene que consultar los usuarios que existen\n2. *Admin* seleciona el usuario que quiere eliminar\n3. *System* elimina el usuario que ha seleccionado el *Admin*\n\n## Alternative flow\n1. Si el administrador no selecciona ningun usuario no se puede eliminar ninguno"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23720,7 +23744,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Asignar resultados"
+					"name": "Asignar resultados",
+					"documentation": "# Flow of events\n\n## Basic Flow: Asignar resultado\n\n1. *System* shows a Calendar where days with events are highlighted\n2. *Admin* selects a **Date** in a Calendar\n3. *System* displays the **events** of this **date**\n4. *Admin* selects an **event**\n5. *Admin* selects a **question**\n6. *Admin* selects a **Forecast**\n7. *Admin* the **Forecast** that has selected is the result of the question\n7. *System* adds the result.\n8. *System* paint in green the result that have win\n9. *System* paint in red the result that have lose. \n\n## Alternative flow\n1. There are no events on this date. Result cannot be asigned.\n2. The question field is empty. Result cannot be asigned.\n3. There is no Forecast. Result cannot be asigned.\n4. Event date hasn't already finished (event day is after current day). Result cannot be asigned."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23743,7 +23768,8 @@
 								"$ref": "AAAAAAGHk3+wJ7P1FXU="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Anular apuesta\n\n1. *Usuario* tiene que consultar las apuestas realizadas\n2. *Usuario* seleccionar una apuesta que todavía no ha ocurrido.\n3. *Usuario* indica que la quiere anular\n5. *System* anula la apuesta que ha indicado el usuario.\n\n\n## Alternative flow\n* No puede modificar una apuesta que ya ha pasado. "
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23766,7 +23792,8 @@
 								"$ref": "AAAAAAGHk3+wJ7P1FXU="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Modificar apuesta\n\n1. *Usuario* tiene que consultar las apuestas realizadas\n2. *Usuario* seleccionar una apuesta que todavía no ha ocurrido.\n3. *Usuario* introducir el dinero a aumentar o disminuir.\n4. *Usuario* seleccionar si quiere aumentar o disminuir la apuesta.\n5. *System* aumenta o disminuye el dinero de la apuesta y el saldo\n\n\n## Alternative flow\n* No puede modificar una apuesta que ya ha pasado. \n* No puede disminuir tanto como para quedarse en números negativos.\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23774,7 +23801,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Consultar datos personales"
+					"name": "Consultar datos personales",
+					"documentation": "# Flow of events\n\n## Basic Flow: Consultar datos personales.\n\n1. *System* visualiza en la pantalla todos los datos del usuario (dni, nombre, apellido, nombre de usuario y contraseña)\n2. El usuario puede visualizar en la pantalla todos sus datos personales. \n\n## Alternative flow\n"
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23797,7 +23825,8 @@
 								"$ref": "AAAAAAGIKQv6aMMsv0k="
 							}
 						}
-					]
+					],
+					"documentation": "# Flow of events\n\n## Basic Flow: Modificar datos personales.\n\n1. *System* visualiza en la pantalla todos los datos del usuario (dni, nombre, apellido, nombre de usuario y contraseña)\n2. *Usuario* introduce el dato que quiere introducir como nuevo.\n3. *System* cambia el dato antiguo por el nuevo que ha introducido el usuario. \n\n## Alternative flow\n4. La tarjeta de crédito tiene que tener 16 caracteres. "
 				},
 				{
 					"_type": "UMLUseCase",
@@ -23805,7 +23834,8 @@
 					"_parent": {
 						"$ref": "AAAAAAGHk3+wIbJi8hY="
 					},
-					"name": "Sacar saldo"
+					"name": "Sacar saldo",
+					"documentation": "# Flow of events\n\n## Basic Flow: Sacar Saldo\n\n1. *usuario* introduce el dinero que quiere sacar de su saldo\n2. *System* quita el dinero introducido por el usuario a su saldo\n\n## Alternative flow\n* El dinero introducido por el usuario tiene que ser un número positivo"
 				}
 			]
 		},
@@ -23858,9 +23888,9 @@
 														"$ref": "AAAAAAGIKTRrHlU8ygg="
 													},
 													"font": "Arial;13;0",
-													"left": 96.72998046875,
+													"left": 94.55908203125,
 													"top": 13,
-													"width": 77.5908203125,
+													"width": 68.87548828125,
 													"height": 13,
 													"text": "SCCreateBet"
 												},
@@ -23873,7 +23903,7 @@
 													"font": "Arial;13;1",
 													"left": 77,
 													"top": 13,
-													"width": 14.72998046875,
+													"width": 12.55908203125,
 													"height": 13,
 													"text": "sd"
 												}
