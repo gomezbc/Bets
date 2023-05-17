@@ -117,7 +117,7 @@ public class AumentarApuestaGUI extends JFrame {
 		
 		
 		lblNewLabel_1.setForeground(new Color(0, 0, 255));
-		lblNewLabel_1.setBounds(237, 76, 102, 22);
+		lblNewLabel_1.setBounds(240, 92, 102, 22);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton btnNewButton_2 = new JButton("DISMINUIR");
@@ -168,7 +168,7 @@ public class AumentarApuestaGUI extends JFrame {
 		
 		lblNewLabel_2 = new JLabel("No se pudo modificar la apuesta.");
 		lblNewLabel_2.setForeground(new Color(25, 25, 112));
-		lblNewLabel_2.setBounds(29, 107, 244, 14);
+		lblNewLabel_2.setBounds(44, 96, 244, 14);
 		lblNewLabel_2.setVisible(false);
 		contentPane.add(lblNewLabel_2);
 		
