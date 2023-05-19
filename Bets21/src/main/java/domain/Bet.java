@@ -27,41 +27,86 @@ public class Bet {
 	}
 
 
+	/**
+	 * Get the  number of the bet
+	 * 
+	 * @return the bet number
+	 */
 	public Integer getBetNumber() {
 		return betNumber;
 	}
 
 
+	/**
+	 * Set the bet number to a bet
+	 * 
+	 * @param betNumber to be setted
+	 */
 	public void setBetNumber(Integer betNumber) {
 		this.betNumber = betNumber;
 	}
 
 
+	/**
+	 * Get the User of the bet
+	 * 
+	 * @return the bet
+	 */
 	public User getUser() {
 		return user;
 	}
 
 
+	
+	/**
+	 * Set the User to a bet
+	 * 
+	 * @param user to be setted
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
 
+	
+	/**
+	 * Get the  amount of money of the bet.
+	 * 
+	 * @return the amount of money of the bet
+	 */
 	public double getBetMoney() {
 		return betMoney;
 	}
 
 
+	
+	/**
+	 * Set the bet money to a bet
+	 * 
+	 * @param betMoney to be setted
+	 */
 	public void setBetMoney(float betMoney) {
 		this.betMoney = betMoney;
 	}
 
 
+	
+	/**
+	 * Get the forecast of the bet
+	 * 
+	 * @return the bet's forecast
+	 */
 	public Forecast getForecast() {
 		return forecast;
 	}
 
+	
 
+	/**
+	 * Set the forecast to a bet
+	 * 
+	 * @param forecast to be setted
+	 */
 	public void setForecast(Forecast forecast) {
 		this.forecast = forecast;
 	}

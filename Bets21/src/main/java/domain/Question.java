@@ -78,7 +78,7 @@ public class Question implements Serializable {
 	}
 
 	/**
-	 * Set the bet number to a question
+	 * Set the number to a question
 	 * 
 	 * @param questionNumber to be setted
 	 */

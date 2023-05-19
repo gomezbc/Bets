@@ -441,7 +441,11 @@ public class DataAccess  {
 	
 	
 	
-	
+	/**
+	 * Este método nos permite cambiar el nombre de un usuario.
+	 * @param user, el usuario que se quiere cambiar
+	 * @param Nombre2, el nuevo nombre que va a tener el usuario
+	 */
 	public void modifyUserName (User user, String Nombre2) {
 		
 		User user2 = db.find(User.class, user);
@@ -453,7 +457,11 @@ public class DataAccess  {
 		
 	}
 	
-	
+	/**
+	 * Este método nos permite cambiar el apellido de un usuario
+	 * @param user, el usuario al que se le va a cambiar el apellido
+	 * @param Apellido, el nuevo apellido que va a tener el usuario. 
+	 */
 	public void modifyUserApellido (User user, String Apellido) {
 		
 		User user2 = db.find(User.class, user);
@@ -466,7 +474,11 @@ public class DataAccess  {
 	}
 	
 	
-	
+	/**
+	  * Este método nos permite cambiar el nombre de usuario de un usuario
+	 * @param user, el usuario al que se le va a cambiar el usuario
+	 * @param Usuario, el nuevo nombre de usuario que va a tener el usuario.
+	 */
 	public void modifyUserUsuario (User user, String Usuario) {
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
@@ -476,7 +488,11 @@ public class DataAccess  {
 		
 	}
 	
-	
+	/**
+	 * Este método nos permite cambiar la contraseña de un usuario
+	 * @param user, el usuario al que se le va a cambiar el apellido
+	 * @param passwd, la nueva contraseña que va a tener el usuario.
+	 */
 	public void modifyUserPasswd (User user, String passwd) {
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
@@ -486,6 +502,11 @@ public class DataAccess  {
 		
 	}
 
+	/**
+	 * Este método nos permite cambiar la tajeta de crédito de un usuario.
+	 * @param dni, el dni del usuario al que se le va a cambiar la tarjeta de crédito.
+	 * @param newCard, la nueva tarjeta de crédito del usuario. 
+	 */
 	public void modifyUserCreditCard (String dni, Long newCard) {
 		User user2 = db.find(User.class, dni);
 		db.getTransaction().begin();
@@ -496,6 +517,11 @@ public class DataAccess  {
 	}
 
 	
+	/**
+	 * Este método nos permite eliminar una apuesta
+	 * @param betNumber, el número de la apuesta a eliminar
+	 * @throws BetDoesntExist, si no existe esa apuesta no se puede eliminar
+	 */
 	public void removeBet(Integer betNumber) throws BetDoesntExist{
 		System.out.println(">> DataAccess: removeBet => betNumber="+betNumber);
 		Bet b = db.find(Bet.class, betNumber);
@@ -512,6 +538,12 @@ public class DataAccess  {
  
 	
 	
+	/**
+	 * Este método nos permite modificar el saldo de un usuario.
+	 * @param saldo, el saldo a añadir
+	 * @param user, el usuario al que se le va a modificar el saldo. 
+	 * @return devuelve el usuario. 
+	 */
 	public User modifySaldo (float saldo, String user) {
 		System.out.println(">> DataAccess: modifySaldo => user="+user+" saldo a añadir="+saldo);
 		User user2 = db.find(User.class, user);
@@ -522,6 +554,12 @@ public class DataAccess  {
 	}
 	
 	
+	/**
+	 * Este método nos devuelve un pronóstico.
+	 * @param forecastNumber, el número del pronóstico a devolver.
+	 * @return devuelve un forecast.
+	 * @throws ForecastDoesntExist, si no existe ese forecast no lo puede devolver. 
+	 */
 	public Forecast getForecast(Integer forecastNumber) throws ForecastDoesntExist{
 		System.out.println(">> DataAccess: getForecast => forecastNumber="+forecastNumber);
 		Forecast f = db.find(Forecast.class, forecastNumber);
@@ -536,7 +574,6 @@ public class DataAccess  {
 	
 	/**
 	 * This method retrieves from the database the events of a given date 
-	 * 
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
@@ -555,7 +592,7 @@ public class DataAccess  {
 	
 	
 	
-	
+
 	public Vector<String> getEvents2(Date date) {
 		System.out.println(">> DataAccess: getEvents");
 		Vector<String> res = new Vector<String>();	

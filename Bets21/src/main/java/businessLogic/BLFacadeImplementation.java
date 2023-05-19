@@ -467,7 +467,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 
 	
-	
+	/**
+	 * Este metodo invoca al data access para modificar el nombre de un usuario.
+	 * @param user, el usuario al que se le quiere modificar el nombre
+	 * @param Nombre2, el nuevo nombre que se quiere poner
+	 */
 	@WebMethod
 	 public void modifyUserName (User user, String Nombre2) {
 		dbManager.open(false);
@@ -483,6 +487,12 @@ public class BLFacadeImplementation  implements BLFacade {
 		 
 	 }
 	
+	
+	/**
+	 * Este metodo invoca al data access para modificar el apellido de un usuario.
+	 * @param user, el usuario al que se le quiere modificar el nombre
+	 * @param Apellido, el nuevo apellido que se quiere poner
+	 */
 	@WebMethod
 	 public void modifyUserApellido (User user, String Apellido) {
 		dbManager.open(false);
@@ -499,6 +509,12 @@ public class BLFacadeImplementation  implements BLFacade {
 	 }
 	
 	
+	
+	/**
+	 * Este metodo invoca al data access para modificar el nombre de usuario de un user.
+	 * @param user, el usuario al que se le quiere modificar el nombre de usuario
+	 * @param Usuario, el nuevo nombre de usuario que se quiere poner
+	 */
 	 @WebMethod
 	 public void modifyUserUsuario (User user, String Usuario) {
 		 dbManager.open(false);
@@ -516,6 +532,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	
 	 
 
+	/**
+	 * Este metodo invoca al data access para modificar la contraseña de un user.
+	 * @param user, el usuario al que se le quiere modificar la contraseña de usuario
+	 * @param passwd, la nueva contraseña que se quiere poner
+	 */ 
 	 @WebMethod
 	 public void modifyUserPasswd (User user, String passwd) {
 		dbManager.open(false);
@@ -528,6 +549,12 @@ public class BLFacadeImplementation  implements BLFacade {
 			}
 	 }
 	 
+	 
+	/**
+	 * Este metodo invoca al data access para modificar la tarjeta de credito
+	 * @param dni dni del usuario
+	 * @param newCard la nueva tarjeta de credito
+	 */
 	 @WebMethod
 	 public void modifyUserCreditCard(String dni, Long newCard) {
 		 dbManager.open(false);
