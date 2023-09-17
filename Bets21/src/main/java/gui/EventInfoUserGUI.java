@@ -32,6 +32,8 @@ import domain.Question;
 import domain.User;
 import exceptions.BetAlreadyExist;
 import exceptions.QuestionDoesntExist;
+import gui.renderers.ForecastUserTableCellRender;
+import gui.renderers.QuestionUserTableCellRender;
 import theme.Bets21Theme;
 
 import javax.swing.ImageIcon;

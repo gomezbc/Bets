@@ -31,6 +31,8 @@ import domain.Question;
 import exceptions.EventHasntFinished;
 import exceptions.ForecastDoesntExist;
 import exceptions.QuestionDoesntExist;
+import gui.renderers.ForecastAdminTableCellRender;
+import gui.renderers.QuestionAdminTableCellRender;
 import theme.Bets21Theme;
 
 
