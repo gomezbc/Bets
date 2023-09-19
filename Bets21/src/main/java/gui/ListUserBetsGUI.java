@@ -22,6 +22,7 @@ import domain.Bet;
 import domain.User;
 import exceptions.BetDoesntExist;
 import exceptions.UserDoesntExist;
+import gui.renderers.BetsTableCellRender;
 import theme.Bets21Theme;
 
 import java.awt.event.MouseAdapter;

@@ -1,4 +1,4 @@
-package gui;
+package gui.renderers;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -14,6 +14,7 @@ import domain.Bet;
 import domain.Forecast;
 import domain.User;
 import exceptions.ForecastDoesntExist;
+import gui.MainGUI;
 
 
 public class ForecastUserTableCellRender extends DefaultTableCellRenderer{

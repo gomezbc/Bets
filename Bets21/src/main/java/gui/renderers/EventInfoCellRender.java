@@ -1,4 +1,4 @@
-package gui;
+package gui.renderers;
 import java.awt.Component;
 import java.util.Vector;
 
@@ -6,6 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table. DefaultTableCellRenderer;
 
 import domain.Event;
+import gui.EventInfoPanel;
 
 public class EventInfoCellRender extends DefaultTableCellRenderer{
 	private static final long serialVersionUID = 1L;

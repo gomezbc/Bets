@@ -37,6 +37,7 @@ import businessLogic.BLFacade;
 import configuration.UtilDate;
 import domain.Event;
 import domain.User;
+import gui.renderers.EventInfoCellRender;
 import theme.Bets21Theme;
 
 
