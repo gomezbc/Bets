@@ -8,6 +8,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.DataAccessInterface;
 import domain.Bet;
 import domain.Event;
 import domain.Forecast;
@@ -30,7 +31,7 @@ import exceptions.UserDoesntExist;
  */
 @WebService(endpointInterface = "businessLogic.BLFacade")
 public class BLFacadeImplementation  implements BLFacade {
-	DataAccess dbManager;
+	DataAccessInterface dbManager;
 
 	public BLFacadeImplementation()  {		
 		System.out.println("Creating BLFacadeImplementation instance");
@@ -46,7 +47,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		
 	}
 	
-    public BLFacadeImplementation(DataAccess da)  {
+    public BLFacadeImplementation(DataAccessInterface da)  {
 		
 		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
 		ConfigXML c=ConfigXML.getInstance();

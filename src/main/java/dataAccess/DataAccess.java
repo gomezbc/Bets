@@ -1,6 +1,7 @@
 package dataAccess;
 
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ import exceptions.UserDoesntExist;
 /**
  * It implements the data access to the objectDb database
  */
-public class DataAccess  {
+public class DataAccess  implements DataAccessInterface{
 	protected static EntityManager  db;
 	protected static EntityManagerFactory emf;
 
@@ -405,14 +406,14 @@ public class DataAccess  {
  			db.getTransaction().commit();
  			return b;
 	}
-	
+
 	/**
 	 * This method modifies the betModey of a bet
-	 * @param betMoney 
+	 * @param betMoney the amount of money that the user bets
 	 * @param betNumber number of the bet to modify
 	 * @param dni dni of the user
-	 * @return
-	 * @throws UserDoesntExist
+	 * @return BetDoesntExist if the bet does not exist in the database
+	 * @throws UserDoesntExist if the user does not exist in the database
 	 */
 	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 		Bet bet = db.find(Bet.class, betNumber);
@@ -444,13 +445,13 @@ public class DataAccess  {
 	/**
 	 * Este método nos permite cambiar el nombre de un usuario.
 	 * @param user, el usuario que se quiere cambiar
-	 * @param Nombre2, el nuevo nombre que va a tener el usuario
+	 * @param nombre, el nuevo nombre que va a tener el usuario
 	 */
-	public void modifyUserName (User user, String Nombre2) {
+	public void modifyUserName (User user, String nombre) {
 		
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
-		user2.setName(Nombre2);
+		user2.setName(nombre);
 		db.persist(user2);
 		db.getTransaction().commit();
 		
@@ -460,13 +461,13 @@ public class DataAccess  {
 	/**
 	 * Este método nos permite cambiar el apellido de un usuario
 	 * @param user, el usuario al que se le va a cambiar el apellido
-	 * @param Apellido, el nuevo apellido que va a tener el usuario. 
+	 * @param apellido, el nuevo apellido que va a tener el usuario.
 	 */
-	public void modifyUserApellido (User user, String Apellido) {
+	public void modifyUserApellido (User user, String apellido) {
 		
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
-		user2.setApellido(Apellido);
+		user2.setApellido(apellido);
 		db.persist(user2);
 		db.getTransaction().commit();
 		
@@ -477,12 +478,12 @@ public class DataAccess  {
 	/**
 	  * Este método nos permite cambiar el nombre de usuario de un usuario
 	 * @param user, el usuario al que se le va a cambiar el usuario
-	 * @param Usuario, el nuevo nombre de usuario que va a tener el usuario.
+	 * @param usuario, el nuevo nombre de usuario que va a tener el usuario.
 	 */
-	public void modifyUserUsuario (User user, String Usuario) {
+	public void modifyUserUsuario (User user, String usuario) {
 		User user2 = db.find(User.class, user);
 		db.getTransaction().begin();
-		user2.setUsername(Usuario);
+		user2.setUsername(usuario);
 		db.persist(user2);
 		db.getTransaction().commit();
 		
@@ -552,13 +553,13 @@ public class DataAccess  {
 		db.getTransaction().commit();
 		return user2;
 	}
-	
-	
+
+
 	/**
 	 * Este método nos devuelve un pronóstico.
 	 * @param forecastNumber, el número del pronóstico a devolver.
 	 * @return devuelve un forecast.
-	 * @throws ForecastDoesntExist, si no existe ese forecast no lo puede devolver. 
+	 * @throws ForecastDoesntExist, si no existe ese forecast no lo puede devolver.
 	 */
 	public Forecast getForecast(Integer forecastNumber) throws ForecastDoesntExist{
 		System.out.println(">> DataAccess: getForecast => forecastNumber="+forecastNumber);
@@ -589,26 +590,26 @@ public class DataAccess  {
 		  }
 	 	return res;
 	}
-	
-	
-	
+
+
+
 
 	public Vector<String> getEvents2(Date date) {
 		System.out.println(">> DataAccess: getEvents");
-		Vector<String> res = new Vector<String>();	
-		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1",Event.class);   
+		Vector<String> res = new Vector<String>();
+		TypedQuery<Event> query = db.createQuery("SELECT ev FROM Event ev WHERE ev.eventDate=?1",Event.class);
 		query.setParameter(1, date);
 		List<Event> events = query.getResultList();
-	 	 for (Event ev:events){	 
+	 	 for (Event ev:events){
 		   res.add(ev.toString2().trim().replace(" ","").toLowerCase());
 		  }
 	 	return res;
 	}
 	
-	
 
-	
-	
+
+
+
 	/**
 	 * This method retrieves from the database the dates a month for which there are events
 	 * 
@@ -633,9 +634,12 @@ public class DataAccess  {
 		  }
 	 	return res;
 	}
-	
-	
-	
+
+	@Override
+	public boolean existQuestion(Event event, String question) {
+		return false;
+	}
+
 
 	public void open(boolean initializeMode){
 		
@@ -666,5 +670,13 @@ public class DataAccess  {
 		db.close();
 		System.out.println("DataBase closed");
 	}
-	
+
+	@Override
+	public void emptyDatabase() {
+		File f=new File(c.getDbFilename());
+		f.delete();
+		File f2=new File(c.getDbFilename()+"$");
+		f2.delete();
+	}
+
 }
