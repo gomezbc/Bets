@@ -356,7 +356,7 @@ public class EventInfoAdminGUI extends JPanel {
 				  check();
 			  }
 			  public void check() {
-			     if (preguntaMinimo.getText().isBlank() || pregunta.getText().isBlank()){
+			     if (preguntaMinimo.getText().trim().isEmpty() || pregunta.getText().trim().isEmpty()){
 			    	 btnAñadirPregunta.setEnabled(false);
 			     }else {
 			    	 btnAñadirPregunta.setEnabled(true);
@@ -377,7 +377,7 @@ public class EventInfoAdminGUI extends JPanel {
 				  check();
 			  }
 			  public void check() {
-			     if (preguntaMinimo.getText().isBlank() || pregunta.getText().isBlank()){
+			     if (preguntaMinimo.getText().trim().isEmpty() || pregunta.getText().trim().isEmpty()){
 			    	 btnAñadirPregunta.setEnabled(false);
 			     }else {
 			    	 btnAñadirPregunta.setEnabled(true);
@@ -398,7 +398,7 @@ public class EventInfoAdminGUI extends JPanel {
 				  check();
 			  }
 			  public void check() {
-			     if (pronosticoMinimo.getText().isBlank() || pronostico.getText().isBlank()){
+			     if (pronosticoMinimo.getText().trim().isEmpty() || pronostico.getText().trim().isEmpty()){
 			    	 btnAñadirPronostico.setEnabled(false);
 			     }else {
 			    	 btnAñadirPronostico.setEnabled(true);
@@ -419,7 +419,7 @@ public class EventInfoAdminGUI extends JPanel {
 				  check();
 			  }
 			  public void check() {
-			     if (pronosticoMinimo.getText().isBlank() || pronostico.getText().isBlank()){
+			     if (pronosticoMinimo.getText().trim().isEmpty() || pronostico.getText().trim().isEmpty()){
 			    	 btnAñadirPronostico.setEnabled(false);
 			     }else {
 			    	 btnAñadirPronostico.setEnabled(true);

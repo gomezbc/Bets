@@ -157,7 +157,7 @@ public class CreateEventGUI extends JPanel {
 			  }
 			  public void check() {
 				  
-				  if(!textField.getText().isBlank()) {
+				  if(!textField.getText().trim().isEmpty()) {
 					  try {
 							btnButton_Save.setEnabled(true);
 							// Obtén la fecha seleccionada del JCalendar
