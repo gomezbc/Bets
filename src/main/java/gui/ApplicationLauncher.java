@@ -18,7 +18,7 @@ public class ApplicationLauncher {
 	
 	
 	public static void main(String[] args) {
-
+		//hola
 		ConfigXML c=ConfigXML.getInstance();
 	
 		System.out.println(c.getLocale());
