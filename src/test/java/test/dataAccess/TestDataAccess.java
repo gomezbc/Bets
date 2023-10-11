@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 
 import configuration.ConfigXML;
 import domain.Event;
+import domain.Forecast;
 import domain.Question;
 
 public class TestDataAccess {
@@ -89,5 +90,11 @@ public class TestDataAccess {
 			return false;
 			
 		}
+
+    public boolean existForecast(int forecastNumber) {
+		System.out.println(">> DataAccessTest: existsForecast: number=" + forecastNumber);
+		Forecast f = db.find(Forecast.class, forecastNumber);
+		return f!=null;
+    }
 }
 
