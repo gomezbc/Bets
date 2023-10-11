@@ -402,7 +402,7 @@ public class DataAccess  implements DataAccessInterface{
 		}
 			db.getTransaction().begin();
  	    	Bet b = u.addBet(betMoney, forecast);
- 	    	db.persist(forecast); 
+ 	    	db.persist(u);
  			db.getTransaction().commit();
  			return b;
 	}
