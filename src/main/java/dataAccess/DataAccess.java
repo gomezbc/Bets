@@ -27,15 +27,7 @@ import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
-import exceptions.BetAlreadyExist;
-import exceptions.BetDoesntExist;
-import exceptions.EventAlreadyExist;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import exceptions.*;
 
 /**
  * It implements the data access to the objectDb database
@@ -283,8 +275,12 @@ public class DataAccess  implements DataAccessInterface{
 	 * @throws ForecastAlreadyExist if the forecast already exists in the database
 	 * @throws QuestionDoesntExist if the question does not exist in the database
 	 */
-	public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
+	public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
 		  System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+questionNumber);
+		  if(description.isEmpty()) {
+			  System.err.println(">> DataAccess: createForecast => error DescriptionDoesntExist: La descripción no puede estar vacía");
+	 		  throw new DescriptionDoesntExist("La descripción no puede estar vacía");
+		  }
 	 	  Question ques = db.find(Question.class, questionNumber);
 		  if (ques == null) {
 			System.err.println(">> DataAccess: createForecast => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
