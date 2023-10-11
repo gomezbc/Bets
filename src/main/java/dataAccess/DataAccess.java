@@ -679,8 +679,13 @@ public class DataAccess  implements DataAccessInterface{
 	public void emptyDatabase() {
 
 		try{
-			Files.delete(Paths.get(c.getDbFilename()));
-			Files.delete(Paths.get(c.getDbFilename()+"$"));
+
+			Path pathArchivo1 = Paths.get(c.getDbFilename());
+			Path pathArchivo2 = Paths.get(c.getDbFilename()+"$");
+
+			Files.delete(pathArchivo1);
+			Files.delete(pathArchivo2);
+
 		}catch (IOException e){
 			System.err.println("Error al eliminar archivos");
 		}
