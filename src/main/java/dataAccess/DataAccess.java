@@ -2,6 +2,10 @@ package dataAccess;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -673,10 +677,14 @@ public class DataAccess  implements DataAccessInterface{
 
 	@Override
 	public void emptyDatabase() {
-		File f=new File(c.getDbFilename());
-		f.delete();
-		File f2=new File(c.getDbFilename()+"$");
-		f2.delete();
+
+		try{
+			Files.delete(Paths.get(c.getDbFilename()));
+			Files.delete(Paths.get(c.getDbFilename()+"$"));
+		}catch (IOException e){
+			System.err.println("Error al eliminar archivos");
+		}
+
 	}
 
 }
