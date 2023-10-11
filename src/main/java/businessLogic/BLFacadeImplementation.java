@@ -14,17 +14,7 @@ import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
-import exceptions.BetAlreadyExist;
-import exceptions.BetDoesntExist;
-import exceptions.EventAlreadyExist;
-import exceptions.EventFinished;
-import exceptions.EventHasntFinished;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import exceptions.*;
 
 /**
  * It implements the business logic as a web service.
@@ -89,7 +79,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.close();
 		
 		return qry;
-   };
+   }
    
 	
   
@@ -176,6 +166,7 @@ public class BLFacadeImplementation  implements BLFacade {
     @WebMethod 
 	public Question getQuestion (Integer questionNumber) throws QuestionDoesntExist{
 		dbManager.open(false);
+
 		Question ev;
 		try {
 			ev = dbManager.getQuestion(questionNumber);
@@ -234,7 +225,9 @@ public class BLFacadeImplementation  implements BLFacade {
  		  forecast = dbManager.createForecast(description, gain, questionNumber);
  	   }catch(ForecastAlreadyExist | QuestionDoesntExist e) {
  		   throw e;
- 	   }finally {
+ 	   } catch (DescriptionDoesntExist e) {
+           throw new RuntimeException(e);
+       } finally {
  		   dbManager.close();
  	   }
  	   return forecast;
@@ -408,14 +401,14 @@ public class BLFacadeImplementation  implements BLFacade {
     @WebMethod
     public void updateCloseEvent(Integer numResultado) {
     	dbManager.open(false);
-    	Vector<User> users = new Vector<User>();
+    	Vector<User> users;
     	users = dbManager.getAllUsers();
     	dbManager.close();
     	for(User u: users) {
     		Bet b = u.DoesBetExists(numResultado);
     		if(b!=null) {
     			if(b.getForecast().getForecastNumber().equals(numResultado)) {
-    				this.modifySaldo( (float) ((b.getForecast().getGain() * b.getBetMoney())), u.getDni());
+    				this.modifySaldo( (float) (b.getForecast().getGain() * b.getBetMoney()), u.getDni());
     			}else {
     				this.modifySaldo( (float) (- b.getBetMoney()), u.getDni()) ;
     			}
@@ -542,9 +535,7 @@ public class BLFacadeImplementation  implements BLFacade {
 	 public void modifyUserPasswd (User user, String passwd) {
 		dbManager.open(false);
 			try {
-				dbManager.modifyUserPasswd(user, passwd);	
-			} catch ( Exception e) {
-				throw e;	
+				dbManager.modifyUserPasswd(user, passwd);
 			} finally {
 				dbManager.close();
 			}
@@ -561,9 +552,6 @@ public class BLFacadeImplementation  implements BLFacade {
 		 dbManager.open(false);
 			try {
 				dbManager.modifyUserCreditCard(dni, newCard);
-			} catch ( Exception e) {
-				throw e;
-				
 			} finally {
 				dbManager.close();
 			}

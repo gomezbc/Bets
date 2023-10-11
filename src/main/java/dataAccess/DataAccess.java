@@ -408,7 +408,7 @@ public class DataAccess  implements DataAccessInterface{
 	}
 
 	/**
-	 * This method modifies the betModey of a bet
+	 * This method modifies the bet Money of a bet
 	 * @param betMoney the amount of money that the user bets
 	 * @param betNumber number of the bet to modify
 	 * @param dni dni of the user
@@ -416,23 +416,31 @@ public class DataAccess  implements DataAccessInterface{
 	 * @throws UserDoesntExist if the user does not exist in the database
 	 */
 	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
+
+		if(dni == null){
+			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: error, dni nulo");
+			throw new UserDoesntExist("El usuario introducido no es correcto");
+		}
+
 		Bet bet = db.find(Bet.class, betNumber);
-		User user2 = db.find(User.class, dni);
 		if ( bet == null) {
 			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
-			throw new BetDoesntExist("No existe la apuesta ha modificar");
+			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
+
+		User user2 = db.find(User.class, dni);
 		if ( user2 == null) {
 			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos, dni="+dni);
 			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos, dni="+dni);
 		}
 			
-		double betMoneyAntes = bet.getBetMoney();
-		double betTotal = betMoney + betMoneyAntes;
+		double betMoneyBefore = bet.getBetMoney();
+		double betMoneyAfter = betMoney + betMoneyBefore;
+
 		db.getTransaction().begin();
-		if((betTotal)>0) {
+		if( betMoneyAfter > 0 ) {
 			user2.setSaldo(user2.getSaldo() - betMoney);
-			bet.setBetMoney((float)betTotal);
+			bet.setBetMoney((float)betMoneyAfter);
 		}
 		db.persist(user2);
  	    db.persist(bet);

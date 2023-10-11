@@ -1,6 +1,7 @@
 package domain;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ public class User {
 	private Long creditCard;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	 private Vector<Bet> bets = new Vector<Bet>();
+	 private List<Bet> bets = new ArrayList<>();
 	
 	public User(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) {
 		this.setDni(dni);
@@ -34,7 +35,7 @@ public class User {
 	
 	public Bet addBet(float betMoney, Forecast forecast) {
 		Bet b = new Bet(this, betMoney, forecast);
-		if(bets==null) bets = new Vector<Bet>();
+		if(bets==null) bets = new ArrayList<>();
 		bets.add(b);
 		return b;
 	}
@@ -60,11 +61,11 @@ public class User {
 		}
 	}
 	
-	public Vector<Bet> getBets() {
+	public List<Bet> getBets() {
 		return bets;
 	}
 	
-	public void setBets(Vector<Bet> bets) {
+	public void setBets(List<Bet> bets) {
 		this.bets = bets;
 	}
 
