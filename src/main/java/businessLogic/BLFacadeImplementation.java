@@ -33,7 +33,7 @@ import exceptions.UserDoesntExist;
 public class BLFacadeImplementation  implements BLFacade {
 	DataAccessInterface dbManager;
 
-	public BLFacadeImplementation()  {		
+	public BLFacadeImplementation()  {
 		System.out.println("Creating BLFacadeImplementation instance");
 		ConfigXML c=ConfigXML.getInstance();
 		
@@ -414,7 +414,7 @@ public class BLFacadeImplementation  implements BLFacade {
     	for(User u: users) {
     		Bet b = u.DoesBetExists(numResultado);
     		if(b!=null) {
-    			if(b.getForecast().getForecastNumber()==numResultado) {
+    			if(b.getForecast().getForecastNumber().equals(numResultado)) {
     				this.modifySaldo( (float) ((b.getForecast().getGain() * b.getBetMoney())), u.getDni());
     			}else {
     				this.modifySaldo( (float) (- b.getBetMoney()), u.getDni()) ;
