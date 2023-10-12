@@ -22,6 +22,10 @@ public class ModifyBetDAWTest {
     Forecast forecast;
     Bet bet;
 
+    @Before
+    public void abrirConexionBD(){
+        da.open(false);
+    }
 
     @After
     public void limpiarBD(){
@@ -35,6 +39,7 @@ public class ModifyBetDAWTest {
         }catch (BetDoesntExist e){
             System.out.println("No existía la apuesta");
         }
+        da.close();
     }
 
     private void addUsrToDB() {
