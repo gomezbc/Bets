@@ -55,14 +55,15 @@ public class AddSaldoGUI extends JPanel {
 		
 		setSize(new Dimension(886, 541));
 		
-		
+		Font fuenteSegoe = new Font("Segoe UI Semibold", Font.PLAIN, 16);
+
 		User userRegistered = MainGUI.getUserRegistered();
-		lblSaldo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblSaldo.setFont(fuenteSegoe);
 		lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
 		
 		setLayout(null);
 
-		lblAñadirInfo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblAñadirInfo.setFont(fuenteSegoe);
 		lblAñadirInfo.setBounds(64, 119, 154, 51);
 		add(lblAñadirInfo);
 		
@@ -74,7 +75,7 @@ public class AddSaldoGUI extends JPanel {
 		textField.setColumns(10);
 		
 
-		lblInfoSaldo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblInfoSaldo.setFont(fuenteSegoe);
 		lblInfoSaldo.setBounds(64, 46, 139, 37);
 		add(lblInfoSaldo);
 		
@@ -115,7 +116,7 @@ public class AddSaldoGUI extends JPanel {
 		add(btnAñadir);
 		lblSaldo.setBounds(222, 52, 72, 24);
 		add(lblSaldo);
-		lblSacarInfo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblSacarInfo.setFont(fuenteSegoe);
 		lblSacarInfo.setBounds(64, 212, 142, 30);
 		
 		add(lblSacarInfo);
@@ -158,7 +159,7 @@ public class AddSaldoGUI extends JPanel {
 		
 		lblAñadir = new JLabel("Dinero añadido");
 		lblAñadir.setVisible(false);
-		lblAñadir.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblAñadir.setFont(fuenteSegoe);
 		lblAñadir.setForeground(new Color(46, 139, 87));
 		lblAñadir.setBounds(523, 130, 134, 23);
 		add(lblAñadir);
@@ -169,14 +170,14 @@ public class AddSaldoGUI extends JPanel {
 		lblSacar = new JLabel("Dinero sacado");
 		lblSacar.setVisible(false);
 		lblSacar.setForeground(new Color(46, 139, 87));
-		lblSacar.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblSacar.setFont(fuenteSegoe);
 		lblSacar.setBounds(523, 214, 139, 23);
 		add(lblSacar);
 		lblAñadeUnaTarjeta.setForeground(new Color(246, 97, 81));
 		
 		
 		lblAñadeUnaTarjeta.setBounds(145, 312, 577, 30);
-		lblAñadeUnaTarjeta.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 16));
+		lblAñadeUnaTarjeta.setFont(fuenteSegoe);
 		lblAñadeUnaTarjeta.setVisible(false);
 		add(lblAñadeUnaTarjeta);
 		

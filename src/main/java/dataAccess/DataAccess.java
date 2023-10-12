@@ -2,6 +2,10 @@ package dataAccess;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,15 +27,7 @@ import domain.Event;
 import domain.Forecast;
 import domain.Question;
 import domain.User;
-import exceptions.BetAlreadyExist;
-import exceptions.BetDoesntExist;
-import exceptions.EventAlreadyExist;
-import exceptions.ForecastAlreadyExist;
-import exceptions.ForecastDoesntExist;
-import exceptions.QuestionAlreadyExist;
-import exceptions.QuestionDoesntExist;
-import exceptions.UserAlreadyExist;
-import exceptions.UserDoesntExist;
+import exceptions.*;
 
 /**
  * It implements the data access to the objectDb database
@@ -279,8 +275,12 @@ public class DataAccess  implements DataAccessInterface{
 	 * @throws ForecastAlreadyExist if the forecast already exists in the database
 	 * @throws QuestionDoesntExist if the question does not exist in the database
 	 */
-	public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
+	public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
 		  System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+questionNumber);
+		  if(description.isEmpty()) {
+			  System.err.println(">> DataAccess: createForecast => error DescriptionDoesntExist: La descripción no puede estar vacía");
+	 		  throw new DescriptionDoesntExist("La descripción no puede estar vacía");
+		  }
 	 	  Question ques = db.find(Question.class, questionNumber);
 		  if (ques == null) {
 			System.err.println(">> DataAccess: createForecast => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
@@ -408,7 +408,7 @@ public class DataAccess  implements DataAccessInterface{
 	}
 
 	/**
-	 * This method modifies the betModey of a bet
+	 * This method modifies the bet Money of a bet
 	 * @param betMoney the amount of money that the user bets
 	 * @param betNumber number of the bet to modify
 	 * @param dni dni of the user
@@ -416,23 +416,31 @@ public class DataAccess  implements DataAccessInterface{
 	 * @throws UserDoesntExist if the user does not exist in the database
 	 */
 	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
+
+		if(dni == null){
+			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: error, dni nulo");
+			throw new UserDoesntExist("El usuario introducido no es correcto");
+		}
+
 		Bet bet = db.find(Bet.class, betNumber);
-		User user2 = db.find(User.class, dni);
 		if ( bet == null) {
 			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
-			throw new BetDoesntExist("No existe la apuesta ha modificar");
+			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
+
+		User user2 = db.find(User.class, dni);
 		if ( user2 == null) {
 			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos, dni="+dni);
 			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos, dni="+dni);
 		}
 			
-		double betMoneyAntes = bet.getBetMoney();
-		double betTotal = betMoney + betMoneyAntes;
+		double betMoneyBefore = bet.getBetMoney();
+		double betMoneyAfter = betMoney + betMoneyBefore;
+
 		db.getTransaction().begin();
-		if((betTotal)>0) {
+		if( betMoneyAfter > 0 ) {
 			user2.setSaldo(user2.getSaldo() - betMoney);
-			bet.setBetMoney((float)betTotal);
+			bet.setBetMoney((float)betMoneyAfter);
 		}
 		db.persist(user2);
  	    db.persist(bet);
@@ -673,10 +681,19 @@ public class DataAccess  implements DataAccessInterface{
 
 	@Override
 	public void emptyDatabase() {
-		File f=new File(c.getDbFilename());
-		f.delete();
-		File f2=new File(c.getDbFilename()+"$");
-		f2.delete();
+
+		try{
+
+			Path pathArchivo1 = Paths.get(c.getDbFilename());
+			Path pathArchivo2 = Paths.get(c.getDbFilename()+"$");
+
+			Files.delete(pathArchivo1);
+			Files.delete(pathArchivo2);
+
+		}catch (IOException e){
+			System.err.println("Error al eliminar archivos");
+		}
+
 	}
 
 }

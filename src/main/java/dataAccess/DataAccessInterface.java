@@ -177,7 +177,7 @@ public interface DataAccessInterface {
      * @throws ForecastAlreadyExist if the forecast already exists in the database
      * @throws QuestionDoesntExist if the question does not exist in the database
      */
-    Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist;
+    Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist;
 
     /**
      * This method creates a bet for a user and a forecast
