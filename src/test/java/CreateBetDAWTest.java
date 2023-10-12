@@ -49,6 +49,8 @@ public class CreateBetDAWTest {
         }catch (ForecastAlreadyExist | QuestionDoesntExist e){
             // if the forecast already exists we inherit it from the event
             f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals("forecast1")).findFirst().get();
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
                 testDA.close();
         }
@@ -156,6 +158,8 @@ public class CreateBetDAWTest {
             } catch (UserDoesntExist ex) {
                 throw new RuntimeException(ex);
             }
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
             testDA.close();
         }
@@ -216,6 +220,8 @@ public class CreateBetDAWTest {
             } catch (UserDoesntExist ex) {
                 throw new RuntimeException(ex);
             }
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
             testDA.close();
         }

@@ -64,6 +64,8 @@ public class CreateBetDABTest {
             } catch (UserDoesntExist ex) {
                 throw new RuntimeException(ex);
             }
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
             testDA.close();
         }
@@ -124,6 +126,8 @@ public class CreateBetDABTest {
             } catch (UserDoesntExist ex) {
                 throw new RuntimeException(ex);
             }
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
             testDA.close();
         }
@@ -237,6 +241,8 @@ public class CreateBetDABTest {
             } catch (UserDoesntExist ex) {
                 throw new RuntimeException(ex);
             }
+        } catch (DescriptionDoesntExist e) {
+            fail();
         }finally {
             testDA.close();
         }

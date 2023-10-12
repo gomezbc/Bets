@@ -4,11 +4,9 @@ import dataAccess.DataAccess;
 import domain.*;
 import exceptions.*;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
 
