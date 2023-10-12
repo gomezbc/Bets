@@ -199,8 +199,11 @@ public class Question implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Question other = (Question) obj;
-		if (this.questionNumber != other.questionNumber)
-			return false;
-		return true;
+		return this.questionNumber != other.questionNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }

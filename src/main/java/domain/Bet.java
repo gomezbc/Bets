@@ -120,8 +120,11 @@ public class Bet {
 		if (getClass() != obj.getClass())
 			return false;
 		Bet other = (Bet) obj;
-		if (this.betNumber != other.betNumber)
-			return false;
-		return true;
+		return this.betNumber != other.betNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }
