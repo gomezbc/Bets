@@ -177,7 +177,7 @@ public class Question implements Serializable {
 
 
 
-
+	@Override
 	public String toString(){
 		return questionNumber+";"+question+";"+Float.toString(betMinimum);
 	}
@@ -190,8 +190,20 @@ public class Question implements Serializable {
 		this.forecasts = forecasts;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+		return this.questionNumber != other.questionNumber;
+	}
 
-
-
-	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

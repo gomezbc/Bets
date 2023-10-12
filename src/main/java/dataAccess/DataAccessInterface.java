@@ -181,7 +181,7 @@ public interface DataAccessInterface {
 
     /**
      * This method creates a bet for a user and a forecast
-     * @param user dni of the user
+     * @param dni dni of the user
      * @param betMoney amount of money that the user bets
      * @param forecastNumber number of the forecast to which the user bets
      * @return the created bet
@@ -189,7 +189,7 @@ public interface DataAccessInterface {
      * @throws UserDoesntExist if the user does not exist in the database
      * @throws ForecastDoesntExist if the forecast does not exist in the database
      */
-    Bet createBet (String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist;
+    Bet createBet (String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist;
 
     /**
      * Este método nos devuelve un pronóstico.

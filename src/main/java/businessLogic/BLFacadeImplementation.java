@@ -323,7 +323,7 @@ public class BLFacadeImplementation  implements BLFacade {
     
     /**
 	 * This method invokes the data access to create a new Bet for a Forecast by a User
-	 * @param user dni of the user
+	 * @param dni dni of the user
 	 * @param betMoney amount of money of the bet
 	 * @param forecastNumber number of the forecast for which the bet is created
 	 * @return the created bet
@@ -331,11 +331,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	 * @throws UserDoesntExist if the user doesn't exist
 	 */
     @WebMethod
-	public Bet createBet(String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
+	public Bet createBet(String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
 		dbManager.open(false);
 		Bet bet = null;
 		try {
-			bet = dbManager.createBet(user, betMoney, forecastNumber);
+			bet = dbManager.createBet(dni, betMoney, forecastNumber);
 		} catch (BetAlreadyExist | UserDoesntExist | ForecastDoesntExist e) {
 			throw e;
 		}finally {

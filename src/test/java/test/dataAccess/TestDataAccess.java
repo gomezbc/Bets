@@ -89,7 +89,12 @@ public class TestDataAccess {
 			return e.DoesQuestionExists(q.getQuestion());
 		} else
 			return false;
-
 	}
+  
+  public boolean existForecast(int forecastNumber) {
+		System.out.println(">> DataAccessTest: existsForecast: number=" + forecastNumber);
+		Forecast f = db.find(Forecast.class, forecastNumber);
+		return f!=null;
+    }
 }
 

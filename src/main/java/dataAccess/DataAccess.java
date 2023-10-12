@@ -375,7 +375,7 @@ public class DataAccess  implements DataAccessInterface{
 	
 	/**
 	 * This method creates a bet for a user and a forecast
-	 * @param user dni of the user
+	 * @param dni dni of the user
 	 * @param betMoney amount of money that the user bets
 	 * @param forecastNumber number of the forecast to which the user bets
 	 * @return the created bet
@@ -383,13 +383,13 @@ public class DataAccess  implements DataAccessInterface{
 	 * @throws UserDoesntExist if the user does not exist in the database
 	 * @throws ForecastDoesntExist if the forecast does not exist in the database
 	 */
-	public Bet createBet (String user, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
-		System.out.println(">> DataAccess: createBet => user=" + user + " dinero apostado="+betMoney + " al forecast=" + forecastNumber);
+	public Bet createBet (String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
+		System.out.println(">> DataAccess: createBet => user=" + dni + " dinero apostado="+betMoney + " al forecast=" + forecastNumber);
 		Forecast forecast = db.find(Forecast.class, forecastNumber);
-		User u = db.find(User.class, user);
+		User u = db.find(User.class, dni);
 		if(u==null) {
-			System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+user);
-			throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+user);
+			System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+dni);
+			throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+dni);
 		}
 		if (forecast == null) {
 			System.err.println(">> DataAccess: createBet => error ForecastDoesntExist: No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
@@ -402,7 +402,7 @@ public class DataAccess  implements DataAccessInterface{
 		}
 			db.getTransaction().begin();
  	    	Bet b = u.addBet(betMoney, forecast);
- 	    	db.persist(forecast); 
+ 	    	db.persist(u);
  			db.getTransaction().commit();
  			return b;
 	}

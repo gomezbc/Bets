@@ -110,9 +110,21 @@ public class Bet {
 	public void setForecast(Forecast forecast) {
 		this.forecast = forecast;
 	}
-	
-	
-	
-	
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bet other = (Bet) obj;
+		return this.betNumber != other.betNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }
