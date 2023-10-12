@@ -27,7 +27,7 @@ public class CreateBetDAWTest {
 
     @Test
     public void test1(){
-        //define paramaters
+        //define parameters
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
@@ -37,10 +37,10 @@ public class CreateBetDAWTest {
         try {
             oneDate = sdf.parse("05/10/2022");
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
-        //configure the state of the system (create object in the dabatase)
+        //configure the state of the system (create object in the database)
         try{
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
@@ -72,7 +72,7 @@ public class CreateBetDAWTest {
 
     @Test
     public void test2() {
-        //define paramaters
+        //define parameters
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
@@ -83,10 +83,10 @@ public class CreateBetDAWTest {
         try {
             oneDate = sdf.parse("05/10/2022");
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
-        //configure the state of the system (create object in the dabatase)
+        //configure the state of the system (create object in the database)
         try{
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
@@ -127,7 +127,7 @@ public class CreateBetDAWTest {
 
     @Test
     public void test3() {
-        //define paramaters
+        //define parameters
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
@@ -137,10 +137,10 @@ public class CreateBetDAWTest {
         try {
             oneDate = sdf.parse("05/10/2022");
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
-        //configure the state of the system (create object in the dabatase)
+        //configure the state of the system (create object in the database)
         try{
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
@@ -187,7 +187,7 @@ public class CreateBetDAWTest {
 
     @Test
     public void test4(){
-        //define paramaters
+        //define parameters
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
@@ -197,10 +197,10 @@ public class CreateBetDAWTest {
         try {
             oneDate = sdf.parse("05/10/2022");
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
-        //configure the state of the system (create object in the dabatase)
+        //configure the state of the system (create object in the database)
         try{
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
