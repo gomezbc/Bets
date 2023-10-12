@@ -214,7 +214,7 @@ public class ListUserBetsGUI extends JPanel {
 	public void updateTable() {
 		tableModelBets.setDataVector(null, columnNames);
 		User u = MainGUI.getUserRegistered();
-		Vector<Bet> bets = u.getBets();
+		List<Bet> bets = u.getBets();
 		Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
 		for(Bet b: bets) {
 			Vector<Object> row = new Vector<Object>();

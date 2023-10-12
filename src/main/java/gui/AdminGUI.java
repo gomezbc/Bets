@@ -35,7 +35,7 @@ public class AdminGUI extends JFrame {
 	private static JPanel displayFrame;
 	private JButton btnAñadirPreguntasPronosticos;
 	private static JLabel lblUser;
-	private static JMenuBar menuBar;
+	private static JMenuBar jMenuBar;
 	private JButton btnCerrarEventos;
 	private static JLabel lblLogoUser;
 	private JButton btnListUser;
@@ -140,10 +140,10 @@ public class AdminGUI extends JFrame {
 		
 		
 		
-		menuBar = new JMenuBar();
-		menuBar.setBackground(new Color(0, 145, 202));
-		menuBar.setBounds(40, 42, 640, 30);
-		contentPane.add(menuBar);
+		jMenuBar = new JMenuBar();
+		jMenuBar.setBackground(new Color(0, 145, 202));
+		jMenuBar.setBounds(40, 42, 640, 30);
+		contentPane.add(jMenuBar);
 		
 		btnAñadirPreguntasPronosticos = new JButton("Añadir Preguntas y Pronosticos");
 		btnAñadirPreguntasPronosticos.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -178,8 +178,8 @@ public class AdminGUI extends JFrame {
 				btnCrearEvento.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		menuBar.add(btnCrearEvento);
-		menuBar.add(btnAñadirPreguntasPronosticos);
+		jMenuBar.add(btnCrearEvento);
+		jMenuBar.add(btnAñadirPreguntasPronosticos);
 		btnAñadirPreguntasPronosticos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminGUI.setCurrentTab("EventInfoAdminGUI");
@@ -210,7 +210,7 @@ public class AdminGUI extends JFrame {
 				btnCerrarEventos.setBorder(new EmptyBorder(3,3,3,3));
 			}
 		});
-		menuBar.add(btnCerrarEventos);
+		jMenuBar.add(btnCerrarEventos);
 		
 		btnListUser = new JButton("   Lista de Usuarios   ");
 		btnListUser.setFont(new Font("Roboto", Font.BOLD, 14));
@@ -232,7 +232,7 @@ public class AdminGUI extends JFrame {
 		});
 		btnListUser.setBorder(new EmptyBorder(3, 3, 3, 3));
 		btnListUser.setBackground(Color.WHITE);
-		menuBar.add(btnListUser);
+		jMenuBar.add(btnListUser);
 		
 		icon = new ImageIcon(EventInfoPanel.class.getResource("/icons/user.png"));
 		scaledIcon = icon.getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH);
@@ -250,7 +250,7 @@ public class AdminGUI extends JFrame {
 	public static void updateFrame(JPanel panel) {
 		contentPane.removeAll();
 		contentPane.add(btnLogOut);
-		contentPane.add(menuBar);
+		contentPane.add(jMenuBar);
 		displayFrame = panel;
         displayFrame.setBounds(new Rectangle(0, 70, contentPane.getWidth(), contentPane.getHeight()-70));
 		contentPane.add(displayFrame);

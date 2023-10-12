@@ -181,8 +181,9 @@ public class EventsListGUI extends JPanel {
 						tableEvents.getColumnModel().removeColumn(tableEvents.getColumnModel().getColumn(1)); // not shown in JTable
 						if(currentIndex+4<events.size()) next.setVisible(true);
 						else next.setVisible(false);
-						if(currentIndex>0) previous.setVisible(true);
-						else previous.setVisible(false);
+
+						previous.setVisible(false);
+
 					} catch (Exception e1) {
 
 					}
