@@ -33,7 +33,7 @@ public class CreateBetDABTest {
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
-        String forecastDescription = "forecast1";
+        String forecastText = "forecast1";
         float gain = 1.2F;
         String dni = "12345678N";
         Bet bet;
@@ -53,10 +53,10 @@ public class CreateBetDABTest {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
             u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
-            f = sut.createForecast(forecastDescription, gain, ev.getQuestions().get(0).getQuestionNumber());
+            f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         }catch (ForecastAlreadyExist | QuestionDoesntExist e){
             // if the forecast already exists we inherit it from the event
-            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastDescription)).findFirst().get();
+            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastText)).findFirst().get();
         }catch (UserAlreadyExist e){
             // if the user already exists we retrieve it from the database
             try {
@@ -94,7 +94,7 @@ public class CreateBetDABTest {
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 2F;
-        String forecastDescription = "forecast1";
+        String forecastText = "forecast1";
         float gain = 1.2F;
         String dni = "12345678N";
         float betMoney = 1.5F;
@@ -113,10 +113,10 @@ public class CreateBetDABTest {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
             u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
-            f = sut.createForecast(forecastDescription, gain, ev.getQuestions().get(0).getQuestionNumber());
+            f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         }catch (ForecastAlreadyExist | QuestionDoesntExist e){
             // if the forecast already exists we inherit it from the event
-            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastDescription)).findFirst().get();
+            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastText)).findFirst().get();
         }catch (UserAlreadyExist e){
             // if the user already exists we retrieve it from the database
             try {
@@ -208,7 +208,7 @@ public class CreateBetDABTest {
         String eventText="event1";
         String queryText="query1";
         float betMinimum= 1F;
-        String forecastDescription = "forecast1";
+        String forecastText = "forecast1";
         float gain = 1.2F;
         String dni = "12345678N";
         float betMoney = 0.4F;
@@ -226,10 +226,10 @@ public class CreateBetDABTest {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText,oneDate,queryText, betMinimum);
             u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
-            f = sut.createForecast(forecastDescription, gain, ev.getQuestions().get(0).getQuestionNumber());
+            f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         }catch (ForecastAlreadyExist | QuestionDoesntExist e){
             // if the forecast already exists we inherit it from the event
-            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastDescription)).findFirst().get();
+            f = ev.getQuestions().stream().filter(q -> q.getQuestion().equals(queryText)).findFirst().get().getForecasts().stream().filter(f -> f.getDescription().equals(forecastText)).findFirst().get();
         }catch (UserAlreadyExist e){
             try {
                 // if the user already exists retrieve it from the database
