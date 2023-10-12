@@ -28,18 +28,25 @@ public class ModifyBetDAWTest {
     }
 
     @After
-    public void limpiarBD(){
-        da.removeUser("12345678A");
+    public void cleanBD(){
+        removeUsr();
+        removeBetAndEvent();
 
+        da.close();
+    }
+
+    private void removeUsr() {
+        da.removeUser("12345678A");
+    }
+    private void removeBetAndEvent() {
         try{
             if(bet != null){
                 da.removeBet(bet.getBetNumber());
+                testDA.removeEvent(event);
             }
-            //todo: como se elimina un forecast y los eventos
         }catch (BetDoesntExist e){
             System.out.println("No existía la apuesta");
         }
-        da.close();
     }
 
     private void addUsrToDB() {
