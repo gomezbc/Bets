@@ -412,42 +412,49 @@ public class DataAccess  implements DataAccessInterface{
 	 * @param betMoney the amount of money that the user bets
 	 * @param betNumber number of the bet to modify
 	 * @param dni dni of the user
-	 * @return BetDoesntExist if the bet does not exist in the database
-	 * @throws UserDoesntExist if the user does not exist in the database
-	 */
+	 * @return BetDoesntExist if the bet does not exist in the database, current Bet if the bet is not possible
+	 * @throws UserDoesntExist if the user does not exist in the database**/
+
 	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 
 		if(dni == null){
 			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: error, dni nulo");
 			throw new UserDoesntExist("El usuario introducido no es correcto");
 		}
-
-		Bet bet = db.find(Bet.class, betNumber);
-		if ( bet == null) {
-			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
+		if(betNumber < 0){
+			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: error, identificador negativo");
 			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
 
-		User user2 = db.find(User.class, dni);
-		if ( user2 == null) {
+		Bet bet = db.find(Bet.class, betNumber);
+		User user = db.find(User.class, dni);
+
+		if (user == null) {
 			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos, dni="+dni);
 			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos, dni="+dni);
+		}
+		if (bet == null) {
+			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
+			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
 			
 		double betMoneyBefore = bet.getBetMoney();
 		double betMoneyAfter = betMoney + betMoneyBefore;
+		float userMoney = user.getSaldo();
 
-		db.getTransaction().begin();
-		if( betMoneyAfter > 0 ) {
-			user2.setSaldo(user2.getSaldo() - betMoney);
+		if(userMoney >= betMoney && betMoneyAfter > 0){
+
+			user.setSaldo(userMoney - betMoney);
 			bet.setBetMoney((float)betMoneyAfter);
+
+			db.getTransaction().begin();
+			db.persist(user);
+			db.persist(bet);
+			db.getTransaction().commit();
 		}
-		db.persist(user2);
- 	    db.persist(bet);
- 		db.getTransaction().commit();
  		return bet;
 	}
-	
+
 	
 	
 	/**

@@ -127,4 +127,5 @@ public class Bet {
 	public int hashCode() {
 		return super.hashCode();
 	}
+
 }
