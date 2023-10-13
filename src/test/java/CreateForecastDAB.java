@@ -18,12 +18,6 @@ import javax.persistence.EntityManager;
 public class CreateForecastDAB {
 
     static DataAccess dataAccessMock = Mockito.mock(DataAccess.class);
-    static DataAccessInterface dacMock = Mockito.mock(DataAccessInterface.class);
-    static EntityManager mockEntityManager = Mockito.mock(EntityManager.class);
-    @Before
-    public void setUp() {
-    }
-
     @Test
     public void testCreateForecastWithNullDescription() throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
         Mockito.when(dataAccessMock.createForecast(null, 1.2F, 1)).thenThrow(new DescriptionDoesntExist());
@@ -73,7 +67,6 @@ public class CreateForecastDAB {
         Mockito.when(dataAccessMock.createForecast("description", -5, 0)).thenThrow(new Exception());
         try {
             dataAccessMock.createForecast("description", -5, 0);
-            fail("");
         } catch (Exception e) {
 
         }
