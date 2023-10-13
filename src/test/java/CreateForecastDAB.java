@@ -28,7 +28,6 @@ public class CreateForecastDAB {
 
         }
     }
-
     @Test
     public void testCreateForecastQuestionNumberNull() throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
         /*Mockito.when(dataAccessMock.createForecast("description", 1.2F, null).thenThrow(new QuestionDoesntExist()));
@@ -51,7 +50,6 @@ public class CreateForecastDAB {
         }
         */
     }
-
     @Test
     public void testCreateForecastQuestionDoesntExist() throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
         Mockito.when(dataAccessMock.createForecast("description", 1.2F, 0)).thenThrow(new QuestionDoesntExist());
