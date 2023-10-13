@@ -16,7 +16,6 @@ import org.mockito.Mockito;
 import javax.persistence.EntityManager;
 
 public class CreateForecastDAB {
-
     static DataAccess dataAccessMock = Mockito.mock(DataAccess.class);
     @Test
     public void testCreateForecastWithNullDescription() throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
