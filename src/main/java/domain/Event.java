@@ -145,7 +145,7 @@ public class Event implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		return eventNumber != other.eventNumber;
+		return eventNumber == other.eventNumber;
 	}
 
 

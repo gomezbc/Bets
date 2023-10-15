@@ -70,7 +70,7 @@ public class Forecast {
 		if (getClass() != obj.getClass())
 			return false;
 		Forecast other = (Forecast) obj;
-		return this.forecastNumber != other.forecastNumber;
+		return this.forecastNumber == other.forecastNumber;
 	}
 
 	@Override

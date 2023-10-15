@@ -120,7 +120,7 @@ public class Bet {
 		if (getClass() != obj.getClass())
 			return false;
 		Bet other = (Bet) obj;
-		return this.betNumber != other.betNumber;
+		return this.betNumber == other.betNumber;
 	}
 
 	@Override
