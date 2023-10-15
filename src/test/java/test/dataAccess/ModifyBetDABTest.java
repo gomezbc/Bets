@@ -163,7 +163,7 @@ public class ModifyBetDABTest {
 
         try {
 
-            da.modifyBet(10, -3, "12345678A");
+            da.modifyBet(10, 1, "12345678A");
 
             fail("No se ha lanzado la excepción esperada");
 

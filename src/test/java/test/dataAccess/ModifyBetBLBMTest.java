@@ -61,17 +61,17 @@ public class ModifyBetBLBMTest {
 
     @Test
     public void test1ModifiedBet(){
-        testWhenReturnsBet(20, 0);
+        testWhenReturnsBet(10, 10);
     }
 
     @Test
     public void test2NotEnoughUserMoney(){
-        testWhenReturnsBet(10, 10);
+        testWhenReturnsBet(10, 11);
     }
 
     @Test
     public void test3NotEnoughBetMoney(){
-        testWhenReturnsBet(10, 10);
+        testWhenReturnsBet(10, -10);
     }
 
     @Test
@@ -254,29 +254,31 @@ public class ModifyBetBLBMTest {
     }
 
     @Test
-    public void testLimit3(){testWhenReturnsBet(20, 0);}
+    public void testLimit3(){
+        testWhenReturnsBet(20, 10);
+    }
     @Test
     public void testLimit4(){
-        testWhenReturnsBet(19, 1);
+        testWhenReturnsBet(19, 9);
     }
     @Test
     public void testLimit5(){
-        testWhenReturnsBet(20, 0);
+        testWhenReturnsBet(20, 10);
     }
     @Test
     public void testLimit6(){
-        testWhenReturnsBet(10, 10);
+        testWhenReturnsBet(10, 11);
     }
     @Test
     public void testLimit7(){
-        testWhenReturnsBet(10, 10);
+        testWhenReturnsBet(10, -11);
     }
     @Test
     public void testLimit8(){
-        testWhenReturnsBet(10, 10);
+        testWhenReturnsBet(10, -10);
     }
     @Test
     public void testLimit9() {
-        testWhenReturnsBet(1, 19);
+        testWhenReturnsBet(1, -9);
     }
 }
