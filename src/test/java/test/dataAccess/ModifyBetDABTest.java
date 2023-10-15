@@ -39,7 +39,7 @@ public class ModifyBetDABTest {
     }
 
     private void removeUsr() {
-        da.removeUser("12345678A");
+        da.removeUser(dni);
     }
     private void removeBetAndEvent() {
         try{
@@ -74,17 +74,13 @@ public class ModifyBetDABTest {
         }
     }
 
-    @Test
-    public void test1ModifiedBet(){
-        double expectedBetMoney = 20;
-        double expectedUsrMoney = 0;
-
+    private void testWhenReturnsBet(double expectedBetMoney, double expectedUsrMoney, int betMoney){
         addUsrToDB();
         addBetToDB();
 
         try {
 
-            Bet obtainedBet = da.modifyBet(10, bet.getBetNumber(), dni);
+            Bet obtainedBet = da.modifyBet(betMoney, bet.getBetNumber(), dni);
             double obtainedMoney = obtainedBet.getBetMoney();
 
             double obtainedUsrMoney = da.getUser(dni).getSaldo();
@@ -95,53 +91,21 @@ public class ModifyBetDABTest {
         }catch (Exception e){
             fail("Excepción inesperada");
         }
+    }
 
+    @Test
+    public void test1ModifiedBet(){
+       testWhenReturnsBet(20, 0, 10);
     }
 
     @Test
     public void test2NotEnoughUserMoney(){
-        double expectedBetMoney = 10;
-        double expectedUsrMoney = 10;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(11, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
-
+        testWhenReturnsBet(10, 10, 11);
     }
 
     @Test
     public void test3NotEnoughBetMoney(){
-        double expectedBetMoney = 10;
-        double expectedUsrMoney = 10;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(-10, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
-
+        testWhenReturnsBet(10, 10, -10);
     }
 
     @Test
@@ -251,156 +215,31 @@ public class ModifyBetDABTest {
 
     @Test
     public void testLimit3(){
-        double expectedBetMoney = 20;
-        double expectedUsrMoney = 0;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(10, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(20, 0, 10);
     }
-
     @Test
     public void testLimit4(){
-        double expectedBetMoney = 19;
-        double expectedUsrMoney = 1;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(9, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(19, 1, 9);
     }
-
     @Test
     public void testLimit5(){
-        double expectedBetMoney = 20;
-        double expectedUsrMoney = 0;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(10, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(20, 0, 10);
     }
-
     @Test
     public void testLimit6(){
-        double expectedBetMoney = 10;
-        double expectedUsrMoney = 10;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(11, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(10, 10, 11);
     }
-
     @Test
     public void testLimit7(){
-        double expectedBetMoney = 10;
-        double expectedUsrMoney = 10;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(-11, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(10, 10, -11);
     }
-
     @Test
     public void testLimit8(){
-        double expectedBetMoney = 10;
-        double expectedUsrMoney = 10;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(-10, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+        testWhenReturnsBet(10, 10, -10);
     }
-
     @Test
-    public void testLimit9(){
-        double expectedBetMoney = 1;
-        double expectedUsrMoney = 19;
-
-        addUsrToDB();
-        addBetToDB();
-
-        try {
-
-            Bet obtainedBet = da.modifyBet(-9, bet.getBetNumber(), dni);
-            double obtainedMoney = obtainedBet.getBetMoney();
-            double obtainedUsrMoney = da.getUser(dni).getSaldo();
-
-            assertEquals(expectedBetMoney, obtainedMoney, 0.1);
-            assertEquals(expectedUsrMoney, obtainedUsrMoney, 0.1);
-
-        }catch (Exception e){
-            fail("Excepción inesperada");
-        }
+    public void testLimit9() {
+        testWhenReturnsBet(1, 19, -9);
     }
 
 }

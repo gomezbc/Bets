@@ -36,7 +36,7 @@ public class ModifyBetDAWTest {
     }
 
     private void removeUsr() {
-        da.removeUser("12345678A");
+        da.removeUser(dni);
     }
     private void removeBetAndEvent() {
         try{
