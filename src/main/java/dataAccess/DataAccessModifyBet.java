@@ -3,8 +3,7 @@ package dataAccess;
 import configuration.ConfigXML;
 import configuration.UtilDate;
 import domain.*;
-import exceptions.BetDoesntExist;
-import exceptions.UserDoesntExist;
+import exceptions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -253,27 +252,112 @@ public class DataAccessModifyBet {
 
     }
 
-    public void removeUser(String dni) {
+    public boolean removeUser(String dni) {
+        System.out.println(">> DataAccess: removeUser => " + dni);
+        User u = db.find(User.class, dni);
+        if(u==null) {
+            return false;
+        }else {
+            db.getTransaction().begin();
+            db.remove(u);
+            db.getTransaction().commit();
+            return true;
+        }
     }
 
-    public void removeBet(Integer betNumber) {
+    public void removeBet(Integer betNumber) throws BetDoesntExist{
+        System.out.println(">> DataAccess: removeBet => betNumber="+betNumber);
+        Bet b = db.find(Bet.class, betNumber);
+        if(b==null) {
+            System.err.println(">> DataAccess: removeBet => error BetDoesntExist: No hay una apuesta con este identificador "+betNumber);
+            throw new BetDoesntExist("No hay una apuesta con este identificador "+betNumber);
+        }
+        db.getTransaction().begin();
+        db.remove(b);
+        b.getUser().removeBet(b.getBetNumber());
+        b.getUser().setSaldo((float) (b.getUser().getSaldo() + b.getBetMoney()));
+        db.getTransaction().commit();
     }
 
-    public void createUser(String testUser, String number, String dni, String testUser1, String testUser2, boolean b) {
+    public User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist {
+        System.out.println(">> DataAccess: createUser => username="+username+" dni="+dni+" name="+name+" apellido="+apellido+" isAdmin="+isAdmin);
+        User user = db.find(User.class, dni);
+        if (user==null ) {
+            db.getTransaction().begin();
+            user = new User(username, passwd, dni, name, apellido, isAdmin);
+            db.persist(user);
+            db.getTransaction().commit();
+        }else {
+            System.err.println(">> DataAccess: createUser => error UserAlreadyExist: "+ user.toString() + " already exists!");
+            throw new UserAlreadyExist(user.toString() + " already exists!");
+        }
+        return user;
     }
 
-    public void modifySaldo(int i, String dni) {
+    public User modifySaldo (float saldo, String user) {
+        System.out.println(">> DataAccess: modifySaldo => user="+user+" saldo a añadir="+saldo);
+        User user2 = db.find(User.class, user);
+        db.getTransaction().begin();
+        user2.setSaldo(user2.getSaldo() + saldo);
+        db.getTransaction().commit();
+        return user2;
     }
 
-    public Forecast createForecast(String forecast1, float v, Integer questionNumber) {
-        return null;
+    public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist, DescriptionDoesntExist {
+        System.out.println(">> DataAccess: createForecast => description="+description+" gain="+gain+" Question="+questionNumber);
+        if(description.isEmpty()) {
+            System.err.println(">> DataAccess: createForecast => error DescriptionDoesntExist: La descripción no puede estar vacía");
+            throw new DescriptionDoesntExist("La descripción no puede estar vacía");
+        }
+        Question ques = db.find(Question.class, questionNumber);
+        if (ques == null) {
+            System.err.println(">> DataAccess: createForecast => error QuestionDoesntExist: No existe una pregunta con este identificador: " + questionNumber);
+            throw new QuestionDoesntExist("No existe una pregunta con este identificador: " + questionNumber);
+        }
+        if (ques.DoesForecastExists(description)) {
+            System.err.println(">> DataAccess: createForecast => error ForecastAlreadyExist: Esta predicción ya existe");
+            throw new ForecastAlreadyExist("Esta predicción ya existe");
+        }
+        db.getTransaction().begin();
+        Forecast f = ques.addForecast(description, gain, ques);
+        //db.persist(f);
+        db.persist(ques); // db.persist(f) not required when CascadeType.PERSIST is added in questions property of Event class
+        // @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
+        db.getTransaction().commit();
+        return f;
     }
 
-    public Bet createBet(String dni, int i, Integer forecastNumber) {
-        return null;
+    public Bet createBet (String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
+        System.out.println(">> DataAccess: createBet => user=" + dni + " dinero apostado="+betMoney + " al forecast=" + forecastNumber);
+        Forecast forecast = db.find(Forecast.class, forecastNumber);
+        User u = db.find(User.class, dni);
+        if(u==null) {
+            System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+dni);
+            throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+dni);
+        }
+        if (forecast == null) {
+            System.err.println(">> DataAccess: createBet => error ForecastDoesntExist: No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
+            throw new ForecastDoesntExist("No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
+        }
+
+        if ( u.DoesBetExists(forecastNumber) != null) {
+            System.err.println(">> DataAccess: createBet => error BetAlreadyExist: Ya existe una apuesta a este pronostico");
+            throw new BetAlreadyExist("Ya existe una apuesta a este pronostico");
+        }
+        db.getTransaction().begin();
+        Bet b = u.addBet(betMoney, forecast);
+        db.persist(u);
+        db.getTransaction().commit();
+        return b;
     }
 
-    public User getUser(String dni) {
-        return null;
+    public User getUser(String Dni) throws UserDoesntExist{
+        System.out.println(">> DataAccess: getUser => Dni="+Dni);
+        User u = db.find(User.class, Dni);
+        if(u==null) {
+            System.err.println(">> DataAccess: getUser => error UserDoesntExist: No existe un usuario con este DNI "+Dni);
+            throw new UserDoesntExist("No existe un usuario con este DNI "+Dni);
+        }
+        return u;
     }
 }
