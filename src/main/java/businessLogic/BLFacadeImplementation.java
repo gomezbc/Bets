@@ -23,12 +23,14 @@ import exceptions.*;
 public class BLFacadeImplementation  implements BLFacade {
 	DataAccessInterface dbManager;
 
+	static final  String DBOPENMODE = "initialize";
+
 	public BLFacadeImplementation()  {
 		System.out.println("Creating BLFacadeImplementation instance");
 		ConfigXML c=ConfigXML.getInstance();
 		
-		if (c.getDataBaseOpenMode().equals("initialize")) {
-		    dbManager=new DataAccess(c.getDataBaseOpenMode().equals("initialize"));
+		if (c.getDataBaseOpenMode().equals(DBOPENMODE)) {
+		    dbManager=new DataAccess(c.getDataBaseOpenMode().equals(DBOPENMODE));
 		    dbManager.initializeDB();
 		    } else
 		     dbManager=new DataAccess();
@@ -42,7 +44,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
 		ConfigXML c=ConfigXML.getInstance();
 		
-		if (c.getDataBaseOpenMode().equals("initialize")) {
+		if (c.getDataBaseOpenMode().equals(DBOPENMODE)) {
 			da.open(true);
 			da.initializeDB();
 			da.close();

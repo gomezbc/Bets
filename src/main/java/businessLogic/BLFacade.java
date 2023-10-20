@@ -6,7 +6,6 @@ import java.util.Vector;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-//import domain.Booking;
 import domain.Bet;
 import domain.Event;
 import domain.Forecast;

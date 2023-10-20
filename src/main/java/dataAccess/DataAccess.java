@@ -1,19 +1,11 @@
 package dataAccess;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -226,7 +218,7 @@ public class DataAccess  implements DataAccessInterface{
 	 */
    public Event createEvent(String description,Date eventDate) throws EventAlreadyExist{
 	   System.out.println(">> DataAccess: createEvent => description="+description+" eventDate="+eventDate);
-	   Vector<String> a = getEvents2(eventDate);
+	   ArrayList<String> a = new ArrayList<>(getEvents2(eventDate));
 	   Event event;
 	   if (! a.contains(description.trim().replace(" ","").toLowerCase())) {
 		   db.getTransaction().begin();
