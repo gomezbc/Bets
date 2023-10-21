@@ -24,7 +24,7 @@ import exceptions.*;
 /**
  * It implements the data access to the objectDb database
  */
-public class DataAccess  implements DataAccessInterface{
+public class DataAccess implements DataAccessInterface{
 	protected static EntityManager  db;
 	protected static EntityManagerFactory emf;
 
@@ -153,15 +153,6 @@ public class DataAccess  implements DataAccessInterface{
 		}
 	}
 
-
-
-
-
-
-
-
-
-
 	/**
 	 * This method creates a question for an event, with a question text and the minimum bet
 	 * 
@@ -233,28 +224,25 @@ public class DataAccess  implements DataAccessInterface{
 
    /**
 	* This method creates a user
-	* @param username username of the user
-	* @param passwd password of the user
-	* @param dni dni of the user (unique)
-	* @param name name of the user
-	* @param apellido apellido of the user
-	* @param isAdmin if the user is admin or not
+	* @User object not in db
 	* @return the created user
 	* @throws UserAlreadyExist if the user already exists in the database
     */
-	public User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist {
-		System.out.println(">> DataAccess: createUser => username="+username+" dni="+dni+" name="+name+" apellido="+apellido+" isAdmin="+isAdmin);
-		   User user = db.find(User.class, dni);
-		   if (user==null ) {
+   @Override
+	public User createUserInDB(User user) throws UserAlreadyExist {
+		System.out.println(">> DataAccess: createUser => username="+user.getUsername()+" dni="+user.getDni()+" name="+user.getName()
+				+" apellido="+user.getApellido()+" isAdmin="+user.isAdmin());
+		   User userInDB = db.find(User.class, user.getDni());
+		   if (userInDB==null ) {
 			   db.getTransaction().begin();
-			   user = new User(username, passwd, dni, name, apellido, isAdmin);
-			   db.persist(user);
+			   userInDB = new User(user.getUsername(), user.getPasswd(), user.getDni(), user.getName(), user.getApellido(), user.isAdmin());
+			   db.persist(userInDB);
 			   db.getTransaction().commit();
 		   }else {
-			   System.err.println(">> DataAccess: createUser => error UserAlreadyExist: "+ user.toString() + " already exists!");
-			   throw new UserAlreadyExist(user.toString() + " already exists!");
+			   System.err.println(">> DataAccess: createUser => error UserAlreadyExist: "+ userInDB.toString() + " already exists!");
+			   throw new UserAlreadyExist(userInDB.toString() + " already exists!");
 		   }
-		   return user;
+		   return userInDB;
 	}
 	
 	/**

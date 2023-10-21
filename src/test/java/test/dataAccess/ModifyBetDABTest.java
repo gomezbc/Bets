@@ -4,6 +4,7 @@ import dataAccess.DataAccess;
 import domain.Bet;
 import domain.Event;
 import domain.Forecast;
+import domain.User;
 import exceptions.BetDoesntExist;
 import exceptions.UserAlreadyExist;
 import exceptions.UserDoesntExist;
@@ -55,7 +56,7 @@ public class ModifyBetDABTest {
     private void addUsrToDB() {
         try {
 
-            da.createUser("testUser", "123", dni, "testUser", "testUser", false);
+            da.createUserInDB(new User("testUser", "123", dni, "testUser", "testUser", false));
             da.modifySaldo(10, dni);
 
         } catch (UserAlreadyExist e) {

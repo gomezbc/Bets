@@ -51,7 +51,7 @@ public class CreateBetDABTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", dni, "Juan", "Lopez", false));
             f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         } catch (ForecastAlreadyExist | QuestionDoesntExist e) {
             // if the forecast already exists we inherit it from the event
@@ -113,7 +113,7 @@ public class CreateBetDABTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", dni, "Juan", "Lopez", false));
             f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         } catch (ForecastAlreadyExist | QuestionDoesntExist e) {
             // if the forecast already exists we inherit it from the event
@@ -230,7 +230,7 @@ public class CreateBetDABTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", dni, "Juan", "Lopez", false));
             f = sut.createForecast(forecastText, gain, ev.getQuestions().get(0).getQuestionNumber());
         } catch (ForecastAlreadyExist | QuestionDoesntExist e) {
             // if the forecast already exists we inherit it from the event
@@ -290,7 +290,7 @@ public class CreateBetDABTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", dni, "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", dni, "Juan", "Lopez", false));
         } catch (UserAlreadyExist e) {
             try {
                 // if the user already exists retrieve it from the database

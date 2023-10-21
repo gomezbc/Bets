@@ -93,7 +93,7 @@ public class CreateBetDAWTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", "12345678N", "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", "12345678N", "Juan", "Lopez", false));
 
             // loop until we find a forecast that doesn't exist
             while (testDA.existForecast(forecastNumber)) {
@@ -147,7 +147,7 @@ public class CreateBetDAWTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", "12345678N", "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", "12345678N", "Juan", "Lopez", false));
             f = sut.createForecast("forecast1", 1.2F, ev.getQuestions().get(0).getQuestionNumber());
         } catch (ForecastAlreadyExist | QuestionDoesntExist e) {
             // if the forecast already exists we inherit it from the event
@@ -210,7 +210,7 @@ public class CreateBetDAWTest {
         try {
             testDA.open();
             ev = testDA.addEventWithQuestion(eventText, oneDate, queryText, betMinimum);
-            u = sut.createUser("Juan", "1234", "12345678N", "Juan", "Lopez", false);
+            u = sut.createUserInDB(new User("Juan", "1234", "12345678N", "Juan", "Lopez", false));
             f = sut.createForecast("forecast1", 1.2F, ev.getQuestions().get(0).getQuestionNumber());
         } catch (ForecastAlreadyExist | QuestionDoesntExist e) {
             // if the forecast already exists we inherit it from the event

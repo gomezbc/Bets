@@ -51,7 +51,7 @@ public class ModifyBetDAWTest {
     private void addUsrToDB() {
         try {
 
-            da.createUser("testUser", "123", dni, "testUser", "testUser", false);
+            da.createUserInDB(new User("testUser", "123", dni, "testUser", "testUser", false));
             da.modifySaldo(10, dni);
 
         } catch (UserAlreadyExist e) {

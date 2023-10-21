@@ -93,16 +93,11 @@ public interface DataAccessInterface {
     /**
      * This method creates a user
      *
-     * @param username username of the user
-     * @param passwd   password of the user
-     * @param dni      dni of the user (unique)
-     * @param name     name of the user
-     * @param apellido apellido of the user
-     * @param isAdmin  if the user is admin or not
+     * @param user: the user to create in the db
      * @return the created user
      * @throws UserAlreadyExist if the user already exists in the database
      */
-    User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist;
+    User createUserInDB(User user) throws UserAlreadyExist;
 
     /**
      * This method retrieves a user identified by its dni from the database
