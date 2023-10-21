@@ -409,46 +409,78 @@ public class DataAccess  implements DataAccessInterface{
 
 	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 
-		if(dni == null){
-			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: error, dni nulo");
-			throw new UserDoesntExist("El usuario introducido no es correcto");
-		}
-		if(betNumber < 0){
-			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: error, identificador negativo");
-			throw new BetDoesntExist("No existe la apuesta a modificar");
-		}
+		checkIfDNIAndBetNumberRight(betNumber, dni);
 
 		Bet bet = db.find(Bet.class, betNumber);
 		User user = db.find(User.class, dni);
 
-		if (user == null) {
-			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos, dni="+dni);
-			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos, dni="+dni);
+		checkIfUserAndBetInDB(user, bet);
+
+		modifyBetIfPossible(betMoney, bet, user);
+		return bet;
+	}
+	private void checkIfDNIAndBetNumberRight(int betNumber, String dni) throws UserDoesntExist, BetDoesntExist {
+		checkIfDNIRight(dni);
+		checkIfBetNumberRight(betNumber);
+	}
+	private void checkIfBetNumberRight(int betNumber) throws BetDoesntExist {
+		if(betNumber < 0){
+			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: error, identificador negativo");
+			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
+	}
+	private void checkIfDNIRight(String dni) throws UserDoesntExist {
+		if(dni == null){
+			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: error, dni nulo");
+			throw new UserDoesntExist("El usuario introducido no es correcto");
+		}
+	}
+	private void checkIfUserAndBetInDB(User user, Bet bet) throws UserDoesntExist, BetDoesntExist {
+		checkIfUserInDB(user);
+		checkIfBetInDB(bet);
+	}
+
+	private static void checkIfUserInDB(User user) throws UserDoesntExist {
+		if (user == null) {
+			System.err.println(">> DataAccess: modifyBet => error UserDoesntExist: No existe un usuario con este DNI en la base de datos");
+			throw new UserDoesntExist("No existe un usuario con este DNI en la base de datos");
+		}
+	}
+	private static void checkIfBetInDB(Bet bet) throws BetDoesntExist {
 		if (bet == null) {
 			System.err.println(">> DataAccess: modifyBet => error BetDoesntExist: No existe la apuesta ha modificar");
 			throw new BetDoesntExist("No existe la apuesta a modificar");
 		}
-			
+	}
+
+	private void modifyBetIfPossible(float betMoney, Bet bet, User user) {
 		double betMoneyBefore = bet.getBetMoney();
 		double betMoneyAfter = betMoney + betMoneyBefore;
 		float userMoney = user.getSaldo();
 
-		if(userMoney >= betMoney && betMoneyAfter > 0){
+		if(betPossible(betMoney, userMoney, betMoneyAfter)){
 
-			user.setSaldo(userMoney - betMoney);
-			bet.setBetMoney((float)betMoneyAfter);
+			modifyBetValues(betMoney, bet, user, userMoney, (float) betMoneyAfter);
 
-			db.getTransaction().begin();
-			db.persist(user);
-			db.persist(bet);
-			db.getTransaction().commit();
+			persistModifiedBetAndUserIntoDB(bet, user);
 		}
- 		return bet;
+	}
+	private boolean betPossible(float betMoney, float userMoney, double betMoneyAfter) {
+		return userMoney >= betMoney && betMoneyAfter > 0;
+	}
+	private void modifyBetValues(float betMoney, Bet bet, User user, float userMoney, float betMoneyAfter) {
+		user.setSaldo(userMoney - betMoney);
+		bet.setBetMoney(betMoneyAfter);
+	}
+	private static void persistModifiedBetAndUserIntoDB(Bet bet, User user) {
+		db.getTransaction().begin();
+		db.persist(user);
+		db.persist(bet);
+		db.getTransaction().commit();
 	}
 
-	
-	
+
+
 	/**
 	 * Este método nos permite cambiar el nombre de un usuario.
 	 * @param user, el usuario que se quiere cambiar
