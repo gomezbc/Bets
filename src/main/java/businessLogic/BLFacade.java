@@ -76,7 +76,7 @@ public interface BLFacade  {
 	 * @return the created user
 	 * @throws UserAlreadyExist if the user already exists
 	 */
-	@WebMethod public User createUser(String username, String passwd, String dni, String name, String apellido, boolean isAdmin) throws UserAlreadyExist;
+	@WebMethod public User createUser(User user) throws UserAlreadyExist;
 	
 	/**
 	 * This method invokes the data access to get a Question from the database

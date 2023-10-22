@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import businessLogic.BLFacade;
+import domain.User;
 import exceptions.UserAlreadyExist;
 import theme.Bets21Theme;
 import javax.swing.ImageIcon;
@@ -121,7 +122,8 @@ public class CreateUserGUI extends JFrame {
 					lblUserAlreadyExists.setText("Este usuario ya existe!");
 					lblUserAlreadyExists.setVisible(false);
 					try {
-						facade.createUser(username.getText(), new String(passwd.getPassword()), dni.getText(), name.getText(), surname.getText(), checkbxisAdmin.isSelected());
+						User user = new User(username.getText(), new String(passwd.getPassword()), dni.getText(), name.getText(), surname.getText(), checkbxisAdmin.isSelected());
+						facade.createUser(user);
 					} catch (UserAlreadyExist e1) {
 						lblUserAlreadyExists.setVisible(true);
 					}
