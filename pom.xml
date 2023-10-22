@@ -32,7 +32,7 @@
           <configuration>
                <testFailureIgnore>true</testFailureIgnore>
 			  <includes>
-				  <include>*Test.java</include>
+				  <include>*Test*.java</include>
 				  <include>*Int.java</include>
 				  <include>*INT.java</include>
 				  <include>*DAB.java</include>
