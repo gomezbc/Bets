@@ -25,6 +25,7 @@ import theme.Bets21Theme;
 public class ListUsersGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	public static final String tabbedPaneFont = "Roboto";
 	private JTable tableUsers = new JTable();
 	private JTable tableAdmins = new JTable();
 	private JScrollPane scrollPaneUser = new JScrollPane();
@@ -65,13 +66,13 @@ public class ListUsersGUI extends JPanel {
 		this.setSize(new Dimension(886, 541));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Roboto", Font.PLAIN, 14));
+		tabbedPane.setFont(new Font(tabbedPaneFont, Font.PLAIN, 14));
 		tabbedPane.setBounds(11, 0, 860, 480);
 		this.add(tabbedPane);
-		scrollPaneUser.setFont(new Font("Roboto", Font.PLAIN, 14));
+		scrollPaneUser.setFont(new Font(tabbedPaneFont, Font.PLAIN, 14));
 		
 		scrollPaneUser.setViewportView(tableUsers);
-		scrollPaneAdmin.setFont(new Font("Roboto", Font.PLAIN, 14));
+		scrollPaneAdmin.setFont(new Font(tabbedPaneFont, Font.PLAIN, 14));
 		scrollPaneAdmin.setViewportView(tableAdmins);
 		tabbedPane.addTab("Users", null, scrollPaneUser, null);
 		tabbedPane.addTab("Admins", null, scrollPaneAdmin, null);
@@ -87,7 +88,7 @@ public class ListUsersGUI extends JPanel {
 		updateTable();
 		
 		btnEliminarUsuario = new JButton("Eliminar Usuario");
-		btnEliminarUsuario.setFont(new Font("Roboto", Font.BOLD, 14));
+		btnEliminarUsuario.setFont(new Font(tabbedPaneFont, Font.BOLD, 14));
 		btnEliminarUsuario.setBackground(Color.WHITE);
 		btnEliminarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
