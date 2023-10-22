@@ -364,26 +364,41 @@ public class DataAccess implements DataAccessInterface{
 	 */
 	public Bet createBet (String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
 		System.out.println(">> DataAccess: createBet => user=" + dni + " dinero apostado="+betMoney + " al forecast=" + forecastNumber);
-		Forecast forecast = db.find(Forecast.class, forecastNumber);
-		User u = db.find(User.class, dni);
-		if(u==null) {
-			System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+dni);
-			throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+dni);
-		}
-		if (forecast == null) {
-			System.err.println(">> DataAccess: createBet => error ForecastDoesntExist: No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
-			throw new ForecastDoesntExist("No hay un pronostico con este identificador en la base de datos, forecastNumber="+forecastNumber);
-		}
 
+		User u = getUserFromDB(dni);
+		Forecast forecast = getForecastFromDB(forecastNumber);
+		doesBetAlreadyExist(forecastNumber, u);
+
+		db.getTransaction().begin();
+ 	    Bet b = u.addBet(betMoney, forecast);
+ 	    db.persist(u);
+ 		db.getTransaction().commit();
+		return b;
+	}
+
+	private static void doesBetAlreadyExist(int forecastNumber, User u) throws BetAlreadyExist {
 		if ( u.DoesBetExists(forecastNumber) != null) {
 			System.err.println(">> DataAccess: createBet => error BetAlreadyExist: Ya existe una apuesta a este pronostico");
 			throw new BetAlreadyExist("Ya existe una apuesta a este pronostico");
 		}
-			db.getTransaction().begin();
- 	    	Bet b = u.addBet(betMoney, forecast);
- 	    	db.persist(u);
- 			db.getTransaction().commit();
- 			return b;
+	}
+
+	private static Forecast getForecastFromDB(int forecastNumber) throws ForecastDoesntExist {
+		Forecast forecast = db.find(Forecast.class, forecastNumber);
+		if (forecast == null) {
+			System.err.println(">> DataAccess: createBet => error ForecastDoesntExist: No hay un pronostico con este identificador en la base de datos, forecastNumber="+ forecastNumber);
+			throw new ForecastDoesntExist("No hay un pronostico con este identificador en la base de datos, forecastNumber="+ forecastNumber);
+		}
+		return forecast;
+	}
+
+	private static User getUserFromDB(String dni) throws UserDoesntExist {
+		User u = db.find(User.class, dni);
+		if(u==null) {
+			System.err.println(">> DataAccess: createBet => error UserDoesntExist: No hay un usuario con este DNI en la base de datos, dni="+ dni);
+			throw new UserDoesntExist("No hay un usuario con este DNI en la base de datos, dni="+ dni);
+		}
+		return u;
 	}
 
 	/**
