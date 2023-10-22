@@ -278,6 +278,10 @@ public class MainGUI extends JFrame {
 			jButtonLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e1) {
 					BLFacade facade = MainGUI.getBusinessLogic();
+					validateLogin(facade);
+				}
+
+				private void validateLogin(BLFacade facade) {
 					if(userRegistered!= null) {
 						userError.setText("<html>Cierra sesión antes de iniciar <br>sesión con otro usuario</html>");
 						userError.setVisible(true);
@@ -285,24 +289,31 @@ public class MainGUI extends JFrame {
 						User user = null;
 						try {
 							user = facade.getUser(textField.getText());
-							if(!user.checkCredentials(new String(pwdIngreseSuContrasea.getPassword()))) userError.setText("La contraseña es incorrecta");
-							else {
-									setUserRegistered(user);
-									userError.setVisible(false);
-								if(user.isAdmin()) {
-									JFrame a = new AdminGUI();
-									a.setVisible(true);
-								}else {
-									JFrame a = new UserGUI();
-									a.setVisible(true);
-								}
-							}
+							checkUserCredentials(user);
 						}catch(UserDoesntExist e2) {
 							userError.setVisible(true);
 							userError.setText(e2.getMessage());
 						}
 					}
-					
+				}
+
+				private void checkUserCredentials(User user) {
+					if(!user.checkCredentials(new String(pwdIngreseSuContrasea.getPassword()))) userError.setText("La contraseña es incorrecta");
+					else {
+							setUserRegistered(user);
+							userError.setVisible(false);
+							showGUIBasedOnRole(user);
+					}
+				}
+
+				private void showGUIBasedOnRole(User user) {
+					if(user.isAdmin()) {
+						JFrame a = new AdminGUI();
+						a.setVisible(true);
+					}else {
+						JFrame a = new UserGUI();
+						a.setVisible(true);
+					}
 				}
 			});
 		}
