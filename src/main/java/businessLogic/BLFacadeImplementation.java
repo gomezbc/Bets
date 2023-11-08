@@ -1,5 +1,6 @@
 package businessLogic;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -15,6 +16,8 @@ import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.*;
+import iterators.EventExtendedIterator;
+import iterators.ExtendedIterator;
 
 /**
  * It implements the business logic as a web service.
@@ -557,8 +560,13 @@ public class BLFacadeImplementation  implements BLFacade {
 				dbManager.close();
 			}
 	 }
-	
-	
+
+	@Override
+	public ExtendedIterator<Event> getEventsIterator(Date date) {
+		List<Event> events = getEvents(date);
+		return new EventExtendedIterator(events);
+	}
+
 
 }
 
