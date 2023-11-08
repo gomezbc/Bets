@@ -47,12 +47,9 @@ public class ListUserBetsGUI extends JPanel {
 		return fila;
 	}
 
-
-
 	public static void setFila(int fila) {
 		ListUserBetsGUI.fila = fila;
 	}
-
 
 
 	public static DefaultTableModel getTableModelBets() {
@@ -72,10 +69,7 @@ public class ListUserBetsGUI extends JPanel {
 	private static int betNumber2;
 	private static int fila;
 	
-	
 
-	
-	
 	public static int getBetNumber2() {
 		return betNumber2;
 	}
