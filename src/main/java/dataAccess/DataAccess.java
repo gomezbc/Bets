@@ -52,7 +52,6 @@ public class DataAccess implements DataAccessInterface{
 		
 		db.getTransaction().begin();
 		try {
-
 			
 		   Calendar today = Calendar.getInstance();
 		   
@@ -104,13 +103,13 @@ public class DataAccess implements DataAccessInterface{
 	private Event getIndividualEvent(List<String> eventNames, int year, int month, int i) {
 		Event event = null;
 		if(i <= 10){
-			event = new Event(i, eventNames.get(i), UtilDate.newDate(year, month, 17));
+			event = new Event(i, eventNames.get(i-1), UtilDate.newDate(year, month, 17));
 		}
 		if(i >= 11 && i <= 16){
-			event = new Event(i, eventNames.get(i), UtilDate.newDate(year, month, 1));
+			event = new Event(i, eventNames.get(i-1), UtilDate.newDate(year, month, 1));
 		}
 		if(i >= 17 && i <= 20){
-			event = new Event(i, eventNames.get(i), UtilDate.newDate(year, month +1, 28));
+			event = new Event(i, eventNames.get(i-1), UtilDate.newDate(year, month +1, 28));
 		}
 		return event;
 	}
