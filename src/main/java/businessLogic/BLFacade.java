@@ -22,6 +22,7 @@ import exceptions.QuestionAlreadyExist;
 import exceptions.QuestionDoesntExist;
 import exceptions.UserAlreadyExist;
 import exceptions.UserDoesntExist;
+import iterators.ExtendedIterator;
 
 /**
  * Interface that specifies the business logic.
@@ -224,6 +225,7 @@ public interface BLFacade  {
 	 * @param newCard la nueva tarjeta de credito
 	 */
 	@WebMethod public void modifyUserCreditCard(String user, Long newCard);
-	
-	
+
+
+    ExtendedIterator<Event> getEventsIterator(Date date);
 }
