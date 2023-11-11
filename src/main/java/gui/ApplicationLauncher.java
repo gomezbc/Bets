@@ -18,11 +18,9 @@ public class ApplicationLauncher {
 	public static void main(String[] args) {
 
 		ConfigXML c=ConfigXML.getInstance();
-	
 		System.out.println(c.getLocale());
 		
 		Locale.setDefault(new Locale(c.getLocale()));
-		
 		System.out.println("Locale: "+Locale.getDefault());
 		
 		MainGUI a=new MainGUI();
@@ -32,9 +30,7 @@ public class ApplicationLauncher {
 			
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 
-			BLFacade appFacadeInterface = BLFacadeFactory.createBLFacadeImplementation(c);
-
-			MainGUI.setBussinessLogic(appFacadeInterface);
+			MainGUI.setBussinessLogic(true);
 
 		}catch (Exception e) {
 			a.jLabelSelectOption.setText("Error: "+e.toString());
