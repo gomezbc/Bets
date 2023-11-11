@@ -1,5 +1,5 @@
 import businessLogic.BLFacade;
-import businessLogic.BLFacadeImplementation;
+import businessLogic.BLFacadeLocalImplementation;
 import dataAccess.DataAccess;
 import domain.Event;
 import domain.Question;
@@ -24,7 +24,7 @@ public class CreateQuestionBLBMTest {
      Event mockedEvent=Mockito.mock(Event.class);
 	
 	@InjectMocks
-	 BLFacade sut=new BLFacadeImplementation(dataAccess);
+	 BLFacade sut=new BLFacadeLocalImplementation(dataAccess);
 	
 	//sut.createQuestion:  The event has one question with a queryText. 
 

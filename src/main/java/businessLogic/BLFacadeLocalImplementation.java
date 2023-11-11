@@ -23,12 +23,12 @@ import iterators.ExtendedIterator;
  * It implements the business logic as a web service.
  */
 @WebService(endpointInterface = "businessLogic.BLFacade")
-public class BLFacadeImplementation  implements BLFacade {
+public class BLFacadeLocalImplementation implements BLFacade {
 	DataAccessInterface dbManager;
 
 	static final  String DBOPENMODE = "initialize";
 
-	public BLFacadeImplementation()  {
+	public BLFacadeLocalImplementation()  {
 		System.out.println("Creating BLFacadeImplementation instance");
 		ConfigXML c=ConfigXML.getInstance();
 		
@@ -42,7 +42,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		
 	}
 	
-    public BLFacadeImplementation(DataAccessInterface da)  {
+    public BLFacadeLocalImplementation(DataAccessInterface da)  {
 		
 		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
 		ConfigXML c=ConfigXML.getInstance();

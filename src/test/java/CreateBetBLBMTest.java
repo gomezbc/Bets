@@ -1,5 +1,5 @@
 import businessLogic.BLFacade;
-import businessLogic.BLFacadeImplementation;
+import businessLogic.BLFacadeLocalImplementation;
 import dataAccess.DataAccess;
 import domain.*;
 import exceptions.*;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class CreateBetBLBMTest {
     static DataAccess dataAccess = Mockito.mock(DataAccess.class);
     @InjectMocks
-    static BLFacade sut = new BLFacadeImplementation(dataAccess);
+    static BLFacade sut = new BLFacadeLocalImplementation(dataAccess);
 
     Forecast mockedForecast = Mockito.mock(Forecast.class);
     User mockedUser = Mockito.mock(User.class);

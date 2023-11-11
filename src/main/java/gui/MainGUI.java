@@ -24,10 +24,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import businessLogic.BLFacadeFactory;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
+import configuration.ConfigXML;
 import domain.User;
 import exceptions.UserDoesntExist;
 import theme.Bets21Theme;
@@ -55,9 +57,15 @@ public class MainGUI extends JFrame {
 		return appFacadeInterface;
 	}
 	 
-	public static void setBussinessLogic (BLFacade afi){
-		appFacadeInterface=afi;
+	public static void setBussinessLogic(boolean local){
+		setConfigBusinessLogic(local);
+		appFacadeInterface= BLFacadeFactory.createBLFacadeImplementation(ConfigXML.getInstance());
 	}
+
+	private static void setConfigBusinessLogic(boolean local) {
+		ConfigXML.getInstance().setBusinessLogic(local);
+	}
+
 	protected JLabel jLabelSelectOption;
 	private JRadioButton rdbtnNewRadioButton;
 	private JRadioButton rdbtnNewRadioButton_1;

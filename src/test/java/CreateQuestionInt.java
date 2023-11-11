@@ -9,9 +9,7 @@ import java.util.Date;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import businessLogic.BLFacadeImplementation;
-import configuration.ConfigXML;
-import dataAccess.DataAccessInterface;
+import businessLogic.BLFacadeLocalImplementation;
 import dataAccess.DataAccess;
 import domain.Event;
 import domain.Question;
@@ -20,7 +18,7 @@ import exceptions.QuestionAlreadyExist;
 import test.businessLogic.TestFacadeImplementation;
 
 public class CreateQuestionInt {
-	 static BLFacadeImplementation sut;
+	 static BLFacadeLocalImplementation sut;
 	 static TestFacadeImplementation testBL;
 
 	private Event ev;
@@ -33,7 +31,7 @@ public class CreateQuestionInt {
 		//DataAccess da= new DataAccess(ConfigXML.getInstance().getDataBaseOpenMode().equals("initialize"));
 		DataAccess da= new DataAccess();
 
-		sut=new BLFacadeImplementation(da);
+		sut=new BLFacadeLocalImplementation(da);
 		
 		testBL= new TestFacadeImplementation();
 	}

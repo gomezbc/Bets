@@ -1,6 +1,6 @@
 package test.dataAccess;
 
-import businessLogic.BLFacadeImplementation;
+import businessLogic.BLFacadeLocalImplementation;
 import dataAccess.DataAccess;
 import domain.Bet;
 import domain.Forecast;
@@ -12,14 +12,12 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import java.beans.IntrospectionException;
-
 import static org.junit.Assert.*;
 
 public class ModifyBetBLBMTest {
 
     static DataAccess daMock = Mockito.mock(DataAccess.class);
-    static BLFacadeImplementation blf = new BLFacadeImplementation(daMock);
+    static BLFacadeLocalImplementation blf = new BLFacadeLocalImplementation(daMock);
 
     String dni = "12345678A";
     User usr = Mockito.mock(User.class);
