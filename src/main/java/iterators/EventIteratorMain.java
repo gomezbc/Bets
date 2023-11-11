@@ -1,7 +1,8 @@
 package iterators;
 
 import businessLogic.BLFacade;
-import businessLogic.BLFacadeImplementation;
+import businessLogic.BLFacadeFactory;
+import configuration.ConfigXML;
 import domain.Event;
 
 import java.text.ParseException;
@@ -12,7 +13,10 @@ public class EventIteratorMain {
 
     public static void main(String[] args) {
         // obtener el objeto Facade local
-        BLFacade blFacade = new BLFacadeImplementation();
+        ConfigXML configXML = ConfigXML.getInstance();
+        // establecemos la logica de negocio a local
+        configXML.setBusinessLogic(true);
+        BLFacade blFacade = BLFacadeFactory.createBLFacadeImplementation(configXML);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
         try {

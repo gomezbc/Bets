@@ -2,6 +2,7 @@ package businessLogic;
 
 import domain.*;
 import exceptions.*;
+import iterators.ExtendedIterator;
 
 import javax.xml.ws.Service;
 import java.util.Date;
@@ -128,5 +129,10 @@ public class BlFacadeRemoteImplementation implements BLFacade{
     @Override
     public void modifyUserCreditCard(String user, Long newCard) {
         blf.modifyUserCreditCard(user, newCard);
+    }
+
+    @Override
+    public ExtendedIterator<Event> getEventsIterator(Date date) {
+        return blf.getEventsIterator(date);
     }
 }
