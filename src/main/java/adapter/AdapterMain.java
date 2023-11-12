@@ -1,9 +1,9 @@
-import businessLogic.BLFacade;
+package adapter;
+
 import businessLogic.BLFacadeImplementation;
 import domain.User;
-import gui.AdapterGUI;
 
-public class Main {
+public class AdapterMain {
     public static void main(String[] args) {
         try {
             BLFacadeImplementation blFacade = new BLFacadeImplementation();

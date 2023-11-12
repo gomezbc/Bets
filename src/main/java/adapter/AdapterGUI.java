@@ -1,4 +1,4 @@
-package gui;
+package adapter;
 
 import domain.User;
 import domain.UserAdapter;
