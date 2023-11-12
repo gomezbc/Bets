@@ -1,5 +1,6 @@
 package businessLogic;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -15,17 +16,19 @@ import domain.Forecast;
 import domain.Question;
 import domain.User;
 import exceptions.*;
+import iterators.EventExtendedIterator;
+import iterators.ExtendedIterator;
 
 /**
  * It implements the business logic as a web service.
  */
 @WebService(endpointInterface = "businessLogic.BLFacade")
-public class BLFacadeImplementation  implements BLFacade {
+public class BLFacadeLocalImplementation implements BLFacade {
 	DataAccessInterface dbManager;
 
 	static final  String DBOPENMODE = "initialize";
 
-	public BLFacadeImplementation()  {
+	public BLFacadeLocalImplementation()  {
 		System.out.println("Creating BLFacadeImplementation instance");
 		ConfigXML c=ConfigXML.getInstance();
 		
@@ -39,7 +42,7 @@ public class BLFacadeImplementation  implements BLFacade {
 		
 	}
 	
-    public BLFacadeImplementation(DataAccessInterface da)  {
+    public BLFacadeLocalImplementation(DataAccessInterface da)  {
 		
 		System.out.println("Creating BLFacadeImplementation instance with DataAccess parameter");
 		ConfigXML c=ConfigXML.getInstance();
@@ -557,8 +560,13 @@ public class BLFacadeImplementation  implements BLFacade {
 				dbManager.close();
 			}
 	 }
-	
-	
+
+	@Override
+	public ExtendedIterator<Event> getEventsIterator(Date date) {
+		List<Event> events = getEvents(date);
+		return new EventExtendedIterator(events);
+	}
+
 
 }
 

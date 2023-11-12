@@ -69,6 +69,10 @@ public class ConfigXML {
 	public boolean isBusinessLogicLocal() {
 		return businessLogicLocal;
 	}
+
+	public void setBusinessLogic(boolean local) {
+		businessLogicLocal=local;
+	}
 	private static ConfigXML theInstance = new ConfigXML();
 
 	private ConfigXML(){
