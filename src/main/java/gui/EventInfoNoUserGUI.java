@@ -122,7 +122,7 @@ public class EventInfoNoUserGUI extends JPanel {
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
 				Question q;
 				try {
-					q = facade.getQuestion(qNumber);
+					q = facade.getQuestionByQuestionNumber(qNumber);
 					Vector<Forecast> forecasts = q.getForecasts();
 
 					tableModelForecast.setDataVector(null, columnNamesForecast);

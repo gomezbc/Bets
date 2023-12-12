@@ -40,7 +40,7 @@ public class QuestionAdminTableCellRender extends DefaultTableCellRenderer{
 		BLFacade facade = MainGUI.getBusinessLogic();
 		Question q = null;
 		try {
-			q = facade.getQuestion(numQuestion);
+			q = facade.getQuestionByQuestionNumber(numQuestion);
 			Date todayDate = Calendar.getInstance().getTime();
 			Date eventDate = q.getEvent().getEventDate();
 			Boolean readyToClose = (todayDate.compareTo(eventDate)>=1);

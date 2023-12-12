@@ -152,10 +152,10 @@ public class ListUserBetsGUI extends JPanel {
 				User u = MainGUI.getUserRegistered();
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
-					facade.removeBet(betNumber);
+					facade.deleteBetByBetNumber(betNumber);
 					try {
 						//Actualizamos el saldo del usuario
-						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+						MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 						UserGUI.updateSaldo();
 					} catch (UserDoesntExist e1) {
 						e1.printStackTrace();

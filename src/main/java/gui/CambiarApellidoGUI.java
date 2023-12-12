@@ -77,12 +77,12 @@ public class CambiarApellidoGUI extends JDialog {
 			    public void actionPerformed(ActionEvent e) {
 			    	
 			    	if(textField.getText().trim().length()>0) {
-			    		facade.modifyUserApellido(u, textField.getText().trim());
+			    		facade.changeUserLastName(u, textField.getText().trim());
 			    		lblNewLabel_1.setVisible(false);
 
 			    	
 			    	try {
-						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+						MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 					} catch (UserDoesntExist e1) {
 						e1.printStackTrace();
 					}

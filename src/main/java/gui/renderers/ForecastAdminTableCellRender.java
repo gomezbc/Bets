@@ -41,7 +41,7 @@ public class ForecastAdminTableCellRender extends DefaultTableCellRenderer{
 		BLFacade facade = MainGUI.getBusinessLogic();
 		Forecast f = null;
 		try {
-			f = facade.getForecast(numForecast);
+			f = facade.getForecastByForecastNumber(numForecast);
 			Boolean isResult = (f == f.getQuestion().getResult()); 
 			Boolean hasResult = (f.getQuestion().getResult() != null);
 			Date todayDate = Calendar.getInstance().getTime();

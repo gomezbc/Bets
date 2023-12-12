@@ -144,7 +144,7 @@ public class EventInfoAdminGUI extends JPanel {
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
 				Question q;
 				try {
-					q = facade.getQuestion(qNumber);
+					q = facade.getQuestionByQuestionNumber(qNumber);
 					Vector<Forecast> forecasts = q.getForecasts();
 
 					tableModelForecast.setDataVector(null, columnNamesForecast);
@@ -201,7 +201,7 @@ public class EventInfoAdminGUI extends JPanel {
 					BLFacade facade = MainGUI.getBusinessLogic();
 					int i = tableQueries.getSelectedRow();
 					int qNumber = (int) tableModelQueries.getValueAt(i,0);
-					Forecast f = facade.createForecast(pronostico.getText().trim(), Float.parseFloat(pronosticoMinimo.getText()), qNumber);
+					Forecast f = facade.saveForecast(pronostico.getText().trim());
 					Vector<Object> row = new Vector<Object>();
 					row.add(f.getForecastNumber());
 					row.add(f.getDescription());
@@ -263,7 +263,7 @@ public class EventInfoAdminGUI extends JPanel {
 						return;
 					}
 					BLFacade facade = MainGUI.getBusinessLogic();
-					Question q = facade.createQuestion(ev, pregunta.getText().trim(), Float.parseFloat(preguntaMinimo.getText()));
+					Question q = facade.saveQuestion(ev);
 					Vector<Object> row = new Vector<Object>();
 					row.add(q.getQuestionNumber());
 					row.add(q.getQuestion());

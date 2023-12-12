@@ -1,8 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -83,11 +81,11 @@ public class CambiarUsuarioGUI extends JDialog {
 			    	
 			    	if(textField.getText().trim().length()>0) {
 			    	
-			    			facade.modifyUserUsuario(u, textField.getText().trim());
+			    			facade.changeUserName(u, textField.getText().trim());
 			    			lblNewLabel_1.setVisible(false);
 			    	
 			    		try {
-			    			MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+			    			MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 			    		} catch (UserDoesntExist e1) {
 			    			e1.printStackTrace();
 			    		}

@@ -157,7 +157,7 @@ public class EventInfoUserGUI extends JPanel {
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
 				Question q;
 				try {
-					q = facade.getQuestion(qNumber);
+					q = facade.getQuestionByQuestionNumber(qNumber);
 					Vector<Forecast> forecasts = q.getForecasts();
 
 					tableModelForecast.setDataVector(null, columnNamesForecast);
@@ -213,7 +213,7 @@ public class EventInfoUserGUI extends JPanel {
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
 				Question q;
 				try {
-					q = facade.getQuestion(qNumber);
+					q = facade.getQuestionByQuestionNumber(qNumber);
 					float minBet = q.getBetMinimum();
 					float dineroBet = Float.parseFloat(dineroApostar.getText());
 					if(u.getSaldo() < dineroBet) {
@@ -225,9 +225,9 @@ public class EventInfoUserGUI extends JPanel {
 					}else {
 						i = tableForecast.getSelectedRow();
 						int fNumber = (int) tableModelForecast.getValueAt(i,0);
-						facade.createBet(u.getDni(), dineroBet, fNumber);
-						facade.modifySaldo(-dineroBet, u.getDni());
-						MainGUI.setUserRegistered(facade.getUser(u.getDni()));//Actualizamos los datos del usuario
+						facade.saveBet(u.getDni());
+						facade.modifyUserBalanceByDni(-dineroBet, u.getDni());
+						MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));//Actualizamos los datos del usuario
 						UserGUI.updateSaldo();
 						lblError.setText("Apuesta realizada");
 						lblError.setVisible(true);

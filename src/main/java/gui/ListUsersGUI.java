@@ -109,7 +109,7 @@ public class ListUsersGUI extends JPanel {
 				int i = selectedTable.getSelectedRow();
 				String dni = (String) selectedModel.getValueAt(i, 0);
 				BLFacade facade = MainGUI.getBusinessLogic();
-				boolean ret = facade.removeUser(dni);
+				boolean ret = facade.deleteUserByDni(dni);
 				lblResBtn.setVisible(true);
 				if(ret) {
 					lblResBtn.setForeground(new Color(51, 51, 51));

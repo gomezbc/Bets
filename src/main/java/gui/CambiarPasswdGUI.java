@@ -75,12 +75,12 @@ public class CambiarPasswdGUI extends JDialog {
 			    public void actionPerformed(ActionEvent e) {
 			    	
 			    	if(String.valueOf(passwordField.getPassword()).trim().length()>0) {
-			    		facade.modifyUserPasswd(u, String.valueOf(passwordField.getPassword()).trim());
+			    		facade.changeUserPassword(u, String.valueOf(passwordField.getPassword()).trim());
 			    		lblNewLabel_1.setVisible(false);
 			    		passwordField.setText("");
 			    		
 			    	try {
-						MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+						MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 					} catch (UserDoesntExist e1) {
 						e1.printStackTrace();
 					}

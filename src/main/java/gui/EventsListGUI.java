@@ -25,12 +25,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
@@ -104,7 +101,7 @@ public class EventsListGUI extends JPanel {
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
 		BLFacade facade = MainGUI.getBusinessLogic();
-		datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
+		datesWithEventsCurrentMonth=facade.getDatesWithEventsInAMonth(jCalendar1.getDate());
 		paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
 
 		// Code for JCalendar
@@ -136,7 +133,7 @@ public class EventsListGUI extends JPanel {
 						
 						jCalendar1.setCalendar(calendarAct);
 
-						datesWithEventsCurrentMonth=facade.getEventsMonth(jCalendar1.getDate());
+						datesWithEventsCurrentMonth=facade.getDatesWithEventsInAMonth(jCalendar1.getDate());
 					}
 
 					paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
@@ -150,7 +147,7 @@ public class EventsListGUI extends JPanel {
 						previous.setVisible(false);
 						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
 						
-						Vector<domain.Event> events = facade.getEvents(firstDay);
+						Vector<domain.Event> events = facade.getEventsByDate(firstDay);
 
 						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
 						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));

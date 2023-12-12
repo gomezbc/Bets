@@ -45,7 +45,7 @@ public class QuestionUserTableCellRender extends DefaultTableCellRenderer{
 		BLFacade facade = MainGUI.getBusinessLogic();
 		Question q = null;
 		try {
-			q = facade.getQuestion(numQuestion);
+			q = facade.getQuestionByQuestionNumber(numQuestion);
 			Boolean isClosed = (q.getResult() != null);
 			if (isClosed) {
 				if(isSelected) setBackground(closedS);

@@ -148,7 +148,7 @@ public class CloseEventGUI extends JPanel {
 				int qNumber = (int) tableModelQueries.getValueAt(i,0);
 				Question q;
 				try {
-					q = facade.getQuestion(qNumber);
+					q = facade.getQuestionByQuestionNumber(qNumber);
 					Vector<Forecast> forecasts = q.getForecasts();
 
 					tableModelForecast.setDataVector(null, columnNamesForecast);
@@ -191,12 +191,12 @@ public class CloseEventGUI extends JPanel {
 				int forecastNumber = (int) tableModelForecast.getValueAt(i,0);
 		
 				try {
-					if(facade.getQuestion(questionNumber).getResult()!=null) {
+					if(facade.getQuestionByQuestionNumber(questionNumber).getResult()!=null) {
 						lblInfo.setText("Ya tiene un resultado");
 						lblInfo.setVisible(true);
 					}else {
-						facade.assignResult(questionNumber, forecastNumber);
-						facade.updateCloseEvent(forecastNumber);
+						facade.assignResultForecastToQuestion(questionNumber, forecastNumber);
+						facade.updateUsersBalanceIfWinners(forecastNumber);
 					}
 				}catch(EventHasntFinished e1){
 					lblInfo.setText("El evento no ha finalizado");

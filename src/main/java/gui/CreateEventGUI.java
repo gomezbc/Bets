@@ -16,12 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.toedter.calendar.JCalendar;
 
 import businessLogic.BLFacade;
@@ -109,7 +106,7 @@ public class CreateEventGUI extends JPanel {
 					java.util.Date fechaConHoraCero = calendario.getTime();
 					
 					
-					facade.createEvent( textField.getText(), fechaConHoraCero);
+					facade.saveEvent( textField.getText());
 					
 					textField.setText("");
 					

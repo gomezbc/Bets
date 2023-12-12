@@ -1,7 +1,8 @@
 package businessLogic;
 
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -33,32 +34,30 @@ public interface BLFacade  {
 
 	/**
 	 * This method creates a question for an event, with a question text and the minimum bet
-	 * 
-	 * @param event to which question is added
-	 * @param question text of the question
-	 * @param betMinimum minimum quantity of the bet
-	 * @return the created question, or null, or an exception
-	 * @throws EventFinished if current data is after data of the event
- 	 * @throws QuestionAlreadyExist if the same question already exists for the event
+	 *
+	 * @param question question to save
+	 * @return the saved question
+	 * @throws EventFinished        if current date is after date of the event
+	 * @throws QuestionAlreadyExist if the same question already exists for the event
 	 */
-	@WebMethod Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist;
+	@WebMethod Question saveQuestion(Question question) throws EventFinished, QuestionAlreadyExist;
 	
 	
 	/**
-	 * This method retrieves the events of a given date 
-	 * 
+	 * This method retrieves the events of a given date
+	 *
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
-	@WebMethod public Vector<Event> getEvents(Date date);
+	@WebMethod public List<Event> getEventsByDate(LocalDate date);
 	
 	/**
 	 * This method retrieves from the database the dates a month for which there are events
-	 * 
-	 * @param date of the month for which days with events want to be retrieved 
+	 *
+	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
-	@WebMethod public Vector<Date> getEventsMonth(Date date);
+	@WebMethod public List<LocalDate> getDatesWithEventsInAMonth(LocalDate date);
 	
 	/**
 	 * This method calls the data access to initialize the database with some events and questions.
@@ -68,43 +67,38 @@ public interface BLFacade  {
 
 	/**
 	 * This method invokes the data access to create a new user for the application
-	 * @param username username of the user
-	 * @param passwd password of the user
-	 * @param dni dni of the user
-	 * @param name name of the user
-	 * @param apellido apellido of the user
-	 * @param isAdmin if the user is admin or not
-	 * @return the created user
+	 * @param user user to save
+	 * @return saved user
 	 * @throws UserAlreadyExist if the user already exists
 	 */
-	@WebMethod public User createUser(User user) throws UserAlreadyExist;
+	@WebMethod public User saveUser(User user) throws UserAlreadyExist;
 	
 	/**
-	 * This method invokes the data access to get a Question from the database
-	 * @param questionNumber number of the question
-	 * @return the question
-	 * @throws QuestionDoesntExist if the question doesn't exist
+	 * This method invokes the data access to save an event in the database
+	 *
+	 * @param event event to save
+	 * @return saved event
+	 * @throws EventAlreadyExist if the event already exists
 	 */
-	@WebMethod public Event createEvent(String description,Date eventDate) throws EventAlreadyExist;
+	@WebMethod public Event saveEvent(Event event) throws EventAlreadyExist;
 	
 	/**
-	 * This method invokes the data access to create a new Forecast for a Question
-	 * @param description description of the forecast
-	 * @param gain gain of the forecast
-	 * @param questionNumber number of the question
-	 * @return the created forecast
+	 * This method invokes the data access to save a forecast in the database
+	 *
+	 * @param forecast forecast to save
+	 * @return the saved forecast
 	 * @throws ForecastAlreadyExist if the forecast already exists
-	 * @throws QuestionDoesntExist if the question doesn't exist
+	 * @throws QuestionDoesntExist  if the question doesn't exist
 	 */
-	@WebMethod public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist;
+	@WebMethod public Forecast saveForecast(Forecast forecast) throws ForecastAlreadyExist, QuestionDoesntExist;
 	
 	/**
-	 * This method invokes the data access to get a User from the database given its DNI
-	 * @param Dni dni of the user
+	 * This method invokes the data access to get a User from the database given its dni
+	 * @param dni dni of the user
 	 * @return the user
 	 * @throws UserDoesntExist there is no user with that dni
 	 */
-	@WebMethod public User getUser(String Dni) throws UserDoesntExist;
+	@WebMethod public User getUserByDni(String dni) throws UserDoesntExist;
 	
 	/**
 	 * This method invokes the data access to get a Question from the database
@@ -112,7 +106,7 @@ public interface BLFacade  {
 	 * @return the question
 	 * @throws QuestionDoesntExist if the question doesn't exist
 	 */
-	@WebMethod public Question getQuestion(Integer questionNumber) throws QuestionDoesntExist;
+	@WebMethod public Question getQuestionByQuestionNumber(Integer questionNumber) throws QuestionDoesntExist;
 
 	/**
 	 * This method invokes the data access to assign a result to a question
@@ -122,109 +116,110 @@ public interface BLFacade  {
 	 * @throws ForecastDoesntExist there is no forecast with that number
 	 * @throws EventHasntFinished the event associated to the question has not finished yet
 	 */
-	@WebMethod public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
+	@WebMethod public void assignResultForecastToQuestion(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished;
 
 	/**
 	 * This method invokes the data access to get all the events from the database
+	 *
 	 * @return a vector with all the events
 	 */
-	@WebMethod public Vector<User> getAllUsers();
+	@WebMethod public List<User> getAllUsers();
 	
 	/**
 	 * This method invokes the data access to remove a user from the database
 	 * @param dni dni of the user to remove
 	 * @return true if the user has been removed, false otherwise
 	 */
-	@WebMethod public boolean removeUser(String dni);
+	@WebMethod public boolean deleteUserByDni(String dni);
 
 	/**
-	 * This method invokes the data access to create a new Bet for a Forecast by a User
-	 * @param dni dni of the user
-	 * @param betMoney amount of money of the bet
-	 * @param forecastNumber the forecast for which the bet is created
-	 * @return the created bet
+	 * This method invokes the data access to save a bet in the database
+	 *
+	 * @param bet bet to save
+	 * @return the saved bet
 	 * @throws BetAlreadyExist if the bet already exists
 	 * @throws UserDoesntExist if the user doesn't exist
 	 */
-	@WebMethod public Bet createBet(String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist;
+	@WebMethod public Bet saveBet(Bet bet) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist;
 	
 	/**
 	 * This method invokes the data access to modify the balance of a user
-	 * @param saldo amount of money to add to the user's balance (+) to add, (-) to remove
-	 * @param user2 dni of the user
+	 *
+	 * @param balanceModification amount of money to add to the user's balance (+) to add, (-) to remove
+	 * @param dni     dni of the user
 	 * @return the user with the modified balance
 	 */
-    @WebMethod public User modifySaldo (float saldo, String user2);
-	
+    @WebMethod public User modifyUserBalanceByDni(float balanceModification, String dni);
+
 	/**
 	 * This method invokes the data access to get a Forecast from the database given its number
 	 * @param forecastNumber number of the forecast
 	 * @return the forecast
 	 * @throws ForecastDoesntExist there is no forecast with that number
 	 */
-	@WebMethod public Forecast getForecast (Integer forecastNumber) throws ForecastDoesntExist;
+	@WebMethod public Forecast getForecastByForecastNumber(Integer forecastNumber) throws ForecastDoesntExist;
 	
 	/**
 	 * This method invokes the data access to get all the users from the database, and modify their balance according to the result of the event
-	 * @param numResultado number of the forecast which is the result
+	 * @param resultantForecastNumber number of the forecast which is the result
 	 */
-	@WebMethod public void updateCloseEvent(Integer numResultado);
+	@WebMethod public void updateUsersBalanceIfWinners(Integer resultantForecastNumber);
 	
 	/**
 	 * This method invokes the data access to remove a bet from the database
 	 * @param betNumber number of the bet to remove
 	 * @throws BetDoesntExist there is no bet with that number
 	 */
-	@WebMethod public void removeBet(Integer betNumber) throws BetDoesntExist;
+	@WebMethod public void deleteBetByBetNumber(Integer betNumber) throws BetDoesntExist;
 	
 	/**
-	 * This method invokes the data access to modify the betModey from a bet in the database
+	 * This method invokes the data access to modify the betMoney from a bet in the database
 	 * @param betMoney the new amount of money of the bet
 	 * @param betNumber number of the bet to modify
-	 * @param user user who made the bet
+	 * @param dni dni of the user who made the bet
 	 */
-	@WebMethod public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist ;	
+	@WebMethod public Bet changeBetMoney(float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist;
 	
 	
 	
 	/**
-	 * Este metodo invoca al data access para modificar el nombre de un usuario.
-	 * @param user, el usuario al que se le quiere modificar el nombre
-	 * @param Nombre2, el nuevo nombre que se quiere poner
+	 * This method invokes the data access to change the name of a user
+	 * @param user user to modify
+	 * @param newUsername new name for the user
 	 */
-	@WebMethod public void modifyUserName (User user, String Nombre2);
+	@WebMethod public void changeUserUsername(User user, String newUsername);
 
 	
 	/**
-	 * Este metodo invoca al data access para modificar el apellido de un usuario.
-	 * @param user, el usuario al que se le quiere modificar el nombre
-	 * @param Apellido, el nuevo apellido que se quiere poner
+	 * This method invokes the data access to change the surname of a user
+	 * @param user user to modify
+	 * @param lastName new surname for the user
 	 */
-	@WebMethod public void modifyUserApellido (User user, String Apellido);
+	@WebMethod public void changeUserLastName(User user, String lastName);
 	
 	
 	/**
-	 * Este metodo invoca al data access para modificar el nombre de usuario de un user.
-	 * @param user, el usuario al que se le quiere modificar el nombre de usuario
-	 * @param Usuario, el nuevo nombre de usuario que se quiere poner
+	 * This method invokes the data access to change the name of a user
+	 * @param user user to modify
+	 * @param newName new name for the user
 	 */
-	@WebMethod public void modifyUserUsuario (User user, String Usuario);
+	@WebMethod public void changeUserName(User user, String newName);
 	
 	
 	
 	/**
-	 * Este metodo invoca al data access para modificar la contraseña de un user.
-	 * @param user, el usuario al que se le quiere modificar la contraseña de usuario
-	 * @param passwd, la nueva contraseña que se quiere poner
+	 * This method invokes the data access to change the password of a user
+	 * @param user user to modify
+	 * @param newPassword new password for the user
 	 */
-	@WebMethod public void modifyUserPasswd (User user, String passwd);
+	@WebMethod public void changeUserPassword(User user, String newPassword);
 	
 	/**
-	 * Este metodo invoca al data access para modificar la tarjeta de credito
-	 * @param dni dni del usuario
-	 * @param newCard la nueva tarjeta de credito
+	 * This method invokes the data access to change the creditCard of a user
+	 * @param user user to modify
+	 * @param newCard new creditCard for the user
 	 */
-	@WebMethod public void modifyUserCreditCard(String user, Long newCard);
+	@WebMethod public void changeUserCreditCard(String user, Long newCard);
 
 
     ExtendedIterator<Event> getEventsIterator(Date date);

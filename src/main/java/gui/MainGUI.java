@@ -22,11 +22,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 import businessLogic.BLFacadeFactory;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import businessLogic.BLFacade;
 import configuration.ConfigXML;
@@ -296,7 +293,7 @@ public class MainGUI extends JFrame {
 					}else {
 						User user = null;
 						try {
-							user = facade.getUser(textField.getText());
+							user = facade.getUserByDni(textField.getText());
 							checkUserCredentials(user);
 						}catch(UserDoesntExist e2) {
 							userError.setVisible(true);

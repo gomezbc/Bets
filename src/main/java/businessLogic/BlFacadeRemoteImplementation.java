@@ -5,8 +5,9 @@ import exceptions.*;
 import iterators.ExtendedIterator;
 
 import javax.xml.ws.Service;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 public class BlFacadeRemoteImplementation implements BLFacade{
 
@@ -17,18 +18,18 @@ public class BlFacadeRemoteImplementation implements BLFacade{
     }
 
     @Override
-    public Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist {
-        return blf.createQuestion(event, question, betMinimum);
+    public Question saveQuestion(Question question) throws EventFinished, QuestionAlreadyExist {
+        return blf.saveQuestion(question);
     }
 
     @Override
-    public Vector<Event> getEvents(Date date) {
-        return blf.getEvents(date);
+    public List<Event> getEventsByDate(LocalDate date) {
+        return blf.getEventsByDate(date);
     }
 
     @Override
-    public Vector<Date> getEventsMonth(Date date) {
-        return blf.getEventsMonth(date);
+    public List<LocalDate> getDatesWithEventsInAMonth(LocalDate date) {
+        return blf.getDatesWithEventsInAMonth(date);
     }
 
     @Override
@@ -37,98 +38,98 @@ public class BlFacadeRemoteImplementation implements BLFacade{
     }
 
     @Override
-    public User createUser(User user) throws UserAlreadyExist {
-        return blf.createUser(user);
+    public User saveUser(User user) throws UserAlreadyExist {
+        return blf.saveUser(user);
     }
 
     @Override
-    public Event createEvent(String description, Date eventDate) throws EventAlreadyExist {
-        return blf.createEvent(description, eventDate);
+    public Event saveEvent(Event event) throws EventAlreadyExist {
+        return blf.saveEvent(event);
     }
 
     @Override
-    public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
-        return blf.createForecast(description, gain, questionNumber);
+    public Forecast saveForecast(Forecast forecast) throws ForecastAlreadyExist, QuestionDoesntExist {
+        return blf.saveForecast(forecast);
     }
 
     @Override
-    public User getUser(String Dni) throws UserDoesntExist {
-        return blf.getUser(Dni);
+    public User getUserByDni(String dni) throws UserDoesntExist {
+        return blf.getUserByDni(dni);
     }
 
     @Override
-    public Question getQuestion(Integer questionNumber) throws QuestionDoesntExist {
-        return blf.getQuestion(questionNumber);
+    public Question getQuestionByQuestionNumber(Integer questionNumber) throws QuestionDoesntExist {
+        return blf.getQuestionByQuestionNumber(questionNumber);
     }
 
     @Override
-    public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished {
-        blf.assignResult(questionNumber, forecastNumber);
+    public void assignResultForecastToQuestion(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished {
+        blf.assignResultForecastToQuestion(questionNumber, forecastNumber);
     }
 
     @Override
-    public Vector<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return blf.getAllUsers();
     }
 
     @Override
-    public boolean removeUser(String dni) {
-        return blf.removeUser(dni);
+    public boolean deleteUserByDni(String dni) {
+        return blf.deleteUserByDni(dni);
     }
 
     @Override
-    public Bet createBet(String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
-        return blf.createBet(dni, betMoney, forecastNumber);
+    public Bet saveBet(Bet bet) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist {
+        return blf.saveBet(bet);
     }
 
     @Override
-    public User modifySaldo(float saldo, String user2) {
-        return blf.modifySaldo(saldo, user2);
+    public User modifyUserBalanceByDni(float balanceModification, String dni) {
+        return blf.modifyUserBalanceByDni(balanceModification, dni);
     }
 
     @Override
-    public Forecast getForecast(Integer forecastNumber) throws ForecastDoesntExist {
-        return blf.getForecast(forecastNumber);
+    public Forecast getForecastByForecastNumber(Integer forecastNumber) throws ForecastDoesntExist {
+        return blf.getForecastByForecastNumber(forecastNumber);
     }
 
     @Override
-    public void updateCloseEvent(Integer numResultado) {
-        blf.updateCloseEvent(numResultado);
+    public void updateUsersBalanceIfWinners(Integer resultantForecastNumber) {
+        blf.updateUsersBalanceIfWinners(resultantForecastNumber);
     }
 
     @Override
-    public void removeBet(Integer betNumber) throws BetDoesntExist {
-        blf.removeBet(betNumber);
+    public void deleteBetByBetNumber(Integer betNumber) throws BetDoesntExist {
+        blf.deleteBetByBetNumber(betNumber);
     }
 
     @Override
-    public Bet modifyBet(float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
-        return blf.modifyBet(betMoney, betNumber, dni);
+    public Bet changeBetMoney(float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
+        return blf.changeBetMoney(betMoney, betNumber, dni);
     }
 
     @Override
-    public void modifyUserName(User user, String Nombre2) {
-        blf.modifyUserName(user, Nombre2);
+    public void changeUserUsername(User user, String newUsername) {
+        blf.changeUserUsername(user, newUsername);
     }
 
     @Override
-    public void modifyUserApellido(User user, String Apellido) {
-        blf.modifyUserApellido(user, Apellido);
+    public void changeUserLastName(User user, String lastName) {
+        blf.changeUserLastName(user, lastName);
     }
 
     @Override
-    public void modifyUserUsuario(User user, String Usuario) {
-        blf.modifyUserUsuario(user, Usuario);
+    public void changeUserName(User user, String newName) {
+        blf.changeUserName(user, newName);
     }
 
     @Override
-    public void modifyUserPasswd(User user, String passwd) {
-        blf.modifyUserPasswd(user, passwd);
+    public void changeUserPassword(User user, String newPassword) {
+        blf.changeUserPassword(user, newPassword);
     }
 
     @Override
-    public void modifyUserCreditCard(String user, Long newCard) {
-        blf.modifyUserCreditCard(user, newCard);
+    public void changeUserCreditCard(String user, Long newCard) {
+        blf.changeUserCreditCard(user, newCard);
     }
 
     @Override

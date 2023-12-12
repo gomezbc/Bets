@@ -123,7 +123,7 @@ public class CreateUserGUI extends JFrame {
 					lblUserAlreadyExists.setVisible(false);
 					try {
 						User user = new User(username.getText(), new String(passwd.getPassword()), dni.getText(), name.getText(), surname.getText(), checkbxisAdmin.isSelected());
-						facade.createUser(user);
+						facade.saveUser(user);
 					} catch (UserAlreadyExist e1) {
 						lblUserAlreadyExists.setVisible(true);
 					}

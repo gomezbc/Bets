@@ -42,8 +42,8 @@ public class ForecastUserTableCellRender extends DefaultTableCellRenderer{
 		User u = MainGUI.getUserRegistered();
 		Forecast f = null;
 		try {
-			f = facade.getForecast(numForecast);
-			u = facade.getUser(u.getDni());
+			f = facade.getForecastByForecastNumber(numForecast);
+			u = facade.getUserByDni(u.getDni());
 			Boolean isResult = (f == f.getQuestion().getResult()); 
 			Bet b = u.DoesBetExists(numForecast);
 			Boolean hasBets = (b != null);

@@ -36,7 +36,7 @@ public class CreateBetBLBMTest {
             throw new RuntimeException(e);
         }
         try {
-            sut.createBet(mockedUser.getDni(), betMoney, mockedForecast.getForecastNumber());
+            sut.saveBet(mockedUser.getDni());
         } catch (BetAlreadyExist | UserDoesntExist | ForecastDoesntExist e) {
             throw new RuntimeException(e);
         }
@@ -71,7 +71,7 @@ public class CreateBetBLBMTest {
         Mockito.doReturn(new Bet(mockedUser, betMoney, mockedForecast)).when(mockedUser).DoesBetExists(forecastNumber);
 
         try {
-            sut.createBet(mockedUser.getDni(), betMoney, mockedForecast.getForecastNumber());
+            sut.saveBet(mockedUser.getDni());
         } catch (BetAlreadyExist e) {
             assertTrue(true);
         } catch (UserDoesntExist | ForecastDoesntExist e) {
@@ -97,7 +97,7 @@ public class CreateBetBLBMTest {
         }
 
         try {
-            sut.createBet(mockedUser.getDni(), betMoney, forecastNumber);
+            sut.saveBet(mockedUser.getDni());
             // it should raise an exception
             fail();
         } catch (UserDoesntExist e) {
@@ -133,7 +133,7 @@ public class CreateBetBLBMTest {
             throw new RuntimeException(e);
         }
         try {
-            sut.createBet(mockedUser.getDni(), betMoney, mockedForecast.getForecastNumber());
+            sut.saveBet(mockedUser.getDni());
         } catch (Error e) {
             assertTrue(true);
         } catch (Exception e) {
@@ -163,7 +163,7 @@ public class CreateBetBLBMTest {
         }
 
         try {
-            sut.createBet(mockedUser.getDni(), betMoney, forecastNumber);
+            sut.saveBet(mockedUser.getDni());
             // it should raise an exception
             fail();
         } catch (ForecastDoesntExist e) {

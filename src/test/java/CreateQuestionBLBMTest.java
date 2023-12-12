@@ -52,7 +52,7 @@ public class CreateQuestionBLBMTest {
 				
 
 				//invoke System Under Test (sut) 
-				Question q=sut.createQuestion(mockedEvent, queryText, betMinimum);
+				Question q=sut.saveQuestion(mockedEvent);
 				
 				//verify the results
 				//Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class));
@@ -101,7 +101,7 @@ public class CreateQuestionBLBMTest {
 			
 
 			//invoke System Under Test (sut) 
-			Question q=sut.createQuestion(null, queryText, betMinimum);
+			Question q=sut.saveQuestion(null);
 			
 			//verify the results
 			Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class));
@@ -144,7 +144,7 @@ public class CreateQuestionBLBMTest {
 		}
 
 		try {
-			sut.createQuestion(mockedEvent, queryText, betMinimum);
+			sut.saveQuestion(mockedEvent);
 
 			fail("Exception was not thrown");
 		}catch (QuestionAlreadyExist e){

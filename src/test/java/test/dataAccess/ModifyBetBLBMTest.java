@@ -39,7 +39,7 @@ public class ModifyBetBLBMTest {
             Bet expectedBet = new Bet(usr, (float)expectedBetMoney, forecastMock);
             Mockito.doReturn(expectedBet).when(daMock).modifyBet(betMoney, 1, dni);
 
-            Bet obtainedBet = blf.modifyBet(betMoney, 1, dni);
+            Bet obtainedBet = blf.changeBetMoney(betMoney, 1, dni);
 
             Mockito.verify(daMock, Mockito.times(1)).modifyBet(argBetMoney.capture(), argBetNum.capture(), argDni.capture());
 

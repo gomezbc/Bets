@@ -16,7 +16,7 @@ public class AdapterMain {
             BLFacade blFacade = BLFacadeFactory.createBLFacadeImplementation(configXML);
 
             blFacade.getAllUsers().forEach(user -> System.out.println(user.getDni()));
-            User user = blFacade.getUser("123456789N");
+            User user = blFacade.getUserByDni("123456789N");
             AdapterGUI vt = new AdapterGUI(user);
             vt.setVisible(true);
         } catch (Exception e) {

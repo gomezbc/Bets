@@ -82,14 +82,14 @@ public class AumentarApuestaGUI extends JFrame {
 			
 				try {
 					if(Float.parseFloat(textField.getText()) > 0) {
-					Bet b = facade.modifyBet(Float.parseFloat(textField.getText()), BetNumber, u.getDni() );
+					Bet b = facade.changeBetMoney(Float.parseFloat(textField.getText()), BetNumber, u.getDni() );
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
 					lblNewLabel_1.setVisible(true);
 					
 					
-					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+					MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 					UserGUI.updateSaldo();
 					
 					jButtonClose_actionPerformed(e);
@@ -132,14 +132,14 @@ public class AumentarApuestaGUI extends JFrame {
 			
 				try {
 					if(Float.parseFloat(textField.getText()) > 0) {
-					Bet b = facade.modifyBet(-(Float.parseFloat(textField.getText())), BetNumber, u.getDni() );
+					Bet b = facade.changeBetMoney(-(Float.parseFloat(textField.getText())), BetNumber, u.getDni() );
 					lblNewLabel_1.setVisible(true);
 					DefaultTableModel tableModelBets2 = ListUserBetsGUI.getTableModelBets();
 					tableModelBets2.setValueAt(b.getBetMoney(), fila, 5);
 					tableModelBets2.setValueAt(Double.toString(b.getBetMoney()), fila, 6);
 					
 					
-					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+					MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 					UserGUI.updateSaldo();
 					
 					

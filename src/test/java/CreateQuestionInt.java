@@ -60,7 +60,7 @@ public class CreateQuestionInt {
 			
 			
 			//invoke System Under Test (sut)  
-			sut.createQuestion(ev, queryText, betMinimum);
+			sut.saveQuestion(ev);
 			
 			
 			//if the program continues fail
@@ -104,7 +104,7 @@ public class CreateQuestionInt {
 			ev = testBL.addEventWithQuestion(eventText,oneDate,"query2",betMinimum );
 			
 			//invoke System Under Test (sut)  
-			Question q=sut.createQuestion(ev, queryText, betMinimum);
+			Question q=sut.saveQuestion(ev);
 			
 			
 			//verify the results

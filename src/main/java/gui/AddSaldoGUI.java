@@ -92,8 +92,8 @@ public class AddSaldoGUI extends JPanel {
 				try {
 					if (Float.parseFloat(textField.getText()) > 0){
 						
-							facade.modifySaldo(Float.parseFloat(textField.getText()), userRegistered.getDni());
-							MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
+							facade.modifyUserBalanceByDni(Float.parseFloat(textField.getText()), userRegistered.getDni());
+							MainGUI.setUserRegistered(facade.getUserByDni(userRegistered.getDni()));
 							userRegistered = MainGUI.getUserRegistered();
 							lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
 							lblAñadir.setVisible(true);
@@ -135,8 +135,8 @@ public class AddSaldoGUI extends JPanel {
 				BLFacade facade = MainGUI.getBusinessLogic();
 				try {
 					if (Float.parseFloat(textField_1.getText()) > 0){
-						facade.modifySaldo(-(Float.parseFloat(textField_1.getText())), userRegistered.getDni());
-						MainGUI.setUserRegistered(facade.getUser(userRegistered.getDni()));
+						facade.modifyUserBalanceByDni(-(Float.parseFloat(textField_1.getText())), userRegistered.getDni());
+						MainGUI.setUserRegistered(facade.getUserByDni(userRegistered.getDni()));
 						userRegistered = MainGUI.getUserRegistered();
 						lblSaldo.setText(String.format("%.2f", userRegistered.getSaldo()));
 						textField_1.setText("");

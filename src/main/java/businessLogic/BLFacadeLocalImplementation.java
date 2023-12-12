@@ -1,4 +1,5 @@
 package businessLogic;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -58,17 +59,15 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	
 
 	/**
-	 * This method creates a question for an event, with a question text and the minimum bet
-	 * 
-	 * @param event to which question is added
-	 * @param question text of the question
-	 * @param betMinimum minimum quantity of the bet
-	 * @return the created question, or null, or an exception
-	 * @throws EventFinished if current data is after data of the event
- 	 * @throws QuestionAlreadyExist if the same question already exists for the event
-	 */
+     * This method creates a question for an event, with a question text and the minimum bet
+     *
+     * @param question text of the question
+     * @return the created question, or null, or an exception
+     * @throws EventFinished        if current data is after data of the event
+     * @throws QuestionAlreadyExist if the same question already exists for the event
+     */
    @WebMethod
-   public Question createQuestion(Event event, String question, float betMinimum) throws EventFinished, QuestionAlreadyExist{
+   public Question saveQuestion(Question question) throws EventFinished, QuestionAlreadyExist{
 	   
 	    //The minimum bed must be greater than 0
 		dbManager.open(false);
@@ -89,13 +88,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	
   
 	/**
-	 * This method invokes the data access to retrieve the events of a given date 
-	 * 
+	 * This method invokes the data access to retrieve the events of a given date
+	 *
 	 * @param date in which events are retrieved
 	 * @return collection of events
 	 */
     @WebMethod	
-	public Vector<Event> getEvents(Date date)  {
+	public List<Event> getEventsByDate(LocalDate date)  {
 		dbManager.open(false);
 		Vector<Event>  events = dbManager.getEvents(date);
 		dbManager.close();
@@ -105,11 +104,11 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
 	/**
 	 * This method invokes the data access to retrieve the dates a month for which there are events
-	 * 
-	 * @param date of the month for which days with events want to be retrieved 
+	 *
+	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
-	@WebMethod public Vector<Date> getEventsMonth(Date date) {
+	@WebMethod public List<LocalDate> getDatesWithEventsInAMonth(LocalDate date) {
 		dbManager.open(false);
 		Vector<Date>  dates=dbManager.getEventsMonth(date);
 		dbManager.close();
@@ -147,7 +146,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws UserAlreadyExist if the user already exists
 	 */
     @WebMethod
-    public User createUser(User user) throws UserAlreadyExist {
+    public User saveUser(User user) throws UserAlreadyExist {
  	   dbManager.open(false);
  	   try {
  		   user = dbManager.createUserInDB(user);
@@ -168,7 +167,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws QuestionDoesntExist if the question doesn't exist
 	 */
     @WebMethod 
-	public Question getQuestion (Integer questionNumber) throws QuestionDoesntExist{
+	public Question getQuestionByQuestionNumber(Integer questionNumber) throws QuestionDoesntExist{
 		dbManager.open(false);
 
 		Question ev;
@@ -189,13 +188,12 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
     /**
 	 * This method invokes the data access to create a new Event
-	 * @param description description of the event
-	 * @param eventDate date of the event
-	 * @return the created event
+	 *
+	 * @param event@return the created event
 	 * @throws EventAlreadyExist if the event already exists
 	 */
     @WebMethod
-    public Event createEvent(String description,Date eventDate) throws EventAlreadyExist {
+    public Event saveEvent(Event event) throws EventAlreadyExist {
     	dbManager.open(false);
     	Event event = null; 
     	try {
@@ -214,15 +212,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
     /**
 	 * This method invokes the data access to create a new Forecast for a Question
-	 * @param description description of the forecast
-	 * @param gain gain of the forecast
-	 * @param questionNumber number of the question
-	 * @return the created forecast
+	 *
+	 * @param forecast@return the created forecast
 	 * @throws ForecastAlreadyExist if the forecast already exists
-	 * @throws QuestionDoesntExist if the question doesn't exist
+	 * @throws QuestionDoesntExist  if the question doesn't exist
 	 */
     @WebMethod
-    public Forecast createForecast(String description, float gain, int questionNumber) throws ForecastAlreadyExist, QuestionDoesntExist {
+    public Forecast saveForecast(Forecast forecast) throws ForecastAlreadyExist, QuestionDoesntExist {
  	   dbManager.open(false);
  	  Forecast forecast = null;
  	   try {
@@ -248,7 +244,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws UserDoesntExist there is no user with that dni
 	 */
     @WebMethod
-    public User getUser(String Dni) throws UserDoesntExist {
+    public User getUserByDni(String Dni) throws UserDoesntExist {
   	   dbManager.open(false);
   	   User u = null;
   	   try {
@@ -274,7 +270,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws EventHasntFinished the event associated to the question has not finished yet
 	 */
     @WebMethod
-    public void assignResult(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
+    public void assignResultForecastToQuestion(Integer questionNumber, Integer forecastNumber) throws QuestionDoesntExist, ForecastDoesntExist, EventHasntFinished
     {
     	dbManager.open(false);
     	try {
@@ -295,10 +291,11 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
     /**
 	 * This method invokes the data access to get all the events from the database
+	 *
 	 * @return a vector with all the events
 	 */
     @WebMethod
-    public Vector<User> getAllUsers(){
+    public List<User> getAllUsers(){
     	dbManager.open(false);
     	Vector<User> users = dbManager.getAllUsers();
   	    dbManager.close();
@@ -315,7 +312,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @return true if the user has been removed, false otherwise
 	 */
     @WebMethod
-    public boolean removeUser(String dni) {
+    public boolean deleteUserByDni(String dni) {
     	dbManager.open(false);
     	boolean ret = dbManager.removeUser(dni);
   	    dbManager.close();
@@ -327,15 +324,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
     /**
 	 * This method invokes the data access to create a new Bet for a Forecast by a User
-	 * @param dni dni of the user
-	 * @param betMoney amount of money of the bet
-	 * @param forecastNumber number of the forecast for which the bet is created
-	 * @return the created bet
+	 *
+	 * @param bet@return the created bet
 	 * @throws BetAlreadyExist if the bet already exists
 	 * @throws UserDoesntExist if the user doesn't exist
 	 */
     @WebMethod
-	public Bet createBet(String dni, float betMoney, int forecastNumber) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
+	public Bet saveBet(Bet bet) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
 		dbManager.open(false);
 		Bet bet = null;
 		try {
@@ -354,16 +349,17 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
     /**
 	 * This method invokes the data access to modify the balance of a user
-	 * @param saldo amount of money to add to the user's balance (+) to add, (-) to remove
-	 * @param user2 dni of the user
+	 *
+	 * @param balanceModification amount of money to add to the user's balance (+) to add, (-) to remove
+	 * @param dni     dni of the user
 	 * @return the user with the modified balance
 	 */
     @WebMethod
-    public User modifySaldo (float saldo, String user2) {
+    public User modifyUserBalanceByDni(float balanceModification, String dni) {
     	dbManager.open(false);
     	User user = null;
     	try {
-    		user = dbManager.modifySaldo(saldo, user2);
+    		user = dbManager.modifySaldo(balanceModification, dni);
     	} catch ( Exception e) {
     		throw e;
     	}finally {
@@ -382,7 +378,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws ForecastDoesntExist there is no forecast with that number
 	 */
     @WebMethod 
-    public Forecast getForecast (Integer forecastNumber) throws ForecastDoesntExist{
+    public Forecast getForecastByForecastNumber(Integer forecastNumber) throws ForecastDoesntExist{
     	Forecast ret = null;
     	dbManager.open(false);
     	try {
@@ -400,21 +396,21 @@ public class BLFacadeLocalImplementation implements BLFacade {
     
 	/**
 	 * This method invokes the data access to get all the users from the database, and modify their balance according to the result of the event
-	 * @param numResultado number of the forecast which is the result
+	 * @param resultantForecastNumber number of the forecast which is the result
 	 */
     @WebMethod
-    public void updateCloseEvent(Integer numResultado) {
+    public void updateUsersBalanceIfWinners(Integer resultantForecastNumber) {
     	dbManager.open(false);
     	Vector<User> users;
     	users = dbManager.getAllUsers();
     	dbManager.close();
     	for(User u: users) {
-    		Bet b = u.DoesBetExists(numResultado);
+    		Bet b = u.DoesBetExists(resultantForecastNumber);
     		if(b!=null) {
-    			if(b.getForecast().getForecastNumber().equals(numResultado)) {
-    				this.modifySaldo( (float) (b.getForecast().getGain() * b.getBetMoney()), u.getDni());
+    			if(b.getForecast().getForecastNumber().equals(resultantForecastNumber)) {
+    				this.modifyUserBalanceByDni( (float) (b.getForecast().getGain() * b.getBetMoney()), u.getDni());
     			}else {
-    				this.modifySaldo( (float) (- b.getBetMoney()), u.getDni()) ;
+    				this.modifyUserBalanceByDni( (float) (- b.getBetMoney()), u.getDni()) ;
     			}
     		}
     	}
@@ -430,7 +426,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @throws BetDoesntExist there is no bet with that number
 	 */
 	@Override
-	public void removeBet(Integer betNumber) throws BetDoesntExist {
+	public void deleteBetByBetNumber(Integer betNumber) throws BetDoesntExist {
 		dbManager.open(false);
 		try {
             dbManager.removeBet(betNumber);
@@ -451,7 +447,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @param dni dni of the user who made the bet
 	 */
 	@WebMethod
-	public Bet modifyBet (float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
+	public Bet changeBetMoney(float betMoney, int betNumber, String dni) throws BetDoesntExist, UserDoesntExist {
 		dbManager.open(false);
     	Bet bet;
     	try {
@@ -468,13 +464,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	/**
 	 * Este metodo invoca al data access para modificar el nombre de un usuario.
 	 * @param user, el usuario al que se le quiere modificar el nombre
-	 * @param Nombre2, el nuevo nombre que se quiere poner
+	 * @param newUsername, el nuevo nombre que se quiere poner
 	 */
 	@WebMethod
-	 public void modifyUserName (User user, String Nombre2) {
+	 public void changeUserUsername(User user, String newUsername) {
 		dbManager.open(false);
 		try {
-			dbManager.modifyUserName(user, Nombre2);
+			dbManager.modifyUserName(user, newUsername);
 			
 		} catch ( Exception e) {
 			throw e;
@@ -489,13 +485,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	/**
 	 * Este metodo invoca al data access para modificar el apellido de un usuario.
 	 * @param user, el usuario al que se le quiere modificar el nombre
-	 * @param Apellido, el nuevo apellido que se quiere poner
+	 * @param lastName, el nuevo apellido que se quiere poner
 	 */
 	@WebMethod
-	 public void modifyUserApellido (User user, String Apellido) {
+	 public void changeUserLastName(User user, String lastName) {
 		dbManager.open(false);
 		try {
-			dbManager.modifyUserApellido(user, Apellido);
+			dbManager.modifyUserApellido(user, lastName);
 			
 		} catch ( Exception e) {
 			throw e;
@@ -511,13 +507,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	/**
 	 * Este metodo invoca al data access para modificar el nombre de usuario de un user.
 	 * @param user, el usuario al que se le quiere modificar el nombre de usuario
-	 * @param Usuario, el nuevo nombre de usuario que se quiere poner
+	 * @param newName, el nuevo nombre de usuario que se quiere poner
 	 */
 	 @WebMethod
-	 public void modifyUserUsuario (User user, String Usuario) {
+	 public void changeUserName(User user, String newName) {
 		 dbManager.open(false);
 			try {
-				dbManager.modifyUserUsuario(user, Usuario);
+				dbManager.modifyUserUsuario(user, newName);
 				
 			} catch ( Exception e) {
 				throw e;
@@ -533,13 +529,13 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	/**
 	 * Este metodo invoca al data access para modificar la contraseña de un user.
 	 * @param user, el usuario al que se le quiere modificar la contraseña de usuario
-	 * @param passwd, la nueva contraseña que se quiere poner
+	 * @param newPassword, la nueva contraseña que se quiere poner
 	 */ 
 	 @WebMethod
-	 public void modifyUserPasswd (User user, String passwd) {
+	 public void changeUserPassword(User user, String newPassword) {
 		dbManager.open(false);
 			try {
-				dbManager.modifyUserPasswd(user, passwd);
+				dbManager.modifyUserPasswd(user, newPassword);
 			} finally {
 				dbManager.close();
 			}
@@ -552,7 +548,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	 * @param newCard la nueva tarjeta de credito
 	 */
 	 @WebMethod
-	 public void modifyUserCreditCard(String dni, Long newCard) {
+	 public void changeUserCreditCard(String dni, Long newCard) {
 		 dbManager.open(false);
 			try {
 				dbManager.modifyUserCreditCard(dni, newCard);
@@ -563,7 +559,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 
 	@Override
 	public ExtendedIterator<Event> getEventsIterator(Date date) {
-		List<Event> events = getEvents(date);
+		List<Event> events = getEventsByDate(date);
 		return new EventExtendedIterator(events);
 	}
 

@@ -22,7 +22,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import businessLogic.BLFacade;
-import java.awt.SystemColor;
 
 public class CambiarDatosGUI extends JPanel {
 	
@@ -205,8 +204,8 @@ public class CambiarDatosGUI extends JPanel {
 				try {
 					lblWarning.setVisible(false);
 					Long newCard = Long.parseLong(textFieldTarjeta.getText().toString().trim());
-					facade.modifyUserCreditCard(u.getDni(), newCard);
-					MainGUI.setUserRegistered(facade.getUser(u.getDni()));
+					facade.changeUserCreditCard(u.getDni(), newCard);
+					MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));
 					
 					
 				}catch (NumberFormatException eN) {
