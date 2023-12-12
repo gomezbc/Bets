@@ -1,9 +1,8 @@
 package businessLogic;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -72,13 +71,12 @@ public class BLFacadeLocalImplementation implements BLFacade {
 	    //The minimum bed must be greater than 0
 		dbManager.open(false);
 		Question qry=null;
-		
-	    
-		if(new Date().compareTo(event.getEventDate())>0)
+
+		if(new Date().compareTo(question.getEvent().getEventDate())>0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished"));
 				
 		
-		 qry=dbManager.createQuestion(event,question,betMinimum);
+		// qry=dbManager.createQuestion(event,question,betMinimum);
 
 		dbManager.close();
 		
@@ -96,25 +94,35 @@ public class BLFacadeLocalImplementation implements BLFacade {
     @WebMethod	
 	public List<Event> getEventsByDate(LocalDate date)  {
 		dbManager.open(false);
-		Vector<Event>  events = dbManager.getEvents(date);
+		//Vector<Event>  events = dbManager.getEvents(date);
 		dbManager.close();
-		return events;
+		return null;
 	}
 
-    
+	@Override
+	public List<LocalDate> getDatesWithEventsInAMonth(LocalDate date) {
+		dbManager.open(false);
+		Date d = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		List<Date>  dates = dbManager.getEventsMonth(d);
+		dbManager.close();
+		return dates.stream().map(d1 -> d1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).collect(Collectors.toList());
+	}
+
+
 	/**
 	 * This method invokes the data access to retrieve the dates a month for which there are events
 	 *
 	 * @param date of the month for which days with events want to be retrieved
 	 * @return collection of dates
 	 */
-	@WebMethod public List<LocalDate> getDatesWithEventsInAMonth(LocalDate date) {
+	@WebMethod
+	public List<Date> getDatesWithEventsInAMonth(Date date) {
 		dbManager.open(false);
 		Vector<Date>  dates=dbManager.getEventsMonth(date);
 		dbManager.close();
 		return dates;
 	}
-	
+
 	
 	public void close() {
 		DataAccess dB4oManager=new DataAccess(false);
@@ -195,9 +203,8 @@ public class BLFacadeLocalImplementation implements BLFacade {
     @WebMethod
     public Event saveEvent(Event event) throws EventAlreadyExist {
     	dbManager.open(false);
-    	Event event = null; 
     	try {
-    		event = dbManager.createEvent(description, eventDate);
+    		event = dbManager.createEvent(event.getDescription(), event.getEventDate());
     	} catch (EventAlreadyExist e){
     		throw e;
     	}finally {
@@ -220,9 +227,8 @@ public class BLFacadeLocalImplementation implements BLFacade {
     @WebMethod
     public Forecast saveForecast(Forecast forecast) throws ForecastAlreadyExist, QuestionDoesntExist {
  	   dbManager.open(false);
- 	  Forecast forecast = null;
  	   try {
- 		  forecast = dbManager.createForecast(description, gain, questionNumber);
+ 		  forecast = dbManager.createForecast(forecast.getDescription(), (float) forecast.getGain(), forecast.getQuestion().getQuestionNumber());
  	   }catch(ForecastAlreadyExist | QuestionDoesntExist e) {
  		   throw e;
  	   } catch (DescriptionDoesntExist e) {
@@ -332,9 +338,8 @@ public class BLFacadeLocalImplementation implements BLFacade {
     @WebMethod
 	public Bet saveBet(Bet bet) throws BetAlreadyExist, UserDoesntExist, ForecastDoesntExist{
 		dbManager.open(false);
-		Bet bet = null;
 		try {
-			bet = dbManager.createBet(dni, betMoney, forecastNumber);
+			bet = dbManager.createBet(bet.getUser().getDni(), (float) bet.getBetMoney(), bet.getForecast().getForecastNumber());
 		} catch (BetAlreadyExist | UserDoesntExist | ForecastDoesntExist e) {
 			throw e;
 		}finally {
@@ -559,7 +564,7 @@ public class BLFacadeLocalImplementation implements BLFacade {
 
 	@Override
 	public ExtendedIterator<Event> getEventsIterator(Date date) {
-		List<Event> events = getEventsByDate(date);
+		List<Event> events = getEventsByDate(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		return new EventExtendedIterator(events);
 	}
 

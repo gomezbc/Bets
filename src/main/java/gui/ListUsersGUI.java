@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -136,7 +137,7 @@ public class ListUsersGUI extends JPanel {
 		tableModelUser.setDataVector(null, columnNames);
 		tableModelAdmin.setDataVector(null, columnNames);
 		BLFacade facade=MainGUI.getBusinessLogic();
-		Vector<User> users = new Vector<User>();
+		List<User> users = new Vector<User>();
 		users = facade.getAllUsers();
 		
 		for(User u: users) {

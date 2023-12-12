@@ -26,10 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import businessLogic.BLFacade;
-import domain.Event;
-import domain.Forecast;
-import domain.Question;
-import domain.User;
+import domain.*;
 import exceptions.BetAlreadyExist;
 import exceptions.QuestionDoesntExist;
 import gui.renderers.ForecastUserTableCellRender;
@@ -225,7 +222,8 @@ public class EventInfoUserGUI extends JPanel {
 					}else {
 						i = tableForecast.getSelectedRow();
 						int fNumber = (int) tableModelForecast.getValueAt(i,0);
-						facade.saveBet(u.getDni());
+						Forecast f = facade.getForecastByForecastNumber(fNumber);
+						facade.saveBet(new Bet(u, dineroBet, f));
 						facade.modifyUserBalanceByDni(-dineroBet, u.getDni());
 						MainGUI.setUserRegistered(facade.getUserByDni(u.getDni()));//Actualizamos los datos del usuario
 						UserGUI.updateSaldo();

@@ -13,11 +13,10 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,7 +49,7 @@ public class EventsListGUI extends JPanel {
 	private Calendar calendarAct = null;
 
 	
-	private Vector<Date> datesWithEventsCurrentMonth = new Vector<Date>();
+	private List<LocalDate> datesWithEventsCurrentMonth = new ArrayList<>();
 
 	private JTable tableEvents= new JTable();
 
@@ -58,7 +57,7 @@ public class EventsListGUI extends JPanel {
 	private DefaultTableModel tableModelEvents;
 
 	private static Vector<Event> todayEvents;
-	private static Vector<Event> currentEvents = new Vector<Event>(4);
+	private static List<Event> currentEvents = new ArrayList<>(4);
 	private static int currentIndex;
 	private static int currentMax;
 	
@@ -101,8 +100,9 @@ public class EventsListGUI extends JPanel {
 		jCalendar1.setBounds(new Rectangle(40, 50, 225, 150));
 
 		BLFacade facade = MainGUI.getBusinessLogic();
-		datesWithEventsCurrentMonth=facade.getDatesWithEventsInAMonth(jCalendar1.getDate());
-		paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+		LocalDate jCalendar1LocalDate = jCalendar1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		datesWithEventsCurrentMonth= new Vector<>(facade.getDatesWithEventsInAMonth(jCalendar1LocalDate));
+		paintDaysWithEvents(jCalendar1, datesWithEventsCurrentMonth.stream().map(d -> Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant())).collect(Collectors.toList()));
 
 		// Code for JCalendar
 		this.jCalendar1.addPropertyChangeListener(new PropertyChangeListener()
@@ -133,10 +133,10 @@ public class EventsListGUI extends JPanel {
 						
 						jCalendar1.setCalendar(calendarAct);
 
-						datesWithEventsCurrentMonth=facade.getDatesWithEventsInAMonth(jCalendar1.getDate());
+						datesWithEventsCurrentMonth=facade.getDatesWithEventsInAMonth(jCalendar1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 					}
 
-					paintDaysWithEvents(jCalendar1,datesWithEventsCurrentMonth);
+					paintDaysWithEvents(jCalendar1, datesWithEventsCurrentMonth.stream().map(d -> Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant())).collect(Collectors.toList()));
 													
 					
 
@@ -146,8 +146,8 @@ public class EventsListGUI extends JPanel {
 						next.setVisible(false);
 						previous.setVisible(false);
 						tableModelEvents.setColumnCount(2); // another column added to allocate ev objects
-						
-						Vector<domain.Event> events = facade.getEventsByDate(firstDay);
+						LocalDate firstDayLocal = firstDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+						Vector<domain.Event> events = (Vector<Event>) facade.getEventsByDate(firstDayLocal);
 
 						if (events.isEmpty() ) jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("NoEvents")+ ": "+dateformat1.format(calendarAct.getTime()));
 						else jLabelEvents.setText(ResourceBundle.getBundle("Etiquetas").getString("Events")+ ": "+dateformat1.format(calendarAct.getTime()));
@@ -158,12 +158,12 @@ public class EventsListGUI extends JPanel {
 						if(events.size()/4>0) currentMax=4;
 						else currentMax=events.size();
 						
-						currentEvents.removeAllElements();
+						currentEvents.clear();
 						
 						for(int i=0;i<currentMax;i++){
 							currentEvents.add(i, todayEvents.get(i));
 						}
-						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(currentEvents));
+						tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(new Vector<Event>(currentEvents)));
 						EventInfoCellRender.setIndex(0);
 						tableEvents.setDefaultRenderer(Object.class, new DefaultTableCellRenderer());
 						for (domain.Event ev:currentEvents){
@@ -244,7 +244,7 @@ public class EventsListGUI extends JPanel {
 				if(todayEvents.size()-(currentIndex+4)>=4) currentMax += 4;
 				else currentMax += todayEvents.size()-(currentIndex+4);
 				currentIndex += 4;
-				currentEvents.removeAllElements();
+				currentEvents.clear();
 				for(int i=0;i<4-(currentMax%4);i++){
 					currentEvents.add(i, todayEvents.get(currentIndex+i));
 				}
@@ -275,7 +275,7 @@ public class EventsListGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				currentIndex -= 4;
 				currentMax -= 4-(currentMax%4);
-				currentEvents.removeAllElements();
+				currentEvents.clear();
 				for(int i=0;i<4-(currentMax%4);i++){
 					currentEvents.add(i, todayEvents.get(currentIndex+i));
 				}
@@ -320,7 +320,7 @@ public class EventsListGUI extends JPanel {
 	
 	public void renderEventsTable() {
 		EventInfoCellRender.setIndex(0);
-		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(currentEvents));
+		tableEvents.getColumnModel().getColumn(0).setCellRenderer(new EventInfoCellRender(new Vector<>(currentEvents)));
 		tableModelEvents.fireTableDataChanged();
 		tableEvents.repaint();
 		if(todayEvents!=null && currentIndex+4<todayEvents.size()) next.setVisible(true);
@@ -329,7 +329,7 @@ public class EventsListGUI extends JPanel {
 		else previous.setVisible(false);
 	}
 	
-	public static void paintDaysWithEvents(JCalendar jCalendar,Vector<Date> datesWithEventsCurrentMonth) {
+	public static void paintDaysWithEvents(JCalendar jCalendar,List<Date> datesWithEventsCurrentMonth) {
 		// For each day with events in current month, the background color for that day is changed to cyan.
 
 		Calendar calendar = jCalendar.getCalendar();

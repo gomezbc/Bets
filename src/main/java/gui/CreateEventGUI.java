@@ -106,7 +106,7 @@ public class CreateEventGUI extends JPanel {
 					java.util.Date fechaConHoraCero = calendario.getTime();
 					
 					
-					facade.saveEvent( textField.getText());
+					facade.saveEvent( new Event(textField.getText(), fechaConHoraCero));
 					
 					textField.setText("");
 					

@@ -201,7 +201,8 @@ public class EventInfoAdminGUI extends JPanel {
 					BLFacade facade = MainGUI.getBusinessLogic();
 					int i = tableQueries.getSelectedRow();
 					int qNumber = (int) tableModelQueries.getValueAt(i,0);
-					Forecast f = facade.saveForecast(pronostico.getText().trim());
+					Question q = facade.getQuestionByQuestionNumber(qNumber);
+					Forecast f = facade.saveForecast(new Forecast(pronostico.getText().trim(), Float.parseFloat(pronosticoMinimo.getText()), q));
 					Vector<Object> row = new Vector<Object>();
 					row.add(f.getForecastNumber());
 					row.add(f.getDescription());
@@ -263,7 +264,7 @@ public class EventInfoAdminGUI extends JPanel {
 						return;
 					}
 					BLFacade facade = MainGUI.getBusinessLogic();
-					Question q = facade.saveQuestion(ev);
+					Question q = facade.saveQuestion(new Question(pregunta.getText().trim(), Float.parseFloat(preguntaMinimo.getText()), ev));
 					Vector<Object> row = new Vector<Object>();
 					row.add(q.getQuestionNumber());
 					row.add(q.getQuestion());
